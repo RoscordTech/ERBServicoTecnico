@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ERB Servicio Técnico de Gamma Blanca – Especialistas en reparación y mantenimiento de electrodomésticos en Barcelona, Coruña, Valencia y Castellón de la Plana.">
+  <link rel="icon" href="favicon.ico" />
+  <title>
+    <span class="lang-es">ERB Servicio Técnico de Gamma Blanca</span>
+    <span class="lang-ca">ERB Servei Tècnic de Gamma Blanca</span>
+    <span class="lang-va">ERB Servei Tècnic de Gamma Blanca</span>
+  </title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Default: show Spanish, hide Catalan and Valencian */
+    .lang-es { display: inline; }
+    .lang-ca, .lang-va { display: none; }
+
+    /* Custom styles not easily done with Tailwind or for specific overrides */
+    html { scroll-behavior: smooth; }
+
+    /* Keyframes for fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="font-sans bg-white text-[#0a5cb8] leading-relaxed">
+  <div class="flex justify-center mt-5">
+      <img src="logo.png" alt="ERB Servicio Técnico Logo" class="h-20 w-auto">
+  </div>
+
+  <div id="language-selector" class="text-center my-5">
+    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Castellano</button>
+    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Català</button>
+    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Valencià</button>
+  </div>
+
+  <header class="hero bg-gradient-to-br from-[#0a5cb8] to-[#003f7f] text-white text-center py-24 px-5 animate-[fadeIn_1.5s_ease-in-out]">
+    <h1 class="text-4xl md:text-5xl mb-2">
+      <span class="lang-es">ERB Servicio Técnico de Gamma Blanca</span>
+      <span class="lang-ca">ERB Servei Tècnic de Gamma Blanca</span>
+      <span class="lang-va">ERB Servei Tècnic de Gamma Blanca</span>
+    </h1>
+    <p class="text-lg mb-4">
+      <span class="lang-es">Especialistas en reparación y mantenimiento de electrodomésticos.</span>
+      <span class="lang-ca">Especialistes en reparació i manteniment d'electrodomèstics.</span>
+      <span class="lang-va">Especialistes en reparació i manteniment d'aparells electrodomèstics.</span>
+    </p>
+    <a href="#servicios" class="btn inline-block bg-white text-[#0a5cb8] px-6 py-3 rounded-md font-bold transition duration-300 transform hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white">
+      <span class="lang-es">Ver Servicios</span>
+      <span class="lang-ca">Veure Serveis</span>
+      <span class="lang-va">Veure Serveis</span>
+    </a>
+  </header>
+
+  <div class="contact-container text-center my-5">
+    <a href="https://wa.me/34631449197" class="whatsapp inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" target="_blank" aria-label="Chatea con nosotros por WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-6 h-6 mr-2 align-middle fill-current text-white">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-93-25.7l-6.7-4-69.8 18.3L100 360.6l-4.1-6.9c-18.5-31.4-28.2-67.7-28.2-109.2c0-114.8 93.4-208.3 208.3-208.3c41.5 0 81.5 15.3 111.7 44.5c30.3 29.3 47.9 68.1 47.9 109.4c0 114.8-93.4 208.3-208.3 208.3zm95.3-95.1c-7.1-3.7-42.8-21.4-49.2-23.8c-6.5-2.4-11.2-3.6-16 3.6s-18.9 23.8-23.2 28.6c-4.3 4.9-8.6 5.6-16 1.8s-30-11-57.1-35.3c-22.9-20.7-38.3-46.2-42.7-53.6c-4.3-7.5-0.4-11.5 3.4-15.2c3.4-3.4 7.1-8.5 10.6-12.7c3.7-4.3 4.9-7.1 7.1-11.2c2.4-4.3 1.2-8.1-0.6-11.2s-16-38.2-21.9-46.5c-5.9-8.4-11.8-7.1-16-7.3s-10.6-2.4-16-2.4s-13.2 3.6-20.3 10.6c-7.1 7.1-18.9 17.7-18.9 42.8s19.2 49.6 21.9 53.1c2.9 3.7 38.2 58.2 92.3 82.6c11.2 4.9 20.9 7.8 28 10c14.6 4.5 27.9 3.8 38.4 2.3c11.2-1.5 32.4-13.2 36.9-25.4c4.5-12.2 4.5-22.6 3.2-24.5c-1.3-1.9-4.7-3-10-5.9z"/>
+      </svg>
+      <span class="lang-es">Contáctanos</span>
+      <span class="lang-ca">Contacta'ns</span>
+      <span class="lang-va">Contacta'ns</span>
+    </a>
+  </div>
+
+  <section id="servicios" class="servicios py-16 px-5 bg-gray-100 text-center">
+    <h2 class="text-3xl md:text-4xl mb-8">
+      <span class="lang-es">¿Qué electrodomésticos reparamos?</span>
+      <span class="lang-ca">Quins electrodomèstics reparam?</span>
+      <span class="lang-va">Quins aparells electrodomèstics reparam?</span>
+    </h2>
+    <div class="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-screen-lg mx-auto">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">ac_unit</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Frigoríficos y Congeladores</span>
+          <span class="lang-ca">Neveres i congeladors</span>
+          <span class="lang-va">Neveres i congeladors</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">No enfrían correctamente, problemas de congelación o ruidos inusuales.</span>
+          <span class="lang-ca">No refreden correctament, problemes de congelació o sorolls inusuals.</span>
+          <span class="lang-va">No refreden correctament, problemes de congelació o sorolls inusuals.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-100 focus-within:outline-none focus-within:ring-4 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">air</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Aires Acondicionados</span>
+          <span class="lang-ca">Aires condicionats</span>
+          <span class="lang-va">Aires condicionats</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Instalación y reparación de sistemas de climatización.</span>
+          <span class="lang-ca">Instal·lació i reparació de sistemes de climatització.</span>
+          <span class="lang-va">Instal·lació i reparació de sistemes de climatització.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">washing_machine</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Lavadoras</span>
+          <span class="lang-ca">Rentadores</span>
+          <span class="lang-va">Rentadores</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Problemas de centrifugado, agua, ruidos o bloqueos.</span>
+          <span class="lang-ca">Problemes de centrifugació, aigua, sorolls o bloqueigs.</span>
+          <span class="lang-va">Problemes de centrifugació, aigua, sorolls o bloqueigs.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">cleaning_services</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Lavavajillas</span>
+          <span class="lang-ca">Rentavaixelles</span>
+          <span class="lang-va">Rentavaixelles</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Fugas, mal funcionamiento o limpieza deficiente.</span>
+          <span class="lang-ca">Fuites, mal funcionament o rentat deficient.</span>
+          <span class="lang-va">Fuites, mal funcionament o rentat deficient.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">kitchen</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Hornos</span>
+          <span class="lang-ca">Forns</span>
+          <span class="lang-va">Forns</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">No calientan o presentan fallos en resistencias o sensores.</span>
+          <span class="lang-ca">No escalfen o presenten fallades en resistències o sensors.</span>
+          <span class="lang-va">No escalfen o presenten fallades en resistències o sensors.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">local_laundry_service</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Secadoras</span>
+          <span class="lang-ca">Assecadores</span>
+          <span class="lang-va">Assecadores</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Problemas de calor, giro o humedad excesiva.</span>
+          <span class="lang-ca">Problemes de calor, gir o humitat excessiva.</span>
+          <span class="lang-va">Problemes de calor, gir o humitat excessiva.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">bolt</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Vitrocerámicas</span>
+          <span class="lang-ca">Vitrocèrmiques</span>
+          <span class="lang-va">Vitrocèrmiques</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Problemas en zonas de calor, sensores o controles.</span>
+          <span class="lang-ca">Problemes en zones de calor, sensors o controls.</span>
+          <span class="lang-va">Problemes en zones de calor, sensors o controls.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">whatshot</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Calentadores de Agua</span>
+          <span class="lang-ca">Escalfadors d'aigua</span>
+          <span class="lang-va">Escalfadors d'aigua</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Reparación e instalación de calentadores de agua.</span>
+          <span class="lang-ca">Reparació i instal·lació d'escalfadors d'aigua.</span>
+          <span class="lang-va">Reparació i instal·lació d'escalfadors d'aigua.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">fireplace</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Calderas</span>
+          <span class="lang-ca">Calderes</span>
+          <span class="lang-va">Calderes</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Mantenimiento y reparación de calderas domésticas.</span>
+          <span class="lang-ca">Manteniment i reparació de calderes domèstiques.</span>
+          <span class="lang-va">Manteniment i reparació de calderes domèstiques.</span>
+        </p>
+      </div>
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">hot_tub</span>
+        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+          <span class="lang-es">Termotanques</span>
+          <span class="lang-ca">Termotancs</span>
+          <span class="lang-va">Termotancs</span>
+        </h3>
+        <p class="text-gray-700">
+          <span class="lang-es">Reparación y mantenimiento de termotanques.</span>
+          <span class="lang-ca">Reparació i manteniment de termotancs.</span>
+          <span class="lang-va">Reparació i manteniment de termotancs.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="beneficios py-16 px-5 bg-white text-center">
+      <h2 class="text-3xl md:text-4xl mb-8 text-[#0a5cb8]">
+          <span class="lang-es">Nuestros Beneficios</span>
+          <span class="lang-ca">Els nostres Beneficis</span>
+          <span class="lang-va">Els nostres Beneficis</span>
+      </h2>
+      <div class="container flex flex-wrap justify-center gap-5 max-w-screen-lg mx-auto">
+          <a href="tel:+34631449197" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+              <i class="fa-solid fa-phone text-5xl mb-4 block"></i>
+              <p class="m-0 text-sm leading-tight">
+                  <span class="lang-es">Solicita tu inspección llamando a nuestros canales de atención al cliente.</span>
+                  <span class="lang-ca">Sol·licita la teva inspecció trucant als nostres canals d'atenció al client.</span>
+                  <span class="lang-va">Sol·licita la teua inspecció cridant als nostres canals d'atenció al client.</span>
+              </p>
+          </a>
+          <a href="#formulario" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+              <i class="fa-solid fa-truck text-5xl mb-4 block"></i>
+              <p class="m-0 text-sm leading-tight">
+                  <span class="lang-es">Reparación en el acto si decides reparar, no cobramos el desplazamiento.</span>
+                  <span class="lang-ca">Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.</span>
+                  <span class="lang-va">Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.</span>
+              </p>
+          </a>
+          <a href="#servicios" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+              <i class="fa-solid fa-wrench text-5xl mb-4 block"></i>
+              <p class="m-0 text-sm leading-tight">
+                  <span class="lang-es">Disfruta de tu electrodoméstico como nuevo Con garantía en la reparación de 6 meses.</span>
+                  <span class="lang-ca">Gaudeix del teu electrodomèstic com nou amb garantia en la reparació de 6 mesos.</span>
+                  <span class="lang-va">Gaudeix del teu electrodomèstic com nou amb garantia en la reparació de 6 mesos.</span>
+              </p>
+          </a>
+          <a href="#formulario" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+              <i class="fa-solid fa-money-bill text-5xl mb-4 block"></i>
+              <p class="m-0 text-sm leading-tight">
+                  <span class="lang-es">Precios más competitivos del mercado</span>
+                  <span class="lang-ca">Preus més competitius del mercat</span>
+                  <span class="lang-va">Preus més competitius del mercat</span>
+              </p>
+          </a>
+      </div>
+  </section>
+
+  <section id="marcas" class="marcas py-16 px-5 bg-gray-100 text-center">
+      <h2 class="text-3xl md:text-4xl mb-8 text-[#0a5cb8]">
+          <span class="lang-es">Marcas con las que trabajamos</span>
+          <span class="lang-ca">Marques amb les quals treballem</span>
+          <span class="lang-va">Marques amb les quals treballem</span>
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-lg mx-auto items-center">
+          <div class="flex justify-center"><img src="samsung-logo-wordmark-rgb.png" alt="Logo Samsung" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="lg-logo-1.png" alt="Logo LG" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="balay.png" alt="Logo Balay" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="siemens.png" alt="Logo Siemens" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Logo Whirlpool" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="neckar.png" alt="Logo Neckar" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="bosch.png" alt="Logo Bosch" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="Haier_logo.svg.png" alt="Logo Haier" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="mitsubishi.png" alt="Logo Mitsubishi Electric" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="saunier.png" alt="Logo Saunier Duval" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="ariston.jpg" alt="Logo Ariston Thermo Group" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="vaillant.jpg" alt="Logo Vaillant" class="h-12 w-auto"></div>
+          <div class="flex justify-center"><img src="junkers.png" alt="Logo Junkers" class="h-12 w-auto"></div>
+      </div>
+  </section>
+
+  <section class="formulario bg-white p-10 max-w-xl mx-auto my-10 rounded-lg shadow-xl">
+    <h2 class="text-2xl md:text-3xl text-center mb-5">
+      <span class="lang-es">Solicita tu reparación</span>
+      <span class="lang-ca">Sol·licita la teva reparació</span>
+      <span class="lang-va">Sol·licita la teua reparació</span>
+    </h2>
+    <form id="contactForm" action="https://formsubmit.co/roscordtgn@gmail.com" method="POST" class="space-y-4">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div>
+        <label for="nombre" class="block mb-1 font-bold">
+          <span class="lang-es">Nombre:</span>
+          <span class="lang-ca">Nom:</span>
+          <span class="lang-va">Nom:</span>
+        </label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autofocus class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+      </div>
+
+      <div>
+        <label for="telefono" class="block mb-1 font-bold">
+          <span class="lang-es">Teléfono:</span>
+          <span class="lang-ca">Telèfon:</span>
+          <span class="lang-va">Telèfon:</span>
+        </label>
+        <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+      </div>
+
+      <div>
+        <label for="email" class="block mb-1 font-bold">
+          <span class="lang-es">Correo electrónico:</span>
+          <span class="lang-ca">Correu electrònic:</span>
+          <span class="lang-va">Correu electrònic:</span>
+        </label>
+        <input type="email" id="email" name="email" placeholder="tu@correo.com" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+      </div>
+
+      <div>
+        <label for="ubicacion" class="block mb-1 font-bold">
+          <span class="lang-es">Ubicación del servicio:</span>
+          <span class="lang-ca">Ubicació del servei:</span>
+          <span class="lang-va">Ubicació del servei:</span>
+        </label>
+        <select id="ubicacion" name="ubicacion" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+          <option value="">Selecciona una ubicación</option>
+          <option value="Barcelona">Barcelona</option>
+          <option value="Coruña">La Coruña</option>
+          <option value="Valencia">Valencia</option>
+          <option value="Castellón de la Plana">Castellón de la Plana</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="equipo" class="block mb-1 font-bold">
+          <span class="lang-es">Electrodoméstico a reparar:</span>
+          <span class="lang-ca">Electrodomèstic a reparar:</span>
+          <span class="lang-va">Electrodomèstic a reparar:</span>
+        </label>
+        <select id="equipo" name="equipo" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+          <option value="">Selecciona uno</option>
+          <option value="Lavadora">Lavadoras</option>
+          <option value="Lavavajillas">Lavavajillas</option>
+          <option value="Frigorífico">Frigoríficos y Congeladores</option>
+          <option value="Horno">Hornos</option>
+          <option value="Secadora">Secadoras</option>
+          <option value="Vitrocerámica">Vitrocerámicas</option>
+          <option value="Calentador">Calentadores de Agua</option>
+          <option value="Caldera">Calderas</option>
+          <option value="Aire acondicionado">Aires Acondicionados</option>
+          <option value="Termotanque">Termotanques</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="mensaje" class="block mb-1 font-bold">
+          <span class="lang-es">Descripción del problema:</span>
+          <span class="lang-ca">Descripció del problema:</span>
+          <span class="lang-va">Descripció del problema:</span>
+        </label>
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe el problema" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent"></textarea>
+      </div>
+
+      <button type="submit" class="w-full bg-[#0a5cb8] text-white py-2 px-4 rounded-md font-bold transition duration-300 hover:bg-[#064b93] focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:ring-offset-2">
+        <span class="lang-es">Enviar</span>
+        <span class="lang-ca">Envia</span>
+        <span class="lang-va">Envia</span>
+      </button>
+    </form>
+    <div id="formResponse" class="form-response text-center mt-5 p-4 rounded-md font-bold hidden opacity-0 transition duration-500 ease-in-out" role="alert" aria-live="assertive"></div>
+  </section>
+
+  <footer class="bg-[#0a5cb8] text-white text-center py-5 text-sm">
+    <p>
+      <span class="lang-es">© 2025 ERB Servicio Técnico de Gamma Blanca | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN DE LA PLANA</span>
+      <span class="lang-ca">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ DE LA PLANA</span>
+      <span class="lang-va">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ DE LA PLANA</span>
+    </p>
+  </footer>
+
+  <script>
+    // Diccionario para traducciones de placeholders y textos de opción por defecto
+    const translations = {
+      es: {
+        placeholder: {
+          nombre: "Tu nombre",
+          telefono: "+34 600 000 000",
+          email: "tu@correo.com",
+          mensaje: "Describe el problema"
+        },
+        text: {
+          defaultUbicacion: "Selecciona una ubicación",
+          defaultElectrodomestico: "Selecciona uno"
+        }
+      },
+      ca: {
+        placeholder: {
+          nombre: "El teu nom",
+          telefono: "+34 600 000 000",
+          email: "el teu@correu.com",
+          mensaje: "Descriu el problema"
+        },
+        text: {
+          defaultUbicacion: "Selecciona una ubicació",
+          defaultElectrodomestico: "Selecciona un"
+        }
+      },
+      va: {
+        placeholder: {
+          nombre: "El teu nom",
+          telefono: "+34 600 000 000",
+          email: "el teu@correu.com",
+          mensaje: "Descriu el problema"
+        },
+        text: {
+          defaultUbicacion: "Selecciona una ubicació",
+          defaultElectrodomestico: "Selecciona un"
+        }
+      }
+    };
+
+    // Función para actualizar los placeholders y el texto de la opción por defecto
+    function updatePlaceholders(lang) {
+      document.getElementById('nombre').placeholder = translations[lang].placeholder.nombre;
+      document.getElementById('telefono').placeholder = translations[lang].placeholder.telefono;
+      document.getElementById('email').placeholder = translations[lang].placeholder.email;
+      document.getElementById('mensaje').placeholder = translations[lang].placeholder.mensaje;
+      document.getElementById('ubicacion').options[0].text = translations[lang].text.defaultUbicacion;
+      document.getElementById('equipo').options[0].text = translations[lang].text.defaultElectrodomestico;
+    }
+
+    // Función para cambiar el idioma
+    function setLanguage(lang) {
+      const languages = ['es', 'ca', 'va'];
+      languages.forEach(function(l) {
+        const elems = document.getElementsByClassName('lang-' + l);
+        for (let i = 0; i < elems.length; i++) {
+          elems[i].style.display = (l === lang) ? 'inline' : 'none';
+        }
+      });
+      updatePlaceholders(lang);
+    }
+
+    // Se establece por defecto el castellano al cargar la página
+    setLanguage('es');
+
+    // Añadir listeners a los botones de idioma
+    document.querySelectorAll('#language-selector button').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const lang = event.target.textContent.toLowerCase().includes('castellano') ? 'es' :
+                         event.target.textContent.toLowerCase().includes('català') ? 'ca' : 'va';
+            setLanguage(lang);
+        });
+    });
+
+
+    // Capturar el envío del formulario y procesarlo de forma asíncrona
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Evitar el envío tradicional
+
+      const form = this;
+      const submitButton = form.querySelector("button[type='submit']"); // Seleccionar el botón de envío
+      const responseDiv = document.getElementById("formResponse");
+
+      // Deshabilitar el botón para evitar envíos múltiples
+      submitButton.disabled = true;
+      // Mostrar mensaje de "Enviando..."
+      responseDiv.textContent = "Enviando...";
+      responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success opacity-100"; // Resetear clases y mostrar/fade in
+
+      // Envío asíncrono con fetch
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        // Verificar si la respuesta es OK (estado 200-299)
+        if (response.ok) {
+          return response.text(); // O response.json() si la API devuelve JSON
+        } else {
+          // Manejar errores HTTP
+          return response.text().then(text => {
+            throw new Error(`HTTP status ${response.status}: ${text}`);
+          });
+        }
+      })
+      .then(() => {
+        // Éxito: ocultamos el formulario y mostramos el mensaje de éxito
+        form.style.display = "none";
+        responseDiv.textContent = "Formulario enviado, nos contactaremos en breve.";
+        responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success bg-blue-100 text-[#0a5cb8] opacity-100"; // Aplicar estilos de éxito
+      })
+      .catch(error => {
+        // Error: mostramos el mensaje de error y reactivamos el botón
+        responseDiv.textContent = "Error: " + error.message + ". Por favor, inténtalo de nuevo.";
+        responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error bg-red-100 text-red-700 opacity-100"; // Aplicar estilos de error
+      })
+      .finally(() => {
+        // Asegurarse de que el botón se reactive después de que el fetch se complete
+        submitButton.disabled = false;
+      });
+    });
+  </script>
+</body>
+</html>
