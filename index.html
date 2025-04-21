@@ -17,33 +17,33 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* Default: show Spanish, hide Catalan and Valencian */
+    /* Reglas para mostrar/ocultar idiomas por defecto (Castellano visible) */
     .lang-es { display: inline; }
     .lang-ca, .lang-va { display: none; }
 
-    /* Custom styles not easily done with Tailwind or for specific overrides */
-    html { scroll-behavior: smooth; }
+    /* Estilos generales del HTML y Body */
+    html { scroll-behavior: smooth; } /* Desplazamiento suave al hacer clic en enlaces internos */
 
-    /* Keyframes for fade-in animation */
+    /* Keyframes para animaciones */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Estilos para el modo oscuro */
+    /* Estilos para el Modo Oscuro */
     body.dark-mode {
       background-color: #1a202c; /* Fondo oscuro */
       color: #e2e8f0; /* Texto claro */
     }
 
     body.dark-mode .hero {
-      background: linear-gradient(135deg, #003f7f, #0a5cb8); /* Degradado más oscuro */
+      background: linear-gradient(135deg, #003f7f, #0a5cb8); /* Degradado más oscuro para el hero */
       color: #e2e8f0;
     }
 
     body.dark-mode .servicios,
     body.dark-mode .marcas {
-      background-color: #2d3748; /* Fondo más oscuro para secciones */
+      background-color: #2d3748; /* Fondo más oscuro para secciones de servicios y marcas */
       color: #e2e8f0;
     }
 
@@ -51,9 +51,8 @@
     body.dark-mode .marcas h2,
     body.dark-mode .beneficios h2,
     body.dark-mode .formulario h2 {
-        color: #90cdf4; /* Azul más claro para encabezados */
+        color: #90cdf4; /* Azul más claro para encabezados en modo oscuro */
     }
-
 
     body.dark-mode .card {
       background-color: #4a5568; /* Fondo de tarjeta más oscuro */
@@ -67,7 +66,7 @@
     }
 
     body.dark-mode .card .icon {
-      color: #90cdf4; /* Azul más claro para iconos */
+      color: #90cdf4; /* Azul más claro para iconos de tarjeta */
     }
 
     body.dark-mode .card h3 {
@@ -77,7 +76,6 @@
      body.dark-mode .card p {
         color: #cbd5e0; /* Gris más claro para texto de tarjeta */
      }
-
 
     body.dark-mode .contact-container .whatsapp {
       background: #003f7f; /* Azul más oscuro para botón de whatsapp */
@@ -106,13 +104,13 @@
     }
 
     body.dark-mode .formulario label {
-        color: #e2e8f0; /* Texto claro para etiquetas */
+        color: #e2e8f0; /* Texto claro para etiquetas de formulario */
     }
 
     body.dark-mode .formulario input,
     body.dark-mode .formulario textarea,
     body.dark-mode .formulario select {
-      background-color: #4a5568; /* Fondo de entrada más oscuro */
+      background-color: #4a5568; /* Fondo de entrada de formulario más oscuro */
       border-color: #636b78; /* Borde más oscuro */
       color: #e2e8f0; /* Texto claro */
     }
@@ -121,7 +119,6 @@
      body.dark-mode .formulario textarea::placeholder {
         color: #a0aec0; /* Texto de marcador de posición más claro */
      }
-
 
     body.dark-mode .formulario input:focus,
     body.dark-mode .formulario textarea:focus,
@@ -139,6 +136,7 @@
       background-color: #0a5cb8; /* Azul original al pasar el ratón */
     }
 
+    /* Estilos para mensajes de respuesta del formulario */
     body.dark-mode .form-response.success {
         background: #2f855a; /* Verde más oscuro para éxito */
         color: #e2e8f0;
@@ -149,13 +147,13 @@
         color: #e2e8f0;
      }
 
-
+    /* Estilos del pie de página */
     body.dark-mode footer {
       background: #003f7f; /* Pie de página azul más oscuro */
       color: #e2e8f0;
     }
 
-    /* Estilos para el botón de modo oscuro en modo oscuro */
+    /* Estilos específicos para el botón de modo oscuro en modo oscuro */
     body.dark-mode #language-selector button#darkModeToggle {
         border-color: #90cdf4; /* Borde azul más claro en modo oscuro */
         background-color: #2d3748; /* Fondo más oscuro */
@@ -175,15 +173,16 @@
   </style>
 </head>
 <body class="font-sans bg-white text-[#0a5cb8] leading-relaxed">
+
   <div class="flex justify-center mt-5">
-      <img src="logo.png" alt="ERB Servicio Técnico Logo">
+      <img src="logo.png" alt="ERB Servicio Técnico Logo" class="h-20 w-auto">
   </div>
 
-  <div id="language-selector" class="text-center my-5">
-    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Castellano</button>
-    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Català</button>
-    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Valencià</button>
-    <button id="darkModeToggle" class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+  <div id="language-selector" class="text-center my-5 flex flex-wrap justify-center">
+    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Cambiar a Castellano">Castellano</button>
+    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Cambiar a Català">Català</button>
+    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Cambiar a Valencià">Valencià</button>
+    <button id="darkModeToggle" class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Alternar Modo Oscuro">
         <i class="fa-solid fa-moon"></i> <span class="lang-es">Modo Oscuro</span><span class="lang-ca">Mode Fosc</span><span class="lang-va">Mode Fosc</span>
     </button>
   </div>
@@ -224,7 +223,7 @@
       <span class="lang-va">Quins aparells electrodomèstics reparam?</span>
     </h2>
     <div class="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-screen-lg mx-auto">
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Frigorífico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">ac_unit</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Frigoríficos y Congeladores</span>
@@ -237,7 +236,7 @@
           <span class="lang-va">No refreden correctament, problemes de congelació o sorolls inusuals.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-100 focus-within:outline-none focus-within:ring-4 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-100 focus-within:outline-none focus-within:ring-4 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Aire acondicionado">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">air</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Aires Acondicionados</span>
@@ -250,7 +249,7 @@
           <span class="lang-va">Instal·lació i reparació de sistemes de climatització.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavadora">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">washing_machine</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Lavadoras</span>
@@ -263,7 +262,7 @@
           <span class="lang-va">Problemes de centrifugació, aigua, sorolls o bloqueigs.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavavajillas">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">cleaning_services</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Lavavajillas</span>
@@ -276,7 +275,7 @@
           <span class="lang-va">Fuites, mal funcionament o rentat deficient.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Horno">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">kitchen</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Hornos</span>
@@ -289,7 +288,7 @@
           <span class="lang-va">No escalfen o presenten fallades en resistències o sensors.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Secadora">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">local_laundry_service</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Secadoras</span>
@@ -302,7 +301,7 @@
           <span class="lang-va">Problemes de calor, gir o humitat excessiva.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Vitrocerámica">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">bolt</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Vitrocerámicas</span>
@@ -315,7 +314,7 @@
           <span class="lang-va">Problemes en zones de calor, sensors o controls.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calentador">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">whatshot</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Calentadores de Agua</span>
@@ -328,7 +327,7 @@
           <span class="lang-va">Reparació i instal·lació d'escalfadors d'aigua.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Caldera">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">fireplace</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Calderas</span>
@@ -341,7 +340,7 @@
           <span class="lang-va">Manteniment i reparació de calderes domèstiques.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Termotanque">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">hot_tub</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Termotanques</span>
@@ -369,7 +368,7 @@
               <p class="m-0 text-sm leading-tight">
                   <span class="lang-es">Solicita tu inspección llamando a nuestros canales de atención al cliente.</span>
                   <span class="lang-ca">Sol·licita la teva inspecció trucant als nostres canals d'atenció al client.</span>
-                  <span class="lang-va">Sol·licita la teua inspección cridant als nostres canals d'atenció al client.</span>
+                  <span class="lang-va">Sol·licita la teua inspección cridant als nostres canals d'atención al client.</span>
               </p>
           </a>
           <a href="#formulario" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
@@ -414,7 +413,7 @@
           <span class="lang-ca">Nom:</span>
           <span class="lang-va">Nom:</span>
         </label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autofocus class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
       </div>
 
       <div>
@@ -423,7 +422,7 @@
           <span class="lang-ca">Telèfon:</span>
           <span class="lang-va">Telèfon:</span>
         </label>
-        <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+        <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
       </div>
 
       <div>
@@ -432,7 +431,7 @@
           <span class="lang-ca">Correu electrònic:</span>
           <span class="lang-va">Correu electrònic:</span>
         </label>
-        <input type="email" id="email" name="email" placeholder="tu@correo.com" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+        <input type="email" id="email" name="email" placeholder="tu@correo.com" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
       </div>
 
       <div>
@@ -441,7 +440,7 @@
           <span class="lang-ca">Ubicació del servei:</span>
           <span class="lang-va">Ubicació del servei:</span>
         </label>
-        <select id="ubicacion" name="ubicacion" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+        <select id="ubicacion" name="ubicacion" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
           <option value="">Selecciona una ubicación</option>
           <option value="Barcelona">Barcelona</option>
           <option value="Coruña">La Coruña</option>
@@ -456,7 +455,7 @@
           <span class="lang-ca">Electrodomèstic a reparar:</span>
           <span class="lang-va">Electrodomèstic a reparar:</span>
         </label>
-        <select id="equipo" name="equipo" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
+        <select id="equipo" name="equipo" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
           <option value="">Selecciona uno</option>
           <option value="Lavadora">Lavadoras</option>
           <option value="Lavavajillas">Lavavajillas</option>
@@ -478,7 +477,7 @@
           <span class="lang-ca">Descripció del problema:</span>
           <span class="lang-va">Descripció del problema:</span>
         </label>
-        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe el problema" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent"></textarea>
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe el problema" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent"></textarea>
       </div>
 
       <button type="submit" class="w-full bg-[#0a5cb8] text-white py-2 px-4 rounded-md font-bold transition duration-300 hover:bg-[#064b93] focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:ring-offset-2">
@@ -515,9 +514,9 @@
 
   <footer class="bg-[#0a5cb8] text-white text-center py-5 text-sm">
     <p>
-      <span class="lang-es">© 2025 ERB Servicio Técnico de Gamma Blanca | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN DE LA PLANA</span>
-      <span class="lang-ca">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ DE LA PLANA</span>
-      <span class="lang-va">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ DE LA PLANA</span>
+      <span class="lang-es">© 2025 ERB Servicio Técnico de Gamma Blanca | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana</span>
+      <span class="lang-ca">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
+      <span class="lang-va">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
     </p>
   </footer>
 
@@ -535,7 +534,8 @@
           defaultUbicacion: "Selecciona una ubicación",
           defaultElectrodomestico: "Selecciona uno",
           darkMode: "Modo Oscuro",
-          lightMode: "Modo Claro"
+          lightMode: "Modo Claro",
+          sending: "Enviando..." // Added translation for sending state
         }
       },
       ca: {
@@ -549,7 +549,8 @@
           defaultUbicacion: "Selecciona una ubicació",
           defaultElectrodomestico: "Selecciona un",
           darkMode: "Mode Fosc",
-          lightMode: "Mode Clar"
+          lightMode: "Mode Clar",
+          sending: "Enviant..." // Added translation for sending state
         }
       },
       va: {
@@ -563,12 +564,13 @@
           defaultUbicacion: "Selecciona una ubicació",
           defaultElectrodomestico: "Selecciona un",
           darkMode: "Mode Fosc",
-          lightMode: "Mode Clar"
+          lightMode: "Mode Clar",
+          sending: "Enviant..." // Added translation for sending state
         }
       }
     };
 
-    // Función para actualizar los placeholders y el texto de la opción por defecto
+    // Función para actualizar los placeholders y el texto de la opción por defecto en el formulario
     function updatePlaceholders(lang) {
       document.getElementById('nombre').placeholder = translations[lang].placeholder.nombre;
       document.getElementById('telefono').placeholder = translations[lang].placeholder.telefono;
@@ -576,12 +578,15 @@
       document.getElementById('mensaje').placeholder = translations[lang].placeholder.mensaje;
       document.getElementById('ubicacion').options[0].text = translations[lang].text.defaultUbicacion;
       document.getElementById('equipo').options[0].text = translations[lang].text.defaultElectrodomestico;
+
+      // Also update the submit button text when language changes
+      updateSubmitButtonText();
     }
 
     // Variable para almacenar el idioma actual
     let currentLang = 'es';
 
-    // Función para cambiar el idioma
+    // Función principal para cambiar el idioma visible en la página
     function setLanguage(lang) {
       currentLang = lang; // Actualizar el idioma actual
       const languages = ['es', 'ca', 'va'];
@@ -591,20 +596,19 @@
           elems[i].style.display = (l === lang) ? 'inline' : 'none';
         }
       });
-      updatePlaceholders(currentLang); // Usar currentLang actualizado
-      updateDarkModeButtonText(); // Actualizar texto del botón de modo oscuro al cambiar idioma
+      updatePlaceholders(currentLang); // Actualizar placeholders y opciones del formulario
+      updateDarkModeButtonText(); // Asegurarse de que el texto del botón de modo oscuro se actualice
     }
 
-    // Función para actualizar el texto y el icono del botón de modo oscuro
+    // Función para actualizar el texto y el icono del botón de modo oscuro según el modo y el idioma
     function updateDarkModeButtonText() {
-        const isDarkMode = body.classList.contains('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode'); // Usar document.body directamente
         const darkModeToggle = document.getElementById('darkModeToggle');
         const icon = darkModeToggle.querySelector('i');
         // Seleccionar los spans de idioma dentro del botón de modo oscuro
         const textSpanEs = darkModeToggle.querySelector('.lang-es');
         const textSpanCa = darkModeToggle.querySelector('.lang-ca');
         const textSpanVa = darkModeToggle.querySelector('.lang-va');
-
 
         if (isDarkMode) {
              icon.classList.remove('fa-moon');
@@ -624,14 +628,27 @@
         // La función setLanguage se encarga de mostrar solo el span correcto.
     }
 
+    // Function to update the submit button text based on current language
+    function updateSubmitButtonText() {
+        const submitButton = document.querySelector("#contactForm button[type='submit']");
+        if (submitButton) {
+            const langSpans = submitButton.querySelectorAll('span[class^="lang-"]');
+            langSpans.forEach(span => {
+                if (span.classList.contains('lang-' + currentLang)) {
+                    span.style.display = 'inline';
+                } else {
+                    span.style.display = 'none';
+                }
+            });
+        }
+    }
 
-    // Lógica de modo oscuro
-    const body = document.body; // Declarar body aquí para que esté disponible globalmente
 
-
+    // Esperar a que el DOM esté completamente cargado antes de ejecutar el script
     document.addEventListener('DOMContentLoaded', (event) => {
+        const body = document.body; // Obtener referencia al body
 
-        // Lógica para determinar el modo inicial (prefiere localStorage, luego sistema)
+        // Lógica para determinar el modo inicial (prefiere localStorage, luego la preferencia del sistema)
         const savedMode = localStorage.getItem('dark-mode');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -641,17 +658,13 @@
             // Solo aplicar la preferencia del sistema si no hay una preferencia guardada en localStorage
             body.classList.add('dark-mode');
         }
-        // Si savedMode es 'disabled' o savedMode es null y el sistema prefiere claro,
-        // el modo claro por defecto estará activo.
+        // updateDarkModeButtonText() se llama dentro de setLanguage.
+
+        // Establecer el idioma por defecto a Castellano de forma explícita al cargar la página
+        setLanguage('es');
 
 
-        // Determinar el idioma inicial y luego establecerlo para actualizar el texto del botón de modo oscuro
-        const initialLang = document.querySelector('.lang-es').style.display === 'inline' ? 'es' :
-                           document.querySelector('.lang-ca').style.display === 'inline' ? 'ca' : 'va';
-        setLanguage(initialLang); // Esto también llama a updateDarkModeButtonText
-
-
-        // Add event listeners to language buttons
+        // Añadir listeners de eventos a los botones de idioma
         document.querySelectorAll('#language-selector button').forEach(button => {
             button.addEventListener('click', (event) => {
                 const buttonText = event.target.textContent.toLowerCase();
@@ -665,129 +678,48 @@
             });
         });
 
-        // Add event listener for dark mode toggle button
-        const darkModeToggle = document.getElementById('darkModeToggle'); // Get element here
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
+        // Añadir listener de evento al botón de modo oscuro
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (darkModeToggle) { // Verificar que el elemento existe
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
 
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('dark-mode', 'enabled');
-            } else {
-                localStorage.setItem('dark-mode', 'disabled');
-            }
-            updateDarkModeButtonText(); // Actualizar texto e icono después de cambiar el modo
-        });
+                // Guardar la preferencia del modo en localStorage
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('dark-mode', 'enabled');
+                } else {
+                    localStorage.setItem('dark-mode', 'disabled');
+                }
+                updateDarkModeButtonText(); // Actualizar texto e icono después de cambiar el modo
+            });
+        }
 
 
-        // Get references to form elements and sections
+        // Obtener referencias a los elementos del formulario y la sección del formulario
         const equipoSelect = document.getElementById('equipo');
         const formularioSection = document.querySelector('.formulario');
 
-        // Mapping from displayed appliance name (Spanish) to form value
-        const applianceMap = {
-            "Frigoríficos y Congeladores": "Frigorífico",
-            "Aires Acondicionados": "Aire acondicionado",
-            "Lavadoras": "Lavadora",
-            "Lavavajillas": "Lavavajillas",
-            "Hornos": "Horno",
-            "Secadoras": "Secadora",
-            "Vitrocerámicas": "Vitrocerámica",
-            "Calentadores de Agua": "Calentador",
-            "Calderas": "Caldera",
-            "Termotanques": "Termotanque"
-        };
-
-        // Add click listeners to service cards
+        // Añadir listeners de click a las tarjetas de servicio para autocompletar el formulario y desplazarse
         document.querySelectorAll('#servicios .card').forEach(card => {
             card.addEventListener('click', () => {
-                // Get the appliance name from the currently displayed language span
-                const h3 = card.querySelector('h3');
-                // Find the visible language span within the h3
-                let applianceText = '';
-                const languages = ['es', 'ca', 'va'];
-                for (const lang of languages) {
-                    const span = h3.querySelector('.lang-' + lang);
-                    if (span && span.style.display !== 'none') {
-                        applianceText = span.textContent;
-                        break; // Found the visible text, exit loop
-                    }
-                }
+                // Obtener el valor del electrodoméstico directamente del atributo de datos
+                const formValue = card.dataset.applianceValue;
 
-
-                // Find the corresponding form value using the Spanish text as key
-                // We need to map the text from any language to the Spanish key in applianceMap
-                // Let's create a reverse map or a more robust mapping
-                 const reverseApplianceMap = {
-                    es: {
-                        "Frigoríficos y Congeladores": "Frigorífico",
-                        "Aires Acondicionados": "Aire acondicionado",
-                        "Lavadoras": "Lavadora",
-                        "Lavavajillas": "Lavavajillas",
-                        "Hornos": "Horno",
-                        "Secadoras": "Secadora",
-                        "Vitrocerámicas": "Vitrocerámica",
-                        "Calentadores de Agua": "Calentador",
-                        "Calderas": "Caldera",
-                        "Termotanques": "Termotanque"
-                    },
-                    ca: {
-                        "Neveres i congeladors": "Frigorífico",
-                        "Aires condicionats": "Aire acondicionado",
-                        "Rentadores": "Lavadora",
-                        "Rentavaixelles": "Lavavajillas",
-                        "Forns": "Horno",
-                        "Assecadores": "Secadora",
-                        "Vitrocèrmiques": "Vitrocerámica",
-                        "Escalfadors d'aigua": "Calentador",
-                        "Calderes": "Caldera",
-                        "Termotancs": "Termotanque"
-                    },
-                    va: {
-                         "Neveres i congeladors": "Frigorífico",
-                         "Aires condicionats": "Aire acondicionado",
-                         "Rentadores": "Lavadora",
-                         "Rentavaixelles": "Lavavajillas",
-                         "Forns": "Horno",
-                         "Assecadores": "Secadora",
-                         "Vitrocèrmiques": "Vitrocerámica",
-                         "Escalfadors d'aigua": "Calentador",
-                         "Calderes": "Caldera",
-                         "Termotancs": "Termotanque"
-                    }
-                 };
-
-
-                // Get the form value based on the detected appliance text and the current language
-                const formValue = reverseApplianceMap[currentLang] ? reverseApplianceMap[currentLang][applianceText] : null;
-
-
+                // Si se encontró un valor de formulario válido y el elemento select existe
                 if (formValue && equipoSelect) {
-                    // Set the form value
+                    // Establecer el valor del campo select del formulario
                     equipoSelect.value = formValue;
 
-                    // Scroll to the form section
+                    // Desplazarse a la sección del formulario
                     if (formularioSection) {
-                        formularioSection.scrollIntoView({ behavior: 'smooth' });
+                         formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Desplazarse al inicio del bloque
                     }
-                } else if (equipoSelect && formularioSection) {
-                     // If no direct mapping found for the specific language text,
-                     // try to find it using the Spanish text as a fallback before just scrolling.
-                     // This handles cases where translation keys might be missing or different.
-                     const spanishApplianceText = h3.querySelector('.lang-es').textContent;
-                     const fallbackFormValue = applianceMap[spanishApplianceText];
-                     if (fallbackFormValue) {
-                          equipoSelect.value = fallbackFormValue;
-                          if (formularioSection) {
-                             formularioSection.scrollIntoView({ behavior: 'smooth' });
-                          }
-                     } else {
-                         // If still no mapping, just scroll to the form
-                         formularioSection.scrollIntoView({ behavior: 'smooth' });
-                     }
+                } else if (formularioSection) {
+                     // Si no se encontró un valor de datos (ej. si la tarjeta no tiene el atributo), solo desplazarse al formulario
+                     formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
-
 
         // Capturar el envío del formulario y procesarlo de forma asíncrona
          document.getElementById("contactForm").addEventListener("submit", function(e) {
@@ -796,12 +728,33 @@
            const form = this;
            const submitButton = form.querySelector("button[type='submit']"); // Seleccionar el botón de envío
            const responseDiv = document.getElementById("formResponse");
+           const emailInput = document.getElementById('email'); // Get email input
 
-           // Deshabilitar el botón para evitar envíos múltiples
+           // Basic client-side validation (email format)
+           if (emailInput && !emailInput.checkValidity()) {
+              responseDiv.textContent = "Por favor, introduce un correo electrónico válido.";
+              responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error bg-red-100 text-red-700 opacity-100";
+              responseDiv.style.opacity = '1'; // Ensure it's visible
+              return; // Stop submission
+           }
+
+
+           // Deshabilitar el botón para evitar envíos múltiples y mostrar estado de envío
            submitButton.disabled = true;
+           const originalButtonSpans = submitButton.querySelectorAll('span[class^="lang-"]');
+           let originalButtonText = {};
+           originalButtonSpans.forEach(span => {
+                originalButtonText[span.className.replace('lang-', '')] = span.textContent;
+                span.textContent = translations[span.className.replace('lang-', '')].text.sending;
+           });
+           submitButton.classList.add('opacity-50', 'cursor-not-allowed'); // Optional: add visual feedback
+
+
            // Mostrar mensaje de "Enviando..."
-           responseDiv.textContent = "Enviando...";
+           responseDiv.textContent = translations[currentLang].text.sending; // Use translated text
            responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success opacity-100"; // Resetear clases y mostrar/fade in
+           responseDiv.style.opacity = '1'; // Ensure it's visible
+
 
            // Envío asíncrono con fetch
            fetch(form.action, {
@@ -832,12 +785,15 @@
              responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error bg-red-100 text-red-700 opacity-100"; // Aplicar estilos de error
            })
            .finally(() => {
-             // Asegurarse de que el botón se reactive después de que el fetch se complete
+             // Asegurarse de que el botón se reactive y el texto se restaure después de que el fetch se complete
              submitButton.disabled = false;
+             submitButton.classList.remove('opacity-50', 'cursor-not-allowed'); // Remove visual feedback
+             originalButtonSpans.forEach(span => {
+                 span.textContent = originalButtonText[span.className.replace('lang-', '')];
+             });
            });
          });
     }); // Fin DOMContentLoaded
   </script>
 </body>
 </html>
-
