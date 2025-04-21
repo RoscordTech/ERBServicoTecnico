@@ -29,6 +29,149 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Estilos para el modo oscuro */
+    body.dark-mode {
+      background-color: #1a202c; /* Fondo oscuro */
+      color: #e2e8f0; /* Texto claro */
+    }
+
+    body.dark-mode .hero {
+      background: linear-gradient(135deg, #003f7f, #0a5cb8); /* Degradado más oscuro */
+      color: #e2e8f0;
+    }
+
+    body.dark-mode .servicios,
+    body.dark-mode .marcas {
+      background-color: #2d3748; /* Fondo más oscuro para secciones */
+      color: #e2e8f0;
+    }
+
+    body.dark-mode .servicios h2,
+    body.dark-mode .marcas h2,
+    body.dark-mode .beneficios h2,
+    body.dark-mode .formulario h2 {
+        color: #90cdf4; /* Azul más claro para encabezados */
+    }
+
+
+    body.dark-mode .card {
+      background-color: #4a5568; /* Fondo de tarjeta más oscuro */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Sombra más oscura */
+    }
+
+    body.dark-mode .card:hover,
+    body.dark-mode .card:focus-within {
+      background-color: #5a67d8; /* Azul oscuro ligeramente más claro al pasar el ratón */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Sombra más oscura al pasar el ratón */
+    }
+
+    body.dark-mode .card .icon {
+      color: #90cdf4; /* Azul más claro para iconos */
+    }
+
+    body.dark-mode .card h3 {
+      color: #90cdf4; /* Azul más claro para títulos de tarjeta */
+    }
+
+     body.dark-mode .card p {
+        color: #cbd5e0; /* Gris más claro para texto de tarjeta */
+     }
+
+
+    body.dark-mode .contact-container .whatsapp {
+      background: #003f7f; /* Azul más oscuro para botón de whatsapp */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark-mode .contact-container .whatsapp:hover,
+    body.dark-mode .contact-container .whatsapp:focus {
+        background: #0a5cb8; /* Azul original al pasar el ratón */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    body.dark-mode .beneficios .btn {
+        background-color: #003f7f; /* Azul más oscuro para botones de beneficio */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    }
+
+    body.dark-mode .beneficios .btn:hover {
+        background-color: #0a5cb8; /* Azul original al pasar el ratón */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    }
+
+    body.dark-mode .formulario {
+      background: #2d3748; /* Fondo de formulario más oscuro */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark-mode .formulario label {
+        color: #e2e8f0; /* Texto claro para etiquetas */
+    }
+
+    body.dark-mode .formulario input,
+    body.dark-mode .formulario textarea,
+    body.dark-mode .formulario select {
+      background-color: #4a5568; /* Fondo de entrada más oscuro */
+      border-color: #636b78; /* Borde más oscuro */
+      color: #e2e8f0; /* Texto claro */
+    }
+
+     body.dark-mode .formulario input::placeholder,
+     body.dark-mode .formulario textarea::placeholder {
+        color: #a0aec0; /* Texto de marcador de posición más claro */
+     }
+
+
+    body.dark-mode .formulario input:focus,
+    body.dark-mode .formulario textarea:focus,
+    body.dark-mode .formulario select:focus {
+      border-color: #90cdf4; /* Borde de enfoque azul más claro */
+      box-shadow: 0 0 0 1px #90cdf4; /* Anillo de enfoque azul más claro */
+    }
+
+    body.dark-mode .formulario button {
+      background: #003f7f; /* Botón de formulario azul más oscuro */
+    }
+
+    body.dark-mode .formulario button:hover,
+    body.dark-mode .formulario button:focus {
+      background-color: #0a5cb8; /* Azul original al pasar el ratón */
+    }
+
+    body.dark-mode .form-response.success {
+        background: #2f855a; /* Verde más oscuro para éxito */
+        color: #e2e8f0;
+    }
+
+     body.dark-mode .form-response.error {
+        background: #c53030; /* Rojo más oscuro para error */
+        color: #e2e8f0;
+     }
+
+
+    body.dark-mode footer {
+      background: #003f7f; /* Pie de página azul más oscuro */
+      color: #e2e8f0;
+    }
+
+    /* Estilos para el botón de modo oscuro en modo oscuro */
+    body.dark-mode #language-selector button#darkModeToggle {
+        border-color: #90cdf4; /* Borde azul más claro en modo oscuro */
+        background-color: #2d3748; /* Fondo más oscuro */
+        color: #e2e8f0; /* Texto claro */
+    }
+
+    body.dark-mode #language-selector button#darkModeToggle:hover {
+        background-color: #4a5568; /* Fondo más oscuro al pasar el ratón */
+        color: #e2e8f0;
+    }
+
+    /* Añadido para ocultar el desbordamiento horizontal */
+    body {
+        overflow-x: hidden;
+    }
+
   </style>
 </head>
 <body class="font-sans bg-white text-[#0a5cb8] leading-relaxed">
@@ -40,6 +183,9 @@
     <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Castellano</button>
     <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Català</button>
     <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">Valencià</button>
+    <button id="darkModeToggle" class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+        <i class="fa-solid fa-moon"></i> <span class="lang-es">Modo Oscuro</span><span class="lang-ca">Mode Fosc</span><span class="lang-va">Mode Fosc</span>
+    </button>
   </div>
 
   <header class="hero bg-gradient-to-br from-[#0a5cb8] to-[#003f7f] text-white text-center py-24 px-5 animate-[fadeIn_1.5s_ease-in-out]">
@@ -387,7 +533,9 @@
         },
         text: {
           defaultUbicacion: "Selecciona una ubicación",
-          defaultElectrodomestico: "Selecciona uno"
+          defaultElectrodomestico: "Selecciona uno",
+          darkMode: "Modo Oscuro",
+          lightMode: "Modo Claro"
         }
       },
       ca: {
@@ -399,7 +547,9 @@
         },
         text: {
           defaultUbicacion: "Selecciona una ubicació",
-          defaultElectrodomestico: "Selecciona un"
+          defaultElectrodomestico: "Selecciona un",
+          darkMode: "Mode Fosc",
+          lightMode: "Mode Clar"
         }
       },
       va: {
@@ -411,7 +561,9 @@
         },
         text: {
           defaultUbicacion: "Selecciona una ubicació",
-          defaultElectrodomestico: "Selecciona un"
+          defaultElectrodomestico: "Selecciona un",
+          darkMode: "Mode Fosc",
+          lightMode: "Mode Clar"
         }
       }
     };
@@ -426,8 +578,12 @@
       document.getElementById('equipo').options[0].text = translations[lang].text.defaultElectrodomestico;
     }
 
+    // Variable para almacenar el idioma actual
+    let currentLang = 'es';
+
     // Función para cambiar el idioma
     function setLanguage(lang) {
+      currentLang = lang; // Actualizar el idioma actual
       const languages = ['es', 'ca', 'va'];
       languages.forEach(function(l) {
         const elems = document.getElementsByClassName('lang-' + l);
@@ -435,69 +591,142 @@
           elems[i].style.display = (l === lang) ? 'inline' : 'none';
         }
       });
-      updatePlaceholders(lang);
+      updatePlaceholders(currentLang); // Usar currentLang actualizado
+      updateDarkModeButtonText(); // Actualizar texto del botón de modo oscuro al cambiar idioma
     }
 
-    // Se establece por defecto el castellano al cargar la página
-    setLanguage('es');
-
-    // Añadir listeners a los botones de idioma
-    document.querySelectorAll('#language-selector button').forEach(button => {
-        button.addEventListener('click', (event) => {
-            const lang = event.target.textContent.toLowerCase().includes('castellano') ? 'es' :
-                         event.target.textContent.toLowerCase().includes('català') ? 'ca' : 'va';
-            setLanguage(lang);
-        });
-    });
+    // Función para actualizar el texto y el icono del botón de modo oscuro
+    function updateDarkModeButtonText() {
+        const isDarkMode = body.classList.contains('dark-mode');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const icon = darkModeToggle.querySelector('i');
+        // Seleccionar los spans de idioma dentro del botón de modo oscuro
+        const textSpanEs = darkModeToggle.querySelector('.lang-es');
+        const textSpanCa = darkModeToggle.querySelector('.lang-ca');
+        const textSpanVa = darkModeToggle.querySelector('.lang-va');
 
 
-    // Capturar el envío del formulario y procesarlo de forma asíncrona
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // Evitar el envío tradicional
-
-      const form = this;
-      const submitButton = form.querySelector("button[type='submit']"); // Seleccionar el botón de envío
-      const responseDiv = document.getElementById("formResponse");
-
-      // Deshabilitar el botón para evitar envíos múltiples
-      submitButton.disabled = true;
-      // Mostrar mensaje de "Enviando..."
-      responseDiv.textContent = "Enviando...";
-      responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success opacity-100"; // Resetear clases y mostrar/fade in
-
-      // Envío asíncrono con fetch
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        // Verificar si la respuesta es OK (estado 200-299)
-        if (response.ok) {
-          return response.text(); // O response.json() si la API devuelve JSON
+        if (isDarkMode) {
+             icon.classList.remove('fa-moon');
+             icon.classList.add('fa-sun');
+             // Actualizar el texto de todos los spans de idioma dentro del botón
+             textSpanEs.textContent = translations.es.text.lightMode;
+             textSpanCa.textContent = translations.ca.text.lightMode;
+             textSpanVa.textContent = translations.va.text.lightMode;
         } else {
-          // Manejar errores HTTP
-          return response.text().then(text => {
-            throw new Error(`HTTP status ${response.status}: ${text}`);
-          });
+             icon.classList.remove('fa-sun');
+             icon.classList.add('fa-moon');
+             // Actualizar el texto de todos los spans de idioma dentro del botón
+             textSpanEs.textContent = translations.es.text.darkMode;
+             textSpanCa.textContent = translations.ca.text.darkMode;
+             textSpanVa.textContent = translations.va.text.darkMode;
         }
-      })
-      .then(() => {
-        // Éxito: ocultamos el formulario y mostramos el mensaje de éxito
-        form.style.display = "none";
-        responseDiv.textContent = "Formulario enviado, nos contactaremos en breve.";
-        responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success bg-blue-100 text-[#0a5cb8] opacity-100"; // Aplicar estilos de éxito
-      })
-      .catch(error => {
-        // Error: mostramos el mensaje de error y reactivamos el botón
-        responseDiv.textContent = "Error: " + error.message + ". Por favor, inténtalo de nuevo.";
-        responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error bg-red-100 text-red-700 opacity-100"; // Aplicar estilos de error
-      })
-      .finally(() => {
-        // Asegurarse de que el botón se reactive después de que el fetch se complete
-        submitButton.disabled = false;
-      });
-    });
+        // La función setLanguage se encarga de mostrar solo el span correcto.
+    }
+
+
+    // Lógica de modo oscuro
+    const body = document.body; // Declarar body aquí para que esté disponible globalmente
+
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+
+        // Lógica para determinar el modo inicial (prefiere localStorage, luego sistema)
+        const savedMode = localStorage.getItem('dark-mode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedMode === 'enabled') {
+            body.classList.add('dark-mode');
+        } else if (savedMode === null && prefersDark) {
+            // Solo aplicar la preferencia del sistema si no hay una preferencia guardada en localStorage
+            body.classList.add('dark-mode');
+        }
+        // Si savedMode es 'disabled' o savedMode es null y el sistema prefiere claro,
+        // el modo claro por defecto estará activo.
+
+
+        // Determinar el idioma inicial y luego establecerlo para actualizar el texto del botón de modo oscuro
+        const initialLang = document.querySelector('.lang-es').style.display === 'inline' ? 'es' :
+                           document.querySelector('.lang-ca').style.display === 'inline' ? 'ca' : 'va';
+        setLanguage(initialLang); // Esto también llama a updateDarkModeButtonText
+
+
+        // Add event listeners to language buttons
+        document.querySelectorAll('#language-selector button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const buttonText = event.target.textContent.toLowerCase();
+                let lang = 'es'; // Default
+                if (buttonText.includes('català')) {
+                    lang = 'ca';
+                } else if (buttonText.includes('valencià')) {
+                    lang = 'va';
+                }
+                setLanguage(lang);
+            });
+        });
+
+        // Add event listener for dark mode toggle button
+        const darkModeToggle = document.getElementById('darkModeToggle'); // Get element here
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+            updateDarkModeButtonText(); // Actualizar texto e icono después de cambiar el modo
+        });
+
+
+        // Capturar el envío del formulario y procesarlo de forma asíncrona
+         document.getElementById("contactForm").addEventListener("submit", function(e) {
+           e.preventDefault(); // Evitar el envío tradicional
+
+           const form = this;
+           const submitButton = form.querySelector("button[type='submit']"); // Seleccionar el botón de envío
+           const responseDiv = document.getElementById("formResponse");
+
+           // Deshabilitar el botón para evitar envíos múltiples
+           submitButton.disabled = true;
+           // Mostrar mensaje de "Enviando..."
+           responseDiv.textContent = "Enviando...";
+           responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success opacity-100"; // Resetear clases y mostrar/fade in
+
+           // Envío asíncrono con fetch
+           fetch(form.action, {
+             method: "POST",
+             body: new FormData(form),
+             headers: { 'Accept': 'application/json' }
+           })
+           .then(response => {
+             // Verificar si la respuesta es OK (estado 200-299)
+             if (response.ok) {
+               return response.text(); // O response.json() si la API devuelve JSON
+             } else {
+               // Manejar errores HTTP
+               return response.text().then(text => {
+                 throw new Error(`HTTP status ${response.status}: ${text}`);
+               });
+             }
+           })
+           .then(() => {
+             // Éxito: ocultamos el formulario y mostramos el mensaje de éxito
+             form.style.display = "none";
+             responseDiv.textContent = "Formulario enviado, nos contactaremos en breve.";
+             responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success bg-blue-100 text-[#0a5cb8] opacity-100"; // Aplicar estilos de éxito
+           })
+           .catch(error => {
+             // Error: mostramos el mensaje de error y reactivamos el botón
+             responseDiv.textContent = "Error: " + error.message + ". Por favor, inténtalo de nuevo.";
+             responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error bg-red-100 text-red-700 opacity-100"; // Aplicar estilos de error
+           })
+           .finally(() => {
+             // Asegurarse de que el botón se reactive después de que el fetch se complete
+             submitButton.disabled = false;
+           });
+         });
+    }); // Fin DOMContentLoaded
   </script>
 </body>
 </html>
