@@ -81,17 +81,6 @@
         color: #cbd5e0; /* Gris más claro para texto de tarjeta */
      }
 
-    body.dark-mode .contact-container .whatsapp {
-      background: #0a5cb8; /* Azul más oscuro para botón de whatsapp */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    body.dark-mode .contact-container .whatsapp:hover,
-    body.dark-mode .contact-container .whatsapp:focus {
-        background: #0a5cb8; /* Azul original al pasar el ratón */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-    }
-
     body.dark-mode .beneficios .btn {
         background-color: #003f7f; /* Azul más oscuro para botones de beneficio */
         box-shadow: 0 4px 6px rgba(0,0,0,0.4);
@@ -271,11 +260,6 @@
         font-weight: bold;
         /* Asegurar tamaño de toque adecuado en móviles */
         min-width: 120px; /* Ancho mínimo para toque */
-    }
-
-    .service-type-selector button:hover {
-        background-color: #0a5cb8;
-        color: #fff;
     }
 
     .service-type-selector button.active {
@@ -485,6 +469,53 @@
         color: #cbd5e0;
     }
 
+    /* Styles for the new WhatsApp button container */
+    .whatsapp-button-container {
+        text-align: center;
+        margin-top: 2rem; /* Add some space above the form */
+        margin-bottom: 2rem; /* Add some space below the button */
+        padding: 0 1rem; /* Add horizontal padding */
+    }
+
+    /* Styles for the new WhatsApp button - Adjusted to match site palette */
+    .whatsapp-button-container .whatsapp-btn {
+        background-color: #0a5cb8; /* Match site blue */
+        color: white;
+        padding: 0.75rem 1.5rem; /* py-3 px-6 */
+        border-radius: 9999px; /* rounded-full */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Added background-color to transition */
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .whatsapp-button-container .whatsapp-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* hover:shadow-lg */
+        background-color: #003f7f; /* Darker blue on hover */
+    }
+
+    .whatsapp-button-container .whatsapp-btn:focus {
+         outline: none;
+         box-shadow: 0 0 0 2px rgba(10, 92, 184, 0.5); /* focus:ring-2 focus:ring-[#0a5cb8] */
+    }
+
+    body.dark-mode .whatsapp-button-container .whatsapp-btn {
+        background-color: #003f7f; /* Darker blue in dark mode */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark-mode .whatsapp-button-container .whatsapp-btn:hover {
+         background-color: #0a5cb8; /* Lighter blue on hover in dark mode */
+         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    body.dark-mode .whatsapp-button-container .whatsapp-btn:focus {
+         box-shadow: 0 0 0 2px rgba(0, 63, 127, 0.5); /* Darker blue focus ring */
+    }
+
 
   </style>
 </head>
@@ -548,13 +579,10 @@
           <span class="lang-ca">Sobre Nosaltres</span>
           <span class="lang-va">Sobre Nosaltres</span>
       </a>
-      <a href="https://wa.me/34631449197" class="whatsapp inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" target="_blank" aria-label="Chatea con nosotros por WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-6 h-6 mr-2 align-middle fill-current text-white">
-          <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-93-25.7l-6.7-4-69.8 18.3L100 360.6l-4.1-6.9c-18.5-31.4-28.2-67.7-28.2-109.2c0-114.8 93.4-208.3 208.3-208.3c41.5 0 81.5 15.3 111.7 44.5c30.3 29.3 47.9 68.1 47.9 109.4c0 114.8-93.4 208.3-208.3 208.3zm95.3-95.1c-7.1-3.7-42.8-21.4-49.2-23.8c-6.5-2.4-11.2-3.6-16 3.6s-18.9 23.8-23.2 28.6c-4.3 4.9-8.6 5.6-16 1.8s-30-11-57.1-35.3c-22.9-20.7-38.3-46.2-42.7-53.6c-4.3-7.5-0.4-11.5 3.4-15.2c3.4-3.4 7.1-8.5 10.6-12.7c3.7-4.3 4.9-7.1 7.1-11.2c2.4-4.3 1.2-8.1-0.6-11.2s-16-38.2-21.9-46.5c-5.9-8.4-11.8-7.1-16-7.3s-10.6-2.4-16-2.4s-13.2 3.6-20.3 10.6c-7.1 7.1-18.9 17.7-18.9 42.8s19.2 49.6 21.9 53.1c2.9 3.7 38.2 58.2 92.3 82.6c11.2 4.9 20.9 7.8 28 10c14.6 4.5 27.9 3.8 38.4 2.3c11.2-1.5 32.4-13.2 36.9-25.4c4.5-12.2 4.5-22.6 3.2-24.5c-1.3-1.9-4.7-3-10-5.9z"/>
-        </svg>
-        <span class="lang-es">Contáctanos</span>
-        <span class="lang-ca">Contacta'ns</span>
-        <span class="lang-va">Contacta'ns</span>
+      <a href="#formulario" id="requestRepairBtn" class="btn inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Solicita tu reparación a través del formulario">
+        <i class="fa-solid fa-file-alt mr-2 align-middle"></i> <span class="lang-es">Solicita tu reparación</span>
+        <span class="lang-ca">Sol·licita la teva reparació</span>
+        <span class="lang-va">Sol·licita la teua reparació</span>
       </a>
   </div>
 
@@ -793,6 +821,17 @@
       </p>
   </section>
 
+  <div class="whatsapp-button-container">
+      <a href="https://wa.me/34631449197" class="whatsapp-btn" target="_blank" aria-label="Chatea con nosotros por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-6 h-6 mr-2 align-middle fill-current text-white">
+          <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-93-25.7l-6.7-4-69.8 18.3L100 360.6l-4.1-6.9c-18.5-31.4-28.2-67.7-28.2-109.2c0-114.8 93.4-208.3 208.3-208.3c41.5 0 81.5 15.3 111.7 44.5c30.3 29.3 47.9 68.1 47.9 109.4c0 114.8-93.4 208.3-208.3 208.3zm95.3-95.1c-7.1-3.7-42.8-21.4-49.2-23.8c-6.5-2.4-11.2-3.6-16 3.6s-18.9 23.8-23.2 28.6c-4.3 4.9-8.6 5.6-16 1.8s-30-11-57.1-35.3c-22.9-20.7-38.3-46.2-42.7-53.6c-4.3-7.5-0.4-11.5 3.4-15.2c3.4-3.4 7.1-8.5 10.6-12.7c3.7-4.3 4.9-7.1 7.1-11.2c2.4-4.3 1.2-8.1-0.6-11.2s-16-38.2-21.9-46.5c-5.9-8.4-11.8-7.1-16-7.3s-10.6-2.4-16-2.4s-13.2 3.6-20.3 10.6c-7.1 7.1-18.9 17.7-18.9 42.8s19.2 49.6 21.9 53.1c2.9 3.7 38.2 58.2 92.3 82.6c11.2 4.9 20.9 7.8 28 10c14.6 4.5 27.9 3.8 38.4 2.3c11.2-1.5 32.4-13.2 36.9-25.4c4.5-12.2 4.5-22.6 3.2-24.5c-1.3-1.9-4.7-3-10-5.9z"/>
+        </svg>
+        <span class="lang-es">Chatea por WhatsApp</span>
+        <span class="lang-ca">Xateja per WhatsApp</span>
+        <span class="lang-va">Chateja per WhatsApp</span>
+      </a>
+  </div>
+
 
   <section class="formulario bg-white p-10 max-w-xl mx-auto my-10 rounded-lg shadow-xl">
     <h2 class="text-2xl md:text-3xl text-center mb-5">
@@ -952,12 +991,14 @@
           lightMode: "Modo Claro",
           sending: "Enviando...",
           viewBrands: "Ver Marcas",
-          aboutUs: "Sobre Nosotros", // Added translation for About Us button
+          aboutUs: "Sobre Nosotros",
           domestico: "Doméstico",
           industrial: "Industrial",
           formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.",
           formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.",
-          validationError: "Por favor, completa todos los campos requeridos."
+          validationError: "Por favor, completa todos los campos requeridos.",
+          requestRepair: "Solicita tu reparación", // New translation key
+          chatWhatsApp: "Chatea por WhatsApp" // New translation key
         }
       },
       ca: {
@@ -974,12 +1015,14 @@
           lightMode: "Mode Clar",
           sending: "Enviant...",
           viewBrands: "Veure Marques",
-          aboutUs: "Sobre Nosaltres", // Added translation for About Us button
+          aboutUs: "Sobre Nosaltres",
           domestico: "Domèstic",
           industrial: "Industrial",
           formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.",
           formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.",
-          validationError: "Si us plau, completa tots els camps requerits."
+          validationError: "Si us plau, completa tots els camps requerits.",
+          requestRepair: "Sol·licita la teva reparació", // New translation key
+          chatWhatsApp: "Xateja per WhatsApp" // New translation key
         }
       },
       va: {
@@ -996,12 +1039,14 @@
           lightMode: "Mode Clar",
           sending: "Enviant...",
           viewBrands: "Veure Marques",
-          aboutUs: "Sobre Nosaltres", // Added translation for About Us button
+          aboutUs: "Sobre Nosaltres",
           domestico: "Doméstico",
           industrial: "Industrial",
           formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.",
           formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.",
-          validationError: "Per favor, completa tots els camps requerits."
+          validationError: "Per favor, completa tots els camps requerits.",
+          requestRepair: "Sol·licita la teua reparació", // New translation key
+          chatWhatsApp: "Chateja per WhatsApp" // New translation key
         }
       }
     };
@@ -1019,6 +1064,7 @@
       updateSubmitButtonText();
       updateServiceTypeButtonText(currentLang); // Update service type button text
       updateAboutUsButtonText(currentLang); // Update About Us button text
+      updateContactButtonsText(currentLang); // Update the text of the re-arranged contact buttons
     }
 
     // Variable to store the current language
@@ -1036,31 +1082,7 @@
       });
       updatePlaceholders(currentLang); // Update form placeholders and options
       updateDarkModeButtonText(); // Ensure dark mode button text is updated
-
-      // Update the text of the "View Brands" button
-      const viewBrandsButton = document.querySelector('.contact-buttons-container a[href="#marcas"]');
-      if (viewBrandsButton) {
-         const langSpans = viewBrandsButton.querySelectorAll('span[class^="lang-"]');
-         langSpans.forEach(span => {
-             if (span.classList.contains('lang-' + currentLang)) {
-                 span.style.display = 'inline';
-             } else {
-                 span.style.display = 'none';
-             }
-         });
-      }
-       // Update the text of the "About Us" button
-       const aboutUsButton = document.querySelector('.contact-buttons-container a[href="#about-us"]');
-       if (aboutUsButton) {
-          const langSpans = aboutUsButton.querySelectorAll('span[class^="lang-"]');
-          langSpans.forEach(span => {
-              if (span.classList.contains('lang-' + currentLang)) {
-                  span.style.display = 'inline';
-              } else {
-                  span.style.display = 'none';
-              }
-          });
-       }
+      updateContactButtonsText(currentLang); // Update the text of the re-arranged contact buttons
     }
 
     // Function to update the text and icon of the dark mode button based on mode and language
@@ -1128,6 +1150,26 @@
             aboutUsButton.querySelector('.lang-ca').textContent = translations.ca.text.aboutUs;
             aboutUsButton.querySelector('.lang-va').textContent = translations.va.text.aboutUs;
         }
+    }
+
+    // New function to update the text of the re-arranged contact buttons
+    function updateContactButtonsText(lang) {
+        // Update "Solicita tu reparación" button text (now scrolls to form)
+        const requestRepairButton = document.querySelector('.contact-buttons-container a[href="#formulario"]');
+        if (requestRepairButton) {
+            requestRepairButton.querySelector('.lang-es').textContent = translations[lang].text.requestRepair;
+            requestRepairButton.querySelector('.lang-ca').textContent = translations[lang].text.requestRepair;
+            requestRepairButton.querySelector('.lang-va').textContent = translations[lang].text.requestRepair;
+        }
+
+        // Update "Chatea por WhatsApp" button text (the new button)
+        const chatWhatsAppButton = document.querySelector('.whatsapp-button-container .whatsapp-btn');
+        if (chatWhatsAppButton) {
+             chatWhatsAppButton.querySelector('.lang-es').textContent = translations[lang].text.chatWhatsApp;
+             chatWhatsAppButton.querySelector('.lang-ca').textContent = translations[lang].text.chatWhatsApp;
+             chatWhatsAppButton.querySelector('.lang-va').textContent = translations[lang].text.chatWhatsApp;
+        }
+         // Note: The "View Brands" button text is updated within setLanguage already.
     }
 
 
@@ -1200,6 +1242,7 @@
         const formularioSection = document.querySelector('.formulario');
         const formLoadingIndicator = document.getElementById('formLoadingIndicator'); // Get loading indicator
         const serviciosSection = document.getElementById('servicios'); // Get the services section
+        const requestRepairBtn = document.getElementById('requestRepairBtn'); // Get the "Solicita tu reparación" button
 
 
         // Add click listeners to service cards to pre-fill the form and scroll
@@ -1332,6 +1375,16 @@
             });
         } else {
             console.error("Elementos del selector de tipo de servicio o sección de servicios no encontrados.");
+        }
+
+        // Added click listener for the "Solicita tu reparación" button to ensure scrolling
+        if (requestRepairBtn && formularioSection) {
+            requestRepairBtn.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default anchor link behavior
+                formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        } else {
+            console.error("Botón 'Solicita tu reparación' o sección de formulario no encontrados.");
         }
 
 
