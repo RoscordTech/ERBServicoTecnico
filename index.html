@@ -42,15 +42,19 @@
     }
 
     body.dark-mode .servicios,
-    body.dark-mode .marcas {
-      background-color: #2d3748; /* Fondo más oscuro para secciones de servicios y marcas */
+    body.dark-mode .marcas,
+    body.dark-mode .about-us /* Added dark mode style for about us */
+     {
+      background-color: #2d3748; /* Fondo más oscuro para secciones */
       color: #e2e8f0;
     }
 
     body.dark-mode .servicios h2,
     body.dark-mode .marcas h2,
     body.dark-mode .beneficios h2,
-    body.dark-mode .formulario h2 {
+    body.dark-mode .formulario h2,
+    body.dark-mode .about-us h2 /* Added dark mode style for about us heading */
+     {
         color: #90cdf4; /* Azul más claro para encabezados en modo oscuro */
     }
 
@@ -137,21 +141,79 @@
     }
 
     /* Estilos para mensajes de respuesta del formulario */
+    .form-response {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .form-response.visible {
+        opacity: 1;
+    }
+    .form-response.success {
+        background: #d4edda; /* Verde claro para éxito */
+        color: #155724; /* Texto verde oscuro */
+        border: 1px solid #c3e6cb;
+    }
+
+     .form-response.error {
+        background: #f8d7da; /* Rojo claro para error */
+        color: #721c24; /* Texto rojo oscuro */
+        border: 1px solid #f5c6cb;
+     }
+
     body.dark-mode .form-response.success {
         background: #2f855a; /* Verde más oscuro para éxito */
         color: #e2e8f0;
+        border-color: #22543d;
     }
 
      body.dark-mode .form-response.error {
         background: #c53030; /* Rojo más oscuro para error */
         color: #e2e8f0;
+        border-color: #a71f24;
      }
 
+    /* Estilos para el indicador de carga */
+    #formLoadingIndicator {
+        display: none; /* Hidden by default */
+        text-align: center;
+        margin-top: 1rem;
+        color: #0a5cb8; /* Match theme color */
+    }
+
+    body.dark-mode #formLoadingIndicator {
+        color: #90cdf4; /* Match dark mode color */
+    }
+
+
     /* Estilos del pie de página */
+    footer {
+        background: #0a5cb8;
+        color: white;
+        text-align: center;
+        padding: 1.25rem 1rem; /* py-5 px-4 equivalent */
+        font-size: 0.875rem; /* text-sm equivalent */
+    }
+
+    footer a {
+        color: white;
+        text-decoration: underline;
+        margin: 0 0.5rem;
+        transition: opacity 0.3s ease;
+    }
+
+    footer a:hover {
+        opacity: 0.8;
+    }
+
     body.dark-mode footer {
       background: #0a5cb8; /* Pie de página azul más oscuro */
       color: #e2e8f0;
     }
+
+    body.dark-mode footer a {
+        color: #e2e8f0;
+    }
+
 
     /* Estilos específicos para el botón de modo oscuro en modo oscuro */
     body.dark-mode #language-selector button#darkModeToggle {
@@ -272,6 +334,11 @@
          }
     }
 
+    /* Estilo para ocultar tarjetas filtradas */
+    .servicios .card.hidden {
+        display: none;
+    }
+
 
     .servicios .card .icon {
         font-size: 4rem; /* Ajustar tamaño del icono en móviles si es necesario */
@@ -388,6 +455,36 @@
         font-size: 0.8rem; /* Ajustar tamaño de fuente */
     }
 
+    /* Estilos para la sección Sobre Nosotros */
+    .about-us {
+        background-color: #f7fafc; /* bg-gray-100 */
+        padding: 4rem 1.25rem; /* py-16 px-5 */
+        text-align: center;
+    }
+
+    .about-us h2 {
+        color: #0a5cb8;
+        font-size: 2.25rem; /* text-3xl */
+        margin-bottom: 2rem; /* mb-8 */
+    }
+
+    .about-us p {
+        color: #4a5568; /* text-gray-700 */
+        font-size: 1.125rem; /* text-lg */
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    body.dark-mode .about-us {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+
+    body.dark-mode .about-us p {
+        color: #cbd5e0;
+    }
+
 
   </style>
 </head>
@@ -395,7 +492,7 @@
 
   <div class="flex justify-center mt-5">
       <div class="w-32 h-auto sm:w-40 md:w-48 lg:w-56">
-          <img src="logo.png" alt="ERB Servicio Técnico Logo" class="block w-full h-auto">
+          <img src="logo.png" alt="ERB Servicio Técnico Logo" class="block w-full h-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/192x192/cccccc/ffffff?text=Logo';">
       </div>
   </div>
 
@@ -409,12 +506,12 @@
   </div>
 
   <section class="service-type-selector">
-      <button id="domesticoBtn" class="active">
+      <button id="domesticoBtn" class="active" data-service-type="domestico">
           <span class="lang-es">Doméstico</span>
           <span class="lang-ca">Domèstic</span>
           <span class="lang-va">Domèstic</span>
       </button>
-      <button id="industrialBtn">
+      <button id="industrialBtn" data-service-type="industrial">
           <span class="lang-es">Industrial</span>
           <span class="lang-ca">Industrial</span>
           <span class="lang-va">Industrial</span>
@@ -445,6 +542,12 @@
           <span class="lang-ca">Veure Marques</span>
           <span class="lang-va">Veure Marques</span>
       </a>
+      <a href="#about-us" class="btn inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Conoce más sobre nosotros">
+          <i class="fa-solid fa-building mr-2 align-middle"></i>
+          <span class="lang-es">Sobre Nosotros</span>
+          <span class="lang-ca">Sobre Nosaltres</span>
+          <span class="lang-va">Sobre Nosaltres</span>
+      </a>
       <a href="https://wa.me/34631449197" class="whatsapp inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" target="_blank" aria-label="Chatea con nosotros por WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-6 h-6 mr-2 align-middle fill-current text-white">
           <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-93-25.7l-6.7-4-69.8 18.3L100 360.6l-4.1-6.9c-18.5-31.4-28.2-67.7-28.2-109.2c0-114.8 93.4-208.3 208.3-208.3c41.5 0 81.5 15.3 111.7 44.5c30.3 29.3 47.9 68.1 47.9 109.4c0 114.8-93.4 208.3-208.3 208.3zm95.3-95.1c-7.1-3.7-42.8-21.4-49.2-23.8c-6.5-2.4-11.2-3.6-16 3.6s-18.9 23.8-23.2 28.6c-4.3 4.9-8.6 5.6-16 1.8s-30-11-57.1-35.3c-22.9-20.7-38.3-46.2-42.7-53.6c-4.3-7.5-0.4-11.5 3.4-15.2c3.4-3.4 7.1-8.5 10.6-12.7c3.7-4.3 4.9-7.1 7.1-11.2c2.4-4.3 1.2-8.1-0.6-11.2s-16-38.2-21.9-46.5c-5.9-8.4-11.8-7.1-16-7.3s-10.6-2.4-16-2.4s-13.2 3.6-20.3 10.6c-7.1 7.1-18.9 17.7-18.9 42.8s19.2 49.6 21.9 53.1c2.9 3.7 38.2 58.2 92.3 82.6c11.2 4.9 20.9 7.8 28 10c14.6 4.5 27.9 3.8 38.4 2.3c11.2-1.5 32.4-13.2 36.9-25.4c4.5-12.2 4.5-22.6 3.2-24.5c-1.3-1.9-4.7-3-10-5.9z"/>
@@ -463,7 +566,7 @@
       <span class="lang-va">Quins aparells electrodomèstics reparam?</span>
     </h2>
     <div class="cards grid grid-cols-2 lg:grid-cols-3 gap-5 max-w-screen-lg mx-auto">
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Frigorífico">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Frigorífico" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">ac_unit</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Frigoríficos y Congeladores</span>
@@ -476,7 +579,7 @@
           <span class="lang-va">No refreden correctament, problemes de congelació o sorolls inusuals.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-100 focus-within:outline-none focus-within:ring-4 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Aire acondicionado">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-100 focus-within:outline-none focus-within:ring-4 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Aire acondicionado" data-service-type="domestico industrial">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">air</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Aires Acondicionados</span>
@@ -489,7 +592,7 @@
           <span class="lang-va">Instal·lació i reparació de sistemes de climatització.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavadora">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavadora" data-service-type="domestico">
         <i class="fas fa-washing-machine icon text-5xl text-[#0a5cb8] mb-2.5"></i>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Lavadoras</span>
@@ -502,7 +605,7 @@
           <span class="lang-va">Problemes de centrifugació, aigua, sorolls o bloqueigs.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavavajillas">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavavajillas" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">cleaning_services</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Lavavajillas</span>
@@ -515,7 +618,7 @@
           <span class="lang-va">Fuites, mal funcionament o rentat deficient.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Horno">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Horno" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">kitchen</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Hornos</span>
@@ -528,7 +631,7 @@
           <span class="lang-va">No escalfen o presenten fallades en resistències o sensors.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Secadora">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Secadora" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">local_laundry_service</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Secadoras</span>
@@ -541,7 +644,7 @@
           <span class="lang-va">Problemes de calor, gir o humitat excessiva.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Vitrocerámica">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Vitrocerámica" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">bolt</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Vitrocerámicas</span>
@@ -554,7 +657,7 @@
           <span class="lang-va">Problemes en zonas de calor, sensors o controls.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calentador">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calentador" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">whatshot</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Calentadores de Agua</span>
@@ -567,7 +670,7 @@
           <span class="lang-va">Reparació i instal·lació d'escalfadors d'aigua.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Caldera">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Caldera" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">fireplace</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Calderas</span>
@@ -580,7 +683,7 @@
           <span class="lang-va">Manteniment i reparació de calderes domèstiques.</span>
         </p>
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Termotanque">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Termotanque" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">hot_tub</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Termotanques</span>
@@ -593,6 +696,45 @@
           <span class="lang-va">Reparació i manteniment de termotancs.</span>
         </p>
       </div>
+        <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Maquinaria de Lavandería Industrial" data-service-type="industrial">
+            <i class="fas fa-industry icon text-5xl text-[#0a5cb8] mb-2.5"></i>
+            <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+              <span class="lang-es">Maquinaria de Lavandería Industrial</span>
+              <span class="lang-ca">Maquinària de bugaderia industrial</span>
+              <span class="lang-va">Maquinària de bugaderia industrial</span>
+            </h3>
+            <p class="text-gray-700">
+              <span class="lang-es">Reparación y mantenimiento de lavadoras y secadoras industriales.</span>
+              <span class="lang-ca">Reparació i manteniment de rentadores i assecadores industrials.</span>
+              <span class="lang-va">Reparació i manteniment de rentadores i assecadores industrials.</span>
+            </p>
+          </div>
+          <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Equipos de Refrigeración Industrial" data-service-type="industrial">
+            <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">kitchen</span>
+            <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+              <span class="lang-es">Equipos de Refrigeración Industrial</span>
+              <span class="lang-ca">Equips de refrigeració industrial</span>
+              <span class="lang-va">Equips de refrigeració industrial</span>
+            </h3>
+            <p class="text-gray-700">
+              <span class="lang-es">Cámaras frigoríficas, congeladores industriales, etc.</span>
+              <span class="lang-ca">Cambres frigorífiques, congeladors industrials, etc.</span>
+              <span class="lang-va">Cambres frigorífiques, congeladors industrials, etc.</span>
+            </p>
+          </div>
+           <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calderas Industriales" data-service-type="industrial">
+            <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">fireplace</span>
+            <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
+              <span class="lang-es">Calderas Industriales</span>
+              <span class="lang-ca">Calderes industrials</span>
+              <span class="lang-va">Calderes industrials</span>
+            </h3>
+            <p class="text-gray-700">
+              <span class="lang-es">Mantenimiento y reparación de sistemas de calderas industriales.</span>
+              <span class="lang-ca">Manteniment i reparació de sistemes de calderes industrials.</span>
+              <span class="lang-va">Manteniment i reparació de sistemes de calderes industrials.</span>
+            </p>
+          </div>
     </div>
   </section>
 
@@ -637,6 +779,20 @@
           </a>
       </div>
   </section>
+
+  <section id="about-us" class="about-us">
+      <h2>
+          <span class="lang-es">Sobre Nosotros</span>
+          <span class="lang-ca">Sobre Nosaltres</span>
+          <span class="lang-va">Sobre Nosaltres</span>
+      </h2>
+      <p>
+          <span class="lang-es">Somos un equipo de técnicos especializados con años de experiencia en la reparación y mantenimiento de electrodomésticos de gama blanca, tanto domésticos como industriales. Nuestro compromiso es ofrecer un servicio rápido, eficiente y con garantía, asegurando la máxima satisfacción de nuestros clientes en Barcelona, Coruña, Valencia y Castellón de la Plana. Confía en nosotros para devolverle la vida a tus electrodomésticos.</span>
+          <span class="lang-ca">Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'electrodomèstics de gamma blanca, tant domèstics com industrials. El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana. Confia en nosaltres per tornar-li la vida als teus electrodomèstics.</span>
+          <span class="lang-va">Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'aparells electrodomèstics de gamma blanca, tant domèstics com industrials. El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana. Confia en nosaltres per tornar-li la vida als teus aparells electrodomèstics.</span>
+      </p>
+  </section>
+
 
   <section class="formulario bg-white p-10 max-w-xl mx-auto my-10 rounded-lg shadow-xl">
     <h2 class="text-2xl md:text-3xl text-center mb-5">
@@ -697,16 +853,19 @@
         </label>
         <select id="equipo" name="equipo" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
           <option value="">Selecciona uno</option>
-          <option value="Lavadora">Lavadoras</option>
-          <option value="Lavavajillas">Lavavajillas</option>
-          <option value="Frigorífico">Frigorífico</option>
-          <option value="Horno">Horno</option>
-          <option value="Secadora">Secadora</option>
-          <option value="Vitrocerámica">Vitrocerámica</option>
-          <option value="Calentador">Calentador</option>
-          <option value="Caldera">Caldera</option>
-          <option value="Aire acondicionado">Aire acondicionado</option>
-          <option value="Termotanque">Termotanque</option>
+          <option value="Lavadora">Lavadoras (Doméstico)</option>
+          <option value="Lavavajillas">Lavavajillas (Doméstico)</option>
+          <option value="Frigorífico">Frigorífico (Doméstico)</option>
+          <option value="Horno">Horno (Doméstico)</option>
+          <option value="Secadora">Secadora (Doméstico)</option>
+          <option value="Vitrocerámica">Vitrocerámica (Doméstico)</option>
+          <option value="Calentador">Calentador (Doméstico)</option>
+          <option value="Caldera">Caldera (Doméstico)</option>
+          <option value="Aire acondicionado">Aire acondicionado (Doméstico/Industrial)</option>
+          <option value="Termotanque">Termotanque (Doméstico)</option>
+          <option value="Maquinaria de Lavandería Industrial">Maquinaria de Lavandería Industrial</option>
+          <option value="Equipos de Refrigeración Industrial">Equipos de Refrigeración Industrial</option>
+          <option value="Calderas Industriales">Calderas Industriales</option>
           <option value="Otro">Otro</option>
         </select>
       </div>
@@ -726,7 +885,13 @@
         <span class="lang-va">Envia</span>
       </button>
     </form>
-    <div id="formResponse" class="form-response text-center mt-5 p-4 rounded-md font-bold hidden opacity-0 transition duration-500 ease-in-out" role="alert" aria-live="assertive"></div>
+    <div id="formLoadingIndicator" class="flex justify-center items-center">
+        <i class="fas fa-spinner fa-spin mr-2"></i>
+        <span class="lang-es">Enviando...</span>
+        <span class="lang-ca">Enviant...</span>
+        <span class="lang-va">Enviant...</span>
+    </div>
+    <div id="formResponse" class="form-response text-center mt-5 p-4 rounded-md font-bold hidden" role="status" aria-live="polite"></div>
   </section>
 
   <section id="marcas" class="marcas py-16 px-5 bg-gray-100 text-center">
@@ -736,7 +901,20 @@
           <span class="lang-va">Marques amb les quals treballem</span>
       </h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-lg mx-auto items-center">
-          <div class="flex justify-center"><img src="samsung-logo-wordmark-rgb.png" alt="Logo Samsung" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="lg-logo-1.png" alt="Logo LG" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="balay.png" alt="Logo Balay" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="siemens.png" alt="Logo Siemens" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Logo Whirlpool" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="neckar.png" alt="Logo Neckar" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="bosch.png" alt="Logo Bosch" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="Haier_logo.svg.png" alt="Logo Haier" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="mitsubishi.png" alt="Logo Mitsubishi Electric" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="saunier.png" alt="Logo Saunier Duval" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="ariston.jpg" alt="Logo Ariston Thermo Group" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="vaillant.jpg" alt="Logo Vaillant" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="junkers.png" alt="Logo Junkers" class="h-10 sm:h-12 w-auto"></div> </div>
+          <div class="flex justify-center"><img src="samsung-logo-wordmark-rgb.png" alt="Logo Samsung" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Samsung';"></div>
+          <div class="flex justify-center"><img src="lg-logo-1.png" alt="Logo LG" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=LG';"></div>
+          <div class="flex justify-center"><img src="balay.png" alt="Logo Balay" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Balay';"></div>
+          <div class="flex justify-center"><img src="siemens.png" alt="Logo Siemens" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Siemens';"></div>
+          <div class="flex justify-center"><img src="Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Logo Whirlpool" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Whirlpool';"></div>
+          <div class="flex justify-center"><img src="neckar.png" alt="Logo Neckar" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Neckar';"></div>
+          <div class="flex justify-center"><img src="bosch.png" alt="Logo Bosch" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Bosch';"></div>
+          <div class="flex justify-center"><img src="Haier_logo.svg.png" alt="Logo Haier" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Haier';"></div>
+          <div class="flex justify-center"><img src="mitsubishi.png" alt="Logo Mitsubishi Electric" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Mitsubishi';"></div>
+          <div class="flex justify-center"><img src="saunier.png" alt="Logo Saunier Duval" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Saunier Duval';"></div>
+          <div class="flex justify-center"><img src="ariston.jpg" alt="Logo Ariston Thermo Group" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Ariston';"></div>
+          <div class="flex justify-center"><img src="vaillant.jpg" alt="Logo Vaillant" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Vaillant';"></div>
+          <div class="flex justify-center"><img src="junkers.png" alt="Logo Junkers" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Junkers';"></div>
+      </div>
   </section>
 
   <footer class="bg-[#0a5cb8] text-white text-center py-5 text-sm">
@@ -745,10 +923,20 @@
       <span class="lang-ca">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
       <span class="lang-va">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
     </p>
+    <div class="mt-2">
+        <a href="#" class="lang-es">Política de Privacidad</a><span class="lang-es"> | </span>
+        <a href="#" class="lang-es">Aviso Legal</a>
+
+        <a href="#" class="lang-ca">Política de Privacitat</a><span class="lang-ca"> | </span>
+        <a href="#" class="lang-ca">Avís Legal</a>
+
+        <a href="#" class="lang-va">Política de Privacitat</a><span class="lang-va"> | </span>
+        <a href="#" class="lang-va">Avís Legal</a>
+    </div>
   </footer>
 
   <script>
-    // Diccionario para traducciones de placeholders y textos de opción por defecto
+    // Dictionary for translations of placeholders and default option texts
     const translations = {
       es: {
         placeholder: {
@@ -762,10 +950,14 @@
           defaultElectrodomestico: "Selecciona uno",
           darkMode: "Modo Oscuro",
           lightMode: "Modo Claro",
-          sending: "Enviando...", // Added translation for sending state
-          viewBrands: "Ver Marcas", // Added translation for "View Brands" button
+          sending: "Enviando...",
+          viewBrands: "Ver Marcas",
+          aboutUs: "Sobre Nosotros", // Added translation for About Us button
           domestico: "Doméstico",
-          industrial: "Industrial"
+          industrial: "Industrial",
+          formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.",
+          formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.",
+          validationError: "Por favor, completa todos los campos requeridos."
         }
       },
       ca: {
@@ -780,10 +972,14 @@
           defaultElectrodomestico: "Selecciona un",
           darkMode: "Mode Fosc",
           lightMode: "Mode Clar",
-          sending: "Enviant...", // Added translation for sending state
-          viewBrands: "Veure Marques", // Added translation for "View Brands" button
+          sending: "Enviant...",
+          viewBrands: "Veure Marques",
+          aboutUs: "Sobre Nosaltres", // Added translation for About Us button
           domestico: "Domèstic",
-          industrial: "Industrial"
+          industrial: "Industrial",
+          formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.",
+          formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.",
+          validationError: "Si us plau, completa tots els camps requerits."
         }
       },
       va: {
@@ -798,15 +994,19 @@
           defaultElectrodomestico: "Selecciona un",
           darkMode: "Mode Fosc",
           lightMode: "Mode Clar",
-          sending: "Enviant...", // Added translation for sending state
-          viewBrands: "Veure Marques", // Added translation for "View Brands" button
+          sending: "Enviant...",
+          viewBrands: "Veure Marques",
+          aboutUs: "Sobre Nosaltres", // Added translation for About Us button
           domestico: "Doméstico",
-          industrial: "Industrial"
+          industrial: "Industrial",
+          formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.",
+          formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.",
+          validationError: "Per favor, completa tots els camps requerits."
         }
       }
     };
 
-    // Función para actualizar los placeholders y el texto de la opción por defecto en el formulario
+    // Function to update placeholders and default option text in the form
     function updatePlaceholders(lang) {
       document.getElementById('nombre').placeholder = translations[lang].placeholder.nombre;
       document.getElementById('telefono').placeholder = translations[lang].placeholder.telefono;
@@ -817,15 +1017,16 @@
 
       // Also update the submit button text when language changes
       updateSubmitButtonText();
-      updateServiceTypeButtonText(lang); // Update service type button text
+      updateServiceTypeButtonText(currentLang); // Update service type button text
+      updateAboutUsButtonText(currentLang); // Update About Us button text
     }
 
-    // Variable para almacenar el idioma actual
+    // Variable to store the current language
     let currentLang = 'es';
 
-    // Función principal para cambiar el idioma visible en la página
+    // Main function to change the visible language on the page
     function setLanguage(lang) {
-      currentLang = lang; // Actualizar el idioma actual
+      currentLang = lang; // Update the current language
       const languages = ['es', 'ca', 'va'];
       languages.forEach(function(l) {
         const elems = document.getElementsByClassName('lang-' + l);
@@ -833,10 +1034,10 @@
           elems[i].style.display = (l === lang) ? 'inline' : 'none';
         }
       });
-      updatePlaceholders(currentLang); // Actualizar placeholders y opciones del formulario
-      updateDarkModeButtonText(); // Asegurarse de que el texto del botón de modo oscuro se actualice
+      updatePlaceholders(currentLang); // Update form placeholders and options
+      updateDarkModeButtonText(); // Ensure dark mode button text is updated
 
-      // Update the text of the new "View Brands" button
+      // Update the text of the "View Brands" button
       const viewBrandsButton = document.querySelector('.contact-buttons-container a[href="#marcas"]');
       if (viewBrandsButton) {
          const langSpans = viewBrandsButton.querySelectorAll('span[class^="lang-"]');
@@ -848,14 +1049,25 @@
              }
          });
       }
+       // Update the text of the "About Us" button
+       const aboutUsButton = document.querySelector('.contact-buttons-container a[href="#about-us"]');
+       if (aboutUsButton) {
+          const langSpans = aboutUsButton.querySelectorAll('span[class^="lang-"]');
+          langSpans.forEach(span => {
+              if (span.classList.contains('lang-' + currentLang)) {
+                  span.style.display = 'inline';
+              } else {
+                  span.style.display = 'none';
+              }
+          });
+       }
     }
 
-    // Función para actualizar el texto y el icono del botón de modo oscuro según el modo y el idioma
+    // Function to update the text and icon of the dark mode button based on mode and language
     function updateDarkModeButtonText() {
-        const isDarkMode = document.body.classList.contains('dark-mode'); // Usar document.body directamente
+        const isDarkMode = document.body.classList.contains('dark-mode');
         const darkModeToggle = document.getElementById('darkModeToggle');
         const icon = darkModeToggle.querySelector('i');
-        // Seleccionar los spans de idioma dentro del botón de modo oscuro
         const textSpanEs = darkModeToggle.querySelector('.lang-es');
         const textSpanCa = darkModeToggle.querySelector('.lang-ca');
         const textSpanVa = darkModeToggle.querySelector('.lang-va');
@@ -863,19 +1075,17 @@
         if (isDarkMode) {
              icon.classList.remove('fa-moon');
              icon.classList.add('fa-sun');
-             // Actualizar el texto de todos los spans de idioma dentro del botón
              textSpanEs.textContent = translations.es.text.lightMode;
              textSpanCa.textContent = translations.ca.text.lightMode;
              textSpanVa.textContent = translations.va.text.lightMode;
         } else {
              icon.classList.remove('fa-sun');
              icon.classList.add('fa-moon');
-             // Actualizar el texto de todos los spans de idioma dentro del botón
              textSpanEs.textContent = translations.es.text.darkMode;
              textSpanCa.textContent = translations.ca.text.darkMode;
              textSpanVa.textContent = translations.va.text.darkMode;
         }
-        // La función setLanguage se encarga de mostrar solo el span correcto.
+        // The setLanguage function handles displaying the correct span.
     }
 
     // Function to update the submit button text based on current language
@@ -910,28 +1120,51 @@
          }
     }
 
+    // Function to update the About Us button text based on current language
+    function updateAboutUsButtonText(lang) {
+        const aboutUsButton = document.querySelector('.contact-buttons-container a[href="#about-us"]');
+        if (aboutUsButton) {
+            aboutUsButton.querySelector('.lang-es').textContent = translations.es.text.aboutUs;
+            aboutUsButton.querySelector('.lang-ca').textContent = translations.ca.text.aboutUs;
+            aboutUsButton.querySelector('.lang-va').textContent = translations.va.text.aboutUs;
+        }
+    }
 
-    // Esperar a que el DOM esté completamente cargado antes de ejecutar el script
+
+    // Function to filter service cards based on selected type
+    function filterServiceCards(serviceType) {
+        const cards = document.querySelectorAll('#servicios .card');
+        cards.forEach(card => {
+            const cardTypes = card.dataset.serviceType ? card.dataset.serviceType.split(' ') : [];
+            if (serviceType === 'all' || cardTypes.includes(serviceType)) {
+                card.classList.remove('hidden'); // Show the card
+            } else {
+                card.classList.add('hidden'); // Hide the card
+            }
+        });
+    }
+
+
+    // Wait for the DOM to be fully loaded before executing the script
     document.addEventListener('DOMContentLoaded', (event) => {
-        const body = document.body; // Obtener referencia al body
+        const body = document.body;
 
-        // Lógica para determinar el modo inicial (prefiere localStorage, luego la preferencia del sistema)
+        // Logic to determine the initial mode (prefers localStorage, then system preference)
         const savedMode = localStorage.getItem('dark-mode');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (savedMode === 'enabled') {
             body.classList.add('dark-mode');
         } else if (savedMode === null && prefersDark) {
-            // Solo aplicar la preferencia del sistema si no hay una preferencia guardada en localStorage
             body.classList.add('dark-mode');
         }
-        // updateDarkModeButtonText() se llama dentro de setLanguage.
+        // updateDarkModeButtonText() is called within setLanguage.
 
-        // Establecer el idioma por defecto a Castellano de forma explícita al cargar la página
+        // Set the default language to Spanish explicitly on page load
         setLanguage('es');
 
 
-        // Añadir listeners de eventos a los botones de idioma
+        // Add event listeners to language buttons
         document.querySelectorAll('#language-selector button').forEach(button => {
             button.addEventListener('click', (event) => {
                 const buttonText = event.target.textContent.toLowerCase();
@@ -945,128 +1178,138 @@
             });
         });
 
-        // Añadir listener de evento al botón de modo oscuro
+        // Add event listener to the dark mode button
         const darkModeToggle = document.getElementById('darkModeToggle');
-        if (darkModeToggle) { // Verificar que el elemento existe
+        if (darkModeToggle) {
             darkModeToggle.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
 
-                // Guardar la preferencia del modo en localStorage
+                // Save the mode preference to localStorage
                 if (body.classList.contains('dark-mode')) {
                     localStorage.setItem('dark-mode', 'enabled');
                 } else {
                     localStorage.setItem('dark-mode', 'disabled');
                 }
-                updateDarkModeButtonText(); // Actualizar texto e icono después de cambiar el modo
+                updateDarkModeButtonText(); // Update text and icon after changing mode
             });
         }
 
 
-        // Obtener referencias a los elementos del formulario y la sección del formulario
+        // Get references to form elements and the form section
         const equipoSelect = document.getElementById('equipo');
         const formularioSection = document.querySelector('.formulario');
+        const formLoadingIndicator = document.getElementById('formLoadingIndicator'); // Get loading indicator
+        const serviciosSection = document.getElementById('servicios'); // Get the services section
 
-        // Añadir listeners de click a las tarjetas de servicio para autocompletar el formulario y desplazarse
+
+        // Add click listeners to service cards to pre-fill the form and scroll
         document.querySelectorAll('#servicios .card').forEach(card => {
             card.addEventListener('click', () => {
-                // Obtener el valor del electrodoméstico directamente del atributo de datos
+                // Get the appliance value directly from the data attribute
                 const formValue = card.dataset.applianceValue;
 
-                // Si se encontró un valor de formulario válido y el elemento select existe
+                // If a valid form value was found and the select element exists
                 if (formValue && equipoSelect) {
-                    // Establecer el valor del campo select del formulario
+                    // Set the value of the form's select field
                     equipoSelect.value = formValue;
 
-                    // Desplazarse a la sección del formulario
+                    // Scroll to the form section
                     if (formularioSection) {
-                         formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Desplazarse al inicio del bloque
+                         formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 } else if (formularioSection) {
-                     // Si no se encontró un valor de datos (ej. si la tarjeta no tiene el atributo), solo desplazarse al formulario
+                     // If no data value was found (e.g., if the card doesn't have the attribute), just scroll to the form
                      formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Capturar el envío del formulario y procesarlo de forma asíncrona
+        // Capture form submission and process it asynchronously
          document.getElementById("contactForm").addEventListener("submit", function(e) {
-           e.preventDefault(); // Evitar el envío tradicional
+           e.preventDefault(); // Prevent traditional submission
 
            const form = this;
-           const submitButton = form.querySelector("button[type='submit']"); // Seleccionar el botón de envío
+           const submitButton = form.querySelector("button[type='submit']");
            const responseDiv = document.getElementById("formResponse");
-           const emailInput = document.getElementById('email'); // Get email input
 
-           // Basic client-side validation (email format)
-           if (emailInput && !emailInput.checkValidity()) {
-              responseDiv.textContent = "Por favor, introduce un correo electrónico válido.";
-              responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error bg-red-100 text-red-700 opacity-100";
-              responseDiv.style.opacity = '1'; // Ensure it's visible
-              return; // Stop submission
+           // Hide previous response message
+           responseDiv.classList.remove('visible', 'success', 'error');
+           responseDiv.textContent = ''; // Clear previous text
+
+
+           // Basic client-side validation for required fields
+           let allRequiredFilled = true;
+           form.querySelectorAll('[required]').forEach(input => {
+               if (!input.value) {
+                   allRequiredFilled = false;
+                   input.classList.add('border-red-500'); // Highlight empty field
+               } else {
+                   input.classList.remove('border-red-500'); // Remove highlight if filled
+               }
+           });
+
+           if (!allRequiredFilled) {
+               responseDiv.textContent = translations[currentLang].text.validationError;
+               responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error visible";
+               return; // Stop submission
            }
 
 
-           // Deshabilitar el botón para evitar envíos múltiples y mostrar estado de envío
+           // Disable the button and show loading indicator
            submitButton.disabled = true;
-           const originalButtonSpans = submitButton.querySelectorAll('span[class^="lang-"]');
-           let originalButtonText = {};
-           originalButtonSpans.forEach(span => {
-                originalButtonText[span.className.replace('lang-', '')] = span.textContent;
-                span.textContent = translations[span.className.replace('lang-', '')].text.sending;
-           });
-           submitButton.classList.add('opacity-50', 'cursor-not-allowed'); // Optional: add visual feedback
+           submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+           formLoadingIndicator.style.display = 'flex'; // Show loading indicator
 
 
-           // Mostrar mensaje de "Enviando..."
-           responseDiv.textContent = translations[currentLang].text.sending; // Use translated text
-           responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success opacity-100"; // Resetear clases y mostrar/fade in
-           responseDiv.style.opacity = '1'; // Ensure it's visible
-
-
-           // Envío asíncrono con fetch
+           // Asynchronous submission with fetch
            fetch(form.action, {
              method: "POST",
              body: new FormData(form),
              headers: { 'Accept': 'application/json' }
            })
            .then(response => {
-             // Verificar si la respuesta es OK (estado 200-299)
+             formLoadingIndicator.style.display = 'none'; // Hide loading indicator
              if (response.ok) {
-               return response.text(); // O response.json() si la API devuelve JSON
+               return response.text();
              } else {
-               // Manejar errores HTTP
                return response.text().then(text => {
                  throw new Error(`HTTP status ${response.status}: ${text}`);
                });
              }
            })
            .then(() => {
-             // Éxito: ocultamos el formulario y mostramos el mensaje de éxito
+             // Success: hide the form and show the success message
+             form.reset(); // Clear the form fields
              form.style.display = "none";
-             responseDiv.textContent = "Formulario enviado, nos contactaremos en breve.";
-             responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success bg-blue-100 text-[#0a5cb8] opacity-100"; // Aplicar estilos de éxito
+             responseDiv.textContent = translations[currentLang].text.formSuccess;
+             responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success visible";
            })
            .catch(error => {
-             // Error: mostramos el mensaje de error y reactivamos el botón
-             responseDiv.textContent = "Error: " + error.message + ". Por favor, inténtalo de nuevo.";
-             responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error bg-red-100 text-red-700 opacity-100"; // Aplicar estilos de error
+             // Error: show the error message and reactivate the button
+             console.error('Form submission error:', error);
+             responseDiv.textContent = translations[currentLang].text.formError;
+             responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error visible";
            })
            .finally(() => {
-             // Asegurarse de que el botón se reactive y el texto se restaure después de que el fetch se complete
+             // Ensure the button is reactivated after the fetch completes
              submitButton.disabled = false;
-             submitButton.classList.remove('opacity-50', 'cursor-not-allowed'); // Remove visual feedback
-             originalButtonSpans.forEach(span => {
-                 span.textContent = originalButtonText[span.className.replace('lang-', '')];
-             });
+             submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+             // If submission was successful, the form is hidden, so no need to show it again.
+             // If there was an error, the form remains visible.
+             if (form.style.display !== "none") {
+                 form.style.display = "space-y-4"; // Restore display
+             }
            });
          });
 
-        // Lógica para el selector de tipo de servicio
-        const domesticoBtn = document.getElementById('domesticoBtn');
-        const industrialBtn = document.getElementById('industrialBtn');
+        // Logic for the service type selector
         const serviceTypeSelector = document.querySelector('.service-type-selector');
+        const domesticoBtn = document.getElementById('domesticoBtn');
 
-        if (serviceTypeSelector && domesticoBtn && industrialBtn) {
+        if (serviceTypeSelector && domesticoBtn && serviciosSection) { // Ensure serviciosSection is available
+            // Initially filter for "Doméstico" when the page loads
+            filterServiceCards('domestico');
+
             serviceTypeSelector.addEventListener('click', (event) => {
                 const clickedButton = event.target.closest('button');
                 if (clickedButton) {
@@ -1077,17 +1320,22 @@
                     // Add active class to the clicked button
                     clickedButton.classList.add('active');
 
-                    // TODO: Add logic here to show/hide sections or filter content based on selection
-                    const selectedType = clickedButton.id === 'domesticoBtn' ? 'domestico' : 'industrial';
-                    console.log(`Service type selected: ${selectedType}`); // Placeholder for filtering logic
+                    // Get the selected service type from the data attribute
+                    const selectedType = clickedButton.dataset.serviceType;
+
+                    // Filter the service cards based on the selected type
+                    filterServiceCards(selectedType);
+
+                    // Scroll to the services section after filtering
+                    serviciosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         } else {
-            console.error("Elementos del selector de tipo de servicio no encontrados.");
+            console.error("Elementos del selector de tipo de servicio o sección de servicios no encontrados.");
         }
 
 
-    }); // Fin DOMContentLoaded
+    }); // End DOMContentLoaded
   </script>
 </body>
 </html>
