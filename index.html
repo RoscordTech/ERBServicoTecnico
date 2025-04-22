@@ -78,7 +78,7 @@
      }
 
     body.dark-mode .contact-container .whatsapp {
-      background: #003f7f; /* Azul más oscuro para botón de whatsapp */
+      background: #0a5cb8; /* Azul más oscuro para botón de whatsapp */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     }
 
@@ -149,7 +149,7 @@
 
     /* Estilos del pie de página */
     body.dark-mode footer {
-      background: #003f7f; /* Pie de página azul más oscuro */
+      background: #0a5cb8; /* Pie de página azul más oscuro */
       color: #e2e8f0;
     }
 
@@ -161,7 +161,7 @@
     }
 
     body.dark-mode #language-selector button#darkModeToggle:hover {
-        background-color: #4a5568; /* Fondo más oscuro al pasar el ratón */
+        background-color: #4a5568;
         color: #e2e8f0;
     }
 
@@ -170,12 +170,231 @@
         overflow-x: hidden;
     }
 
+    /* Estilos para el contenedor de botones de contacto/marcas */
+    .contact-buttons-container {
+        display: flex;
+        flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+        justify-content: center;
+        gap: 1rem; /* Espacio entre los botones */
+        margin-top: 1.25rem; /* my-5 */
+        margin-bottom: 1.25rem; /* my-5 */
+    }
+
+    /* Estilos para los botones dentro del contenedor */
+    .contact-buttons-container .btn {
+        /* Hereda estilos de .btn en la sección de beneficios o define específicos si es necesario */
+        /* Asegurar que los botones tengan un ancho flexible pero mínimo */
+        flex-grow: 1; /* Permite que crezcan */
+        flex-shrink: 0; /* Evita que se encojan demasiado */
+        max-width: 200px; /* Ancho máximo para evitar que sean demasiado anchos en pantallas grandes */
+        text-align: center; /* Centrar texto dentro del botón */
+    }
+
+    /* Estilos para el selector de tipo de servicio */
+    .service-type-selector {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .service-type-selector button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: 2px solid #0a5cb8;
+        background-color: #fff;
+        color: #0a5cb8;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        font-weight: bold;
+        /* Asegurar tamaño de toque adecuado en móviles */
+        min-width: 120px; /* Ancho mínimo para toque */
+    }
+
+    .service-type-selector button:hover {
+        background-color: #0a5cb8;
+        color: #fff;
+    }
+
+    .service-type-selector button.active {
+        background-color: #0a5cb8;
+        color: #fff;
+        border-color: #0a5cb8;
+    }
+
+    body.dark-mode .service-type-selector button {
+        border-color: #90cdf4;
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+
+    body.dark-mode .service-type-selector button:hover {
+        background-color: #4a5568;
+        color: #e2e8f0;
+    }
+
+    body.dark-mode .service-type-selector button.active {
+        background-color: #90cdf4;
+        color: #1a202c;
+        border-color: #90cdf4;
+    }
+
+    /* Estilos para la sección de servicios (grid) */
+    .servicios .cards {
+        /* Modificado para 2 columnas en móviles y 3 en lg */
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas por defecto (móviles) */
+        gap: 1.25rem; /* Ajuste de espacio (equivalente a gap-5) */
+        padding: 0 1rem; /* Añadir un poco de padding horizontal en móviles */
+    }
+
+    /* Media query para pantallas grandes (lg y superior) */
+    @media (min-width: 1024px) {
+        .servicios .cards {
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas en lg */
+        }
+    }
+
+
+    .servicios .card {
+        padding: 1rem; /* Reducir un poco el padding en móviles si es necesario */
+    }
+
+    /* Estilo para hacer las tarjetas de servicios más rectangulares en móviles */
+    @media (max-width: 640px) { /* Estilos solo para pantallas móviles */
+        .servicios .card {
+            min-height: 220px; /* Mantener la altura mínima ajustada */
+        }
+         .servicios .card .icon {
+             margin-bottom: 0.5rem; /* Reducir espacio debajo del icono en móviles */
+         }
+         .servicios .card h3 {
+             margin-bottom: 0.1rem; /* Reducir espacio debajo del título en móviles */
+         }
+    }
+
+
+    .servicios .card .icon {
+        font-size: 4rem; /* Ajustar tamaño del icono en móviles si es necesario */
+        margin-bottom: 0.75rem; /* Ajustar espacio debajo del icono */
+    }
+
+    .servicios .card h3 {
+        font-size: 1.1rem; /* Ajustar tamaño del título en móviles */
+        margin-bottom: 0.25rem; /* Ajustar espacio debajo del título */
+    }
+
+    .servicios .card p {
+        font-size: 0.9rem; /* Ajustar tamaño del texto en móviles */
+    }
+
+    /* Estilos para la sección de beneficios (flexbox para fila en escritorio) */
+    .beneficios .container {
+        display: flex; /* Usar flexbox */
+        flex-wrap: wrap; /* Permitir que los elementos se envuelvan en pantallas pequeñas */
+        justify-content: center; /* Centrar horizontalmente */
+        gap: 1.5rem; /* Espacio entre elementos */
+        max-width: 1000px; /* Ancho máximo */
+        margin: 0 auto; /* Centrar */
+        padding: 0 1rem; /* Padding horizontal */
+    }
+
+    .beneficios .item {
+        background-color: #0a5cb8;
+        color: white;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        display: flex; /* Usar flexbox para alinear contenido verticalmente */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Centrar contenido verticalmente */
+        flex-basis: 250px; /* Base flexible para que cada item intente tener al menos 250px de ancho */
+        flex-grow: 1; /* Permitir que crezcan para llenar el espacio disponible */
+        min-height: 180px; /* Altura mínima para uniformidad */
+    }
+
+    .beneficios .item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .beneficios .item i {
+        font-size: 3rem; /* Tamaño del icono */
+        margin-bottom: 1rem; /* Espacio debajo del icono */
+    }
+
+    .beneficios .item p {
+        font-size: 1rem; /* Tamaño del texto */
+        line-height: 1.4;
+    }
+
+    body.dark-mode .beneficios .item {
+        background-color: #003f7f;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    }
+
+    body.dark-mode .beneficios .item:hover {
+        background-color: #0a5cb8;
+        box-shadow: 0 6px 8px rgba(0,0,0,0.6);
+    }
+
+
+    /* Estilos para el formulario */
+    .formulario {
+        padding: 1.5rem; /* Ajustar padding en móviles */
+        margin: 1.5rem auto; /* Ajustar margen */
+    }
+
+    .formulario label {
+        font-size: 0.9rem; /* Ajustar tamaño de etiqueta */
+        margin-bottom: 0.25rem; /* Ajustar espacio */
+    }
+
+    .formulario input,
+    .formulario textarea,
+    .formulario select {
+        padding: 0.75rem; /* Ajustar padding de entradas */
+        font-size: 1rem; /* Asegurar tamaño de fuente legible */
+    }
+
+    .formulario button {
+        padding: 0.75rem 1rem; /* Ajustar padding del botón de envío */
+        font-size: 1rem; /* Asegurar tamaño de fuente legible */
+    }
+
+    /* Estilos para la sección de marcas (grid) */
+    .marcas .grid {
+        gap: 1rem; /* Ajustar espacio entre logos */
+        padding: 0 1rem; /* Añadir padding horizontal */
+    }
+
+    .marcas img {
+        height: 3rem; /* Ajustar altura de los logos en móviles */
+        width: auto;
+    }
+
+    /* Ajustes para el selector de idioma y modo oscuro en móviles */
+    #language-selector {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem; /* Añadir un poco de padding horizontal */
+    }
+
+    #language-selector button {
+        margin: 0.25rem; /* Ajustar margen entre botones */
+        padding: 0.5rem 0.75rem; /* Ajustar padding para tamaño de toque */
+        font-size: 0.8rem; /* Ajustar tamaño de fuente */
+    }
+
+
   </style>
 </head>
 <body class="font-sans bg-white text-[#0a5cb8] leading-relaxed">
 
   <div class="flex justify-center mt-5">
-      <img src="logo.png" alt="ERB Servicio Técnico Logo" class="h-20 w-auto">
+      <img src="logo.png" alt="ERB Servicio Técnico Logo">
   </div>
 
   <div id="language-selector" class="text-center my-5 flex flex-wrap justify-center">
@@ -187,13 +406,25 @@
     </button>
   </div>
 
-  <header class="hero bg-gradient-to-br from-[#0a5cb8] to-[#003f7f] text-white text-center py-24 px-5 animate-[fadeIn_1.5s_ease-in-out]">
-    <h1 class="text-4xl md:text-5xl mb-2">
+  <section class="service-type-selector">
+      <button id="domesticoBtn" class="active">
+          <span class="lang-es">Doméstico</span>
+          <span class="lang-ca">Domèstic</span>
+          <span class="lang-va">Domèstic</span>
+      </button>
+      <button id="industrialBtn">
+          <span class="lang-es">Industrial</span>
+          <span class="lang-ca">Industrial</span>
+          <span class="lang-va">Industrial</span>
+      </button>
+  </section>
+  <header class="hero bg-gradient-to-br from-[#0a5cb8] to-[#003f7f] text-white text-center py-16 md:py-24 px-5 animate-[fadeIn_1.5s_ease-in-out]">
+    <h1 class="text-3xl md:text-5xl mb-2">
       <span class="lang-es">ERB Servicio Técnico de Gamma Blanca</span>
       <span class="lang-ca">ERB Servei Tècnic de Gamma Blanca</span>
       <span class="lang-va">ERB Servei Tècnic de Gamma Blanca</span>
     </h1>
-    <p class="text-lg mb-4">
+    <p class="text-base md:text-lg mb-4">
       <span class="lang-es">Especialistas en reparación y mantenimiento de electrodomésticos.</span>
       <span class="lang-ca">Especialistes en reparació i manteniment d'electrodomèstics.</span>
       <span class="lang-va">Especialistes en reparació i manteniment d'aparells electrodomèstics.</span>
@@ -205,16 +436,23 @@
     </a>
   </header>
 
-  <div class="contact-container text-center my-5">
-    <a href="https://wa.me/34631449197" class="whatsapp inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" target="_blank" aria-label="Chatea con nosotros por WhatsApp">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-6 h-6 mr-2 align-middle fill-current text-white">
-        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-93-25.7l-6.7-4-69.8 18.3L100 360.6l-4.1-6.9c-18.5-31.4-28.2-67.7-28.2-109.2c0-114.8 93.4-208.3 208.3-208.3c41.5 0 81.5 15.3 111.7 44.5c30.3 29.3 47.9 68.1 47.9 109.4c0 114.8-93.4 208.3-208.3 208.3zm95.3-95.1c-7.1-3.7-42.8-21.4-49.2-23.8c-6.5-2.4-11.2-3.6-16 3.6s-18.9 23.8-23.2 28.6c-4.3 4.9-8.6 5.6-16 1.8s-30-11-57.1-35.3c-22.9-20.7-38.3-46.2-42.7-53.6c-4.3-7.5-0.4-11.5 3.4-15.2c3.4-3.4 7.1-8.5 10.6-12.7c3.7-4.3 4.9-7.1 7.1-11.2c2.4-4.3 1.2-8.1-0.6-11.2s-16-38.2-21.9-46.5c-5.9-8.4-11.8-7.1-16-7.3s-10.6-2.4-16-2.4s-13.2 3.6-20.3 10.6c-7.1 7.1-18.9 17.7-18.9 42.8s19.2 49.6 21.9 53.1c2.9 3.7 38.2 58.2 92.3 82.6c11.2 4.9 20.9 7.8 28 10c14.6 4.5 27.9 3.8 38.4 2.3c11.2-1.5 32.4-13.2 36.9-25.4c4.5-12.2 4.5-22.6 3.2-24.5c-1.3-1.9-4.7-3-10-5.9z"/>
-      </svg>
-      <span class="lang-es">Contáctanos</span>
-      <span class="lang-ca">Contacta'ns</span>
-      <span class="lang-va">Contacta'ns</span>
-    </a>
+  <div class="contact-buttons-container">
+      <a href="#marcas" class="btn inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Ver Marcas con las que trabajamos">
+          <i class="fa-solid fa-tags mr-2 align-middle"></i>
+          <span class="lang-es">Ver Marcas</span>
+          <span class="lang-ca">Veure Marques</span>
+          <span class="lang-va">Veure Marques</span>
+      </a>
+      <a href="https://wa.me/34631449197" class="whatsapp inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" target="_blank" aria-label="Chatea con nosotros por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-6 h-6 mr-2 align-middle fill-current text-white">
+          <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-93-25.7l-6.7-4-69.8 18.3L100 360.6l-4.1-6.9c-18.5-31.4-28.2-67.7-28.2-109.2c0-114.8 93.4-208.3 208.3-208.3c41.5 0 81.5 15.3 111.7 44.5c30.3 29.3 47.9 68.1 47.9 109.4c0 114.8-93.4 208.3-208.3 208.3zm95.3-95.1c-7.1-3.7-42.8-21.4-49.2-23.8c-6.5-2.4-11.2-3.6-16 3.6s-18.9 23.8-23.2 28.6c-4.3 4.9-8.6 5.6-16 1.8s-30-11-57.1-35.3c-22.9-20.7-38.3-46.2-42.7-53.6c-4.3-7.5-0.4-11.5 3.4-15.2c3.4-3.4 7.1-8.5 10.6-12.7c3.7-4.3 4.9-7.1 7.1-11.2c2.4-4.3 1.2-8.1-0.6-11.2s-16-38.2-21.9-46.5c-5.9-8.4-11.8-7.1-16-7.3s-10.6-2.4-16-2.4s-13.2 3.6-20.3 10.6c-7.1 7.1-18.9 17.7-18.9 42.8s19.2 49.6 21.9 53.1c2.9 3.7 38.2 58.2 92.3 82.6c11.2 4.9 20.9 7.8 28 10c14.6 4.5 27.9 3.8 38.4 2.3c11.2-1.5 32.4-13.2 36.9-25.4c4.5-12.2 4.5-22.6 3.2-24.5c-1.3-1.9-4.7-3-10-5.9z"/>
+        </svg>
+        <span class="lang-es">Contáctanos</span>
+        <span class="lang-ca">Contacta'ns</span>
+        <span class="lang-va">Contacta'ns</span>
+      </a>
   </div>
+
 
   <section id="servicios" class="servicios py-16 px-5 bg-gray-100 text-center">
     <h2 class="text-3xl md:text-4xl mb-8">
@@ -222,7 +460,7 @@
       <span class="lang-ca">Quins electrodomèstics reparam?</span>
       <span class="lang-va">Quins aparells electrodomèstics reparam?</span>
     </h2>
-    <div class="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-screen-lg mx-auto">
+    <div class="cards grid grid-cols-2 lg:grid-cols-3 gap-5 max-w-screen-lg mx-auto">
       <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Frigorífico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">ac_unit</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
@@ -250,7 +488,7 @@
         </p>
       </div>
       <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavadora">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">washing_machine</span>
+        <i class="fas fa-washing-machine icon text-5xl text-[#0a5cb8] mb-2.5"></i>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Lavadoras</span>
           <span class="lang-ca">Rentadores</span>
@@ -311,7 +549,7 @@
         <p class="text-gray-700">
           <span class="lang-es">Problemas en zonas de calor, sensores o controles.</span>
           <span class="lang-ca">Problemes en zones de calor, sensors o controls.</span>
-          <span class="lang-va">Problemes en zones de calor, sensors o controls.</span>
+          <span class="lang-va">Problemes en zonas de calor, sensors o controls.</span>
         </p>
       </div>
       <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calentador">
@@ -363,7 +601,7 @@
           <span class="lang-va">Els nostres Beneficis</span>
       </h2>
       <div class="container flex flex-wrap justify-center gap-5 max-w-screen-lg mx-auto">
-          <a href="tel:+34631449197" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+          <a href="tel:+34631449197" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
               <i class="fa-solid fa-phone text-5xl mb-4 block"></i>
               <p class="m-0 text-sm leading-tight">
                   <span class="lang-es">Solicita tu inspección llamando a nuestros canales de atención al cliente.</span>
@@ -371,7 +609,7 @@
                   <span class="lang-va">Sol·licita la teua inspección cridant als nostres canals d'atención al client.</span>
               </p>
           </a>
-          <a href="#formulario" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+          <a href="#formulario" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
               <i class="fa-solid fa-truck text-5xl mb-4 block"></i>
               <p class="m-0 text-sm leading-tight">
                   <span class="lang-es">Reparación en el acto si decides reparar, no cobramos el desplazamiento.</span>
@@ -379,7 +617,7 @@
                   <span class="lang-va">Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.</span>
               </p>
           </a>
-          <a href="#servicios" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+          <a href="#servicios" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
               <i class="fa-solid fa-wrench text-5xl mb-4 block"></i>
               <p class="m-0 text-sm leading-tight">
                   <span class="lang-es">Disfruta de tu electrodoméstico como nuevo Con garantía en la reparación de 6 meses.</span>
@@ -387,7 +625,7 @@
                   <span class="lang-va">Gaudeix del teu electrodomèstic com nou amb garantia en la reparació de 6 mesos.</span>
               </p>
           </a>
-          <a href="#formulario" class="btn bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
+          <a href="#formulario" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
               <i class="fa-solid fa-money-bill text-5xl mb-4 block"></i>
               <p class="m-0 text-sm leading-tight">
                   <span class="lang-es">Precios más competitivos del mercado</span>
@@ -429,7 +667,7 @@
         <label for="email" class="block mb-1 font-bold">
           <span class="lang-es">Correo electrónico:</span>
           <span class="lang-ca">Correu electrònic:</span>
-          <span class="lang-va">Correu electrònic:</span>
+          <span class="lang-va">Correo electrónico:</span>
         </label>
         <input type="email" id="email" name="email" placeholder="tu@correo.com" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
       </div>
@@ -496,20 +734,7 @@
           <span class="lang-va">Marques amb les quals treballem</span>
       </h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-lg mx-auto items-center">
-          <div class="flex justify-center"><img src="samsung-logo-wordmark-rgb.png" alt="Logo Samsung" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="lg-logo-1.png" alt="Logo LG" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="balay.png" alt="Logo Balay" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="siemens.png" alt="Logo Siemens" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Logo Whirlpool" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="neckar.png" alt="Logo Neckar" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="bosch.png" alt="Logo Bosch" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="Haier_logo.svg.png" alt="Logo Haier" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="mitsubishi.png" alt="Logo Mitsubishi Electric" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="saunier.png" alt="Logo Saunier Duval" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="ariston.jpg" alt="Logo Ariston Thermo Group" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="vaillant.jpg" alt="Logo Vaillant" class="h-12 w-auto"></div>
-          <div class="flex justify-center"><img src="junkers.png" alt="Logo Junkers" class="h-12 w-auto"></div>
-      </div>
+          <div class="flex justify-center"><img src="samsung-logo-wordmark-rgb.png" alt="Logo Samsung" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="lg-logo-1.png" alt="Logo LG" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="balay.png" alt="Logo Balay" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="siemens.png" alt="Logo Siemens" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Logo Whirlpool" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="neckar.png" alt="Logo Neckar" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="bosch.png" alt="Logo Bosch" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="Haier_logo.svg.png" alt="Logo Haier" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="mitsubishi.png" alt="Logo Mitsubishi Electric" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="saunier.png" alt="Logo Saunier Duval" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="ariston.jpg" alt="Logo Ariston Thermo Group" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="vaillant.jpg" alt="Logo Vaillant" class="h-10 sm:h-12 w-auto"></div> <div class="flex justify-center"><img src="junkers.png" alt="Logo Junkers" class="h-10 sm:h-12 w-auto"></div> </div>
   </section>
 
   <footer class="bg-[#0a5cb8] text-white text-center py-5 text-sm">
@@ -535,7 +760,10 @@
           defaultElectrodomestico: "Selecciona uno",
           darkMode: "Modo Oscuro",
           lightMode: "Modo Claro",
-          sending: "Enviando..." // Added translation for sending state
+          sending: "Enviando...", // Added translation for sending state
+          viewBrands: "Ver Marcas", // Added translation for "View Brands" button
+          domestico: "Doméstico",
+          industrial: "Industrial"
         }
       },
       ca: {
@@ -550,7 +778,10 @@
           defaultElectrodomestico: "Selecciona un",
           darkMode: "Mode Fosc",
           lightMode: "Mode Clar",
-          sending: "Enviant..." // Added translation for sending state
+          sending: "Enviant...", // Added translation for sending state
+          viewBrands: "Veure Marques", // Added translation for "View Brands" button
+          domestico: "Domèstic",
+          industrial: "Industrial"
         }
       },
       va: {
@@ -565,7 +796,10 @@
           defaultElectrodomestico: "Selecciona un",
           darkMode: "Mode Fosc",
           lightMode: "Mode Clar",
-          sending: "Enviant..." // Added translation for sending state
+          sending: "Enviant...", // Added translation for sending state
+          viewBrands: "Veure Marques", // Added translation for "View Brands" button
+          domestico: "Doméstico",
+          industrial: "Industrial"
         }
       }
     };
@@ -581,6 +815,7 @@
 
       // Also update the submit button text when language changes
       updateSubmitButtonText();
+      updateServiceTypeButtonText(lang); // Update service type button text
     }
 
     // Variable para almacenar el idioma actual
@@ -598,6 +833,19 @@
       });
       updatePlaceholders(currentLang); // Actualizar placeholders y opciones del formulario
       updateDarkModeButtonText(); // Asegurarse de que el texto del botón de modo oscuro se actualice
+
+      // Update the text of the new "View Brands" button
+      const viewBrandsButton = document.querySelector('.contact-buttons-container a[href="#marcas"]');
+      if (viewBrandsButton) {
+         const langSpans = viewBrandsButton.querySelectorAll('span[class^="lang-"]');
+         langSpans.forEach(span => {
+             if (span.classList.contains('lang-' + currentLang)) {
+                 span.style.display = 'inline';
+             } else {
+                 span.style.display = 'none';
+             }
+         });
+      }
     }
 
     // Función para actualizar el texto y el icono del botón de modo oscuro según el modo y el idioma
@@ -641,6 +889,23 @@
                 }
             });
         }
+    }
+
+    // Function to update the service type button text based on current language
+    function updateServiceTypeButtonText(lang) {
+        const domesticoBtn = document.getElementById('domesticoBtn');
+        const industrialBtn = document.getElementById('industrialBtn');
+
+        if (domesticoBtn) {
+            domesticoBtn.querySelector('.lang-es').textContent = translations.es.text.domestico;
+            domesticoBtn.querySelector('.lang-ca').textContent = translations.ca.text.domestico;
+            domesticoBtn.querySelector('.lang-va').textContent = translations.va.text.domestico;
+        }
+         if (industrialBtn) {
+            industrialBtn.querySelector('.lang-es').textContent = translations.es.text.industrial;
+            industrialBtn.querySelector('.lang-ca').textContent = translations.ca.text.industrial;
+            industrialBtn.querySelector('.lang-va').textContent = translations.va.text.industrial;
+         }
     }
 
 
@@ -793,6 +1058,33 @@
              });
            });
          });
+
+        // Lógica para el selector de tipo de servicio
+        const domesticoBtn = document.getElementById('domesticoBtn');
+        const industrialBtn = document.getElementById('industrialBtn');
+        const serviceTypeSelector = document.querySelector('.service-type-selector');
+
+        if (serviceTypeSelector && domesticoBtn && industrialBtn) {
+            serviceTypeSelector.addEventListener('click', (event) => {
+                const clickedButton = event.target.closest('button');
+                if (clickedButton) {
+                    // Remove active class from all buttons
+                    serviceTypeSelector.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    // Add active class to the clicked button
+                    clickedButton.classList.add('active');
+
+                    // TODO: Add logic here to show/hide sections or filter content based on selection
+                    const selectedType = clickedButton.id === 'domesticoBtn' ? 'domestico' : 'industrial';
+                    console.log(`Service type selected: ${selectedType}`); // Placeholder for filtering logic
+                }
+            });
+        } else {
+            console.error("Elementos del selector de tipo de servicio no encontrados.");
+        }
+
+
     }); // Fin DOMContentLoaded
   </script>
 </body>
