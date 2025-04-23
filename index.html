@@ -348,16 +348,6 @@
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
 
-    .beneficios .item i {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-
-    .beneficios .item p {
-        font-size: 1rem;
-        line-height: 1.4;
-    }
-
     body.dark-mode .beneficios .item {
         background-color: #003f7f;
         box-shadow: 0 4px 6px rgba(0,0,0,0.4);
@@ -420,20 +410,6 @@
         text-align: center;
     }
 
-    .about-us h2 {
-        color: #0a5cb8;
-        font-size: 2.25rem;
-        margin-bottom: 2rem;
-    }
-
-    .about-us p {
-        color: #4a5568;
-        font-size: 1.125rem;
-        line-height: 1.6;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
     body.dark-mode .about-us {
         background-color: #2d3748;
         color: #e2e8f0;
@@ -443,7 +419,6 @@
         color: #cbd5e0;
     }
 
-    /* WhatsApp button container */
     .whatsapp-button-container {
         text-align: center;
         margin-top: 2rem;
@@ -451,7 +426,6 @@
         padding: 0 1rem;
     }
 
-    /* WhatsApp button styles */
     .whatsapp-button-container .whatsapp-btn {
         background-color: #0a5cb8;
         color: white;
@@ -490,7 +464,6 @@
          box-shadow: 0 0 0 2px rgba(0, 63, 127, 0.5);
     }
 
-    /* WhatsApp image icon style */
     .whatsapp-button-container .whatsapp-btn img {
         width: 1.5rem;
         height: 1.5rem;
@@ -574,7 +547,7 @@
          background-color: #003f7f;
     }
 
-    body.dark-mode #cookie-banner .accept-btn:hover {
+    body.dark-mode .accept-btn:hover {
          background-color: #0a5cb8;
     }
 
@@ -689,7 +662,7 @@
         <p class="text-gray-700">
           <span class="lang-es">No enfrían correctamente, problemas de congelación o ruidos inusuales.</span>
           <span class="lang-ca">No refreden correctament, problemes de congelació o sorolls inusuals.</span>
-          <span class="lang-va">No refreden correctament, problemes de congelació o sorolls inusuals.</span>
+          <span class="lang-va">No refreden correctament, problemes de congelació o sorolls inusuales.</span>
         </p>
       </div>
       <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-100 focus-within:outline-none focus-within:ring-4 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Aire acondicionado" data-service-type="domestico industrial">
@@ -1040,23 +1013,23 @@
     <div class="mt-2">
         <a href="#" class="lang-es">Política de Privacidad</a><span class="lang-es"> | </span>
         <a href="#" class="lang-es">Aviso Legal</a><span class="lang-es"> | </span>
-        <a href="#" id="manageCookiesLink" class="lang-es">Gestionar Cookies</a>
+        <a href="/1234.html" id="manageCookiesLink" class="lang-es">Gestionar Cookies</a>
 
         <a href="#" class="lang-ca">Política de Privacitat</a><span class="lang-ca"> | </span>
         <a href="#" class="lang-ca">Avís Legal</a><span class="lang-ca"> | </span>
-        <a href="#" id="manageCookiesLinkCa" class="lang-ca">Gestionar Galetes</a>
+        <a href="/1234.html" id="manageCookiesLinkCa" class="lang-ca">Gestionar Galetes</a>
 
         <a href="#" class="lang-va">Política de Privacitat</a><span class="lang-va"> | </span>
         <a href="#" class="lang-va">Avís Legal</a><span class="lang-va"> | </span>
-        <a href="#" id="manageCookiesLinkVa" class="lang-va">Gestionar Galetes</a>
+        <a href="/1234.html" id="manageCookiesLinkVa" class="lang-va">Gestionar Galetes</a>
     </div>
   </footer>
 
   <div id="cookie-banner">
       <div class="cookie-content">
-          <span class="lang-es">Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra <a href="/politica-de-cookies.html" target="_blank">Política de Cookies</a>.</span>
-          <span class="lang-ca">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra <a href="/politica-de-cookies.html" target="_blank">Política de Galetes</a>.</span>
-          <span class="lang-va">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra <a href="/politica-de-cookies.html" target="_blank">Política de Galetes</a>.</span>
+          <span class="lang-es">Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra <a href="/1234.html" target="_blank">Política de Cookies</a>.</span>
+          <span class="lang-ca">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra <a href="/1234.html" target="_blank">Política de Galetes</a>.</span>
+          <span class="lang-va">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra <a href="/1234.html" target="_blank">Política de Galetes</a>.</span>
       </div>
       <div class="cookie-buttons">
           <button class="accept-btn">
@@ -1075,15 +1048,15 @@
     const translations = {
       es: {
         placeholder: { nombre: "Tu nombre", telefono: "+34 600 000 000", email: "tu@correo.com", mensaje: "Describe el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicación", defaultElectrodomestico: "Selecciona uno", darkMode: "Modo Oscuro", lightMode: "Modo Claro", sending: "Enviando...", viewBrands: "Ver Marcas", aboutUs: "Sobre Nosotros", domestico: "Doméstico", industrial: "Industrial", formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.", formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.", validationError: "Por favor, completa todos los campos requeridos.", requestRepair: "Solicita tu reparación", chatWhatsApp: "Chatea por WhatsApp", cookieConsent: "Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra ", cookiePolicyLink: "Política de Cookies", cookieAccept: "Aceptar", cookieReject: "Rechazar", manageCookies: "Gestionar Cookies" }
+        text: { defaultUbicacion: "Selecciona una ubicación", defaultElectrodomestico: "Selecciona uno", darkMode: "Modo Oscuro", lightMode: "Modo Claro", sending: "Enviando...", viewBrands: "Ver Marcas", aboutUs: "Sobre Nosotros", domestico: "Doméstico", industrial: "Industrial", formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.", formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.", validationError: "Por favor, completa todos los campos requeridos.", requestRepair: "Solicita tu reparación", chatWhatsApp: "Chatea por WhatsApp", cookieConsent: "Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra ", cookiePolicyLink: "1234.html", cookieAccept: "Aceptar", cookieReject: "Rechazar", manageCookies: "Gestionar Cookies" }
       },
       ca: {
         placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.", formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.", validationError: "Si us plau, completa tots els camps requerits.", requestRepair: "Sol·licita la teva reparació", chatWhatsApp: "Xateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra ", cookiePolicyLink: "Política de Galetes", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes" }
+        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.", formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.", validationError: "Si us plau, completa tots els camps requerits.", requestRepair: "Sol·licita la teva reparació", chatWhatsApp: "Xateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes" }
       },
       va: {
         placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Doméstico", industrial: "Industrial", formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.", formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.", validationError: "Per favor, completa tots els camps requerits.", requestRepair: "Sol·licita la teua reparació", chatWhatsApp: "Chateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra ", cookiePolicyLink: "Política de Galetes", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes" }
+        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Doméstico", industrial: "Industrial", formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.", formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.", validationError: "Per favor, completa tots els camps requerits.", requestRepair: "Sol·licita la teua reparació", chatWhatsApp: "Chateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes" }
       }
     };
     function updatePlaceholders(lang) {
@@ -1190,9 +1163,9 @@
         const cookieBanner = document.getElementById('cookie-banner');
         if (cookieBanner) {
             // Update text content
-            cookieBanner.querySelector('.cookie-content .lang-es').innerHTML = translations.es.text.cookieConsent + `<a href="/politica-de-cookies.html" target="_blank">${translations.es.text.cookiePolicyLink}</a>.`;
-            cookieBanner.querySelector('.cookie-content .lang-ca').innerHTML = translations.ca.text.cookieConsent + `<a href="/politica-de-cookies.html" target="_blank">${translations.ca.text.cookiePolicyLink}</a>.`;
-            cookieBanner.querySelector('.cookie-content .lang-va').innerHTML = translations.va.text.cookieConsent + `<a href="/politica-de-cookies.html" target="_blank">${translations.va.text.cookiePolicyLink}</a>.`;
+            cookieBanner.querySelector('.cookie-content .lang-es').innerHTML = translations.es.text.cookieConsent + `<a href="/1234.html" target="_blank">${translations.es.text.cookiePolicyLink}</a>.`;
+            cookieBanner.querySelector('.cookie-content .lang-ca').innerHTML = translations.ca.text.cookieConsent + `<a href="/1234.html" target="_blank">${translations.ca.text.cookiePolicyLink}</a>.`;
+            cookieBanner.querySelector('.cookie-content .lang-va').innerHTML = translations.va.text.cookieConsent + `<a href="/1234.html" target="_blank">${translations.va.text.cookiePolicyLink}</a>.`;
 
             // Update button text
             cookieBanner.querySelector('.accept-btn .lang-es').textContent = translations.es.text.cookieAccept;
