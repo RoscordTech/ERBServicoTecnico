@@ -10,126 +10,115 @@
     <span class="lang-ca">ERB Servei Tècnic de Gamma Blanca</span>
     <span class="lang-va">ERB Servei Tècnic de Gamma Blanca</span>
   </title>
-
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
-    /* Reglas para mostrar/ocultar idiomas por defecto (Castellano visible) */
+    /* Language display rules */
     .lang-es { display: inline; }
     .lang-ca, .lang-va { display: none; }
 
-    /* Estilos generales del HTML y Body */
-    html { scroll-behavior: smooth; } /* Desplazamiento suave al hacer clic en enlaces internos */
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
 
-    /* Keyframes para animaciones */
+    /* Fade-in animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Estilos para el Modo Oscuro */
+    /* Dark mode styles */
     body.dark-mode {
-      background-color: #1a202c; /* Fondo oscuro */
-      color: #e2e8f0; /* Texto claro */
+      background-color: #1a202c;
+      color: #e2e8f0;
     }
 
     body.dark-mode .hero {
-      background: linear-gradient(135deg, #003f7f, #0a5cb8); /* Degradado más oscuro para el hero */
+      background: linear-gradient(135deg, #003f7f, #0a5cb8);
       color: #e2e8f0;
     }
 
-    body.dark-mode .servicios,
-    body.dark-mode .marcas,
-    body.dark-mode .about-us /* Added dark mode style for about us */
-     {
-      background-color: #2d3748; /* Fondo más oscuro para secciones */
+    body.dark-mode .servicios, body.dark-mode .marcas, body.dark-mode .about-us {
+      background-color: #2d3748;
       color: #e2e8f0;
     }
 
-    body.dark-mode .servicios h2,
-    body.dark-mode .marcas h2,
-    body.dark-mode .beneficios h2,
-    body.dark-mode .formulario h2,
-    body.dark-mode .about-us h2 /* Added dark mode style for about us heading */
-     {
-        color: #90cdf4; /* Azul más claro para encabezados en modo oscuro */
+    body.dark-mode .servicios h2, body.dark-mode .marcas h2, body.dark-mode .beneficios h2, body.dark-mode .formulario h2, body.dark-mode .about-us h2 {
+        color: #90cdf4;
     }
 
     body.dark-mode .card {
-      background-color: #4a5568; /* Fondo de tarjeta más oscuro */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Sombra más oscura */
+      background-color: #4a5568;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
 
-    body.dark-mode .card:hover,
-    body.dark-mode .card:focus-within {
-      background-color: #5a67d8; /* Azul oscuro ligeramente más claro al pasar el ratón */
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Sombra más oscura al pasar el ratón */
+    body.dark-mode .card:hover, body.dark-mode .card:focus-within {
+      background-color: #5a67d8;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
     }
 
     body.dark-mode .card .icon {
-      color: #90cdf4; /* Azul más claro para iconos de tarjeta */
+      color: #90cdf4;
     }
 
     body.dark-mode .card h3 {
-      color: #90cdf4; /* Azul más claro para títulos de tarjeta */
+      color: #90cdf4;
     }
 
-     body.dark-mode .card p {
-        color: #cbd5e0; /* Gris más claro para texto de tarjeta */
-     }
+    body.dark-mode .card p {
+        color: #cbd5e0;
+    }
 
     body.dark-mode .beneficios .btn {
-        background-color: #003f7f; /* Azul más oscuro para botones de beneficio */
+        background-color: #003f7f;
         box-shadow: 0 4px 6px rgba(0,0,0,0.4);
     }
 
     body.dark-mode .beneficios .btn:hover {
-        background-color: #0a5cb8; /* Azul original al pasar el ratón */
+        background-color: #0a5cb8;
         box-shadow: 0 4px 6px rgba(0,0,0,0.6);
     }
 
-    body.dark-mode .formulario {
-      background: #2d3748; /* Fondo de formulario más oscuro */
+    /* Form styles - Adjusted specificity for dark mode */
+    .formulario {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
+
+    /* Increased specificity and removed !important */
+    body.dark-mode section#formulario {
+      background-color: #2d3748; /* Darker form background */
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
     body.dark-mode .formulario label {
-        color: #e2e8f0; /* Texto claro para etiquetas de formulario */
+        color: #e2e8f0;
     }
 
-    body.dark-mode .formulario input,
-    body.dark-mode .formulario textarea,
-    body.dark-mode .formulario select {
-      background-color: #4a5568; /* Fondo de entrada de formulario más oscuro */
-      border-color: #636b78; /* Borde más oscuro */
-      color: #e2e8f0; /* Texto claro */
+    body.dark-mode .formulario input, body.dark-mode .formulario textarea, body.dark-mode .formulario select {
+      background-color: #4a5568;
+      border-color: #636b78;
+      color: #e2e8f0;
     }
 
-     body.dark-mode .formulario input::placeholder,
-     body.dark-mode .formulario textarea::placeholder {
-        color: #a0aec0; /* Texto de marcador de posición más claro */
-     }
+    body.dark-mode .formulario input::placeholder, body.dark-mode .formulario textarea::placeholder {
+        color: #a0aec0;
+    }
 
-    body.dark-mode .formulario input:focus,
-    body.dark-mode .formulario textarea:focus,
-    body.dark-mode .formulario select:focus {
-      border-color: #90cdf4; /* Borde de enfoque azul más claro */
-      box-shadow: 0 0 0 1px #90cdf4; /* Anillo de enfoque azul más claro */
+    body.dark-mode .formulario input:focus, body.dark-mode .formulario textarea:focus, body.dark-mode .formulario select:focus {
+      border-color: #90cdf4;
+      box-shadow: 0 0 0 1px #90cdf4;
     }
 
     body.dark-mode .formulario button {
-      background: #003f7f; /* Botón de formulario azul más oscuro */
+      background: #003f7f;
     }
 
-    body.dark-mode .formulario button:hover,
-    body.dark-mode .formulario button:focus {
-      background-color: #0a5cb8; /* Azul original al pasar el ratón */
+    body.dark-mode .formulario button:hover, body.dark-mode .formulario button:focus {
+      background-color: #0a5cb8;
     }
 
-    /* Estilos para mensajes de respuesta del formulario */
+    /* Form response messages */
     .form-response {
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
@@ -138,49 +127,47 @@
         opacity: 1;
     }
     .form-response.success {
-        background: #d4edda; /* Verde claro para éxito */
-        color: #155724; /* Texto verde oscuro */
+        background: #d4edda;
+        color: #155724;
         border: 1px solid #c3e6cb;
     }
-
-     .form-response.error {
-        background: #f8d7da; /* Rojo claro para error */
-        color: #721c24; /* Texto rojo oscuro */
+    .form-response.error {
+        background: #f8d7da;
+        color: #721c24;
         border: 1px solid #f5c6cb;
-     }
+    }
 
     body.dark-mode .form-response.success {
-        background: #2f855a; /* Verde más oscuro para éxito */
+        background: #2f855a;
         color: #e2e8f0;
         border-color: #22543d;
     }
 
-     body.dark-mode .form-response.error {
-        background: #c53030; /* Rojo más oscuro para error */
+    body.dark-mode .form-response.error {
+        background: #c53030;
         color: #e2e8f0;
         border-color: #a71f24;
-     }
+    }
 
-    /* Estilos para el indicador de carga */
+    /* Loading indicator */
     #formLoadingIndicator {
-        display: none; /* Hidden by default */
+        display: none;
         text-align: center;
         margin-top: 1rem;
-        color: #0a5cb8; /* Match theme color */
+        color: #0a5cb8;
     }
 
     body.dark-mode #formLoadingIndicator {
-        color: #90cdf4; /* Match dark mode color */
+        color: #90cdf4;
     }
 
-
-    /* Estilos del pie de página */
+    /* Footer styles */
     footer {
         background: #0a5cb8;
         color: white;
         text-align: center;
-        padding: 1.25rem 1rem; /* py-5 px-4 equivalent */
-        font-size: 0.875rem; /* text-sm equivalent */
+        padding: 1.25rem 1rem;
+        font-size: 0.875rem;
     }
 
     footer a {
@@ -195,7 +182,7 @@
     }
 
     body.dark-mode footer {
-      background: #0a5cb8; /* Pie de página azul más oscuro */
+      background: #0a5cb8;
       color: #e2e8f0;
     }
 
@@ -203,12 +190,11 @@
         color: #e2e8f0;
     }
 
-
-    /* Estilos específicos para el botón de modo oscuro en modo oscuro */
+    /* Dark mode toggle button styles */
     body.dark-mode #language-selector button#darkModeToggle {
-        border-color: #90cdf4; /* Borde azul más claro en modo oscuro */
-        background-color: #2d3748; /* Fondo más oscuro */
-        color: #e2e8f0; /* Texto claro */
+        border-color: #90cdf4;
+        background-color: #2d3748;
+        color: #e2e8f0;
     }
 
     body.dark-mode #language-selector button#darkModeToggle:hover {
@@ -216,32 +202,29 @@
         color: #e2e8f0;
     }
 
-    /* Añadido para ocultar el desbordamiento horizontal */
+    /* Prevent horizontal overflow */
     body {
         overflow-x: hidden;
     }
 
-    /* Estilos para el contenedor de botones de contacto/marcas */
+    /* Contact buttons container */
     .contact-buttons-container {
         display: flex;
-        flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 1rem; /* Espacio entre los botones */
-        margin-top: 1.25rem; /* my-5 */
-        margin-bottom: 1.25rem; /* my-5 */
+        gap: 1rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
     }
 
-    /* Estilos para los botones dentro del contenedor */
     .contact-buttons-container .btn {
-        /* Hereda estilos de .btn en la sección de beneficios o define específicos si es necesario */
-        /* Asegurar que los botones tengan un ancho flexible pero mínimo */
-        flex-grow: 1; /* Permite que crezcan */
-        flex-shrink: 0; /* Evita que se encojan demasiado */
-        max-width: 200px; /* Ancho máximo para evitar que sean demasiado anchos en pantallas grandes */
-        text-align: center; /* Centrar texto dentro del botón */
+        flex-grow: 1;
+        flex-shrink: 0;
+        max-width: 200px;
+        text-align: center;
     }
 
-    /* Estilos para el selector de tipo de servicio */
+    /* Service type selector */
     .service-type-selector {
         text-align: center;
         margin-top: 20px;
@@ -258,8 +241,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         font-weight: bold;
-        /* Asegurar tamaño de toque adecuado en móviles */
-        min-width: 120px; /* Ancho mínimo para toque */
+        min-width: 120px;
     }
 
     .service-type-selector button.active {
@@ -285,68 +267,63 @@
         border-color: #90cdf4;
     }
 
-    /* Estilos para la sección de servicios (grid) */
+    /* Services section grid */
     .servicios .cards {
-        /* Modificado para 2 columnas en móviles y 3 en lg */
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas por defecto (móviles) */
-        gap: 1.25rem; /* Ajuste de espacio (equivalente a gap-5) */
-        padding: 0 1rem; /* Añadir un poco de padding horizontal en móviles */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        padding: 0 1rem;
     }
 
-    /* Media query para pantallas grandes (lg y superior) */
     @media (min-width: 1024px) {
         .servicios .cards {
-            grid-template-columns: repeat(3, 1fr); /* 3 columnas en lg */
+            grid-template-columns: repeat(3, 1fr);
         }
     }
-
 
     .servicios .card {
-        padding: 1rem; /* Reducir un poco el padding en móviles si es necesario */
+        padding: 1rem;
     }
 
-    /* Estilo para hacer las tarjetas de servicios más rectangulares en móviles */
-    @media (max-width: 640px) { /* Estilos solo para pantallas móviles */
+    @media (max-width: 640px) {
         .servicios .card {
-            min-height: 220px; /* Mantener la altura mínima ajustada */
+            min-height: 220px;
         }
          .servicios .card .icon {
-             margin-bottom: 0.5rem; /* Reducir espacio debajo del icono en móviles */
+             margin-bottom: 0.5rem;
          }
          .servicios .card h3 {
-             margin-bottom: 0.1rem; /* Reducir espacio debajo del título en móviles */
+             margin-bottom: 0.1rem;
          }
     }
 
-    /* Estilo para ocultar tarjetas filtradas */
+    /* Style to hide filtered cards */
     .servicios .card.hidden {
         display: none;
     }
 
-
     .servicios .card .icon {
-        font-size: 4rem; /* Ajustar tamaño del icono en móviles si es necesario */
-        margin-bottom: 0.75rem; /* Ajustar espacio debajo del icono */
+        font-size: 4rem;
+        margin-bottom: 0.75rem;
     }
 
     .servicios .card h3 {
-        font-size: 1.1rem; /* Ajustar tamaño del título en móviles */
-        margin-bottom: 0.25rem; /* Ajustar espacio debajo del título */
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
     }
 
     .servicios .card p {
-        font-size: 0.9rem; /* Ajustar tamaño del texto en móviles */
+        font-size: 0.9rem;
     }
 
-    /* Estilos para la sección de beneficios (flexbox para fila en escritorio) */
+    /* Benefits section flexbox */
     .beneficios .container {
-        display: flex; /* Usar flexbox */
-        flex-wrap: wrap; /* Permitir que los elementos se envuelvan en pantallas pequeñas */
-        justify-content: center; /* Centrar horizontalmente */
-        gap: 1.5rem; /* Espacio entre elementos */
-        max-width: 1000px; /* Ancho máximo */
-        margin: 0 auto; /* Centrar */
-        padding: 0 1rem; /* Padding horizontal */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 1rem;
     }
 
     .beneficios .item {
@@ -357,13 +334,13 @@
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        display: flex; /* Usar flexbox para alinear contenido verticalmente */
+        display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center; /* Centrar contenido verticalmente */
-        flex-basis: 250px; /* Base flexible para que cada item intente tener al menos 250px de ancho */
-        flex-grow: 1; /* Permitir que crezcan para llenar el espacio disponible */
-        min-height: 180px; /* Altura mínima para uniformidad */
+        justify-content: center;
+        flex-basis: 250px;
+        flex-grow: 1;
+        min-height: 180px;
     }
 
     .beneficios .item:hover {
@@ -372,12 +349,12 @@
     }
 
     .beneficios .item i {
-        font-size: 3rem; /* Tamaño del icono */
-        margin-bottom: 1rem; /* Espacio debajo del icono */
+        font-size: 3rem;
+        margin-bottom: 1rem;
     }
 
     .beneficios .item p {
-        font-size: 1rem; /* Tamaño del texto */
+        font-size: 1rem;
         line-height: 1.4;
     }
 
@@ -391,70 +368,67 @@
         box-shadow: 0 6px 8px rgba(0,0,0,0.6);
     }
 
-
-    /* Estilos para el formulario */
+    /* Form section styles */
     .formulario {
-        padding: 1.5rem; /* Ajustar padding en móviles */
-        margin: 1.5rem auto; /* Ajustar margen */
+        padding: 1.5rem;
+        margin: 1.5rem auto;
     }
 
     .formulario label {
-        font-size: 0.9rem; /* Ajustar tamaño de etiqueta */
-        margin-bottom: 0.25rem; /* Ajustar espacio */
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
     }
 
-    .formulario input,
-    .formulario textarea,
-    .formulario select {
-        padding: 0.75rem; /* Ajustar padding de entradas */
-        font-size: 1rem; /* Asegurar tamaño de fuente legible */
+    .formulario input, .formulario textarea, .formulario select {
+        padding: 0.75rem;
+        font-size: 1rem;
     }
 
     .formulario button {
-        padding: 0.75rem 1rem; /* Ajustar padding del botón de envío */
-        font-size: 1rem; /* Asegurar tamaño de fuente legible */
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
     }
 
-    /* Estilos para la sección de marcas (grid) */
+    /* Brands section grid */
     .marcas .grid {
-        gap: 1rem; /* Ajustar espacio entre logos */
-        padding: 0 1rem; /* Añadir padding horizontal */
+        gap: 1rem;
+        padding: 0 1rem;
     }
 
     .marcas img {
-        height: 3rem; /* Ajustar altura de los logos en móviles */
+        height: 3rem;
         width: auto;
     }
 
-    /* Ajustes para el selector de idioma y modo oscuro en móviles */
+    /* Language and dark mode selector adjustments for mobile */
     #language-selector {
         margin-top: 1rem;
         margin-bottom: 1rem;
-        padding: 0 0.5rem; /* Añadir un poco de padding horizontal */
+        padding: 0 0.5rem;
     }
 
     #language-selector button {
-        margin: 0.25rem; /* Ajustar margen entre botones */
-        padding: 0.5rem 0.75rem; /* Ajustar padding para tamaño de toque */
-        font-size: 0.8rem; /* Ajustar tamaño de fuente */
+        margin: 0.25rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
     }
 
-    /* Estilos para la sección Sobre Nosotros */
+    /* About Us section styles */
     .about-us {
-        background-color: #f7fafc; /* bg-gray-100 */
-        padding: 4rem 1.25rem; /* py-16 px-5 */
+        background-color: #f7fafc;
+        padding: 4rem 1.25rem;
         text-align: center;
     }
 
     .about-us h2 {
         color: #0a5cb8;
-        font-size: 2.25rem; /* text-3xl */
-        margin-bottom: 2rem; /* mb-8 */
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
     }
 
     .about-us p {
-        color: #4a5568; /* text-gray-700 */
-        font-size: 1.125rem; /* text-lg */
+        color: #4a5568;
+        font-size: 1.125rem;
         line-height: 1.6;
         max-width: 800px;
         margin: 0 auto;
@@ -469,22 +443,22 @@
         color: #cbd5e0;
     }
 
-    /* Styles for the new WhatsApp button container */
+    /* WhatsApp button container */
     .whatsapp-button-container {
         text-align: center;
-        margin-top: 2rem; /* Add some space above the form */
-        margin-bottom: 2rem; /* Add some space below the button */
-        padding: 0 1rem; /* Add horizontal padding */
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
     }
 
-    /* Styles for the new WhatsApp button - Adjusted to match site palette */
+    /* WhatsApp button styles */
     .whatsapp-button-container .whatsapp-btn {
-        background-color: #0a5cb8; /* Match site blue */
+        background-color: #0a5cb8;
         color: white;
-        padding: 0.75rem 1.5rem; /* py-3 px-6 */
-        border-radius: 9999px; /* rounded-full */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
-        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Added background-color to transition */
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         font-weight: bold;
         display: inline-flex;
         align-items: center;
@@ -493,37 +467,140 @@
 
     .whatsapp-button-container .whatsapp-btn:hover {
         transform: scale(1.05);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* hover:shadow-lg */
-        background-color: #003f7f; /* Darker blue on hover */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        background-color: #003f7f;
     }
 
     .whatsapp-button-container .whatsapp-btn:focus {
          outline: none;
-         box-shadow: 0 0 0 2px rgba(10, 92, 184, 0.5); /* focus:ring-2 focus:ring-[#0a5cb8] */
+         box-shadow: 0 0 0 2px rgba(10, 92, 184, 0.5);
     }
 
     body.dark-mode .whatsapp-button-container .whatsapp-btn {
-        background-color: #003f7f; /* Darker blue in dark mode */
+        background-color: #003f7f;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     }
 
     body.dark-mode .whatsapp-button-container .whatsapp-btn:hover {
-         background-color: #0a5cb8; /* Lighter blue on hover in dark mode */
+         background-color: #0a5cb8;
          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6);
     }
 
     body.dark-mode .whatsapp-button-container .whatsapp-btn:focus {
-         box-shadow: 0 0 0 2px rgba(0, 63, 127, 0.5); /* Darker blue focus ring */
+         box-shadow: 0 0 0 2px rgba(0, 63, 127, 0.5);
     }
 
-    /* Style for the WhatsApp image icon */
+    /* WhatsApp image icon style */
     .whatsapp-button-container .whatsapp-btn img {
-        width: 1.5rem; /* Equivalent to w-6 */
-        height: 1.5rem; /* Equivalent to h-6 */
-        margin-right: 0.5rem; /* Equivalent to mr-2 */
-        vertical-align: middle; /* Align with text */
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 0.5rem;
+        vertical-align: middle;
     }
 
+    /* Cookie Consent Banner styles */
+    #cookie-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #333; /* Dark background */
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    #cookie-banner .cookie-content {
+        flex-grow: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    #cookie-banner a {
+        color: #90cdf4;
+        text-decoration: underline;
+    }
+
+    #cookie-banner .cookie-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #cookie-banner button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    #cookie-banner .accept-btn {
+        background-color: #0a5cb8;
+        color: white;
+        border: none;
+    }
+
+    #cookie-banner .accept-btn:hover {
+        background-color: #003f7f;
+    }
+
+    #cookie-banner .reject-btn {
+        background-color: #555;
+        color: white;
+        border: none;
+    }
+
+    #cookie-banner .reject-btn:hover {
+        background-color: #777;
+    }
+
+    /* Dark mode styles for cookie banner */
+    body.dark-mode #cookie-banner {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+
+    body.dark-mode #cookie-banner a {
+        color: #90cdf4;
+    }
+
+    body.dark-mode #cookie-banner .accept-btn {
+         background-color: #003f7f;
+    }
+
+    body.dark-mode #cookie-banner .accept-btn:hover {
+         background-color: #0a5cb8;
+    }
+
+    body.dark-mode #cookie-banner .reject-btn {
+        background-color: #4a5568;
+    }
+
+    body.dark-mode .reject-btn:hover {
+        background-color: #636b78;
+    }
+
+    /* Media query for larger screens (horizontal row) */
+    @media (min-width: 768px) {
+        #cookie-banner {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+         #cookie-banner .cookie-content {
+             margin-bottom: 0;
+             text-align: left;
+         }
+         #cookie-banner .cookie-buttons {
+             flex-wrap: nowrap;
+         }
+    }
 
   </style>
 </head>
@@ -556,6 +633,7 @@
           <span class="lang-va">Industrial</span>
       </button>
   </section>
+
   <header class="hero bg-gradient-to-br from-[#0a5cb8] to-[#003f7f] text-white text-center py-16 md:py-24 px-5 animate-[fadeIn_1.5s_ease-in-out]">
     <h1 class="text-3xl md:text-5xl mb-2">
       <span class="lang-es">ERB Servicio Técnico de Gamma Blanca</span>
@@ -594,7 +672,6 @@
       </a>
   </div>
 
-
   <section id="servicios" class="servicios py-16 px-5 bg-gray-100 text-center">
     <h2 class="text-3xl md:text-4xl mb-8">
       <span class="lang-es">¿Qué electrodomésticos reparamos?</span>
@@ -602,7 +679,7 @@
       <span class="lang-va">Quins aparells electrodomèstics reparam?</span>
     </h2>
     <div class="cards grid grid-cols-2 lg:grid-cols-3 gap-5 max-w-screen-lg mx-auto">
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Frigorífico" data-service-type="domestico">
+      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Frigorífico" data-service-type="domestico">
         <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">ac_unit</span>
         <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
           <span class="lang-es">Frigoríficos y Congeladores</span>
@@ -838,8 +915,7 @@
       </a>
   </div>
 
-
-  <section class="formulario bg-white p-10 max-w-xl mx-auto my-10 rounded-lg shadow-xl">
+  <section id="formulario" class="formulario bg-white p-10 max-w-xl mx-auto my-10 rounded-lg shadow-xl">
     <h2 class="text-2xl md:text-3xl text-center mb-5">
       <span class="lang-es">Solicita tu reparación</span>
       <span class="lang-ca">Sol·licita la teva reparació</span>
@@ -847,7 +923,6 @@
     </h2>
     <form id="contactForm" action="https://formsubmit.co/roscordtgn@gmail.com" method="POST" class="space-y-4">
       <input type="hidden" name="_captcha" value="false">
-
       <div>
         <label for="nombre" class="block mb-1 font-bold">
           <span class="lang-es">Nombre:</span>
@@ -856,7 +931,6 @@
         </label>
         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
       </div>
-
       <div>
         <label for="telefono" class="block mb-1 font-bold">
           <span class="lang-es">Teléfono:</span>
@@ -865,7 +939,6 @@
         </label>
         <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
       </div>
-
       <div>
         <label for="email" class="block mb-1 font-bold">
           <span class="lang-es">Correo electrónico:</span>
@@ -874,7 +947,6 @@
         </label>
         <input type="email" id="email" name="email" placeholder="tu@correo.com" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
       </div>
-
       <div>
         <label for="ubicacion" class="block mb-1 font-bold">
           <span class="lang-es">Ubicación del servicio:</span>
@@ -889,7 +961,6 @@
           <option value="Castellón de la Plana">Castellón de la Plana</option>
         </select>
       </div>
-
       <div>
         <label for="equipo" class="block mb-1 font-bold">
           <span class="lang-es">Electrodoméstico a reparar:</span>
@@ -914,7 +985,6 @@
           <option value="Otro">Otro</option>
         </select>
       </div>
-
       <div>
         <label for="mensaje" class="block mb-1 font-bold">
           <span class="lang-es">Descripción del problema:</span>
@@ -923,7 +993,6 @@
         </label>
         <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe el problema" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent"></textarea>
       </div>
-
       <button type="submit" class="w-full bg-[#0a5cb8] text-white py-2 px-4 rounded-md font-bold transition duration-300 hover:bg-[#064b93] focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:ring-offset-2">
         <span class="lang-es">Enviar</span>
         <span class="lang-ca">Envia</span>
@@ -970,94 +1039,53 @@
     </p>
     <div class="mt-2">
         <a href="#" class="lang-es">Política de Privacidad</a><span class="lang-es"> | </span>
-        <a href="#" class="lang-es">Aviso Legal</a>
+        <a href="#" class="lang-es">Aviso Legal</a><span class="lang-es"> | </span>
+        <a href="#" id="manageCookiesLink" class="lang-es">Gestionar Cookies</a>
 
         <a href="#" class="lang-ca">Política de Privacitat</a><span class="lang-ca"> | </span>
-        <a href="#" class="lang-ca">Avís Legal</a>
+        <a href="#" class="lang-ca">Avís Legal</a><span class="lang-ca"> | </span>
+        <a href="#" id="manageCookiesLinkCa" class="lang-ca">Gestionar Galetes</a>
 
         <a href="#" class="lang-va">Política de Privacitat</a><span class="lang-va"> | </span>
-        <a href="#" class="lang-va">Avís Legal</a>
+        <a href="#" class="lang-va">Avís Legal</a><span class="lang-va"> | </span>
+        <a href="#" id="manageCookiesLinkVa" class="lang-va">Gestionar Galetes</a>
     </div>
   </footer>
 
+  <div id="cookie-banner">
+      <div class="cookie-content">
+          <span class="lang-es">Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra <a href="/politica-de-cookies.html" target="_blank">Política de Cookies</a>.</span>
+          <span class="lang-ca">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra <a href="/politica-de-cookies.html" target="_blank">Política de Galetes</a>.</span>
+          <span class="lang-va">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra <a href="/politica-de-cookies.html" target="_blank">Política de Galetes</a>.</span>
+      </div>
+      <div class="cookie-buttons">
+          <button class="accept-btn">
+              <span class="lang-es">Aceptar</span>
+              <span class="lang-ca">Acceptar</span>
+              <span class="lang-va">Acceptar</span>
+          </button>
+          <button class="reject-btn">
+              <span class="lang-es">Rechazar</span>
+              <span class="lang-ca">Rebutjar</span>
+              <span class="lang-va">Rebutjar</span>
+          </button>
+      </div>
+  </div>
   <script>
-    // Dictionary for translations of placeholders and default option texts
     const translations = {
       es: {
-        placeholder: {
-          nombre: "Tu nombre",
-          telefono: "+34 600 000 000",
-          email: "tu@correo.com",
-          mensaje: "Describe el problema"
-        },
-        text: {
-          defaultUbicacion: "Selecciona una ubicación",
-          defaultElectrodomestico: "Selecciona uno",
-          darkMode: "Modo Oscuro",
-          lightMode: "Modo Claro",
-          sending: "Enviando...",
-          viewBrands: "Ver Marcas",
-          aboutUs: "Sobre Nosotros",
-          domestico: "Doméstico",
-          industrial: "Industrial",
-          formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.",
-          formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.",
-          validationError: "Por favor, completa todos los campos requeridos.",
-          requestRepair: "Solicita tu reparación", // New translation key
-          chatWhatsApp: "Chatea por WhatsApp" // New translation key
-        }
+        placeholder: { nombre: "Tu nombre", telefono: "+34 600 000 000", email: "tu@correo.com", mensaje: "Describe el problema" },
+        text: { defaultUbicacion: "Selecciona una ubicación", defaultElectrodomestico: "Selecciona uno", darkMode: "Modo Oscuro", lightMode: "Modo Claro", sending: "Enviando...", viewBrands: "Ver Marcas", aboutUs: "Sobre Nosotros", domestico: "Doméstico", industrial: "Industrial", formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.", formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.", validationError: "Por favor, completa todos los campos requeridos.", requestRepair: "Solicita tu reparación", chatWhatsApp: "Chatea por WhatsApp", cookieConsent: "Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra ", cookiePolicyLink: "Política de Cookies", cookieAccept: "Aceptar", cookieReject: "Rechazar", manageCookies: "Gestionar Cookies" }
       },
       ca: {
-        placeholder: {
-          nombre: "El teu nom",
-          telefono: "+34 600 000 000",
-          email: "el teu@correu.com",
-          mensaje: "Descriu el problema"
-        },
-        text: {
-          defaultUbicacion: "Selecciona una ubicació",
-          defaultElectrodomestico: "Selecciona un",
-          darkMode: "Mode Fosc",
-          lightMode: "Mode Clar",
-          sending: "Enviant...",
-          viewBrands: "Veure Marques",
-          aboutUs: "Sobre Nosaltres",
-          domestico: "Domèstic",
-          industrial: "Industrial",
-          formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.",
-          formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.",
-          validationError: "Si us plau, completa tots els camps requerits.",
-          requestRepair: "Sol·licita la teva reparació", // New translation key
-          chatWhatsApp: "Xateja per WhatsApp" // New translation key
-        }
+        placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
+        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.", formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.", validationError: "Si us plau, completa tots els camps requerits.", requestRepair: "Sol·licita la teva reparació", chatWhatsApp: "Xateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra ", cookiePolicyLink: "Política de Galetes", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes" }
       },
       va: {
-        placeholder: {
-          nombre: "El teu nom",
-          telefono: "+34 600 000 000",
-          email: "el teu@correu.com",
-          mensaje: "Descriu el problema"
-        },
-        text: {
-          defaultUbicacion: "Selecciona una ubicació",
-          defaultElectrodomestico: "Selecciona un",
-          darkMode: "Mode Fosc",
-          lightMode: "Mode Clar",
-          sending: "Enviant...",
-          viewBrands: "Veure Marques",
-          aboutUs: "Sobre Nosaltres",
-          domestico: "Doméstico",
-          industrial: "Industrial",
-          formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.",
-          formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.",
-          validationError: "Per favor, completa tots els camps requerits.",
-          requestRepair: "Sol·licita la teua reparació", // New translation key
-          chatWhatsApp: "Chateja per WhatsApp" // New translation key
-        }
+        placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
+        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Doméstico", industrial: "Industrial", formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.", formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.", validationError: "Per favor, completa tots els camps requerits.", requestRepair: "Sol·licita la teua reparació", chatWhatsApp: "Chateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra ", cookiePolicyLink: "Política de Galetes", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes" }
       }
     };
-
-    // Function to update placeholders and default option text in the form
     function updatePlaceholders(lang) {
       document.getElementById('nombre').placeholder = translations[lang].placeholder.nombre;
       document.getElementById('telefono').placeholder = translations[lang].placeholder.telefono;
@@ -1065,20 +1093,16 @@
       document.getElementById('mensaje').placeholder = translations[lang].placeholder.mensaje;
       document.getElementById('ubicacion').options[0].text = translations[lang].text.defaultUbicacion;
       document.getElementById('equipo').options[0].text = translations[lang].text.defaultElectrodomestico;
-
-      // Also update the submit button text when language changes
       updateSubmitButtonText();
-      updateServiceTypeButtonText(currentLang); // Update service type button text
-      updateAboutUsButtonText(currentLang); // Update About Us button text
-      updateContactButtonsText(currentLang); // Update the text of the re-arranged contact buttons
+      updateServiceTypeButtonText(currentLang);
+      updateAboutUsButtonText(currentLang);
+      updateContactButtonsText(currentLang);
+      updateCookieBannerText(currentLang);
+      updateFooterLinksText(currentLang);
     }
-
-    // Variable to store the current language
     let currentLang = 'es';
-
-    // Main function to change the visible language on the page
     function setLanguage(lang) {
-      currentLang = lang; // Update the current language
+      currentLang = lang;
       const languages = ['es', 'ca', 'va'];
       languages.forEach(function(l) {
         const elems = document.getElementsByClassName('lang-' + l);
@@ -1086,12 +1110,10 @@
           elems[i].style.display = (l === lang) ? 'inline' : 'none';
         }
       });
-      updatePlaceholders(currentLang); // Update form placeholders and options
-      updateDarkModeButtonText(); // Ensure dark mode button text is updated
-      updateContactButtonsText(currentLang); // Update the text of the re-arranged contact buttons
+      updatePlaceholders(currentLang);
+      updateDarkModeButtonText();
+      updateContactButtonsText(currentLang);
     }
-
-    // Function to update the text and icon of the dark mode button based on mode and language
     function updateDarkModeButtonText() {
         const isDarkMode = document.body.classList.contains('dark-mode');
         const darkModeToggle = document.getElementById('darkModeToggle');
@@ -1099,7 +1121,6 @@
         const textSpanEs = darkModeToggle.querySelector('.lang-es');
         const textSpanCa = darkModeToggle.querySelector('.lang-ca');
         const textSpanVa = darkModeToggle.querySelector('.lang-va');
-
         if (isDarkMode) {
              icon.classList.remove('fa-moon');
              icon.classList.add('fa-sun');
@@ -1113,10 +1134,7 @@
              textSpanCa.textContent = translations.ca.text.darkMode;
              textSpanVa.textContent = translations.va.text.darkMode;
         }
-        // The setLanguage function handles displaying the correct span.
     }
-
-    // Function to update the submit button text based on current language
     function updateSubmitButtonText() {
         const submitButton = document.querySelector("#contactForm button[type='submit']");
         if (submitButton) {
@@ -1130,12 +1148,9 @@
             });
         }
     }
-
-    // Function to update the service type button text based on current language
     function updateServiceTypeButtonText(lang) {
         const domesticoBtn = document.getElementById('domesticoBtn');
         const industrialBtn = document.getElementById('industrialBtn');
-
         if (domesticoBtn) {
             domesticoBtn.querySelector('.lang-es').textContent = translations.es.text.domestico;
             domesticoBtn.querySelector('.lang-ca').textContent = translations.ca.text.domestico;
@@ -1147,8 +1162,6 @@
             industrialBtn.querySelector('.lang-va').textContent = translations.va.text.industrial;
          }
     }
-
-    // Function to update the About Us button text based on current language
     function updateAboutUsButtonText(lang) {
         const aboutUsButton = document.querySelector('.contact-buttons-container a[href="#about-us"]');
         if (aboutUsButton) {
@@ -1157,59 +1170,153 @@
             aboutUsButton.querySelector('.lang-va').textContent = translations.va.text.aboutUs;
         }
     }
-
-    // New function to update the text of the re-arranged contact buttons
     function updateContactButtonsText(lang) {
-        // Update "Solicita tu reparación" button text (now scrolls to form)
         const requestRepairButton = document.querySelector('.contact-buttons-container a[href="#formulario"]');
         if (requestRepairButton) {
             requestRepairButton.querySelector('.lang-es').textContent = translations[lang].text.requestRepair;
             requestRepairButton.querySelector('.lang-ca').textContent = translations[lang].text.requestRepair;
             requestRepairButton.querySelector('.lang-va').textContent = translations[lang].text.requestRepair;
         }
-
-        // Update "Chatea por WhatsApp" button text (the new button)
         const chatWhatsAppButton = document.querySelector('.whatsapp-button-container .whatsapp-btn');
         if (chatWhatsAppButton) {
              chatWhatsAppButton.querySelector('.lang-es').textContent = translations[lang].text.chatWhatsApp;
              chatWhatsAppButton.querySelector('.lang-ca').textContent = translations[lang].text.chatWhatsApp;
              chatWhatsAppButton.querySelector('.lang-va').textContent = translations[lang].text.chatWhatsApp;
         }
-         // Note: The "View Brands" button text is updated within setLanguage already.
+    }
+
+    // Function to update cookie banner text based on current language
+    function updateCookieBannerText(lang) {
+        const cookieBanner = document.getElementById('cookie-banner');
+        if (cookieBanner) {
+            // Update text content
+            cookieBanner.querySelector('.cookie-content .lang-es').innerHTML = translations.es.text.cookieConsent + `<a href="/politica-de-cookies.html" target="_blank">${translations.es.text.cookiePolicyLink}</a>.`;
+            cookieBanner.querySelector('.cookie-content .lang-ca').innerHTML = translations.ca.text.cookieConsent + `<a href="/politica-de-cookies.html" target="_blank">${translations.ca.text.cookiePolicyLink}</a>.`;
+            cookieBanner.querySelector('.cookie-content .lang-va').innerHTML = translations.va.text.cookieConsent + `<a href="/politica-de-cookies.html" target="_blank">${translations.va.text.cookiePolicyLink}</a>.`;
+
+            // Update button text
+            cookieBanner.querySelector('.accept-btn .lang-es').textContent = translations.es.text.cookieAccept;
+            cookieBanner.querySelector('.accept-btn .lang-ca').textContent = translations.ca.text.cookieAccept;
+            cookieBanner.querySelector('.accept-btn .lang-va').textContent = translations.va.text.cookieAccept;
+
+            cookieBanner.querySelector('.reject-btn .lang-es').textContent = translations.es.text.cookieReject;
+            cookieBanner.querySelector('.reject-btn .lang-ca').textContent = translations.ca.text.cookieReject;
+            cookieBanner.querySelector('.reject-btn .lang-va').textContent = translations.va.text.cookieReject;
+        }
+    }
+
+    // Function to update footer links text based on current language
+    function updateFooterLinksText(lang) {
+        const manageCookiesLinkEs = document.getElementById('manageCookiesLink');
+        const manageCookiesLinkCa = document.getElementById('manageCookiesLinkCa');
+        const manageCookiesLinkVa = document.getElementById('manageCookiesLinkVa');
+
+        if (manageCookiesLinkEs) manageCookiesLinkEs.textContent = translations.es.text.manageCookies;
+        if (manageCookiesLinkCa) manageCookiesLinkCa.textContent = translations.ca.text.manageCookies;
+        if (manageCookiesLinkVa) manageCookiesLinkVa.textContent = translations.va.text.manageCookies;
     }
 
 
-    // Function to filter service cards based on selected type
     function filterServiceCards(serviceType) {
         const cards = document.querySelectorAll('#servicios .card');
         cards.forEach(card => {
             const cardTypes = card.dataset.serviceType ? card.dataset.serviceType.split(' ') : [];
             if (serviceType === 'all' || cardTypes.includes(serviceType)) {
-                card.classList.remove('hidden'); // Show the card
+                card.classList.remove('hidden');
             } else {
-                card.classList.add('hidden'); // Hide the card
+                card.classList.add('hidden');
             }
         });
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
+    // Function to get a cookie
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i=0;i < ca.length;i++) {
+            let c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    // Function to erase a cookie (by setting expiry to past)
+    function eraseCookie(name) {
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
 
     // Wait for the DOM to be fully loaded before executing the script
     document.addEventListener('DOMContentLoaded', (event) => {
         const body = document.body;
-
-        // Logic to determine the initial mode (prefers localStorage, then system preference)
         const savedMode = localStorage.getItem('dark-mode');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+        // Set initial dark mode based on localStorage or system preference
         if (savedMode === 'enabled') {
             body.classList.add('dark-mode');
         } else if (savedMode === null && prefersDark) {
             body.classList.add('dark-mode');
         }
-        // updateDarkModeButtonText() is called within setLanguage.
 
         // Set the default language to Spanish explicitly on page load
         setLanguage('es');
+
+        // --- Cookie Consent Logic ---
+        const cookieBanner = document.getElementById('cookie-banner');
+        const acceptCookiesBtn = cookieBanner ? cookieBanner.querySelector('.accept-btn') : null;
+        const rejectCookiesBtn = cookieBanner ? cookieBanner.querySelector('.reject-btn') : null;
+        const cookieConsentGiven = getCookie('cookie_consent'); // Check for the consent cookie
+
+        // Show banner if consent has not been given
+        if (!cookieConsentGiven && cookieBanner) {
+            cookieBanner.style.display = 'flex'; // Use flex for layout
+            updateCookieBannerText(currentLang); // Ensure banner text is in the correct language
+        }
+
+        // Handle Accept button click
+        if (acceptCookiesBtn) {
+            acceptCookiesBtn.addEventListener('click', () => {
+                setCookie('cookie_consent', 'accepted', 365); // Set consent cookie for 1 year
+                cookieBanner.style.display = 'none'; // Hide the banner
+                // Here you would typically load any scripts that require consent (e.g., analytics)
+                // For this example, no such scripts are present, but this is where you'd add that logic.
+            });
+        }
+
+        // Handle Reject button click
+        if (rejectCookiesBtn) {
+            rejectCookiesBtn.addEventListener('click', () => {
+                setCookie('cookie_consent', 'rejected', 365); // Record rejection for 1 year
+                cookieBanner.style.display = 'none'; // Hide the banner
+                // Ensure no non-essential cookies are set and relevant scripts are not loaded.
+            });
+        }
+
+        // Handle "Manage Cookies" link click (example - this would typically open a modal or navigate to a page)
+        // For this example, clicking it just shows the banner again to simulate changing preference.
+        document.querySelectorAll('[id^="manageCookiesLink"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                if (cookieBanner) {
+                    cookieBanner.style.display = 'flex'; // Show the banner again
+                    updateCookieBannerText(currentLang); // Update text in case language changed
+                }
+            });
+        });
+        // --- End Cookie Consent Logic ---
 
 
         // Add event listeners to language buttons
@@ -1231,93 +1338,66 @@
         if (darkModeToggle) {
             darkModeToggle.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
-
-                // Save the mode preference to localStorage
                 if (body.classList.contains('dark-mode')) {
                     localStorage.setItem('dark-mode', 'enabled');
                 } else {
                     localStorage.setItem('dark-mode', 'disabled');
                 }
-                updateDarkModeButtonText(); // Update text and icon after changing mode
+                updateDarkModeButtonText();
             });
         }
 
-
-        // Get references to form elements and the form section
         const equipoSelect = document.getElementById('equipo');
         const formularioSection = document.querySelector('.formulario');
-        const formLoadingIndicator = document.getElementById('formLoadingIndicator'); // Get loading indicator
-        const serviciosSection = document.getElementById('servicios'); // Get the services section
-        const requestRepairBtn = document.getElementById('requestRepairBtn'); // Get the "Solicita tu reparación" button
+        const formLoadingIndicator = document.getElementById('formLoadingIndicator');
+        const serviciosSection = document.getElementById('servicios');
+        const requestRepairBtn = document.getElementById('requestRepairBtn');
 
-
-        // Add click listeners to service cards to pre-fill the form and scroll
         document.querySelectorAll('#servicios .card').forEach(card => {
             card.addEventListener('click', () => {
-                // Get the appliance value directly from the data attribute
                 const formValue = card.dataset.applianceValue;
-
-                // If a valid form value was found and the select element exists
                 if (formValue && equipoSelect) {
-                    // Set the value of the form's select field
                     equipoSelect.value = formValue;
-
-                    // Scroll to the form section
                     if (formularioSection) {
                          formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 } else if (formularioSection) {
-                     // If no data value was found (e.g., if the card doesn't have the attribute), just scroll to the form
                      formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Capture form submission and process it asynchronously
          document.getElementById("contactForm").addEventListener("submit", function(e) {
-           e.preventDefault(); // Prevent traditional submission
-
+           e.preventDefault();
            const form = this;
            const submitButton = form.querySelector("button[type='submit']");
            const responseDiv = document.getElementById("formResponse");
-
-           // Hide previous response message
            responseDiv.classList.remove('visible', 'success', 'error');
-           responseDiv.textContent = ''; // Clear previous text
-
-
-           // Basic client-side validation for required fields
+           responseDiv.textContent = '';
            let allRequiredFilled = true;
            form.querySelectorAll('[required]').forEach(input => {
                if (!input.value) {
                    allRequiredFilled = false;
-                   input.classList.add('border-red-500'); // Highlight empty field
+                   input.classList.add('border-red-500');
                } else {
-                   input.classList.remove('border-red-500'); // Remove highlight if filled
+                   input.classList.remove('border-red-500');
                }
            });
-
            if (!allRequiredFilled) {
                responseDiv.textContent = translations[currentLang].text.validationError;
                responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error visible";
-               return; // Stop submission
+               return;
            }
-
-
-           // Disable the button and show loading indicator
            submitButton.disabled = true;
            submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-           formLoadingIndicator.style.display = 'flex'; // Show loading indicator
-
-
-           // Asynchronous submission with fetch
+           formLoadingIndicator.style.display = 'flex';
            fetch(form.action, {
              method: "POST",
              body: new FormData(form),
              headers: { 'Accept': 'application/json' }
            })
            .then(response => {
-             formLoadingIndicator.style.display = 'none'; // Hide loading indicator
+             formLoadingIndicator.style.display = 'none';
              if (response.ok) {
                return response.text();
              } else {
@@ -1327,74 +1407,53 @@
              }
            })
            .then(() => {
-             // Success: hide the form and show the success message
-             form.reset(); // Clear the form fields
+             form.reset();
              form.style.display = "none";
              responseDiv.textContent = translations[currentLang].text.formSuccess;
              responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success visible";
            })
            .catch(error => {
-             // Error: show the error message and reactivate the button
              console.error('Form submission error:', error);
              responseDiv.textContent = translations[currentLang].text.formError;
              responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error visible";
            })
            .finally(() => {
-             // Ensure the button is reactivated after the fetch completes
              submitButton.disabled = false;
              submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-             // If submission was successful, the form is hidden, so no need to show it again.
-             // If there was an error, the form remains visible.
              if (form.style.display !== "none") {
-                 form.style.display = "space-y-4"; // Restore display
+                 form.style.display = "space-y-4";
              }
            });
          });
 
-        // Logic for the service type selector
         const serviceTypeSelector = document.querySelector('.service-type-selector');
         const domesticoBtn = document.getElementById('domesticoBtn');
-
-        if (serviceTypeSelector && domesticoBtn && serviciosSection) { // Ensure serviciosSection is available
-            // Initially filter for "Doméstico" when the page loads
+        if (serviceTypeSelector && domesticoBtn && serviciosSection) {
             filterServiceCards('domestico');
-
             serviceTypeSelector.addEventListener('click', (event) => {
                 const clickedButton = event.target.closest('button');
                 if (clickedButton) {
-                    // Remove active class from all buttons
                     serviceTypeSelector.querySelectorAll('button').forEach(btn => {
                         btn.classList.remove('active');
                     });
-                    // Add active class to the clicked button
                     clickedButton.classList.add('active');
-
-                    // Get the selected service type from the data attribute
                     const selectedType = clickedButton.dataset.serviceType;
-
-                    // Filter the service cards based on the selected type
                     filterServiceCards(selectedType);
-
-                    // Scroll to the services section after filtering
                     serviciosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         } else {
             console.error("Elementos del selector de tipo de servicio o sección de servicios no encontrados.");
         }
-
-        // Added click listener for the "Solicita tu reparación" button to ensure scrolling
         if (requestRepairBtn && formularioSection) {
             requestRepairBtn.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default anchor link behavior
+                event.preventDefault();
                 formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         } else {
             console.error("Botón 'Solicita tu reparación' o sección de formulario no encontrados.");
         }
-
-
-    }); // End DOMContentLoaded
+    });
   </script>
 </body>
 </html>
