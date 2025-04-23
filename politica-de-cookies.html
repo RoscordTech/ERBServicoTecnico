@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Política de Cookies de ERB Servicio Técnico de Gamma Blanca. Información sobre el uso de cookies en nuestro sitio web.">
+  <link rel="icon" href="favicon.ico" />
+  <title>
+    <span class="lang-es">Política de Cookies - ERB Servicio Técnico</span>
+    <span class="lang-ca">Política de Galetes - ERB Servei Tècnic</span>
+    <span class="lang-va">Política de Galetes - ERB Servei Tècnic</span>
+  </title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Language display rules */
+    .lang-es { display: inline; }
+    .lang-ca, .lang-va { display: none; }
+
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
+
+    /* Basic body styles */
+    body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f7fafc; /* Light gray background */
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #1a202c;
+      color: #e2e8f0;
+    }
+
+    body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+        color: #90cdf4; /* Light blue for headings in dark mode */
+    }
+
+    body.dark-mode p {
+        color: #cbd5e0; /* Lighter gray for text in dark mode */
+    }
+
+    body.dark-mode a {
+        color: #90cdf4; /* Light blue for links in dark mode */
+    }
+
+    /* Header/Hero section styles (optional, keeping consistent look) */
+    .hero {
+        background: linear-gradient(135deg, #0a5cb8, #003f7f);
+        color: white;
+        text-align: center;
+        padding: 4rem 1.25rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Main content area */
+    .container {
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+        background-color: #fff; /* White background for content */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    body.dark-mode .container {
+        background-color: #2d3748; /* Darker background for content in dark mode */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .container h2 {
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #0a5cb8; /* Theme blue for headings */
+    }
+
+     body.dark-mode .container h2 {
+         color: #90cdf4; /* Light blue in dark mode */
+     }
+
+    .container h3 {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #0a5cb8; /* Theme blue for subheadings */
+    }
+
+     body.dark-mode .container h3 {
+         color: #90cdf4; /* Light blue in dark mode */
+     }
+
+
+    .container p, .container ul, .container ol {
+        margin-bottom: 1rem;
+    }
+
+    .container ul, .container ol {
+        padding-left: 1.5rem;
+    }
+
+    .container li {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Footer styles (consistent with main page) */
+    footer {
+        background: #0a5cb8;
+        color: white;
+        text-align: center;
+        padding: 1.25rem 1rem;
+        font-size: 0.875rem;
+        margin-top: 2rem;
+    }
+
+    footer a {
+        color: white;
+        text-decoration: underline;
+        margin: 0 0.5rem;
+        transition: opacity 0.3s ease;
+    }
+
+    footer a:hover {
+        opacity: 0.8;
+    }
+
+    body.dark-mode footer {
+      background: #0a5cb8;
+      color: #e2e8f0;
+    }
+
+    body.dark-mode footer a {
+        color: #e2e8f0;
+    }
+
+    /* Language and dark mode selector styles (consistent with main page) */
+     #language-selector {
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+        display: flex; /* Use flexbox */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center; /* Center horizontally */
+    }
+
+    #language-selector button {
+        margin: 0.25rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        border: 1px solid #0a5cb8;
+        background-color: #fff;
+        color: #0a5cb8;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+     #language-selector button:hover {
+        background-color: #0a5cb8;
+        color: white;
+     }
+
+     #language-selector button:focus {
+         outline: none;
+         ring: 2px;
+         ring-color: #0a5cb8;
+     }
+
+    body.dark-mode #language-selector button {
+        border-color: #90cdf4;
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+
+    body.dark-mode #language-selector button:hover {
+        background-color: #4a5568;
+        color: #e2e8f0;
+    }
+
+    body.dark-mode #language-selector button:focus {
+         ring-color: #90cdf4;
+    }
+
+    /* Style for the dark mode toggle button icon */
+    #darkModeToggle i {
+        margin-right: 0.25rem; /* Small space between icon and text */
+    }
+
+
+  </style>
+</head>
+<body class="font-sans">
+
+  <div class="flex justify-center mt-5">
+      <div class="w-32 h-auto sm:w-40 md:w-48 lg:w-56">
+          <img src="logo.png" alt="ERB Servicio Técnico Logo" class="block w-full h-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/192x192/cccccc/ffffff?text=Logo';">
+      </div>
+  </div>
+
+  <div id="language-selector">
+    <button class="lang-button" aria-label="Cambiar a Castellano">Castellano</button>
+    <button class="lang-button" aria-label="Cambiar a Català">Català</button>
+    <button class="lang-button" aria-label="Cambiar a Valencià">Valencià</button>
+    <button id="darkModeToggle" aria-label="Alternar Modo Oscuro">
+        <i class="fa-solid fa-moon"></i> <span class="lang-es">Modo Oscuro</span><span class="lang-ca">Mode Fosc</span><span class="lang-va">Mode Fosc</span>
+    </button>
+  </div>
+
+  <header class="hero">
+    <h1>
+      <span class="lang-es">Política de Cookies</span>
+      <span class="lang-ca">Política de Galetes</span>
+      <span class="lang-va">Política de Galetes</span>
+    </h1>
+  </header>
+
+  <main class="container py-8">
+    <section>
+      <h2>
+        <span class="lang-es">Información General sobre Cookies</span>
+        <span class="lang-ca">Informació General sobre Galetes</span>
+        <span class="lang-va">Informació General sobre Galetes</span>
+      </h2>
+      <p>
+        <span class="lang-es">Este sitio web utiliza cookies propias y de terceros para mejorar la experiencia de navegación, analizar el tráfico y personalizar el contenido. Al utilizar nuestro sitio web, aceptas el uso de cookies de acuerdo con esta política.</span>
+        <span class="lang-ca">Aquest lloc web utilitza galetes pròpies i de tercers per millorar l'experiència de navegació, analitzar el trànsit i personalitzar el contingut. En utilitzar el nostre lloc web, acceptes l'ús de galetes d'acord amb aquesta política.</span>
+        <span class="lang-va">Aquest lloc web utilitza galetes pròpies i de tercers per millorar l'experiència de navegació, analitzar el trànsit i personalitzar el contingut. En utilitzar el nostre lloc web, acceptes l'ús de galetes d'acord amb aquesta política.</span>
+      </p>
+      <p>
+        <span class="lang-es">Una cookie es un pequeño archivo de texto que se almacena en tu navegador cuando visitas casi cualquier página web. Su utilidad es que la web sea capaz de recordar tu visita cuando vuelvas a navegar por esa página. Las cookies suelen almacenar información de carácter técnico, preferencias personales, personalización de contenidos, estadísticas de uso, enlaces a redes sociales, acceso a cuentas de usuario, etc.</span>
+        <span class="lang-ca">Una galeta és un petit fitxer de text que s'emmagatzema al teu navegador quan visites gairebé qualsevol pàgina web. La seva utilitat és que la web sigui capaç de recordar la teva visita quan tornis a navegar per aquesta pàgina. Les galetes solen emmagatzemar informació de caràcter tècnic, preferències personals, personalització de continguts, estadístiques d'ús, enllaços a xarxes socials, accés a comptes d'usuari, etc.</span>
+        <span class="lang-va">Una galeta és un xicotet fitxer de text que s'emmagatzema en el teu navegador quan visites quasi qualsevol pàgina web. La seua utilitat és que el web siga capaç de recordar la teua visita quan tornes a navegar per eixa pàgina. Les galetes solen emmagatzemar informació de caràcter tècnic, preferències personals, personalització de continguts, estadístiques d'ús, enllaços a xarxes socials, accés a comptes d'usuari, etc.</span>
+      </p>
+    </section>
+
+    <section>
+      <h2>
+        <span class="lang-es">Tipos de Cookies Utilizadas en este Sitio Web</span>
+        <span class="lang-ca">Tipus de Galetes Utilitzades en Aquest Lloc Web</span>
+        <span class="lang-va">Tipus de Galetes Utilitzades en Aquest Lloc Web</span>
+      </h2>
+      <p>
+        <span class="lang-es">A continuación, describimos los tipos de cookies que podríamos utilizar en este sitio web:</span>
+        <span class="lang-ca">A continuació, descrivim els tipus de galetes que podríem utilitzar en aquest lloc web:</span>
+        <span class="lang-va">A continuació, descrivim els tipus de galetes que podríem utilitzar en aquest lloc web:</span>
+      </p>
+      <ul>
+        <li>
+          <h3>
+            <span class="lang-es">Cookies Técnicas (Necesarias)</span>
+            <span class="lang-ca">Galetes Tècniques (Necessàries)</span>
+            <span class="lang-va">Galetes Tècniques (Necessàries)</span>
+          </h3>
+          <p>
+            <span class="lang-es">Son aquellas que permiten al usuario la navegación a través de una página web, plataforma o aplicación y la utilización de las diferentes opciones o servicios que en ella existan.</span>
+            <span class="lang-ca">Són aquelles que permeten a l'usuari la navegació a través d'una pàgina web, plataforma o aplicació i la utilització de les diferents opcions o serveis que hi hagi.</span>
+            <span class="lang-va">Són aquelles que permeten a l'usuari la navegació a través d'una pàgina web, plataforma o aplicació i la utilització de les diferents opcions o serveis que hi haja.</span>
+          </p>
+          <p><span class="lang-es">(Ejemplos: cookies de sesión, cookies para recordar preferencias de idioma o modo oscuro, cookies para gestionar el consentimiento de cookies).</span><span class="lang-ca">(Exemples: galetes de sessió, galetes per recordar preferències d'idioma o mode fosc, galetes per gestionar el consentiment de galetes).</span><span class="lang-va">(Exemples: galetes de sessió, galetes per recordar preferències d'idioma o mode fosc, galetes per gestionar el consentiment de galetes).</span></p>
+        </li>
+        <li>
+          <h3>
+            <span class="lang-es">Cookies de Análisis (Opcionales)</span>
+            <span class="lang-ca">Galetes d'Anàlisi (Opcionals)</span>
+            <span class="lang-va">Galetes d'Anàlisi (Opcionals)</span>
+          </h3>
+          <p>
+            <span class="lang-es">Son aquellas que permiten al responsable de las mismas el seguimiento y análisis del comportamiento de los usuarios de los sitios web a los que están vinculadas. La información recogida mediante este tipo de cookies se utiliza en la medición de la actividad de los sitios web, aplicación o plataforma y para la elaboración de perfiles de navegación de los usuarios.</span>
+            <span class="lang-ca">Són aquelles que permeten al responsable de les mateixes el seguiment i anàlisi del comportament dels usuaris dels llocs web als quals estan vinculades. La informació recollida mitjançant aquest tipus de galetes s'utilitza en la mesura de l'activitat dels llocs web, aplicació o plataforma y per a l'elaboració de perfils de navegació dels usuaris.</span>
+            <span class="lang-va">Són aquelles que permeten al responsable de les mateixes el seguiment i anàlisi del comportament dels usuaris dels llocs web als quals estan vinculades. La informació recollida mitjançant aquest tipus de galetes s'utilitza en la mesura de l'activitat dels llocs web, aplicació o plataforma i per a l'elaboració de perfils de navegació dels usuaris.</span>
+          </p>
+           <p><span class="lang-es">(Ejemplos: cookies de Google Analytics u otras herramientas de análisis web).</span><span class="lang-ca">(Exemples: galetes de Google Analytics o altres eines d'anàlisi web).</span><span class="lang-va">(Exemples: galetes de Google Analytics o altres eines d'anàlisi web).</span></p>
+           <p class="lang-es">**Nota:** Actualmente, este sitio web no utiliza cookies de análisis. Si en el futuro se implementaran, esta política se actualizaría y se solicitaría tu consentimiento previo.</p>
+           <p class="lang-ca">**Nota:** Actualment, aquest lloc web no utilitza galetes d'anàlisi. Si en el futur s'implementessin, aquesta política s'actualitzaria i se sol·licitaria el teu consentiment previ.</p>
+           <p class="lang-va">**Nota:** Actualment, aquest lloc web no utilitza galetes d'anàlisi. Si en el futur s'implementaren, aquesta política s'actualitzaria i se sol·licitaria el teu consentiment previ.</p>
+        </li>
+         <li>
+          <h3>
+            <span class="lang-es">Cookies de Marketing/Publicidad (Opcionales)</span>
+            <span class="lang-ca">Galetes de Màrqueting/Publicitat (Opcionals)</span>
+            <span class="lang-va">Galetes de Màrqueting/Publicitat (Opcionals)</span>
+          </h3>
+          <p>
+            <span class="lang-es">Son aquellas que almacenan información del comportamiento de los usuarios obtenida a través de la observación continuada de sus hábitos de navegación, lo que permite desarrollar un perfil específico para mostrar publicidad en función del mismo.</span>
+            <span class="lang-ca">Són aquelles que emmagatzemen informació del comportament dels usuaris obtinguda a través de l'observació continuada dels seus hàbits de navegació, la qual cosa permet desenvolupar un perfil específic per mostrar publicitat en funció d'aquest.</span>
+            <span class="lang-va">Són aquelles que emmagatzemen informació del comportament dels usuaris obtinguda a través de l'observació continuada dels seus hàbits de navegació, la qual cosa permet desenvolupar un perfil específic per mostrar publicitat en funció del mateix.</span>
+          </p>
+            <p><span class="lang-es">(Ejemplos: cookies de redes sociales, cookies para seguimiento de conversiones, cookies de proveedores de publicidad).</span><span class="lang-ca">(Exemples: galetes de xarxes socials, galetes per seguiment de conversions, galetes de proveïdors de publicitat).</span><span class="lang-va">(Exemples: galetes de xarxes socials, galetes per seguiment de conversions, galetes de proveïdors de publicitat).</span></p>
+            <p class="lang-es">**Nota:** Actualmente, este sitio web no utiliza cookies de marketing/publicidad. Si en el futuro se implementaran, esta política se actualizaría y se solicitaría tu consentimiento previo.</p>
+           <p class="lang-ca">**Nota:** Actualment, aquest lloc web no utilitza galetes de màrqueting/publicitat. Si en el futur s'implementessin, aquesta política s'actualitzaria i se sol·licitaria el teu consentiment previ.</p>
+           <p class="lang-va">**Nota:** Actualment, aquest lloc web no utilitza galetes de màrqueting/publicitat. Si en el futur s'implementaren, aquesta política s'actualitzaria i se sol·licitaria el teu consentiment previ.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>
+        <span class="lang-es">Gestión de Cookies</span>
+        <span class="lang-ca">Gestió de Galetes</span>
+        <span class="lang-va">Gestió de Galetes</span>
+      </h2>
+      <p>
+        <span class="lang-es">Puedes permitir, bloquear o eliminar las cookies instaladas en tu equipo mediante la configuración de las opciones del navegador instalado en tu ordenador.</span>
+        <span class="lang-ca">Pots permetre, bloquejar o eliminar les galetes instal·lades al teu equip mitjançant la configuració de les opcions del navegador instal·lat al teu ordinador.</span>
+        <span class="lang-va">Pots permetre, bloquejar o eliminar les galetes instal·lades en el teu equip mitjançant la configuració de les opcions del navegador instal·lat en el teu ordinador.</span>
+      </p>
+      <p>
+        <span class="lang-es">La mayoría de los navegadores web permiten gestionar, en cualquier momento, las preferencias del Usuario sobre el uso de las Cookies. El Usuario puede ajustar su navegador para que rechace Cookies o elimine determinadas Cookies según su criterio.</span>
+        <span class="lang-ca">La majoria dels navegadors web permeten gestionar, en qualsevol moment, les preferències de l'Usuari sobre l'ús de les Galetes. L'Usuari pot ajustar el seu navegador perquè rebutgi Galetes o elimini determinades Galetes segons el seu criteri.</span>
+        <span class="lang-va">La majoria dels navegadors web permeten gestionar, en qualsevol moment, les preferències de l'Usuari sobre l'ús de les Galetes. L'Usuari pot ajustar el seu navegador perquè rebutje Galetes o elimine determinades Galetes segons el seu criteri.</span>
+      </p>
+      <p>
+        <span class="lang-es">A continuación, se muestran enlaces a las instrucciones para la gestión de cookies en los navegadores más comunes:</span>
+        <span class="lang-ca">A continuació, es mostren enllaços a les instruccions per a la gestió de galetes en els navegadors més comuns:</span>
+        <span class="lang-va">A continuació, es mostren enllaços a les instruccions per a la gestió de galetes en els navegadors més comuns:</span>
+      </p>
+      <ul>
+        <li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank">Gestionar cookies en Chrome</a></li>
+        <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we&redirectlocale=es" target="_blank">Gestionar cookies en Firefox</a></li>
+        <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-3b3b-e2b8-597bba28f24d" target="_blank">Gestionar cookies en Edge</a></li>
+        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank">Gestionar cookies en Safari</a></li>
+      </ul>
+      <p>
+        <span class="lang-es">Ten en cuenta que si deshabilitas las cookies técnicas, algunas funcionalidades del sitio web podrían no funcionar correctamente. Si rechazas las cookies de análisis o marketing, no se recopilará información para esos fines, pero el sitio web seguirá siendo funcional.</span>
+        <span class="lang-ca">Tingues en compte que si deshabilites les galetes tècniques, algunes funcionalitats del lloc web podrien no funcionar correctament. Si rebutges les galetes d'anàlisi o màrqueting, no es recopilarà informació per a aquests fins, però el lloc web continuarà sent funcional.</span>
+        <span class="lang-va">Tinga en compte que si deshabilites les galetes tècniques, algunes funcionalitats del lloc web podrien no funcionar correctament. Si rebutges les galetes d'anàlisi o màrqueting, no es recopilarà informació per a eixos fins, però el lloc web continuarà sent funcional.</span>
+      </p>
+      <p>
+          <span class="lang-es">También puedes gestionar tus preferencias de cookies en este sitio haciendo clic en "Gestionar Cookies" en el pie de página de la página principal.</span>
+          <span class="lang-ca">També pots gestionar les teves preferències de galetes en aquest lloc fent clic a "Gestionar Galetes" al peu de pàgina de la pàgina principal.</span>
+          <span class="lang-va">També pots gestionar les teues preferències de galetes en este lloc fent clic a "Gestionar Galetes" al peu de pàgina de la pàgina principal.</span>
+      </p>
+    </section>
+
+    <section>
+        <h2>
+            <span class="lang-es">Actualizaciones de la Política de Cookies</span>
+            <span class="lang-ca">Actualitzacions de la Política de Galetes</span>
+            <span class="lang-va">Actualitzacions de la Política de Galetes</span>
+        </h2>
+        <p>
+            <span class="lang-es">Es posible que actualicemos nuestra Política de Cookies en el futuro. Te recomendamos revisar esta política periódicamente para estar informado sobre cómo utilizamos las cookies.</span>
+            <span class="lang-ca">És possible que actualitzem la nostra Política de Galetes en el futur. Et recomanem revisar aquesta política periòdicament per estar informat sobre com utilitzem les galetes.</span>
+            <span class="lang-va">És possible que actualitzem la nostra Política de Galetes en el futur. Et recomanem revisar esta política periòdicament per estar informat sobre com utilitzem les galetes.</span>
+        </p>
+    </section>
+
+  </main>
+
+  <footer class="bg-[#0a5cb8] text-white text-center py-5 text-sm">
+    <p>
+      <span class="lang-es">© 2025 ERB Servicio Técnico de Gamma Blanca | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana</span>
+      <span class="lang-ca">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
+      <span class="lang-va">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
+    </p>
+    <div class="mt-2">
+        <a href="/politica-de-privacidad.html" class="lang-es">Política de Privacidad</a><span class="lang-es"> | </span>
+        <a href="/aviso-legal.html" class="lang-es">Aviso Legal</a><span class="lang-es"> | </span>
+        <a href="/politica-de-cookies.html" class="lang-es" aria-current="page">Política de Cookies</a>
+
+        <a href="/politica-de-privacitat.html" class="lang-ca">Política de Privacitat</a><span class="lang-ca"> | </span>
+        <a href="/avis-legal.html" class="lang-ca">Avís Legal</a><span class="lang-ca"> | </span>
+        <a href="/politica-de-cookies.html" class="lang-ca" aria-current="page">Política de Galetes</a>
+
+        <a href="/politica-de-privacitat.html" class="lang-va">Política de Privacitat</a><span class="lang-va"> | </span>
+        <a href="/avis-legal.html" class="lang-va">Avís Legal</a><span class="lang-va"> | </span>
+        <a href="/politica-de-cookies.html" class="lang-va" aria-current="page">Política de Galetes</a>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      es: {
+        text: { darkMode: "Modo Oscuro", lightMode: "Modo Claro" }
+      },
+      ca: {
+        text: { darkMode: "Mode Fosc", lightMode: "Mode Clar" }
+      },
+      va: {
+        text: { darkMode: "Mode Fosc", lightMode: "Mode Clar" }
+      }
+    };
+
+    let currentLang = 'es';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const languages = ['es', 'ca', 'va'];
+      languages.forEach(function(l) {
+        const elems = document.getElementsByClassName('lang-' + l);
+        for (let i = 0; i < elems.length; i++) {
+          elems[i].style.display = (l === lang) ? 'inline' : 'none';
+        }
+      });
+      updateDarkModeButtonText();
+    }
+
+    function updateDarkModeButtonText() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const icon = darkModeToggle.querySelector('i');
+        const textSpanEs = darkModeToggle.querySelector('.lang-es');
+        const textSpanCa = darkModeToggle.querySelector('.lang-ca');
+        const textSpanVa = darkModeToggle.querySelector('.lang-va');
+
+        if (isDarkMode) {
+             icon.classList.remove('fa-moon');
+             icon.classList.add('fa-sun');
+             textSpanEs.textContent = translations.es.text.lightMode;
+             textSpanCa.textContent = translations.ca.text.lightMode;
+             textSpanVa.textContent = translations.va.text.lightMode;
+        } else {
+             icon.classList.remove('fa-sun');
+             icon.classList.add('fa-moon');
+             textSpanEs.textContent = translations.es.text.darkMode;
+             textSpanCa.textContent = translations.ca.text.darkMode;
+             textSpanVa.textContent = translations.va.text.darkMode;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const body = document.body;
+        const savedMode = localStorage.getItem('dark-mode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial dark mode based on localStorage or system preference
+        if (savedMode === 'enabled') {
+            body.classList.add('dark-mode');
+        } else if (savedMode === null && prefersDark) {
+            body.classList.add('dark-mode');
+        }
+
+        // Set the default language to Spanish explicitly on page load
+        setLanguage('es');
+
+        // Add event listeners to language buttons
+        document.querySelectorAll('#language-selector .lang-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const buttonText = event.target.textContent.toLowerCase();
+                let lang = 'es'; // Default
+                if (buttonText.includes('català')) {
+                    lang = 'ca';
+                } else if (buttonText.includes('valencià')) {
+                    lang = 'va';
+                }
+                setLanguage(lang);
+            });
+        });
+
+        // Add event listener to the dark mode button
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('dark-mode', 'enabled');
+                } else {
+                    localStorage.setItem('dark-mode', 'disabled');
+                }
+                updateDarkModeButtonText();
+            });
+        }
+    });
+  </script>
+
+</body>
+</html>
