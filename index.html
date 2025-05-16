@@ -13,6 +13,14 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQC24XCERF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-TQC24XCERF');
+  </script>
   <style>
     /* Language display rules */
     .lang-es { display: inline; }
@@ -740,7 +748,7 @@
         <p class="text-gray-700">
           <span class="lang-es">Problemas en zonas de calor, sensores o controles.</span>
           <span class="lang-ca">Problemes en zones de calor, sensors o controls.</span>
-          <span class="lang-va">Problemes en zonas de calor, sensors o controls.</span>
+          <span class="lang-va">Problemes en zones de calor, sensors o controls.</span>
         </p>
       </div>
       <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calentador" data-service-type="domestico">
@@ -1273,6 +1281,12 @@
                 cookieBanner.style.display = 'none'; // Hide the banner
                 // Here you would typically load any scripts that require consent (e.g., analytics)
                 // For this example, no such scripts are present, but this is where you'd add that logic.
+                // If gtag is defined and consent is accepted, initialize it
+                if (typeof gtag === 'function') {
+                    gtag('consent', 'update', {
+                        'analytics_storage': 'granted'
+                    });
+                }
             });
         }
 
@@ -1282,6 +1296,11 @@
                 setCookie('cookie_consent', 'rejected', 365); // Record rejection for 1 year
                 cookieBanner.style.display = 'none'; // Hide the banner
                 // Ensure no non-essential cookies are set and relevant scripts are not loaded.
+                 if (typeof gtag === 'function') {
+                    gtag('consent', 'update', {
+                        'analytics_storage': 'denied'
+                    });
+                }
             });
         }
 
@@ -1433,6 +1452,28 @@
         } else {
             console.error("Botón 'Solicita tu reparación' o sección de formulario no encontrados.");
         }
+
+        // Initialize gtag with default consent state (denied for analytics_storage until user accepts)
+        // This should be done *before* the gtag config call if you want to respect consent from the start.
+        // However, since the gtag script is already in the head, we'll update consent based on cookie.
+        const initialConsent = getCookie('cookie_consent');
+        if (typeof gtag === 'function') {
+            if (initialConsent === 'accepted') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted'
+                });
+            } else { // Covers 'rejected' or null (no consent given yet)
+                 gtag('consent', 'default', { // Use default if no prior consent or rejected
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied', // Example: also deny ad_storage by default
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied'
+                    // Add other consent types as needed
+                });
+            }
+        }
+
+
     });
   </script>
 </body>
