@@ -10,17 +10,14 @@
     <span class="lang-ca">ERB Servei Tècnic de Gamma Blanca</span>
     <span class="lang-va">ERB Servei Tècnic de Gamma Blanca</span>
   </title>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WSN2DHLF');</script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQC24XCERF"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-TQC24XCERF');
-  </script>
   <style>
     /* Language display rules */
     .lang-es { display: inline; }
@@ -586,7 +583,8 @@
   </style>
 </head>
 <body class="font-sans bg-white text-[#0a5cb8] leading-relaxed">
-
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSN2DHLF"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="flex justify-center mt-5">
       <div class="w-32 h-auto sm:w-40 md:w-48 lg:w-56">
           <img src="/erb-pruebaaas/logo.png" alt="ERB Servicio Técnico Logo" class="block w-full h-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/192x192/cccccc/ffffff?text=Logo';">
@@ -1171,9 +1169,9 @@
         const cookieBanner = document.getElementById('cookie-banner');
         if (cookieBanner) {
             // Update text content
-            cookieBanner.querySelector('.cookie-content .lang-es').innerHTML = translations.es.text.cookieConsent + `<a href="/erb-pruebaaas/1234.html" target="_blank">${translations.es.text.cookiePolicyText}</a>.`; // Use cookiePolicyText for display
-            cookieBanner.querySelector('.cookie-content .lang-ca').innerHTML = translations.ca.text.cookieConsent + `<a href="/erb-pruebaaas/1234.html" target="_blank">${translations.ca.text.cookiePolicyText}</a>.`; // Use cookiePolicyText for display
-            cookieBanner.querySelector('.cookie-content .lang-va').innerHTML = translations.va.text.cookieConsent + `<a href="/erb-pruebaaas/1234.html" target="_blank">${translations.va.text.cookiePolicyText}</a>.`; // Use cookiePolicyText for display
+            cookieBanner.querySelector('.cookie-content .lang-es').innerHTML = translations.es.text.cookieConsent + `<a href="/erb-pruebaaas/1234.html" target="_blank">${translations.es.text.cookiePolicyText}</a>.`;
+            cookieBanner.querySelector('.cookie-content .lang-ca').innerHTML = translations.ca.text.cookieConsent + `<a href="/erb-pruebaaas/1234.html" target="_blank">${translations.ca.text.cookiePolicyText}</a>.`;
+            cookieBanner.querySelector('.cookie-content .lang-va').innerHTML = translations.va.text.cookieConsent + `<a href="/erb-pruebaaas/1234.html" target="_blank">${translations.va.text.cookiePolicyText}</a>.`;
 
             // Update button text
             cookieBanner.querySelector('.accept-btn .lang-es').textContent = translations.es.text.cookieAccept;
@@ -1196,7 +1194,6 @@
         if (manageCookiesLinkCa) manageCookiesLinkCa.textContent = translations.ca.text.manageCookies;
         if (manageCookiesLinkVa) manageCookiesLinkVa.textContent = translations.va.text.manageCookies;
 
-        // Also update the "Política de Cookies" link in the footer explicitly
         document.querySelectorAll('footer a[href="/erb-pruebaaas/1234.html"]').forEach(link => {
              if (link.classList.contains('lang-es')) link.textContent = translations.es.text.cookiePolicyText;
              if (link.classList.contains('lang-ca')) link.textContent = translations.ca.text.cookiePolicyText;
@@ -1217,7 +1214,6 @@
         });
     }
 
-    // Function to set a cookie
     function setCookie(name, value, days) {
         let expires = "";
         if (days) {
@@ -1228,7 +1224,6 @@
         document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
 
-    // Function to get a cookie
     function getCookie(name) {
         const nameEQ = name + "=";
         const ca = document.cookie.split(';');
@@ -1240,89 +1235,104 @@
         return null;
     }
 
-    // Function to erase a cookie (by setting expiry to past)
     function eraseCookie(name) {
         document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
-
-    // Wait for the DOM to be fully loaded before executing the script
     document.addEventListener('DOMContentLoaded', (event) => {
         const body = document.body;
         const savedMode = localStorage.getItem('dark-mode');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Set initial dark mode based on localStorage or system preference
         if (savedMode === 'enabled') {
             body.classList.add('dark-mode');
         } else if (savedMode === null && prefersDark) {
             body.classList.add('dark-mode');
         }
 
-        // Set the default language to Spanish explicitly on page load
-        setLanguage('es');
+        setLanguage('es'); // Set default language
 
-        // --- Cookie Consent Logic ---
         const cookieBanner = document.getElementById('cookie-banner');
         const acceptCookiesBtn = cookieBanner ? cookieBanner.querySelector('.accept-btn') : null;
         const rejectCookiesBtn = cookieBanner ? cookieBanner.querySelector('.reject-btn') : null;
-        const cookieConsentGiven = getCookie('cookie_consent'); // Check for the consent cookie
+        const cookieConsentGiven = getCookie('cookie_consent');
 
-        // Show banner if consent has not been given
-        if (!cookieConsentGiven && cookieBanner) {
-            cookieBanner.style.display = 'flex'; // Use flex for layout
-            updateCookieBannerText(currentLang); // Ensure banner text is in the correct language
+        // Initialize dataLayer for GTM Consent Mode v2 (if not already done by GTM snippet)
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} // gtag helper needed for consent
+
+        // Set default consent state (denied) BEFORE GTM loads or any tags fire
+        // This is crucial for CCPA, GDPR etc.
+        if (!cookieConsentGiven) { // Only set default if no decision has been made
+            gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'wait_for_update': 500 // Milliseconds to wait for update; GTM default is 500
+            });
+        } else if (cookieConsentGiven === 'accepted') {
+             gtag('consent', 'default', { // If accepted previously, grant it by default on next load
+                'analytics_storage': 'granted',
+                'ad_storage': 'granted', // Or 'denied' if you don't use ads or want it separate
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted'
+            });
+        } else { // 'rejected' or any other non-accepted value
+             gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied'
+            });
         }
 
-        // Handle Accept button click
+
+        if (!cookieConsentGiven && cookieBanner) {
+            cookieBanner.style.display = 'flex';
+            updateCookieBannerText(currentLang);
+        }
+
         if (acceptCookiesBtn) {
             acceptCookiesBtn.addEventListener('click', () => {
-                setCookie('cookie_consent', 'accepted', 365); // Set consent cookie for 1 year
-                cookieBanner.style.display = 'none'; // Hide the banner
-                // Here you would typically load any scripts that require consent (e.g., analytics)
-                // For this example, no such scripts are present, but this is where you'd add that logic.
-                // If gtag is defined and consent is accepted, initialize it
-                if (typeof gtag === 'function') {
-                    gtag('consent', 'update', {
-                        'analytics_storage': 'granted'
-                    });
-                }
+                setCookie('cookie_consent', 'accepted', 365);
+                cookieBanner.style.display = 'none';
+                // Update GTM consent state
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'granted' // Or 'denied' if not applicable
+                    // Add other consent types as needed if you granted them by default
+                });
             });
         }
 
-        // Handle Reject button click
         if (rejectCookiesBtn) {
             rejectCookiesBtn.addEventListener('click', () => {
-                setCookie('cookie_consent', 'rejected', 365); // Record rejection for 1 year
-                cookieBanner.style.display = 'none'; // Hide the banner
-                // Ensure no non-essential cookies are set and relevant scripts are not loaded.
-                 if (typeof gtag === 'function') {
-                    gtag('consent', 'update', {
-                        'analytics_storage': 'denied'
-                    });
-                }
+                setCookie('cookie_consent', 'rejected', 365);
+                cookieBanner.style.display = 'none';
+                // Update GTM consent state
+                gtag('consent', 'update', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied'
+                     // Ensure all relevant types are denied
+                });
             });
         }
 
-        // Handle "Gestionar Cookies" link click (example - this would typically open a modal or navigate to a page)
-        // For this example, clicking it just shows the banner again to simulate changing preference.
         document.querySelectorAll('[id^="manageCookiesLink"]').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default link behavior
+                e.preventDefault();
                 if (cookieBanner) {
-                    cookieBanner.style.display = 'flex'; // Show the banner again
-                    updateCookieBannerText(currentLang); // Update text in case language changed
+                    cookieBanner.style.display = 'flex';
+                    updateCookieBannerText(currentLang);
                 }
             });
         });
-        // --- End Cookie Consent Logic ---
 
-
-        // Add event listeners to language buttons
         document.querySelectorAll('#language-selector button').forEach(button => {
             button.addEventListener('click', (event) => {
                 const buttonText = event.target.textContent.toLowerCase();
-                let lang = 'es'; // Default
+                let lang = 'es';
                 if (buttonText.includes('català')) {
                     lang = 'ca';
                 } else if (buttonText.includes('valencià')) {
@@ -1332,19 +1342,15 @@
             });
         });
 
-        // Add event listener to the dark mode button
         const darkModeToggle = document.getElementById('darkModeToggle');
         if (darkModeToggle) {
             darkModeToggle.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
-                if (body.classList.contains('dark-mode')) {
-                    localStorage.setItem('dark-mode', 'enabled');
-                } else {
-                    localStorage.setItem('dark-mode', 'disabled');
-                }
+                localStorage.setItem('dark-mode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
                 updateDarkModeButtonText();
             });
         }
+        updateDarkModeButtonText(); // Call on load to set initial text
 
         const equipoSelect = document.getElementById('equipo');
         const formularioSection = document.querySelector('.formulario');
@@ -1357,11 +1363,16 @@
                 const formValue = card.dataset.applianceValue;
                 if (formValue && equipoSelect) {
                     equipoSelect.value = formValue;
-                    if (formularioSection) {
-                         formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                } else if (formularioSection) {
-                     formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                if (formularioSection) {
+                    formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+             // Add keyboard accessibility for cards
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault(); // Prevent default space scroll
+                    card.click(); // Trigger click behavior
                 }
             });
         });
@@ -1377,7 +1388,7 @@
            form.querySelectorAll('[required]').forEach(input => {
                if (!input.value) {
                    allRequiredFilled = false;
-                   input.classList.add('border-red-500');
+                   input.classList.add('border-red-500'); // Highlight empty required fields
                } else {
                    input.classList.remove('border-red-500');
                }
@@ -1398,16 +1409,17 @@
            .then(response => {
              formLoadingIndicator.style.display = 'none';
              if (response.ok) {
-               return response.text();
+               return response.text(); // Or response.json() if your endpoint returns JSON
              } else {
+               // Try to get error message from server if available
                return response.text().then(text => {
-                 throw new Error(`HTTP status ${response.status}: ${text}`);
+                 throw new Error(`HTTP status ${response.status}: ${text || 'Server error'}`);
                });
              }
            })
            .then(() => {
-             form.reset();
-             form.style.display = "none";
+             form.reset(); // Reset form fields
+             form.style.display = "none"; // Hide form
              responseDiv.textContent = translations[currentLang].text.formSuccess;
              responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success visible";
            })
@@ -1419,8 +1431,9 @@
            .finally(() => {
              submitButton.disabled = false;
              submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-             if (form.style.display !== "none") {
-                 form.style.display = "space-y-4";
+             // Ensure form is visible again if it wasn't successfully submitted and hidden
+             if (form.style.display === "none" && !responseDiv.classList.contains('success')) {
+                 form.style.display = "block"; // Or your original display style e.g., "space-y-4"
              }
            });
          });
@@ -1428,7 +1441,7 @@
         const serviceTypeSelector = document.querySelector('.service-type-selector');
         const domesticoBtn = document.getElementById('domesticoBtn');
         if (serviceTypeSelector && domesticoBtn && serviciosSection) {
-            filterServiceCards('domestico');
+            filterServiceCards('domestico'); // Initial filter
             serviceTypeSelector.addEventListener('click', (event) => {
                 const clickedButton = event.target.closest('button');
                 if (clickedButton) {
@@ -1442,7 +1455,7 @@
                 }
             });
         } else {
-            console.error("Elementos del selector de tipo de servicio o sección de servicios no encontrados.");
+            console.error("Service type selector or services section not found.");
         }
         if (requestRepairBtn && formularioSection) {
             requestRepairBtn.addEventListener('click', function(event) {
@@ -1450,30 +1463,8 @@
                 formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         } else {
-            console.error("Botón 'Solicita tu reparación' o sección de formulario no encontrados.");
+            console.error("Request repair button or form section not found.");
         }
-
-        // Initialize gtag with default consent state (denied for analytics_storage until user accepts)
-        // This should be done *before* the gtag config call if you want to respect consent from the start.
-        // However, since the gtag script is already in the head, we'll update consent based on cookie.
-        const initialConsent = getCookie('cookie_consent');
-        if (typeof gtag === 'function') {
-            if (initialConsent === 'accepted') {
-                gtag('consent', 'update', {
-                    'analytics_storage': 'granted'
-                });
-            } else { // Covers 'rejected' or null (no consent given yet)
-                 gtag('consent', 'default', { // Use default if no prior consent or rejected
-                    'analytics_storage': 'denied',
-                    'ad_storage': 'denied', // Example: also deny ad_storage by default
-                    'ad_user_data': 'denied',
-                    'ad_personalization': 'denied'
-                    // Add other consent types as needed
-                });
-            }
-        }
-
-
     });
   </script>
 </body>
