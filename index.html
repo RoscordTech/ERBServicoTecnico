@@ -17,6 +17,19 @@
 
     gtag('config', 'G-TQC24XCERF');
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTNVDQ7ZBX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YTNVDQ7ZBX');
+  </script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
   <style>
     /* Language display rules */
     .lang-es { display: inline; }
@@ -42,12 +55,12 @@
       color: #e2e8f0;
     }
 
-    body.dark-mode .servicios, body.dark-mode .marcas, body.dark-mode .about-us {
+    body.dark-mode .servicios, body.dark-mode .marcas, body.dark-mode .about-us, body.dark-mode .coverage-map-section { /* Added coverage-map-section */
       background-color: #2d3748;
       color: #e2e8f0;
     }
 
-    body.dark-mode .servicios h2, body.dark-mode .marcas h2, body.dark-mode .beneficios h2, body.dark-mode .formulario h2, body.dark-mode .about-us h2 {
+    body.dark-mode .servicios h2, body.dark-mode .marcas h2, body.dark-mode .beneficios h2, body.dark-mode .formulario h2, body.dark-mode .about-us h2, body.dark-mode .coverage-map-section h2 { /* Added coverage-map-section */
         color: #90cdf4;
     }
 
@@ -579,6 +592,26 @@
          }
     }
 
+    /* Styles for the coverage map section */
+    .coverage-map-section {
+        background-color: #f7fafc; /* Light gray background, similar to about-us */
+        padding: 4rem 1.25rem;
+        text-align: center;
+    }
+    #coverageMap {
+        height: 400px; /* Default height for the map */
+        width: 100%;
+        max-width: 800px; /* Max width to keep it centered and not too wide on large screens */
+        margin: 1.5rem auto; /* Center the map */
+        border-radius: 0.5rem; /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+    @media (min-width: 768px) {
+        #coverageMap {
+            height: 500px; /* Taller map on larger screens */
+        }
+    }
+
   </style>
 </head>
 <body class="font-sans bg-white text-[#0a5cb8] leading-relaxed">
@@ -870,6 +903,20 @@
       </div>
   </section>
 
+  <section id="coverage-area" class="coverage-map-section">
+      <h2 class="text-3xl md:text-4xl mb-8">
+          <span class="lang-es">Nuestra Zona de Cobertura</span>
+          <span class="lang-ca">La Nostra Zona de Cobertura</span>
+          <span class="lang-va">La Nostra Zona de Cobertura</span>
+      </h2>
+      <p class="text-base md:text-lg mb-6 max-w-2xl mx-auto">
+          <span class="lang-es">Ofrecemos nuestros servicios en el centro de Valencia y alrededores, cubriendo un área aproximada hasta Sagunto. Consulta el mapa para más detalles.</span>
+          <span class="lang-ca">Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls.</span>
+          <span class="lang-va">Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls.</span>
+      </p>
+      <div id="coverageMap"></div>
+  </section>
+
   <section id="about-us" class="about-us">
       <h2>
           <span class="lang-es">Sobre Nosotros</span>
@@ -1049,20 +1096,24 @@
       </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
   <script>
     // Translations object for dynamic text
     const translations = {
       es: {
         placeholder: { nombre: "Tu nombre", telefono: "+34 600 000 000", email: "tu@correo.com", mensaje: "Describe el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicación", defaultElectrodomestico: "Selecciona uno", darkMode: "Modo Oscuro", lightMode: "Modo Claro", sending: "Enviando...", viewBrands: "Ver Marcas", aboutUs: "Sobre Nosotros", domestico: "Doméstico", industrial: "Industrial", formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.", formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.", validationError: "Por favor, completa todos los campos requeridos.", requestRepair: "Solicita tu reparación", chatWhatsApp: "Chatea por WhatsApp", cookieConsent: "Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra ", cookiePolicyLink: "1234.html", cookieAccept: "Aceptar", cookieReject: "Rechazar", manageCookies: "Gestionar Cookies", cookiePolicyText: "Política de Cookies" }
+        text: { defaultUbicacion: "Selecciona una ubicación", defaultElectrodomestico: "Selecciona uno", darkMode: "Modo Oscuro", lightMode: "Modo Claro", sending: "Enviando...", viewBrands: "Ver Marcas", aboutUs: "Sobre Nosotros", domestico: "Doméstico", industrial: "Industrial", formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.", formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.", validationError: "Por favor, completa todos los campos requeridos.", requestRepair: "Solicita tu reparación", chatWhatsApp: "Chatea por WhatsApp", cookieConsent: "Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra ", cookiePolicyLink: "1234.html", cookieAccept: "Aceptar", cookieReject: "Rechazar", manageCookies: "Gestionar Cookies", cookiePolicyText: "Política de Cookies", coverageTitle: "Nuestra Zona de Cobertura", coverageDetail: "Ofrecemos nuestros servicios en el centro de Valencia y alrededores, cubriendo un área aproximada hasta Sagunto. Consulta el mapa para más detalles." }
       },
       ca: {
         placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.", formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.", validationError: "Si us plau, completa tots els camps requerits.", requestRepair: "Sol·licita la teva reparació", chatWhatsApp: "Xateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes", cookiePolicyText: "Política de Galetes" }
+        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.", formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.", validationError: "Si us plau, completa tots els camps requerits.", requestRepair: "Sol·licita la teva reparació", chatWhatsApp: "Xateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes", cookiePolicyText: "Política de Galetes", coverageTitle: "La Nostra Zona de Cobertura", coverageDetail: "Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls." }
       },
       va: {
         placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Doméstico", industrial: "Industrial", formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.", formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.", validationError: "Per favor, completa tots els camps requerits.", requestRepair: "Sol·licita la teua reparació", chatWhatsApp: "Chateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes", cookiePolicyText: "Política de Galetes" }
+        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.", formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.", validationError: "Per favor, completa tots els camps requerits.", requestRepair: "Sol·licita la teua reparació", chatWhatsApp: "Chateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes", cookiePolicyText: "Política de Galetes", coverageTitle: "La Nostra Zona de Cobertura", coverageDetail: "Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls." }
       }
     };
 
@@ -1080,6 +1131,7 @@
       updateContactButtonsText(currentLang);
       updateCookieBannerText(currentLang); // Ensure cookie banner text is updated
       updateFooterLinksText(currentLang); // Ensure footer links are updated
+      updateCoverageMapText(currentLang); // Update coverage map text
     }
 
     let currentLang = 'es'; // Default language
@@ -1099,6 +1151,7 @@
       updateContactButtonsText(currentLang); // Ensure contact buttons are updated on language change
       updateCookieBannerText(currentLang); // Update cookie banner on language change
       updateFooterLinksText(currentLang); // Update footer links on language change
+      updateCoverageMapText(currentLang); // Update coverage map text on language change
     }
 
     // Function to update the text of the dark mode button
@@ -1231,6 +1284,27 @@
              }
         });
     }
+
+    // Function to update coverage map section text based on current language
+    function updateCoverageMapText(lang) {
+        const coverageSection = document.getElementById('coverage-area');
+        if (coverageSection) {
+            const titleElement = coverageSection.querySelector('h2');
+            const detailElement = coverageSection.querySelector('p');
+
+            if (titleElement) {
+                titleElement.querySelector('.lang-es').textContent = translations.es.text.coverageTitle;
+                titleElement.querySelector('.lang-ca').textContent = translations.ca.text.coverageTitle;
+                titleElement.querySelector('.lang-va').textContent = translations.va.text.coverageTitle;
+            }
+            if (detailElement) {
+                detailElement.querySelector('.lang-es').textContent = translations.es.text.coverageDetail;
+                detailElement.querySelector('.lang-ca').textContent = translations.ca.text.coverageDetail;
+                detailElement.querySelector('.lang-va').textContent = translations.va.text.coverageDetail;
+            }
+        }
+    }
+
 
     // Function to filter service cards based on selected service type
     function filterServiceCards(serviceType) {
@@ -1386,7 +1460,7 @@
                form.querySelectorAll('[required]').forEach(input => {
                    if (!input.value) {
                        allRequiredFilled = false;
-                       input.classList.add('border-red-500');
+                       input.classList.add('border-red-500'); // Highlight empty required fields
                    } else {
                        input.classList.remove('border-red-500');
                    }
@@ -1410,7 +1484,7 @@
                .then(response => {
                  if(formLoadingIndicator) formLoadingIndicator.style.display = 'none';
                  if (response.ok) {
-                   return response.text(); // Or response.json() if your endpoint returns JSON
+                   return response.text();
                  } else {
                    return response.text().then(text => {
                      throw new Error(`HTTP status ${response.status}: ${text}`);
@@ -1419,7 +1493,6 @@
                })
                .then(() => {
                  form.reset();
-                 // form.style.display = "none"; // Keep form visible, just show success
                  responseDiv.textContent = translations[currentLang].text.formSuccess;
                  responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success visible";
                })
@@ -1467,19 +1540,49 @@
         // Initialize gtag with default consent state
         const initialConsent = getCookie('cookie_consent');
         if (typeof gtag === 'function') {
-            gtag('consent', 'default', { // Set default consent state first
+            gtag('consent', 'default', {
                 'analytics_storage': initialConsent === 'accepted' ? 'granted' : 'denied',
                 'ad_storage': 'denied',
                 'ad_user_data': 'denied',
                 'ad_personalization': 'denied'
             });
-            // If consent was already given and accepted, ensure it's updated if needed
             if (initialConsent === 'accepted') {
                  gtag('consent', 'update', {
                     'analytics_storage': 'granted'
                 });
             }
         }
+
+        // Initialize Coverage Map
+        try {
+            const valenciaCoords = [39.4699, -0.3763]; // Coordinates for Valencia
+            const map = L.map('coverageMap').setView(valenciaCoords, 10); // Initial zoom level
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add a marker for Valencia center
+            L.marker(valenciaCoords).addTo(map)
+                .bindPopup('<b>Valencia Centro</b><br>Nuestra base de operaciones.')
+                .openPopup();
+
+            // Add a circle for coverage area (approx. 28km radius to include Sagunto)
+            L.circle(valenciaCoords, {
+                color: '#0a5cb8',      // Blue color, matching the theme
+                fillColor: '#0a5cb8',  // Fill color
+                fillOpacity: 0.2,    // Slight transparency for the fill
+                radius: 28000        // Radius in meters (28 km)
+            }).addTo(map).bindPopup('Zona de cobertura aproximada.');
+
+        } catch (e) {
+            console.error("Error initializing Leaflet map:", e);
+            const mapDiv = document.getElementById('coverageMap');
+            if (mapDiv) {
+                mapDiv.innerHTML = '<p class="text-red-500 text-center">Error al cargar el mapa de cobertura. Por favor, inténtelo de nuevo más tarde.</p>';
+            }
+        }
+        updateCoverageMapText(currentLang); // Ensure map texts are set on load
     });
   </script>
 </body>
