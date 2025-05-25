@@ -23,10 +23,21 @@
             font-family: 'Inter', sans-serif; 
         }
         .hero-bg {
+            /* Imagen de fondo por defecto (para escritorio y tablets grandes) */
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero.jpg.jpeg'); 
             background-size: cover;
             background-position: center;
+            min-height: 100vh; /* Para asegurar que cubra la altura de la pantalla */
         }
+        
+        /* Media Query para dispositivos móviles (ej. pantallas hasta 768px de ancho) */
+        @media (max-width: 768px) {
+            .hero-bg {
+                /* Imagen de fondo específica para móviles */
+                background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero-movil.jpg'); /* ¡Asegúrate de que este archivo exista! */
+            }
+        }
+
         .navy-blue {
             background-color: #001f3f; 
         }
@@ -83,13 +94,12 @@
         .service-hidden {
             display: none !important;
         }
-        /* Estilo para el contenedor del mapa */
         #map {
             height: 350px;
             width: 100%;
-            border-radius: 0.5rem; /* rounded-lg */
+            border-radius: 0.5rem;
             overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
@@ -661,12 +671,11 @@
             const valencia = { lat: 39.4699, lng: -0.3763 };
             const sagunto = { lat: 39.6815, lng: -0.2776 };
 
-            // Inicializar el mapa
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 10, // Ajusta el zoom según sea necesario
+                zoom: 10, 
                 center: valencia,
-                mapTypeId: 'roadmap', // Puedes cambiar el tipo de mapa (satellite, hybrid, terrain)
-                styles: [ /* Puedes añadir estilos personalizados aquí para que coincida con tu web */
+                mapTypeId: 'roadmap', 
+                styles: [ 
                     {
                         "featureType": "water",
                         "elementType": "geometry",
@@ -734,30 +743,27 @@
                 ]
             });
 
-            // Calcular la distancia (radio) entre Valencia y Sagunto
             const radiusInMeters = google.maps.geometry.spherical.computeDistanceBetween(
                 new google.maps.LatLng(valencia),
                 new google.maps.LatLng(sagunto)
             );
 
-            // Crear el círculo de cobertura
             const coverageCircle = new google.maps.Circle({
-                strokeColor: "#001f3f", // Color del borde (azul marino)
+                strokeColor: "#001f3f", 
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: "#007bff", // Color de relleno (azul más claro)
-                fillOpacity: 0.25, // Transparencia del relleno
+                fillColor: "#007bff", 
+                fillOpacity: 0.25, 
                 map: map,
                 center: valencia,
-                radius: radiusInMeters, // Radio en metros
+                radius: radiusInMeters, 
             });
 
-            // Opcional: Añadir un marcador en Valencia
             new google.maps.Marker({
                 position: valencia,
                 map: map,
                 title: "Valencia (Centro de Cobertura)",
-                icon: { // Opcional: icono personalizado
+                icon: { 
                     path: google.maps.SymbolPath.CIRCLE,
                     scale: 6,
                     fillColor: "#001f3f",
