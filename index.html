@@ -1,1589 +1,714 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ERB Servicio Técnico de Gamma Blanca – Especialistas en reparación y mantenimiento de electrodomésticos en Barcelona, Coruña, Valencia y Castellón de la Plana.">
-  <link rel="icon" href="/favicon.ico" />
-  <title>ERB Servicio Técnico</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQC24XCERF"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reparación Electrodomésticos | ERB Servicio Técnico Gama Blanca</title>
+    <meta name="description" content="Servicio técnico experto en reparación de electrodomésticos de gama blanca, industrial e instalación de aires acondicionados. ¡Soluciones rápidas y con garantía!">
+    <link rel="canonical" href="https://erbserviciotecnico.com/">
+    <link rel="icon" href="/favicon.ico">
 
-    gtag('config', 'G-TQC24XCERF');
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTNVDQ7ZBX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQC24XCERF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TQC24XCERF');
+    </script>
 
-    gtag('config', 'G-YTNVDQ7ZBX');
-  </script>
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-
-  <style>
-    /* Language display rules */
-    .lang-es { display: inline; }
-    .lang-ca, .lang-va { display: none; }
-
-    /* Smooth scrolling */
-    html { scroll-behavior: smooth; }
-
-    /* Fade-in animation */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Dark mode styles */
-    body.dark-mode {
-      background-color: #1a202c;
-      color: #e2e8f0;
-    }
-
-    body.dark-mode .hero {
-      background: linear-gradient(135deg, #0a5cb8, #003f7f);
-      color: #e2e8f0;
-    }
-
-    body.dark-mode .servicios, body.dark-mode .marcas, body.dark-mode .about-us, body.dark-mode .coverage-map-section { /* Added coverage-map-section */
-      background-color: #2d3748;
-      color: #e2e8f0;
-    }
-
-    body.dark-mode .servicios h2, body.dark-mode .marcas h2, body.dark-mode .beneficios h2, body.dark-mode .formulario h2, body.dark-mode .about-us h2, body.dark-mode .coverage-map-section h2 { /* Added coverage-map-section */
-        color: #90cdf4;
-    }
-
-    body.dark-mode .card {
-      background-color: #4a5568;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    }
-
-    body.dark-mode .card:hover, body.dark-mode .card:focus-within {
-      background-color: #5a67d8;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-    }
-
-    body.dark-mode .card .icon {
-      color: #90cdf4;
-    }
-
-    body.dark-mode .card h3 {
-      color: #90cdf4;
-    }
-
-    body.dark-mode .card p {
-        color: #cbd5e0;
-    }
-
-    body.dark-mode .beneficios .btn {
-        background-color: #003f7f;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-    }
-
-    body.dark-mode .beneficios .btn:hover {
-        background-color: #0a5cb8;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    }
-
-    /* Form styles - Adjusted specificity for dark mode */
-    .formulario {
-        padding: 1.5rem;
-        margin: 1.5rem auto;
-    }
-
-    /* Increased specificity and removed !important */
-    body.dark-mode section#formulario {
-      background-color: #2d3748; /* Darker form background */
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    body.dark-mode .formulario label {
-        color: #e2e8f0;
-    }
-
-    body.dark-mode .formulario input, body.dark-mode .formulario textarea, body.dark-mode .formulario select {
-      background-color: #4a5568;
-      border-color: #636b78;
-      color: #e2e8f0;
-    }
-
-    body.dark-mode .formulario input::placeholder, body.dark-mode .formulario textarea::placeholder {
-        color: #a0aec0;
-    }
-
-    body.dark-mode .formulario input:focus, body.dark-mode .formulario textarea:focus, body.dark-mode .formulario select:focus {
-      border-color: #90cdf4;
-      box-shadow: 0 0 0 1px #90cdf4;
-    }
-
-    body.dark-mode .formulario button {
-      background: #003f7f;
-    }
-
-    body.dark-mode .formulario button:hover, body.dark-mode .formulario button:focus {
-      background-color: #0a5cb8;
-    }
-
-    /* Form response messages */
-    .form-response {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-    .form-response.visible {
-        opacity: 1;
-    }
-    .form-response.success {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-    .form-response.error {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-
-    body.dark-mode .form-response.success {
-        background: #2f855a;
-        color: #e2e8f0;
-        border-color: #22543d;
-    }
-
-    body.dark-mode .form-response.error {
-        background: #c53030;
-        color: #e2e8f0;
-        border-color: #a71f24;
-    }
-
-    /* Loading indicator */
-    #formLoadingIndicator {
-        display: none;
-        text-align: center;
-        margin-top: 1rem;
-        color: #0a5cb8;
-    }
-
-    body.dark-mode #formLoadingIndicator {
-        color: #90cdf4;
-    }
-
-    /* Footer styles */
-    footer {
-        background: #0a5cb8;
-        color: white;
-        text-align: center;
-        padding: 1.25rem 1rem;
-        font-size: 0.875rem;
-    }
-
-    footer a {
-        color: white;
-        text-decoration: underline;
-        margin: 0 0.5rem;
-        transition: opacity 0.3s ease;
-    }
-
-    footer a:hover {
-        opacity: 0.8;
-    }
-
-    body.dark-mode footer {
-      background: #0a5cb8;
-      color: #e2e8f0;
-    }
-
-    body.dark-mode footer a {
-        color: #e2e8f0;
-    }
-
-    /* Dark mode toggle button styles */
-    body.dark-mode #language-selector button#darkModeToggle {
-        border-color: #90cdf4;
-        background-color: #2d3748;
-        color: #e2e8f0;
-    }
-
-    body.dark-mode #language-selector button#darkModeToggle:hover {
-        background-color: #4a5568;
-        color: #e2e8f0;
-    }
-
-    /* Prevent horizontal overflow */
-    body {
-        overflow-x: hidden;
-    }
-
-    /* Contact buttons container */
-    .contact-buttons-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 1.25rem;
-        margin-bottom: 1.25rem;
-    }
-
-    .contact-buttons-container .btn {
-        flex-grow: 1;
-        flex-shrink: 0;
-        max-width: 200px;
-        text-align: center;
-    }
-
-    /* Service type selector */
-    .service-type-selector {
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .service-type-selector button {
-        padding: 10px 20px;
-        margin: 0 10px;
-        border: 2px solid #0a5cb8;
-        background-color: #fff;
-        color: #0a5cb8;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        font-weight: bold;
-        min-width: 120px;
-    }
-
-    .service-type-selector button.active {
-        background-color: #0a5cb8;
-        color: #fff;
-        border-color: #0a5cb8;
-    }
-
-    body.dark-mode .service-type-selector button {
-        border-color: #90cdf4;
-        background-color: #2d3748;
-        color: #e2e8f0;
-    }
-
-    body.dark-mode .service-type-selector button:hover {
-        background-color: #4a5568;
-        color: #e2e8f0;
-    }
-
-    body.dark-mode .service-type-selector button.active {
-        background-color: #90cdf4;
-        color: #1a202c;
-        border-color: #90cdf4;
-    }
-
-    /* Services section grid */
-    .servicios .cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
-        padding: 0 1rem;
-    }
-
-    @media (min-width: 1024px) {
-        .servicios .cards {
-            grid-template-columns: repeat(3, 1fr);
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Manteniendo Inter, o puedes cambiarla si ERB usa otra */
         }
-    }
-
-    .servicios .card {
-        padding: 1rem;
-    }
-
-    @media (max-width: 640px) {
-        .servicios .card {
-            min-height: 220px;
+        .hero-bg {
+            /* Imagen de fondo actualizada para usar una imagen local desde la raíz */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero.jpg'); /* ¡Reemplaza 'imagen-hero.jpg' con el nombre de tu archivo! */
+            background-size: cover;
+            background-position: center;
         }
-         .servicios .card .icon {
-             margin-bottom: 0.5rem;
-         }
-         .servicios .card h3 {
-             margin-bottom: 0.1rem;
-         }
-    }
-
-    /* Style to hide filtered cards */
-    .servicios .card.hidden {
-        display: none;
-    }
-
-    .servicios .card .icon {
-        font-size: 4rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .servicios .card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.25rem;
-    }
-
-    .servicios .card p {
-        font-size: 0.9rem;
-    }
-
-    /* Benefits section flexbox */
-    .beneficios .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5rem;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 0 1rem;
-    }
-
-    .beneficios .item {
-        background-color: #0a5cb8;
-        color: white;
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-basis: 250px;
-        flex-grow: 1;
-        min-height: 180px;
-    }
-
-    .beneficios .item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    body.dark-mode .beneficios .item {
-        background-color: #003f7f;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-    }
-
-    body.dark-mode .beneficios .item:hover {
-        background-color: #0a5cb8;
-        box-shadow: 0 6px 8px rgba(0,0,0,0.6);
-    }
-
-    /* Form section styles */
-    .formulario {
-        padding: 1.5rem;
-        margin: 1.5rem auto;
-    }
-
-    .formulario label {
-        font-size: 0.9rem;
-        margin-bottom: 0.25rem;
-    }
-
-    .formulario input, .formulario textarea, .formulario select {
-        padding: 0.75rem;
-        font-size: 1rem;
-    }
-
-    .formulario button {
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-    }
-
-    /* Brands section grid */
-    .marcas .grid {
-        gap: 1rem;
-        padding: 0 1rem;
-    }
-
-    .marcas img {
-        height: 3rem;
-        width: auto;
-    }
-
-    /* Language and dark mode selector adjustments for mobile */
-    #language-selector {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        padding: 0 0.5rem;
-    }
-
-    #language-selector button {
-        margin: 0.25rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.8rem;
-    }
-
-    /* About Us section styles */
-    .about-us {
-        background-color: #f7fafc;
-        padding: 4rem 1.25rem;
-        text-align: center;
-    }
-
-    body.dark-mode .about-us {
-        background-color: #2d3748;
-        color: #e2e8f0;
-    }
-
-    body.dark-mode .about-us p {
-        color: #cbd5e0;
-    }
-
-    .whatsapp-button-container {
-        text-align: center;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        padding: 0 1rem;
-    }
-
-    .whatsapp-button-container .whatsapp-btn {
-        background-color: #0a5cb8;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 9999px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-        font-weight: bold;
-        display: inline-flex;
-        align-items: center;
-        text-decoration: none;
-    }
-
-    .whatsapp-button-container .whatsapp-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        background-color: #003f7f;
-    }
-
-    .whatsapp-button-container .whatsapp-btn:focus {
-         outline: none;
-         box-shadow: 0 0 0 2px rgba(10, 92, 184, 0.5);
-    }
-
-    body.dark-mode .whatsapp-button-container .whatsapp-btn {
-        background-color: #003f7f;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-    }
-
-    body.dark-mode .whatsapp-button-container .whatsapp-btn:hover {
-         background-color: #0a5cb8;
-         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6);
-    }
-
-    body.dark-mode .whatsapp-button-container .whatsapp-btn:focus {
-         box-shadow: 0 0 0 2px rgba(0, 63, 127, 0.5);
-    }
-
-    .whatsapp-button-container .whatsapp-btn img {
-        width: 1.5rem;
-        height: 1.5rem;
-        margin-right: 0.5rem;
-        vertical-align: middle;
-    }
-
-    /* Cookie Consent Banner styles */
-    #cookie-banner {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: #333; /* Dark background */
-        color: white;
-        padding: 1rem;
-        text-align: center;
-        z-index: 1000;
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    #cookie-banner .cookie-content {
-        flex-grow: 1;
-        margin-bottom: 0.5rem;
-    }
-
-    #cookie-banner a {
-        color: #90cdf4;
-        text-decoration: underline;
-    }
-
-    #cookie-banner .cookie-buttons {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    #cookie-banner button {
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s ease, opacity 0.3s ease;
-    }
-
-    #cookie-banner .accept-btn {
-        background-color: #0a5cb8;
-        color: white;
-        border: none;
-    }
-
-    #cookie-banner .accept-btn:hover {
-        background-color: #003f7f;
-    }
-
-    #cookie-banner .reject-btn {
-        background-color: #555;
-        color: white;
-        border: none;
-    }
-
-    #cookie-banner .reject-btn:hover {
-        background-color: #777;
-    }
-
-    /* Dark mode styles for cookie banner */
-    body.dark-mode #cookie-banner {
-        background-color: #2d3748;
-        color: #e2e8f0;
-    }
-
-    body.dark-mode #cookie-banner a {
-        color: #90cdf4;
-    }
-
-    body.dark-mode #cookie-banner .accept-btn {
-         background-color: #003f7f;
-    }
-
-    body.dark-mode .accept-btn:hover {
-         background-color: #0a5cb8;
-    }
-
-    body.dark-mode #cookie-banner .reject-btn {
-        background-color: #4a5568;
-    }
-
-    body.dark-mode .reject-btn:hover {
-        background-color: #636b78;
-    }
-
-    /* Media query for larger screens (horizontal row) */
-    @media (min-width: 768px) {
-        #cookie-banner {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
+        .navy-blue {
+            background-color: #001f3f; /* Azul marino oscuro de ERB (ajustar si es diferente) */
         }
-         #cookie-banner .cookie-content {
-             margin-bottom: 0;
-             text-align: left;
-         }
-         #cookie-banner .cookie-buttons {
-             flex-wrap: nowrap;
-         }
-    }
-
-    /* Styles for the coverage map section */
-    .coverage-map-section {
-        background-color: #f7fafc; /* Light gray background, similar to about-us */
-        padding: 4rem 1.25rem;
-        text-align: center;
-    }
-    #coverageMap {
-        height: 400px; /* Default height for the map */
-        width: 100%;
-        max-width: 800px; /* Max width to keep it centered and not too wide on large screens */
-        margin: 1.5rem auto; /* Center the map */
-        border-radius: 0.5rem; /* Rounded corners */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    }
-    @media (min-width: 768px) {
-        #coverageMap {
-            height: 500px; /* Taller map on larger screens */
+        .text-navy {
+            color: #001f3f;
         }
-    }
-
-  </style>
+        .border-navy {
+            border-color: #001f3f;
+        }
+        .btn-primary {
+            background-color: #001f3f;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #003366; 
+        }
+        .section-title {
+            border-bottom: 3px solid #001f3f;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .service-card, .benefit-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover, .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        #mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        .brand-logo img {
+            height: 50px; /* Ajustar según el tamaño de los logos */
+            width: auto;
+            margin: 0.5rem;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+        .brand-logo img:hover {
+            filter: grayscale(0%);
+        }
+        .filter-btn {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #001f3f;
+            color: white;
+        }
+        /* Estilos para ocultar servicios filtrados */
+        .service-hidden {
+            display: none !important;
+        }
+    </style>
 </head>
-<body class="font-sans bg-white text-[#0a5cb8] leading-relaxed">
+<body class="bg-white text-gray-800">
 
-  <div class="flex justify-center mt-5">
-      <div class="w-32 h-auto sm:w-40 md:w-48 lg:w-56">
-          <img src="/logo.png" alt="ERB Servicio Técnico Logo" class="block w-full h-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/192x192/cccccc/ffffff?text=Logo';">
-      </div>
-  </div>
-
-  <div id="language-selector" class="text-center my-5 flex flex-wrap justify-center">
-    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Cambiar a Castellano">Castellano</button>
-    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Cambiar a Català">Català</button>
-    <button class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Cambiar a Valencià">Valencià</button>
-    <button id="darkModeToggle" class="mx-2 px-2.5 py-1.5 text-sm border border-[#0a5cb8] bg-white text-[#0a5cb8] rounded hover:bg-[#0a5cb8] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Alternar Modo Oscuro">
-        <i class="fa-solid fa-moon"></i> <span class="lang-es">Modo Oscuro</span><span class="lang-ca">Mode Fosc</span><span class="lang-va">Mode Fosc</span>
-    </button>
-  </div>
-
-  <section class="service-type-selector">
-      <button id="domesticoBtn" class="active" data-service-type="domestico">
-          <span class="lang-es">Doméstico</span>
-          <span class="lang-ca">Domèstic</span>
-          <span class="lang-va">Domèstic</span>
-      </button>
-      <button id="industrialBtn" data-service-type="industrial">
-          <span class="lang-es">Industrial</span>
-          <span class="lang-ca">Industrial</span>
-          <span class="lang-va">Industrial</span>
-      </button>
-  </section>
-
-  <header class="hero bg-gradient-to-br from-[#0a5cb8] to-[#003f7f] text-white text-center py-16 md:py-24 px-5 animate-[fadeIn_1.5s_ease-in-out]">
-    <h1 class="text-3xl md:text-5xl mb-2">
-      <span class="lang-es">ERB Servicio Técnico de Gamma Blanca</span>
-      <span class="lang-ca">ERB Servei Tècnic de Gamma Blanca</span>
-      <span class="lang-va">ERB Servei Tècnic de Gamma Blanca</span>
-    </h1>
-    <p class="text-base md:text-lg mb-4">
-      <span class="lang-es">Especialistas en reparación y mantenimiento de electrodomésticos.</span>
-      <span class="lang-ca">Especialistes en reparació i manteniment d'electrodomèstics.</span>
-      <span class="lang-va">Especialistes en reparació i manteniment d'aparells electrodomèstics.</span>
-    </p>
-    <a href="#servicios" class="btn inline-block bg-white text-[#0a5cb8] px-6 py-3 rounded-md font-bold transition duration-300 transform hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white">
-      <span class="lang-es">Ver Servicios</span>
-      <span class="lang-ca">Veure Serveis</span>
-      <span class="lang-va">Veure Serveis</span>
-    </a>
-  </header>
-
-  <div class="contact-buttons-container">
-      <a href="#marcas" class="btn inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Ver Marcas con las que trabajamos">
-          <i class="fa-solid fa-tags mr-2 align-middle"></i>
-          <span class="lang-es">Ver Marcas</span>
-          <span class="lang-ca">Veure Marques</span>
-          <span class="lang-va">Veure Marques</span>
-      </a>
-      <a href="#about-us" class="btn inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Conoce más sobre nosotros">
-          <i class="fa-solid fa-building mr-2 align-middle"></i>
-          <span class="lang-es">Sobre Nosotros</span>
-          <span class="lang-ca">Sobre Nosaltres</span>
-          <span class="lang-va">Sobre Nosaltres</span>
-      </a>
-      <a href="#formulario" id="requestRepairBtn" class="btn inline-flex items-center bg-[#0a5cb8] text-white px-4 py-3 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]" aria-label="Solicita tu reparación a través del formulario">
-        <i class="fa-solid fa-file-alt mr-2 align-middle"></i> <span class="lang-es">Solicita tu reparación</span>
-        <span class="lang-ca">Sol·licita la teva reparació</span>
-        <span class="lang-va">Sol·licita la teua reparació</span>
-      </a>
-  </div>
-
-  <section id="servicios" class="servicios py-16 px-5 bg-gray-100 text-center">
-    <h2 class="text-3xl md:text-4xl mb-8">
-      <span class="lang-es">¿Qué electrodomésticos reparamos?</span>
-      <span class="lang-ca">Quins electrodomèstics reparam?</span>
-      <span class="lang-va">Quins aparells electrodomèstics reparam?</span>
-    </h2>
-    <div class="cards grid grid-cols-2 lg:grid-cols-3 gap-5 max-w-screen-lg mx-auto">
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Frigorífico" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">ac_unit</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Frigoríficos y Congeladores</span>
-          <span class="lang-ca">Neveres i congeladors</span>
-          <span class="lang-va">Neveres i congeladors</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">No enfrían correctamente, problemas de congelación o ruidos inusuales.</span>
-          <span class="lang-ca">No refreden correctament, problemes de congelació o sorolls inusuals.</span>
-          <span class="lang-va">No refreden correctament, problemes de congelació o sorolls inusuales.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-100 focus-within:outline-none focus-within:ring-4 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Aire acondicionado" data-service-type="domestico industrial">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">air</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Aires Acondicionados</span>
-          <span class="lang-ca">Aires condicionats</span>
-          <span class="lang-va">Aires condicionats</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Instalación y reparación de sistemas de climatización.</span>
-          <span class="lang-ca">Instal·lació i reparació de sistemes de climatització.</span>
-          <span class="lang-va">Instal·lació i reparació de sistemes de climatització.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavadora" data-service-type="domestico">
-        <i class="fas fa-washing-machine icon text-5xl text-[#0a5cb8] mb-2.5"></i>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Lavadoras</span>
-          <span class="lang-ca">Rentadores</span>
-          <span class="lang-va">Rentadores</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Problemas de centrifugado, agua, ruidos o bloqueos.</span>
-          <span class="lang-ca">Problemes de centrifugació, aigua, sorolls o bloqueigs.</span>
-          <span class="lang-va">Problemes de centrifugació, aigua, sorolls o bloqueigs.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Lavavajillas" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">cleaning_services</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Lavavajillas</span>
-          <span class="lang-ca">Rentavaixelles</span>
-          <span class="lang-va">Rentavaixelles</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Fugas, mal funcionamiento o limpieza deficiente.</span>
-          <span class="lang-ca">Fuites, mal funcionament o rentat deficient.</span>
-          <span class="lang-va">Fuites, mal funcionament o rentat deficient.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Horno" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">kitchen</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Hornos</span>
-          <span class="lang-ca">Forns</span>
-          <span class="lang-va">Forns</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">No calientan o presentan fallos en resistencias o sensores.</span>
-          <span class="lang-ca">No escalfen o presenten fallades en resistències o sensors.</span>
-          <span class="lang-va">No escalfen o presenten fallades en resistències o sensors.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Secadora" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">local_laundry_service</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Secadoras</span>
-          <span class="lang-ca">Assecadores</span>
-          <span class="lang-va">Assecadores</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Problemas de calor, giro o humedad excesiva.</span>
-          <span class="lang-ca">Problemes de calor, gir o humitat excessiva.</span>
-          <span class="lang-va">Problemes de calor, gir o humitat excessiva.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Vitrocerámica" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">bolt</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Vitrocerámicas</span>
-          <span class="lang-ca">Vitrocèrmiques</span>
-          <span class="lang-va">Vitrocèrmiques</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Problemas en zonas de calor, sensores o controles.</span>
-          <span class="lang-ca">Problemes en zones de calor, sensors o controls.</span>
-          <span class="lang-va">Problemes en zones de calor, sensors o controls.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calentador" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">whatshot</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Calentadores de Agua</span>
-          <span class="lang-ca">Escalfadors d'aigua</span>
-          <span class="lang-va">Escalfadors d'aigua</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Reparación e instalación de calentadores de agua.</span>
-          <span class="lang-ca">Reparació i instal·lació d'escalfadors d'aigua.</span>
-          <span class="lang-va">Reparació i instal·lació d'escalfadors d'aigua.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Caldera" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">fireplace</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Calderas</span>
-          <span class="lang-ca">Calderes</span>
-          <span class="lang-va">Calderes</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Mantenimiento y reparación de calderas domésticas.</span>
-          <span class="lang-ca">Manteniment i reparació de calderes domèstiques.</span>
-          <span class="lang-va">Manteniment i reparació de calderes domèstiques.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Termotanque" data-service-type="domestico">
-        <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">hot_tub</span>
-        <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-          <span class="lang-es">Termotanques</span>
-          <span class="lang-ca">Termotancs</span>
-          <span class="lang-va">Termotancs</span>
-        </h3>
-        <p class="text-gray-700">
-          <span class="lang-es">Reparación y mantenimiento de termotanques.</span>
-          <span class="lang-ca">Reparació i manteniment de termotancs.</span>
-          <span class="lang-va">Reparació i manteniment de termotancs.</span>
-        </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Maquinaria de Lavandería Industrial" data-service-type="industrial">
-          <i class="fas fa-industry icon text-5xl text-[#0a5cb8] mb-2.5"></i>
-          <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-            <span class="lang-es">Maquinaria de Lavandería Industrial</span>
-            <span class="lang-ca">Maquinària de bugaderia industrial</span>
-            <span class="lang-va">Maquinària de bugaderia industrial</span>
-          </h3>
-          <p class="text-gray-700">
-            <span class="lang-es">Reparación y mantenimiento de lavadoras y secadoras industriales.</span>
-            <span class="lang-ca">Reparació i manteniment de rentadores i assecadores industrials.</span>
-            <span class="lang-va">Reparació i manteniment de rentadores i assecadores industrials.</span>
-          </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Equipos de Refrigeración Industrial" data-service-type="industrial">
-          <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">kitchen</span>
-          <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-            <span class="lang-es">Equipos de Refrigeración Industrial</span>
-            <span class="lang-ca">Equips de refrigeració industrial</span>
-            <span class="lang-va">Equips de refrigeració industrial</span>
-          </h3>
-          <p class="text-gray-700">
-            <span class="lang-es">Cámaras frigoríficas, congeladores industriales, etc.</span>
-            <span class="lang-ca">Cambres frigorífiques, congeladors industrials, etc.</span>
-            <span class="lang-va">Cambres frigorífiques, congeladors industrials, etc.</span>
-          </p>
-      </div>
-      <div class="card bg-white p-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 cursor-pointer" tabindex="0" data-appliance-value="Calderas Industriales" data-service-type="industrial">
-          <span class="material-icons-outlined icon text-5xl text-[#0a5cb8] mb-2.5">fireplace</span>
-          <h3 class="text-xl font-bold mb-1 text-[#0a5cb8]">
-            <span class="lang-es">Calderas Industriales</span>
-            <span class="lang-ca">Calderes industrials</span>
-            <span class="lang-va">Calderes industrials</span>
-          </h3>
-          <p class="text-gray-700">
-            <span class="lang-es">Mantenimiento y reparación de sistemas de calderas industriales.</span>
-            <span class="lang-ca">Manteniment i reparació de sistemes de calderes industrials.</span>
-            <span class="lang-va">Manteniment i reparació de sistemes de calderes industrials.</span>
-          </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="beneficios py-16 px-5 bg-white text-center">
-      <h2 class="text-3xl md:text-4xl mb-8 text-[#0a5cb8]">
-          <span class="lang-es">Nuestros Beneficios</span>
-          <span class="lang-ca">Els nostres Beneficis</span>
-          <span class="lang-va">Els nostres Beneficis</span>
-      </h2>
-      <div class="container flex flex-wrap justify-center gap-5 max-w-screen-lg mx-auto">
-          <a href="tel:+34612548508" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
-              <i class="fa-solid fa-phone text-5xl mb-4 block"></i>
-              <p class="m-0 text-sm leading-tight">
-                  <span class="lang-es">Solicita tu inspección llamando a nuestros canales de atención al cliente.</span>
-                  <span class="lang-ca">Sol·licita la teva inspecció trucant als nostres canals d'atenció al client.</span>
-                  <span class="lang-va">Sol·licita la teua inspección cridant als nostres canals d'atención al client.</span>
-              </p>
-          </a>
-          <a href="#formulario" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
-              <i class="fa-solid fa-truck text-5xl mb-4 block"></i>
-              <p class="m-0 text-sm leading-tight">
-                  <span class="lang-es">Reparación en el acto si decides reparar, no cobramos el desplazamiento.</span>
-                  <span class="lang-ca">Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.</span>
-                  <span class="lang-va">Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.</span>
-              </p>
-          </a>
-          <a href="#servicios" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
-              <i class="fa-solid fa-wrench text-5xl mb-4 block"></i>
-              <p class="m-0 text-sm leading-tight">
-                  <span class="lang-es">Disfruta de tu electrodoméstico como nuevo Con garantía en la reparación de 6 meses.</span>
-                  <span class="lang-ca">Gaudeix del teu electrodomèstic com nou amb garantia en la reparació de 6 mesos.</span>
-                  <span class="lang-va">Gaudeix del teu electrodomèstic com nou amb garantia en la reparació de 6 mesos.</span>
-              </p>
-          </a>
-          <a href="#formulario" class="btn inline-flex items-center bg-[#0a5cb8] text-white w-full sm:w-60 p-5 rounded-lg text-center no-underline shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0a5cb8]">
-              <i class="fa-solid fa-money-bill text-5xl mb-4 block"></i>
-              <p class="m-0 text-sm leading-tight">
-                  <span class="lang-es">Precios más competitivos del mercado</span>
-                  <span class="lang-ca">Preus més competitius del mercat</span>
-                  <span class="lang-va">Preus més competitius del mercat</span>
-              </p>
-          </a>
-      </div>
-  </section>
-
-  <section id="coverage-area" class="coverage-map-section">
-      <h2 class="text-3xl md:text-4xl mb-8">
-          <span class="lang-es">Nuestra Zona de Cobertura</span>
-          <span class="lang-ca">La Nostra Zona de Cobertura</span>
-          <span class="lang-va">La Nostra Zona de Cobertura</span>
-      </h2>
-      <p class="text-base md:text-lg mb-6 max-w-2xl mx-auto">
-          <span class="lang-es">Ofrecemos nuestros servicios en el centro de Valencia y alrededores, cubriendo un área aproximada hasta Sagunto. Consulta el mapa para más detalles.</span>
-          <span class="lang-ca">Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls.</span>
-          <span class="lang-va">Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls.</span>
-      </p>
-      <div id="coverageMap"></div>
-  </section>
-
-  <section id="about-us" class="about-us">
-      <h2>
-          <span class="lang-es">Sobre Nosotros</span>
-          <span class="lang-ca">Sobre Nosaltres</span>
-          <span class="lang-va">Sobre Nosaltres</span>
-      </h2>
-      <p>
-          <span class="lang-es">Somos un equipo de técnicos especializados con años de experiencia en la reparación y mantenimiento de electrodomésticos de gama blanca, tanto domésticos como industriales. Nuestro compromiso es ofrecer un servicio rápido, eficiente y con garantía, asegurando la máxima satisfacción de nuestros clientes en Barcelona, Coruña, Valencia y Castellón de la Plana. Confía en nosotros para devolverle la vida a tus electrodomésticos.</span>
-          <span class="lang-ca">Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'electrodomèstics de gamma blanca, tant domèstics com industrials. El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana. Confia en nosaltres per tornar-li la vida als teus electrodomèstics.</span>
-          <span class="lang-va">Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'aparells electrodomèstics de gamma blanca, tant domèstics com industrials. El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana. Confia en nosaltres per tornar-li la vida als teus aparells electrodomèstics.</span>
-      </p>
-  </section>
-
-  <div class="whatsapp-button-container">
-      <a href="https://wa.me/34612548508" class="whatsapp-btn" target="_blank" aria-label="Chatea con nosotros por WhatsApp">
-        <img src="/123.png" alt="Icono de WhatsApp" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/24x24/25D366/ffffff?text=WA';">
-        <span class="lang-es">Chatea por WhatsApp</span>
-        <span class="lang-ca">Xateja per WhatsApp</span>
-        <span class="lang-va">Chateja per WhatsApp</span>
-      </a>
-  </div>
-
-  <section id="formulario" class="formulario bg-white p-10 max-w-xl mx-auto my-10 rounded-lg shadow-xl">
-    <h2 class="text-2xl md:text-3xl text-center mb-5">
-      <span class="lang-es">Solicita tu reparación</span>
-      <span class="lang-ca">Sol·licita la teva reparació</span>
-      <span class="lang-va">Sol·licita la teua reparació</span>
-    </h2>
-    <form id="contactForm" action="https://formsubmit.co/roscordtgn@gmail.com" method="POST" class="space-y-4">
-      <input type="hidden" name="_captcha" value="false">
-      <div>
-        <label for="nombre" class="block mb-1 font-bold">
-          <span class="lang-es">Nombre:</span>
-          <span class="lang-ca">Nom:</span>
-          <span class="lang-va">Nom:</span>
-        </label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
-      </div>
-      <div>
-        <label for="telefono" class="block mb-1 font-bold">
-          <span class="lang-es">Teléfono:</span>
-          <span class="lang-ca">Telèfon:</span>
-          <span class="lang-va">Telèfon:</span>
-        </label>
-        <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
-      </div>
-      <div>
-        <label for="email" class="block mb-1 font-bold">
-          <span class="lang-es">Correo electrónico:</span>
-          <span class="lang-ca">Correu electrònic:</span>
-          <span class="lang-va">Correo electrónico:</span>
-        </label>
-        <input type="email" id="email" name="email" placeholder="tu@correo.com" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
-      </div>
-      <div>
-        <label for="ubicacion" class="block mb-1 font-bold">
-          <span class="lang-es">Ubicación del servicio:</span>
-          <span class="lang-ca">Ubicació del servei:</span>
-          <span class="lang-va">Ubicació del servei:</span>
-        </label>
-        <select id="ubicacion" name="ubicacion" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
-          <option value="">Selecciona una ubicación</option>
-          <option value="Barcelona">Barcelona</option>
-          <option value="Coruña">La Coruña</option>
-          <option value="Valencia">Valencia</option>
-          <option value="Castellón de la Plana">Castellón de la Plana</option>
-        </select>
-      </div>
-      <div>
-        <label for="equipo" class="block mb-1 font-bold">
-          <span class="lang-es">Electrodoméstico a reparar:</span>
-          <span class="lang-ca">Electrodomèstic a reparar:</span>
-          <span class="lang-va">Electrodomèstic a reparar:</span>
-        </label>
-        <select id="equipo" name="equipo" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent">
-          <option value="">Selecciona uno</option>
-          <option value="Lavadora">Lavadoras (Doméstico)</option>
-          <option value="Lavavajillas">Lavavajillas (Doméstico)</option>
-          <option value="Frigorífico">Frigorífico (Doméstico)</option>
-          <option value="Horno">Horno (Doméstico)</option>
-          <option value="Secadora">Secadora (Doméstico)</option>
-          <option value="Vitrocerámica">Vitrocerámica (Doméstico)</option>
-          <option value="Calentador">Calentador (Doméstico)</option>
-          <option value="Caldera">Caldera (Doméstico)</option>
-          <option value="Aire acondicionado">Aire acondicionado (Doméstico/Industrial)</option>
-          <option value="Termotanque">Termotanque (Doméstico)</option>
-          <option value="Maquinaria de Lavandería Industrial">Maquinaria de Lavandería Industrial</option>
-          <option value="Equipos de Refrigeración Industrial">Equipos de Refrigeración Industrial</option>
-          <option value="Calderas Industriales">Calderas Industriales</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
-      <div>
-        <label for="mensaje" class="block mb-1 font-bold">
-          <span class="lang-es">Descripción del problema:</span>
-          <span class="lang-ca">Descripció del problema:</span>
-          <span class="lang-va">Descripció del problema:</span>
-        </label>
-        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe el problema" required aria-required="true" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:border-transparent"></textarea>
-      </div>
-      <button type="submit" class="w-full bg-[#0a5cb8] text-white py-2 px-4 rounded-md font-bold transition duration-300 hover:bg-[#064b93] focus:outline-none focus:ring-2 focus:ring-[#0a5cb8] focus:ring-offset-2">
-        <span class="lang-es">Enviar</span>
-        <span class="lang-ca">Envia</span>
-        <span class="lang-va">Envia</span>
-      </button>
-    </form>
-    <div id="formLoadingIndicator" class="flex justify-center items-center">
-        <i class="fas fa-spinner fa-spin mr-2"></i>
-        <span class="lang-es">Enviando...</span>
-        <span class="lang-ca">Enviant...</span>
-        <span class="lang-va">Enviant...</span>
-    </div>
-    <div id="formResponse" class="form-response text-center mt-5 p-4 rounded-md font-bold hidden" role="status" aria-live="polite"></div>
-  </section>
-
-  <section id="marcas" class="marcas py-16 px-5 bg-gray-100 text-center">
-      <h2 class="text-3xl md:text-4xl mb-8 text-[#0a5cb8]">
-          <span class="lang-es">Marcas con las que trabajamos</span>
-          <span class="lang-ca">Marques amb les quals treballem</span>
-          <span class="lang-va">Marques amb les quals treballem</span>
-      </h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-lg mx-auto items-center">
-          <div class="flex justify-center"><img src="/samsung-logo-wordmark-rgb.png" alt="Logo Samsung" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Samsung';"></div>
-          <div class="flex justify-center"><img src="/lg-logo-1.png" alt="Logo LG" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=LG';"></div>
-          <div class="flex justify-center"><img src="/balay.png" alt="Logo Balay" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Balay';"></div>
-          <div class="flex justify-center"><img src="/siemens.png" alt="Logo Siemens" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Siemens';"></div>
-          <div class="flex justify-center"><img src="/Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Logo Whirlpool" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Whirlpool';"></div>
-          <div class="flex justify-center"><img src="/neckar.png" alt="Logo Neckar" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Neckar';"></div>
-          <div class="flex justify-center"><img src="/bosch.png" alt="Logo Bosch" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Bosch';"></div>
-          <div class="flex justify-center"><img src="/Haier_logo.svg.png" alt="Logo Haier" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Haier';"></div>
-          <div class="flex justify-center"><img src="/mitsubishi.png" alt="Logo Mitsubishi Electric" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Mitsubishi';"></div>
-          <div class="flex justify-center"><img src="/saunier.png" alt="Logo Saunier Duval" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Saunier Duval';"></div>
-          <div class="flex justify-center"><img src="/ariston.jpg" alt="Logo Ariston Thermo Group" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Ariston';"></div>
-          <div class="flex justify-center"><img src="/vaillant.jpg" alt="Logo Vaillant" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Vaillant';"></div>
-          <div class="flex justify-center"><img src="/junkers.png" alt="Logo Junkers" class="h-10 sm:h-12 w-auto" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/100x40/cccccc/ffffff?text=Junkers';"></div>
-      </div>
-  </section>
-
-  <footer class="bg-[#0a5cb8] text-white text-center py-5 text-sm">
-    <p>
-      <span class="lang-es">© 2025 ERB Servicio Técnico de Gamma Blanca | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana</span>
-      <span class="lang-ca">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
-      <span class="lang-va">© 2025 ERB Servei Tècnic de Gamma Blanca | BARCELONA – CORUÑA – VALÈNCIA – CASTELLÓ de la Plana</span>
-    </p>
-    <div class="mt-2">
-        <a href="#" class="lang-es">Política de Privacidad</a><span class="lang-es"> | </span>
-        <a href="#" class="lang-es">Aviso Legal</a><span class="lang-es"> | </span>
-        <a href="/1234.html" id="manageCookiesLink" class="lang-es">Gestionar Cookies</a>
-
-        <a href="#" class="lang-ca">Política de Privacitat</a><span class="lang-ca"> | </span>
-        <a href="#" class="lang-ca">Avís Legal</a><span class="lang-ca"> | </span>
-        <a href="/1234.html" id="manageCookiesLinkCa" class="lang-ca">Gestionar Galetes</a>
-
-        <a href="#" class="lang-va">Política de Privacitat</a><span class="lang-va"> | </span>
-        <a href="#" class="lang-va">Avís Legal</a><span class="lang-va"> | </span>
-        <a href="/1234.html" id="manageCookiesLinkVa" class="lang-va">Gestionar Galetes</a>
-    </div>
-  </footer>
-
-  <div id="cookie-banner">
-      <div class="cookie-content">
-          <span class="lang-es">Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra <a href="/1234.html" target="_blank">Política de Cookies</a>.</span>
-          <span class="lang-ca">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra <a href="/1234.html" target="_blank">Política de Galetes</a>.</span>
-          <span class="lang-va">Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra <a href="/1234.html" target="_blank">Política de Galetes</a>.</span>
-      </div>
-      <div class="cookie-buttons">
-          <button class="accept-btn">
-              <span class="lang-es">Aceptar</span>
-              <span class="lang-ca">Acceptar</span>
-              <span class="lang-va">Acceptar</span>
-          </button>
-          <button class="reject-btn">
-              <span class="lang-es">Rechazar</span>
-              <span class="lang-ca">Rebutjar</span>
-              <span class="lang-va">Rebutjar</span>
-          </button>
-      </div>
-  </div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-
-  <script>
-    // Translations object for dynamic text
-    const translations = {
-      es: {
-        placeholder: { nombre: "Tu nombre", telefono: "+34 600 000 000", email: "tu@correo.com", mensaje: "Describe el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicación", defaultElectrodomestico: "Selecciona uno", darkMode: "Modo Oscuro", lightMode: "Modo Claro", sending: "Enviando...", viewBrands: "Ver Marcas", aboutUs: "Sobre Nosotros", domestico: "Doméstico", industrial: "Industrial", formSuccess: "¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.", formError: "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.", validationError: "Por favor, completa todos los campos requeridos.", requestRepair: "Solicita tu reparación", chatWhatsApp: "Chatea por WhatsApp", cookieConsent: "Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al utilizar nuestro sitio web, aceptas todas las cookies de acuerdo con nuestra ", cookiePolicyLink: "1234.html", cookieAccept: "Aceptar", cookieReject: "Rechazar", manageCookies: "Gestionar Cookies", cookiePolicyText: "Política de Cookies", coverageTitle: "Nuestra Zona de Cobertura", coverageDetail: "Ofrecemos nuestros servicios en el centro de Valencia y alrededores, cubriendo un área aproximada hasta Sagunto. Consulta el mapa para más detalles." }
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ERB Servicio Técnico",
+      "image": "https://erbserviciotecnico.com/logo.png", // SEO: URL absoluta del logo
+      "@id": "https://erbserviciotecnico.com/", // SEO: URL absoluta de la página
+      "url": "https://erbserviciotecnico.com/",
+      "telephone": "+34612548508",
+      "priceRange": "$$", // SEO: Ajustar según corresponda
+      "description": "Especialistas en reparación de electrodomésticos de gama blanca, domésticos e industriales, y servicio de instalación de aires acondicionados en Barcelona, Coruña, Valencia y Castellón.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ES" 
+        // No se proporciona una dirección física completa, se especifican áreas de servicio.
       },
-      ca: {
-        placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teva sol·licitud ha estat enviada. Ens posarem en contacte amb tu aviat.", formError: "Hi ha hagut un error en enviar la teva sol·licitud. Si us plau, torna a intentar-ho més tard.", validationError: "Si us plau, completa tots els camps requerits.", requestRepair: "Sol·licita la teva reparació", chatWhatsApp: "Xateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acord amb la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes", cookiePolicyText: "Política de Galetes", coverageTitle: "La Nostra Zona de Cobertura", coverageDetail: "Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls." }
-      },
-      va: {
-        placeholder: { nombre: "El teu nom", telefono: "+34 600 000 000", email: "el teu@correu.com", mensaje: "Descriu el problema" },
-        text: { defaultUbicacion: "Selecciona una ubicació", defaultElectrodomestico: "Selecciona un", darkMode: "Mode Fosc", lightMode: "Mode Clar", sending: "Enviant...", viewBrands: "Veure Marques", aboutUs: "Sobre Nosaltres", domestico: "Domèstic", industrial: "Industrial", formSuccess: "Gràcies! La teua sol·licitud ha sigut enviada. Ens posarem en contacte amb tu prompte.", formError: "Hi ha hagut un error en enviar la teua sol·licitud. Per favor, intenta-ho de nou més tard.", validationError: "Per favor, completa tots els camps requerits.", requestRepair: "Sol·licita la teua reparació", chatWhatsApp: "Chateja per WhatsApp", cookieConsent: "Aquest lloc web utilitza galetes per millorar l'experiència de l'usuari. En utilitzar el nostre lloc web, acceptes totes les galetes d'acuerdo con la nostra ", cookiePolicyLink: "1234.html", cookieAccept: "Acceptar", cookieReject: "Rebutjar", manageCookies: "Gestionar Galetes", cookiePolicyText: "Política de Galetes", coverageTitle: "La Nostra Zona de Cobertura", coverageDetail: "Oferim els nostres serveis al centre de València i voltants, cobrint una àrea aproximada fins a Sagunt. Consulteu el mapa per a més detalls." }
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Barcelona"
+        },
+        {
+          "@type": "City",
+          "name": "Coruña" 
+        },
+        {
+          "@type": "City",
+          "name": "Valencia"
+        },
+        {
+          "@type": "City",
+          "name": "Castellón de la Plana"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios Técnicos",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Reparación de electrodomésticos gama blanca",
+              "serviceType": "Reparación de electrodomésticos"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Reparación de electrodomésticos industriales",
+              "serviceType": "Reparación de electrodomésticos industriales"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Instalación de aires acondicionados",
+              "serviceType": "Instalación de aire acondicionado"
+            }
+          }
+        ]
       }
-    };
-
-    // Function to update placeholders and dynamic text based on selected language
-    function updatePlaceholders(lang) {
-      document.getElementById('nombre').placeholder = translations[lang].placeholder.nombre;
-      document.getElementById('telefono').placeholder = translations[lang].placeholder.telefono;
-      document.getElementById('email').placeholder = translations[lang].placeholder.email;
-      document.getElementById('mensaje').placeholder = translations[lang].placeholder.mensaje;
-      document.getElementById('ubicacion').options[0].text = translations[lang].text.defaultUbicacion;
-      document.getElementById('equipo').options[0].text = translations[lang].text.defaultElectrodomestico;
-      updateSubmitButtonText();
-      updateServiceTypeButtonText(currentLang);
-      updateAboutUsButtonText(currentLang);
-      updateContactButtonsText(currentLang);
-      updateCookieBannerText(currentLang); // Ensure cookie banner text is updated
-      updateFooterLinksText(currentLang); // Ensure footer links are updated
-      updateCoverageMapText(currentLang); // Update coverage map text
     }
+    </script>
 
-    let currentLang = 'es'; // Default language
+    <header class="navy-blue text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#inicio" class="text-2xl font-bold flex items-center">
+                <img src="/logo.png" alt="ERB Servicio Técnico Logo" class="h-8 mr-2"> <span data-lang="company_name_header">ERB Servicio Técnico</span>
+            </a>
+            <nav class="hidden md:flex space-x-4">
+                <a href="#inicio" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_home">Inicio</a>
+                <a href="#servicios" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_services">Servicios</a>
+                <a href="#beneficios" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_benefits">Beneficios</a>
+                <a href="#marcas" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_brands">Marcas</a>
+                <a href="#nosotros" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_about">Sobre Nosotros</a>
+                <a href="#contacto" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_contact">Contacto</a>
+            </nav>
+            <div class="flex items-center">
+                <div class="relative mr-4">
+                    <button id="language-selector-btn" class="flex items-center focus:outline-none">
+                        <i class="fas fa-globe mr-1"></i>
+                        <span id="current-lang-text">ES</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div id="language-dropdown" class="absolute right-0 mt-2 py-2 w-28 navy-blue rounded-md shadow-xl z-20 hidden">
+                        <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-blue-800" data-lang-option="es">Español</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-blue-800" data-lang-option="ca">Català</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-blue-800" data-lang-option="va">Valencià</a>
+                    </div>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-    // Function to set the language of the page
-    function setLanguage(lang) {
-      currentLang = lang;
-      const languages = ['es', 'ca', 'va'];
-      languages.forEach(function(l) {
-        const elems = document.getElementsByClassName('lang-' + l);
-        for (let i = 0; i < elems.length; i++) {
-          elems[i].style.display = (l === lang) ? 'inline' : 'none';
+    <div id="mobile-menu" class="fixed inset-0 navy-blue text-white z-40 p-6 md:hidden">
+        <div class="flex justify-end mb-8">
+            <button id="close-mobile-menu-button" class="focus:outline-none">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4 text-center">
+            <a href="#inicio" class="hover:text-gray-300 text-lg py-2" data-lang="nav_home_mobile">Inicio</a>
+            <a href="#servicios" class="hover:text-gray-300 text-lg py-2" data-lang="nav_services_mobile">Servicios</a>
+            <a href="#beneficios" class="hover:text-gray-300 text-lg py-2" data-lang="nav_benefits_mobile">Beneficios</a>
+            <a href="#marcas" class="hover:text-gray-300 text-lg py-2" data-lang="nav_brands_mobile">Marcas</a>
+            <a href="#nosotros" class="hover:text-gray-300 text-lg py-2" data-lang="nav_about_mobile">Sobre Nosotros</a>
+            <a href="#contacto" class="hover:text-gray-300 text-lg py-2" data-lang="nav_contact_mobile">Contacto</a>
+        </nav>
+    </div>
+
+    <section id="inicio" class="hero-bg text-white min-h-screen flex items-center">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6" data-lang="hero_h1">Reparación de Electrodomésticos: ERB Servicio Técnico</h1>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto" data-lang="hero_subtitle">Especialistas en reparación y mantenimiento de electrodomésticos de gama blanca, industrial e instalación de aires acondicionados.</p>
+            <a href="#contacto" class="btn-primary hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg" data-lang="hero_cta">Solicita Presupuesto</a>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-navy" data-lang="services_title">Nuestros Servicios</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-xl mx-auto" data-lang="services_intro">Soluciones expertas para todo tipo de electrodomésticos y climatización.</p>
+            
+            <div class="flex justify-center space-x-2 md:space-x-4 mb-10">
+                <button class="filter-btn active px-4 py-2 md:px-6 md:py-3 rounded-lg border border-navy text-navy hover:bg-navy-blue hover:text-white" data-filter="all" data-lang="filter_all">Todos</button>
+                <button class="filter-btn px-4 py-2 md:px-6 md:py-3 rounded-lg border border-navy text-navy hover:bg-navy-blue hover:text-white" data-filter="domestico" data-lang="filter_domestic">Doméstico</button>
+                <button class="filter-btn px-4 py-2 md:px-6 md:py-3 rounded-lg border border-navy text-navy hover:bg-navy-blue hover:text-white" data-filter="industrial" data-lang="filter_industrial">Industrial</button>
+            </div>
+
+            <div id="service-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 
+                <div class="service-card bg-white p-6 rounded-xl shadow-lg border border-gray-200" data-type="domestico">
+                    <div class="text-center mb-4"><i class="fas fa-cog text-4xl text-navy"></i></div>
+                    <h3 class="text-xl font-semibold text-navy mb-3 text-center" data-lang="service_some_title">Título Servicio</h3>
+                    <p class="text-gray-600 text-sm mb-3" data-lang="service_some_desc">Descripción corta del servicio.</p>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="beneficios" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title text-navy" data-lang="benefits_title">Por Qué Elegirnos</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="benefit-card text-center p-6 bg-gray-50 rounded-xl shadow">
+                    <div class="text-3xl text-navy mb-4"><i class="fas fa-phone-volume"></i></div>
+                    <h3 class="text-xl font-semibold text-navy mb-2" data-lang="benefit1_title">Atención Inmediata</h3>
+                    <p class="text-gray-600 text-sm" data-lang="benefit1_desc">Solicita tu inspección llamando a nuestros canales de atención al cliente.</p>
+                </div>
+                <div class="benefit-card text-center p-6 bg-gray-50 rounded-xl shadow">
+                    <div class="text-3xl text-navy mb-4"><i class="fas fa-shipping-fast"></i></div>
+                    <h3 class="text-xl font-semibold text-navy mb-2" data-lang="benefit2_title">Sin Coste de Desplazamiento</h3>
+                    <p class="text-gray-600 text-sm" data-lang="benefit2_desc">Reparación en el acto si decides reparar, no cobramos el desplazamiento.</p>
+                </div>
+                <div class="benefit-card text-center p-6 bg-gray-50 rounded-xl shadow">
+                    <div class="text-3xl text-navy mb-4"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-xl font-semibold text-navy mb-2" data-lang="benefit3_title">Garantía de 6 Meses</h3>
+                    <p class="text-gray-600 text-sm" data-lang="benefit3_desc">Disfruta de tu electrodoméstico como nuevo con garantía en la reparación de 6 meses.</p>
+                </div>
+                <div class="benefit-card text-center p-6 bg-gray-50 rounded-xl shadow">
+                    <div class="text-3xl text-navy mb-4"><i class="fas fa-euro-sign"></i></div>
+                    <h3 class="text-xl font-semibold text-navy mb-2" data-lang="benefit4_title">Precios Competitivos</h3>
+                    <p class="text-gray-600 text-sm" data-lang="benefit4_desc">Precios competitivos en todas las reparaciones de electrodomésticos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="marcas" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title text-navy" data-lang="brands_title">Trabajamos con las Mejores Marcas</h2>
+            <div class="flex flex-wrap justify-center items-center">
+                <div class="brand-logo p-2"><img src="/samsung-logo-wordmark-rgb.png" alt="Reparación electrodomésticos Samsung"></div>
+                <div class="brand-logo p-2"><img src="/lg-logo-1.png" alt="Reparación electrodomésticos LG"></div>
+                <div class="brand-logo p-2"><img src="/balay.png" alt="Reparación electrodomésticos Balay"></div>
+                <div class="brand-logo p-2"><img src="/siemens.png" alt="Reparación electrodomésticos Siemens"></div>
+                <div class="brand-logo p-2"><img src="/whirlpool.png" alt="Reparación electrodomésticos Whirlpool"></div>
+                <div class="brand-logo p-2"><img src="/neckar.png" alt="Reparación electrodomésticos Neckar"></div>
+                <div class="brand-logo p-2"><img src="/bosch.png" alt="Reparación electrodomésticos Bosch"></div>
+                <div class="brand-logo p-2"><img src="/haier.png" alt="Reparación electrodomésticos Haier"></div>
+                <div class="brand-logo p-2"><img src="/mitsubishi-electric.png" alt="Reparación aires acondicionados Mitsubishi Electric"></div>
+                <div class="brand-logo p-2"><img src="/saunier-duval.png" alt="Reparación calderas Saunier Duval"></div>
+                <div class="brand-logo p-2"><img src="/ariston.png" alt="Reparación termos Ariston"></div>
+                <div class="brand-logo p-2"><img src="/vaillant.png" alt="Reparación calderas Vaillant"></div>
+                <div class="brand-logo p-2"><img src="/junkers.png" alt="Reparación calentadores Junkers"></div>
+                </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title text-navy" data-lang="about_title">Sobre Nosotros</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://placehold.co/600x400/001f3f/ffffff?text=Equipo+ERB" alt="Equipo de ERB Servicio Técnico" class="rounded-lg shadow-xl w-full h-auto object-cover">
+                </div>
+                <div class="text-gray-700">
+                    <p class="mb-4" data-lang="about_text_p1">Somos un equipo de técnicos especializados con años de experiencia en la reparación y mantenimiento de electrodomésticos de gama blanca, tanto domésticos como industriales, así como en la instalación de aires acondicionados.</p>
+                    <p class="mb-4" data-lang="about_text_p2">Nuestro compromiso es ofrecer un servicio rápido, eficiente y con garantía, asegurando la máxima satisfacción de nuestros clientes en Barcelona, Coruña, Valencia y Castellón de la Plana.</p>
+                    <p data-lang="about_text_p3">Confía en nosotros para devolverle la vida a tus electrodomésticos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-16 md:py-24 navy-blue text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang="contact_title">Contacta con Nosotros</h2>
+            <div class="grid md:grid-cols-2 gap-10 items-start">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6" data-lang="contact_form_title">Envíanos un Mensaje</h3>
+                    <form id="contactForm" action="https://formsubmit.co/roscordtgn@gmail.com" method="POST" class="space-y-6">
+                        <input type="hidden" name="_next" value="https://erbserviciotecnico.com/gracias.html"> <input type="hidden" name="_subject" value="Nuevo mensaje desde la web ERB Servicio Técnico">
+                        <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_template" value="table"> <div>
+                            <label for="nombre" class="block text-sm font-medium" data-lang="form_name">Nombre</label>
+                            <input type="text" name="nombre" id="nombre" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
+                        </div>
+                        <div>
+                            <label for="telefono" class="block text-sm font-medium" data-lang="form_phone">Teléfono</label>
+                            <input type="tel" name="telefono" id="telefono" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium" data-lang="form_email">Correo electrónico</label>
+                            <input type="email" name="email" id="email" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
+                        </div>
+                        <div>
+                            <label for="ubicacion" class="block text-sm font-medium" data-lang="form_location">Ubicación del servicio</label>
+                            <select name="ubicacion" id="ubicacion" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
+                                <option value="barcelona" data-lang="loc_barcelona">Barcelona</option>
+                                <option value="la_coruna" data-lang="loc_coruna">La Coruña</option>
+                                <option value="valencia" data-lang="loc_valencia">Valencia</option>
+                                <option value="castellon" data-lang="loc_castellon">Castellón de la Plana</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="equipo" class="block text-sm font-medium" data-lang="form_appliance">Electrodoméstico a reparar o servicio</label>
+                            <select name="equipo" id="equipo" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
+                                </select>
+                        </div>
+                        <div>
+                            <label for="mensaje" class="block text-sm font-medium" data-lang="form_message">Descripción del problema</label>
+                            <textarea name="mensaje" id="mensaje" rows="4" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-white hover:bg-gray-200 text-navy font-bold py-3 px-6 rounded-lg text-lg transition duration-300" data-lang="form_submit">Enviar Mensaje</button>
+                        </div>
+                    </form>
+                    <div id="form-status" class="mt-4 text-center"></div> </div>
+
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4" data-lang="contact_info_title">Otras Formas de Contacto</h3>
+                        <p class="flex items-center mb-3">
+                            <i class="fas fa-phone mr-3 text-xl"></i>
+                            <a href="tel:+34612548508" class="hover:underline" data-lang="contact_phone_text">+34 612 548 508</a>
+                        </p>
+                        <p class="flex items-center mb-3">
+                            <i class="fas fa-envelope mr-3 text-xl"></i>
+                            <a href="mailto:info@erbserviciotecnico.com" class="hover:underline" data-lang="contact_email_text">info@erbserviciotecnico.com</a> </p>
+                        <p class="flex items-center mb-6">
+                            <img src="/123.png" alt="WhatsApp ERB" class="w-6 h-6 mr-2"> <a href="https://wa.me/34612548508" target="_blank" class="hover:underline" data-lang="contact_whatsapp_text">Chatea con nosotros en WhatsApp</a>
+                        </p>
+                         <p class="flex items-start">
+                            <i class="fas fa-map-marker-alt mr-3 text-xl mt-1"></i>
+                            <span data-lang="contact_areas">Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana</span>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4" data-lang="contact_map_title">Nuestras Áreas de Servicio</h3>
+                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d12495474.904806554!2d-3.691006499999993!3d39.687196800000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sBarcelona%2C%20Coru%C3%B1a%2C%20Valencia%2C%20Castell%C3%B3n%20de%20la%20Plana!5e0!3m2!1ses!2ses!4v1700000000000"
+                                width="100%" 
+                                height="350" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Áreas de servicio de ERB"> 
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p id="footer-copyright-text" data-lang="footer_copyright">© 2025 ERB Servicio Técnico de Electrodomésticos | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana</p>
+            <div class="mt-4 space-x-4 text-sm">
+                <a href="/politica-privacidad.html" class="hover:text-white" data-lang="footer_privacy" id="privacyLink">Política de Privacidad</a>
+                <a href="/aviso-legal.html" class="hover:text-white" data-lang="footer_legal" id="legalLink">Aviso Legal</a>
+                <a href="/politica-cookies.html" class="hover:text-white" data-lang="footer_cookies" id="cookiesLink">Política de Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Definición de servicios
+        const allServices = [
+            { id: 'frigorificos', type: 'domestico', icon: 'fa-snowflake', title_key: 'service_fridge_title', desc_key: 'service_fridge_desc' },
+            { id: 'aires_acondicionados', type: 'domestico industrial', icon: 'fa-wind', title_key: 'service_ac_title', desc_key: 'service_ac_desc' },
+            { id: 'lavadoras', type: 'domestico', icon: 'fa-soap', title_key: 'service_washing_machine_title', desc_key: 'service_washing_machine_desc' },
+            { id: 'lavavajillas', type: 'domestico', icon: 'fa-glass-water-droplet', title_key: 'service_dishwasher_title', desc_key: 'service_dishwasher_desc' },
+            { id: 'hornos', type: 'domestico', icon: 'fa-temperature-high', title_key: 'service_oven_title', desc_key: 'service_oven_desc' },
+            { id: 'secadoras', type: 'domestico', icon: 'fa-shirt', title_key: 'service_dryer_title', desc_key: 'service_dryer_desc' },
+            { id: 'vitroceramicas', type: 'domestico', icon: 'fa-fire-burner', title_key: 'service_cooktop_title', desc_key: 'service_cooktop_desc' },
+            { id: 'calentadores_agua', type: 'domestico', icon: 'fa-tint', title_key: 'service_water_heater_title', desc_key: 'service_water_heater_desc' },
+            { id: 'calderas', type: 'domestico', icon: 'fa-fire', title_key: 'service_boiler_title', desc_key: 'service_boiler_desc' },
+            { id: 'termotanques', type: 'domestico', icon: 'fa-water', title_key: 'service_thermotank_title', desc_key: 'service_thermotank_desc' },
+            { id: 'lavanderia_industrial', type: 'industrial', icon: 'fa-industry', title_key: 'service_industrial_laundry_title', desc_key: 'service_industrial_laundry_desc' },
+            { id: 'refrigeracion_industrial', type: 'industrial', icon: 'fa-temperature-arrow-down', title_key: 'service_industrial_fridge_title', desc_key: 'service_industrial_fridge_desc' },
+            { id: 'calderas_industriales', type: 'industrial', icon: 'fa-dumpster-fire', title_key: 'service_industrial_boiler_title', desc_key: 'service_industrial_boiler_desc' },
+        ];
+
+        // Datos de idioma
+        const translations = {
+            es: {
+                company_name_header: "ERB Servicio Técnico",
+                nav_home: "Inicio", nav_services: "Servicios", nav_benefits: "Beneficios", nav_brands: "Marcas", nav_about: "Sobre Nosotros", nav_contact: "Contacto",
+                nav_home_mobile: "Inicio", nav_services_mobile: "Servicios", nav_benefits_mobile: "Beneficios", nav_brands_mobile: "Marcas", nav_about_mobile: "Sobre Nosotros", nav_contact_mobile: "Contacto",
+                hero_h1: "Reparación de Electrodomésticos: ERB Servicio Técnico",
+                hero_subtitle: "Especialistas en reparación y mantenimiento de electrodomésticos de gama blanca, industrial e instalación de aires acondicionados.",
+                hero_cta: "Solicita Presupuesto",
+                services_title: "Nuestros Servicios",
+                services_intro: "Soluciones expertas para todo tipo de electrodomésticos y climatización.",
+                filter_all: "Todos", filter_domestic: "Doméstico", filter_industrial: "Industrial",
+                // Servicios (ES)
+                service_fridge_title: "Reparación de Frigoríficos y Congeladores", service_fridge_desc: "Soluciones para problemas de enfriamiento, fugas y más en tus equipos de refrigeración domésticos.",
+                service_ac_title: "Instalación y Reparación de Aires Acondicionados", service_ac_desc: "Servicio completo para sistemas de climatización domésticos e industriales, garantizando confort.",
+                service_washing_machine_title: "Reparación de Lavadoras", service_washing_machine_desc: "Arreglamos problemas de centrifugado, desagüe, y cualquier avería en tu lavadora.",
+                service_dishwasher_title: "Reparación de Lavavajillas", service_dishwasher_desc: "Solucionamos fallos de limpieza, fugas o problemas eléctricos en tu lavavajillas.",
+                service_oven_title: "Reparación de Hornos", service_oven_desc: "Reparamos hornos que no calientan, problemas con el termostato o fallos electrónicos.",
+                service_dryer_title: "Reparación de Secadoras", service_dryer_desc: "Soluciones para secadoras que no secan, hacen ruido o no encienden.",
+                service_cooktop_title: "Reparación de Vitrocerámicas", service_cooktop_desc: "Reparamos vitrocerámicas de inducción, eléctricas, con problemas en los fogones o controles.",
+                service_water_heater_title: "Reparación de Calentadores de Agua", service_water_heater_desc: "Servicio técnico para calentadores de gas o eléctricos, problemas de encendido o fugas.",
+                service_boiler_title: "Reparación de Calderas", service_boiler_desc: "Especialistas en calderas de gas o gasoil, solucionamos averías y realizamos mantenimiento.",
+                service_thermotank_title: "Reparación de Termotanques", service_thermotank_desc: "Reparación y mantenimiento de termotanques eléctricos, problemas de temperatura o pérdidas.",
+                service_industrial_laundry_title: "Reparación de Maquinaria de Lavandería Industrial", service_industrial_laundry_desc: "Servicio técnico para lavadoras, secadoras y planchadoras industriales.",
+                service_industrial_fridge_title: "Reparación de Equipos de Refrigeración Industrial", service_industrial_fridge_desc: "Mantenimiento y reparación de cámaras frigoríficas, congeladores y vitrinas industriales.",
+                service_industrial_boiler_title: "Reparación de Calderas Industriales", service_industrial_boiler_desc: "Soluciones para calderas de vapor, agua caliente y otros sistemas industriales.",
+                benefits_title: "Por Qué Elegirnos",
+                benefit1_title: "Atención Inmediata", benefit1_desc: "Solicita tu inspección llamando a nuestros canales de atención al cliente.",
+                benefit2_title: "Sin Coste de Desplazamiento", benefit2_desc: "Reparación en el acto si decides reparar, no cobramos el desplazamiento.",
+                benefit3_title: "Garantía de 6 Meses", benefit3_desc: "Disfruta de tu electrodoméstico como nuevo con garantía en la reparación de 6 meses.",
+                benefit4_title: "Precios Competitivos", benefit4_desc: "Precios competitivos en todas las reparaciones de electrodomésticos.",
+                brands_title: "Trabajamos con las Mejores Marcas",
+                about_title: "Sobre Nosotros",
+                about_text_p1: "Somos un equipo de técnicos especializados con años de experiencia en la reparación y mantenimiento de electrodomésticos de gama blanca, tanto domésticos como industriales, así como en la instalación de aires acondicionados.",
+                about_text_p2: "Nuestro compromiso es ofrecer un servicio rápido, eficiente y con garantía, asegurando la máxima satisfacción de nuestros clientes en Barcelona, Coruña, Valencia y Castellón de la Plana.",
+                about_text_p3: "Confía en nosotros para devolverle la vida a tus electrodomésticos.",
+                contact_title: "Contacta con Nosotros",
+                contact_form_title: "Envíanos un Mensaje",
+                form_name: "Nombre", form_phone: "Teléfono", form_email: "Correo electrónico", form_location: "Ubicación del servicio", form_appliance: "Electrodoméstico a reparar o servicio", form_message: "Descripción del problema", form_submit: "Enviar Mensaje",
+                loc_barcelona: "Barcelona", loc_coruna: "La Coruña", loc_valencia: "Valencia", loc_castellon: "Castellón de la Plana",
+                contact_info_title: "Otras Formas de Contacto",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Chatea con nosotros en WhatsApp",
+                contact_areas: "Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana", contact_map_title: "Nuestras Áreas de Servicio",
+                footer_copyright: "© 2025 ERB Servicio Técnico de Electrodomésticos | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana",
+                footer_privacy: "Política de Privacidad", footer_legal: "Aviso Legal", footer_cookies: "Política de Cookies",
+                form_sending: "Enviando...", form_success: "¡Mensaje enviado con éxito!", form_error: "Error al enviar. Inténtalo de nuevo."
+            },
+            ca: {
+                company_name_header: "ERB Servei Tècnic",
+                nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_contact: "Contacte",
+                nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_contact_mobile: "Contacte",
+                hero_h1: "Reparació d'Electrodomèstics: ERB Servei Tècnic",
+                hero_subtitle: "Especialistes en reparació i manteniment d'electrodomèstics de gamma blanca, industrial i instal·lació d'aires condicionats.",
+                hero_cta: "Sol·licita Pressupost",
+                services_title: "Els Nostres Serveis",
+                services_intro: "Solucions expertes per a tota mena d'electrodomèstics i climatització.",
+                filter_all: "Tots", filter_domestic: "Domèstic", filter_industrial: "Industrial",
+                // Servicios (CA)
+                service_fridge_title: "Reparació de Frigorífics i Congeladors", service_fridge_desc: "Solucions per a problemes de refredament, fuites i més en els teus equips de refrigeració domèstics.",
+                service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
+                service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teva rentadora.",
+                service_dishwasher_title: "Reparació de Rentavaixelles", service_dishwasher_desc: "Solucionem errades de neteja, fuites o problemes elèctrics al teu rentavaixelles.",
+                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no escalfen, problemes amb el termòstat o errades electròniques.",
+                service_dryer_title: "Reparació d'Assecadores", service_dryer_desc: "Solucions per a assecadores que no assequen, fan soroll o no s'engeguen.",
+                service_cooktop_title: "Reparació de Vitroceràmiques", service_cooktop_desc: "Reparem vitroceràmiques d'inducció, elèctriques, amb problemes als fogons o controls.",
+                service_water_heater_title: "Reparació d'Escalfadors d'Aigua", service_water_heater_desc: "Servei tècnic per a escalfadors de gas o elèctrics, problemes d'encesa o fuites.",
+                service_boiler_title: "Reparació de Calderes", service_boiler_desc: "Especialistes en calderes de gas o gasoil, solucionem avaries i realitzem manteniment.",
+                service_thermotank_title: "Reparació de Termos Elèctrics", service_thermotank_desc: "Reparació i manteniment de termos elèctrics, problemes de temperatura o pèrdues.",
+                service_industrial_laundry_title: "Reparació de Maquinària de Bugaderia Industrial", service_industrial_laundry_desc: "Servei tècnic per a rentadores, assecadores i planxadores industrials.",
+                service_industrial_fridge_title: "Reparació d'Equips de Refrigeració Industrial", service_industrial_fridge_desc: "Manteniment i reparació de cambres frigorífiques, congeladors i vitrines industrials.",
+                service_industrial_boiler_title: "Reparació de Calderes Industrials", service_industrial_boiler_desc: "Solucions per a calderes de vapor, aigua calenta i altres sistemes industrials.",
+                benefits_title: "Per Què Triar-nos",
+                benefit1_title: "Atenció Immediata", benefit1_desc: "Sol·licita la teva inspecció trucant als nostres canals d'atenció al client.",
+                benefit2_title: "Sense Cost de Desplaçament", benefit2_desc: "Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.",
+                benefit3_title: "Garantia de 6 Mesos", benefit3_desc: "Gaudeix del teu electrodomèstic com nou amb garantia en la reparació de 6 mesos.",
+                benefit4_title: "Preus Competitius", benefit4_desc: "Preus competitius en totes les reparacions d'electrodomèstics.",
+                brands_title: "Treballem amb les Millors Marques",
+                about_title: "Sobre Nosaltres",
+                about_text_p1: "Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'electrodomèstics de gamma blanca, tant domèstics com industrials, així com en la instal·lació d'aires condicionats.",
+                about_text_p2: "El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana.",
+                about_text_p3: "Confia en nosaltres per tornar-li la vida als teus electrodomèstics.",
+                contact_title: "Contacta amb Nosaltres",
+                contact_form_title: "Envia'ns un Missatge",
+                form_name: "Nom", form_phone: "Telèfon", form_email: "Correu electrònic", form_location: "Ubicació del servei", form_appliance: "Electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
+                loc_barcelona: "Barcelona", loc_coruna: "La Corunya", loc_valencia: "València", loc_castellon: "Castelló de la Plana",
+                contact_info_title: "Altres Formes de Contacte",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
+                contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "Les Nostres Àrees de Servei",
+                footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
+                footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
+                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar."
+            },
+            va: {
+                company_name_header: "ERB Servei Tècnic",
+                nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_contact: "Contacte",
+                nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_contact_mobile: "Contacte",
+                hero_h1: "Reparació d'Electrodomèstics: ERB Servei Tècnic",
+                hero_subtitle: "Especialistes en reparació i manteniment d'aparells electrodomèstics de gamma blanca, industrial i instal·lació d'aires condicionats.",
+                hero_cta: "Sol·licita Pressupost",
+                services_title: "Els Nostres Serveis",
+                services_intro: "Solucions expertes per a tota classe d'aparells electrodomèstics i climatització.",
+                filter_all: "Tots", filter_domestic: "Domèstic", filter_industrial: "Industrial",
+                // Servicios (VA)
+                service_fridge_title: "Reparació de Frigorífics i Congeladors", service_fridge_desc: "Solucions per a problemes de refredament, fugues i més en els teus equips de refrigeració domèstics.",
+                service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
+                service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teua rentadora.",
+                service_dishwasher_title: "Reparació de Rentaplats", service_dishwasher_desc: "Solucionem errades de neteja, fugues o problemes elèctrics al teu rentaplats.",
+                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no calfen, problemes amb el termòstat o errades electròniques.",
+                service_dryer_title: "Reparació d'Eixugadores", service_dryer_desc: "Solucions per a eixugadores que no eixuguen, fan soroll o no s'encenen.",
+                service_cooktop_title: "Reparació de Vitroceràmiques", service_cooktop_desc: "Reparem vitroceràmiques d'inducció, elèctriques, amb problemes als fogons o controls.",
+                service_water_heater_title: "Reparació de Calentadors d'Aigua", service_water_heater_desc: "Servei tècnic per a calentadors de gas o elèctrics, problemes d'encesa o fugues.",
+                service_boiler_title: "Reparació de Calderes", service_boiler_desc: "Especialistes en calderes de gas o gasoil, solucionem avaries i realitzem manteniment.",
+                service_thermotank_title: "Reparació de Termos Elèctrics", service_thermotank_desc: "Reparació i manteniment de termos elèctrics, problemes de temperatura o pèrdues.",
+                service_industrial_laundry_title: "Reparació de Maquinària de Bugaderia Industrial", service_industrial_laundry_desc: "Servei tècnic per a rentadores, eixugadores i planxadores industrials.",
+                service_industrial_fridge_title: "Reparació d'Equips de Refrigeració Industrial", service_industrial_fridge_desc: "Manteniment i reparació de cambres frigorífiques, congeladors i vitrines industrials.",
+                service_industrial_boiler_title: "Reparació de Calderes Industrials", service_industrial_boiler_desc: "Solucions per a calderes de vapor, aigua calenta i altres sistemes industrials.",
+                benefits_title: "Per Què Triar-nos",
+                benefit1_title: "Atenció Immediata", benefit1_desc: "Sol·licita la teua inspecció telefonant als nostres canals d'atenció al client.",
+                benefit2_title: "Sense Cost de Desplaçament", benefit2_desc: "Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.",
+                benefit3_title: "Garantia de 6 Mesos", benefit3_desc: "Gaudeix del teu aparell electrodomèstic com nou amb garantia en la reparació de 6 mesos.",
+                benefit4_title: "Preus Competitius", benefit4_desc: "Preus competitius en totes les reparacions d'aparells electrodomèstics.",
+                brands_title: "Treballem amb les Millors Marques",
+                about_title: "Sobre Nosaltres",
+                about_text_p1: "Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'aparells electrodomèstics de gamma blanca, tant domèstics com industrials, així com en la instal·lació d'aires condicionats.",
+                about_text_p2: "El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana.",
+                about_text_p3: "Confia en nosaltres per tornar-li la vida als teus aparells electrodomèstics.",
+                contact_title: "Contacta amb Nosaltres",
+                contact_form_title: "Envia'ns un Missatge",
+                form_name: "Nom", form_phone: "Telèfon", form_email: "Correu electrònic", form_location: "Ubicació del servei", form_appliance: "Aparell electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
+                loc_barcelona: "Barcelona", loc_coruna: "La Corunya", loc_valencia: "València", loc_castellon: "Castelló de la Plana",
+                contact_info_title: "Altres Formes de Contacte",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
+                contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "Les Nostres Àrees de Servei",
+                footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
+                footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
+                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar."
+            }
+        };
+
+        // Función para cambiar idioma
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            // Añadir clase al body para estilos CSS específicos si es necesario
+            document.body.className = document.body.className.replace(/lang-(es|ca|va)/g, '');
+            document.body.classList.add('lang-' + lang);
+
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                } else if (translations.es[key]) { // Fallback a español si no existe la clave en el idioma actual
+                    element.innerHTML = translations.es[key];
+                }
+            });
+            document.getElementById('current-lang-text').textContent = lang.toUpperCase();
+            localStorage.setItem('preferredLanguage', lang);
+            document.getElementById('language-dropdown').classList.add('hidden');
+
+            // Actualizar enlaces legales
+            const privacyLink = document.getElementById('privacyLink');
+            const legalLink = document.getElementById('legalLink');
+            const cookiesLink = document.getElementById('cookiesLink');
+
+            if (lang === 'ca') {
+                privacyLink.href = '/ca/politica-privacitat.html';
+                legalLink.href = '/ca/avis-legal.html';
+                cookiesLink.href = '/ca/politica-galetes.html';
+            } else if (lang === 'va') {
+                privacyLink.href = '/va/politica-privacitat.html';
+                legalLink.href = '/va/avis-legal.html';
+                cookiesLink.href = '/va/politica-galetes.html';
+            } else { // es
+                privacyLink.href = '/politica-privacidad.html';
+                legalLink.href = '/aviso-legal.html';
+                cookiesLink.href = '/politica-cookies.html';
+            }
+            // Actualizar opciones del select de equipos
+            populateApplianceSelect(lang);
         }
-      });
-      updatePlaceholders(currentLang);
-      updateDarkModeButtonText();
-      updateContactButtonsText(currentLang); // Ensure contact buttons are updated on language change
-      updateCookieBannerText(currentLang); // Update cookie banner on language change
-      updateFooterLinksText(currentLang); // Update footer links on language change
-      updateCoverageMapText(currentLang); // Update coverage map text on language change
-    }
+        
+        function populateServiceCards(lang) {
+            const serviceListContainer = document.getElementById('service-list');
+            serviceListContainer.innerHTML = ''; // Limpiar servicios existentes
+            const currentTranslations = translations[lang] || translations.es;
 
-    // Function to update the text of the dark mode button
-    function updateDarkModeButtonText() {
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const icon = darkModeToggle.querySelector('i');
-        const textSpanEs = darkModeToggle.querySelector('.lang-es');
-        const textSpanCa = darkModeToggle.querySelector('.lang-ca');
-        const textSpanVa = darkModeToggle.querySelector('.lang-va');
+            allServices.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card bg-white p-6 rounded-xl shadow-lg border border-gray-200';
+                card.setAttribute('data-type', service.type); // Para el filtro
 
-        if (isDarkMode) {
-             icon.classList.remove('fa-moon');
-             icon.classList.add('fa-sun');
-             textSpanEs.textContent = translations.es.text.lightMode;
-             textSpanCa.textContent = translations.ca.text.lightMode;
-             textSpanVa.textContent = translations.va.text.lightMode;
-        } else {
-             icon.classList.remove('fa-sun');
-             icon.classList.add('fa-moon');
-             textSpanEs.textContent = translations.es.text.darkMode;
-             textSpanCa.textContent = translations.ca.text.darkMode;
-             textSpanVa.textContent = translations.va.text.darkMode;
+                const iconHtml = `<div class="text-center mb-4"><i class="fas ${service.icon} text-4xl text-navy"></i></div>`;
+                const titleHtml = `<h3 class="text-xl font-semibold text-navy mb-3 text-center">${currentTranslations[service.title_key] || service.title_key}</h3>`;
+                const descHtml = `<p class="text-gray-600 text-sm mb-3">${currentTranslations[service.desc_key] || service.desc_key}</p>`;
+                
+                card.innerHTML = iconHtml + titleHtml + descHtml;
+                serviceListContainer.appendChild(card);
+            });
         }
-    }
 
-    // Function to update the text of the form submit button
-    function updateSubmitButtonText() {
-        const submitButton = document.querySelector("#contactForm button[type='submit']");
-        if (submitButton) {
-            const langSpans = submitButton.querySelectorAll('span[class^="lang-"]');
-            langSpans.forEach(span => {
-                if (span.classList.contains('lang-' + currentLang)) {
-                    span.style.display = 'inline';
+        function populateApplianceSelect(lang) {
+            const applianceSelect = document.getElementById('equipo');
+            if (!applianceSelect) return;
+            applianceSelect.innerHTML = ''; // Limpiar opciones
+            const currentTranslations = translations[lang] || translations.es;
+
+            allServices.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.id;
+                option.textContent = currentTranslations[service.title_key] || service.title_key.replace('service_', '').replace('_title', '').replace(/_/g, ' ');
+                applianceSelect.appendChild(option);
+            });
+        }
+
+        function filterServices(filter) {
+            const serviceCards = document.querySelectorAll('#service-list .service-card');
+            serviceCards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                if (filter === 'all' || cardType.includes(filter)) {
+                    card.classList.remove('service-hidden');
                 } else {
-                    span.style.display = 'none';
+                    card.classList.add('service-hidden');
                 }
             });
-        }
-    }
 
-    // Function to update the text of service type buttons
-    function updateServiceTypeButtonText(lang) {
-        const domesticoBtn = document.getElementById('domesticoBtn');
-        const industrialBtn = document.getElementById('industrialBtn');
-        if (domesticoBtn) {
-            domesticoBtn.querySelector('.lang-es').textContent = translations.es.text.domestico;
-            domesticoBtn.querySelector('.lang-ca').textContent = translations.ca.text.domestico;
-            domesticoBtn.querySelector('.lang-va').textContent = translations.va.text.domestico;
-        }
-         if (industrialBtn) {
-            industrialBtn.querySelector('.lang-es').textContent = translations.es.text.industrial;
-            industrialBtn.querySelector('.lang-ca').textContent = translations.ca.text.industrial;
-            industrialBtn.querySelector('.lang-va').textContent = translations.va.text.industrial;
-         }
-    }
-
-    // Function to update the text of the "About Us" button
-    function updateAboutUsButtonText(lang) {
-        const aboutUsButton = document.querySelector('.contact-buttons-container a[href="#about-us"]');
-        if (aboutUsButton) {
-            aboutUsButton.querySelector('.lang-es').textContent = translations.es.text.aboutUs;
-            aboutUsButton.querySelector('.lang-ca').textContent = translations.ca.text.aboutUs;
-            aboutUsButton.querySelector('.lang-va').textContent = translations.va.text.aboutUs;
-        }
-    }
-
-    // Function to update the text of various contact buttons
-    function updateContactButtonsText(lang) {
-        const requestRepairButton = document.querySelector('.contact-buttons-container a[href="#formulario"]');
-        if (requestRepairButton) {
-            requestRepairButton.querySelector('.lang-es').textContent = translations[lang].text.requestRepair;
-            requestRepairButton.querySelector('.lang-ca').textContent = translations[lang].text.requestRepair;
-            requestRepairButton.querySelector('.lang-va').textContent = translations[lang].text.requestRepair;
-        }
-
-        const chatWhatsAppButton = document.querySelector('.whatsapp-button-container .whatsapp-btn');
-        if (chatWhatsAppButton) {
-             chatWhatsAppButton.querySelector('.lang-es').textContent = translations[lang].text.chatWhatsApp;
-             chatWhatsAppButton.querySelector('.lang-ca').textContent = translations[lang].text.chatWhatsApp;
-             chatWhatsAppButton.querySelector('.lang-va').textContent = translations[lang].text.chatWhatsApp;
-        }
-    }
-
-    // Function to update cookie banner text and links based on current language
-    function updateCookieBannerText(lang) {
-        const cookieBanner = document.getElementById('cookie-banner');
-        if (cookieBanner) {
-            // Update text content with correct link path
-            cookieBanner.querySelector('.cookie-content .lang-es').innerHTML = translations.es.text.cookieConsent + `<a href="/1234.html" target="_blank">${translations.es.text.cookiePolicyText}</a>.`;
-            cookieBanner.querySelector('.cookie-content .lang-ca').innerHTML = translations.ca.text.cookieConsent + `<a href="/1234.html" target="_blank">${translations.ca.text.cookiePolicyText}</a>.`;
-            cookieBanner.querySelector('.cookie-content .lang-va').innerHTML = translations.va.text.cookieConsent + `<a href="/1234.html" target="_blank">${translations.va.text.cookiePolicyText}</a>.`;
-
-            // Update button text
-            cookieBanner.querySelector('.accept-btn .lang-es').textContent = translations.es.text.cookieAccept;
-            cookieBanner.querySelector('.accept-btn .lang-ca').textContent = translations.ca.text.cookieAccept;
-            cookieBanner.querySelector('.accept-btn .lang-va').textContent = translations.va.text.cookieAccept;
-
-            cookieBanner.querySelector('.reject-btn .lang-es').textContent = translations.es.text.cookieReject;
-            cookieBanner.querySelector('.reject-btn .lang-ca').textContent = translations.ca.text.cookieReject;
-            cookieBanner.querySelector('.reject-btn .lang-va').textContent = translations.va.text.cookieReject;
-        }
-    }
-
-    // Function to update footer links text and href based on current language
-    function updateFooterLinksText(lang) {
-        const manageCookiesLinkEs = document.getElementById('manageCookiesLink');
-        const manageCookiesLinkCa = document.getElementById('manageCookiesLinkCa');
-        const manageCookiesLinkVa = document.getElementById('manageCookiesLinkVa');
-
-        if (manageCookiesLinkEs) {
-            manageCookiesLinkEs.textContent = translations.es.text.manageCookies;
-            manageCookiesLinkEs.href = "/" + translations.es.text.cookiePolicyLink; // Update href
-        }
-        if (manageCookiesLinkCa) {
-            manageCookiesLinkCa.textContent = translations.ca.text.manageCookies;
-            manageCookiesLinkCa.href = "/" + translations.ca.text.cookiePolicyLink; // Update href
-        }
-        if (manageCookiesLinkVa) {
-            manageCookiesLinkVa.textContent = translations.va.text.manageCookies;
-            manageCookiesLinkVa.href = "/" + translations.va.text.cookiePolicyLink; // Update href
-        }
-
-        // Update the "Política de Cookies" link in the footer explicitly
-        document.querySelectorAll('footer a[id^="manageCookiesLink"]').forEach(link => {
-             const linkLang = link.id.substring("manageCookiesLink".length).toLowerCase() || 'es'; // es, ca, va
-             if (link.classList.contains('lang-' + linkLang)) {
-                 link.textContent = translations[linkLang].text.manageCookies; // Use manageCookies for display text
-                 link.href = "/" + translations[linkLang].text.cookiePolicyLink; // Ensure href is also updated
-             }
-        });
-    }
-
-    // Function to update coverage map section text based on current language
-    function updateCoverageMapText(lang) {
-        const coverageSection = document.getElementById('coverage-area');
-        if (coverageSection) {
-            const titleElement = coverageSection.querySelector('h2');
-            const detailElement = coverageSection.querySelector('p');
-
-            if (titleElement) {
-                titleElement.querySelector('.lang-es').textContent = translations.es.text.coverageTitle;
-                titleElement.querySelector('.lang-ca').textContent = translations.ca.text.coverageTitle;
-                titleElement.querySelector('.lang-va').textContent = translations.va.text.coverageTitle;
-            }
-            if (detailElement) {
-                detailElement.querySelector('.lang-es').textContent = translations.es.text.coverageDetail;
-                detailElement.querySelector('.lang-ca').textContent = translations.ca.text.coverageDetail;
-                detailElement.querySelector('.lang-va').textContent = translations.va.text.coverageDetail;
-            }
-        }
-    }
-
-
-    // Function to filter service cards based on selected service type
-    function filterServiceCards(serviceType) {
-        const cards = document.querySelectorAll('#servicios .card');
-        cards.forEach(card => {
-            const cardTypes = card.dataset.serviceType ? card.dataset.serviceType.split(' ') : [];
-            if (serviceType === 'all' || cardTypes.includes(serviceType)) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-            }
-        });
-    }
-
-    // --- Cookie Helper Functions ---
-    function setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-    }
-
-    function getCookie(name) {
-        const nameEQ = name + "=";
-        const ca = document.cookie.split(';');
-        for(let i=0;i < ca.length;i++) {
-            let c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-        }
-        return null;
-    }
-
-    function eraseCookie(name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-    // --- End Cookie Helper Functions ---
-
-    // Main script execution after DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const body = document.body;
-        const savedMode = localStorage.getItem('dark-mode');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Set initial dark mode
-        if (savedMode === 'enabled') {
-            body.classList.add('dark-mode');
-        } else if (savedMode === null && prefersDark) {
-            body.classList.add('dark-mode');
-        }
-        updateDarkModeButtonText(); // Update button text after setting mode
-
-        setLanguage('es'); // Set default language to Spanish
-
-        // --- Cookie Consent Logic ---
-        const cookieBanner = document.getElementById('cookie-banner');
-        const acceptCookiesBtn = cookieBanner ? cookieBanner.querySelector('.accept-btn') : null;
-        const rejectCookiesBtn = cookieBanner ? cookieBanner.querySelector('.reject-btn') : null;
-        const cookieConsentGiven = getCookie('cookie_consent');
-
-        if (!cookieConsentGiven && cookieBanner) {
-            cookieBanner.style.display = 'flex';
-            updateCookieBannerText(currentLang);
-        }
-
-        if (acceptCookiesBtn) {
-            acceptCookiesBtn.addEventListener('click', () => {
-                setCookie('cookie_consent', 'accepted', 365);
-                cookieBanner.style.display = 'none';
-                if (typeof gtag === 'function') {
-                    gtag('consent', 'update', { 'analytics_storage': 'granted' });
+            // Actualizar botón activo
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-filter') === filter) {
+                    btn.classList.add('active');
                 }
             });
         }
 
-        if (rejectCookiesBtn) {
-            rejectCookiesBtn.addEventListener('click', () => {
-                setCookie('cookie_consent', 'rejected', 365);
-                cookieBanner.style.display = 'none';
-                 if (typeof gtag === 'function') {
-                    gtag('consent', 'update', { 'analytics_storage': 'denied' });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langButton = document.getElementById('language-selector-btn');
+            const langDropdown = document.getElementById('language-dropdown');
+            
+            langButton.addEventListener('click', () => {
+                langDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!langButton.contains(event.target) && !langDropdown.contains(event.target)) {
+                    langDropdown.classList.add('hidden');
                 }
             });
-        }
 
-        document.querySelectorAll('[id^="manageCookiesLink"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (cookieBanner) {
-                    cookieBanner.style.display = 'flex';
-                    updateCookieBannerText(currentLang);
-                }
-            });
-        });
-        // --- End Cookie Consent Logic ---
-
-        // Language button event listeners
-        document.querySelectorAll('#language-selector button').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const buttonElement = event.target.closest('button'); // Ensure we get the button element
-                if (buttonElement.id === 'darkModeToggle') return; // Skip dark mode toggle
-
-                const buttonText = buttonElement.textContent.toLowerCase();
-                let lang = 'es';
-                if (buttonText.includes('català')) lang = 'ca';
-                else if (buttonText.includes('valencià')) lang = 'va';
-                setLanguage(lang);
-            });
-        });
-
-        // Dark mode toggle event listener
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        if (darkModeToggle) {
-            darkModeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                localStorage.setItem('dark-mode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-                updateDarkModeButtonText();
-            });
-        }
-
-        // Service card click to populate form and scroll
-        const equipoSelect = document.getElementById('equipo');
-        const formularioSection = document.querySelector('section#formulario'); // More specific selector
-        document.querySelectorAll('#servicios .card').forEach(card => {
-            card.addEventListener('click', () => {
-                const formValue = card.dataset.applianceValue;
-                if (formValue && equipoSelect) {
-                    equipoSelect.value = formValue;
-                }
-                if (formularioSection) {
-                     formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Form submission handler
-        const contactForm = document.getElementById("contactForm");
-        if (contactForm) {
-            contactForm.addEventListener("submit", function(e) {
-               e.preventDefault();
-               const form = this;
-               const submitButton = form.querySelector("button[type='submit']");
-               const responseDiv = document.getElementById("formResponse");
-               const formLoadingIndicator = document.getElementById('formLoadingIndicator');
-
-               responseDiv.classList.remove('visible', 'success', 'error');
-               responseDiv.textContent = '';
-               let allRequiredFilled = true;
-
-               form.querySelectorAll('[required]').forEach(input => {
-                   if (!input.value) {
-                       allRequiredFilled = false;
-                       input.classList.add('border-red-500'); // Highlight empty required fields
-                   } else {
-                       input.classList.remove('border-red-500');
-                   }
-               });
-
-               if (!allRequiredFilled) {
-                   responseDiv.textContent = translations[currentLang].text.validationError;
-                   responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error visible";
-                   return;
-               }
-
-               submitButton.disabled = true;
-               submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-               if(formLoadingIndicator) formLoadingIndicator.style.display = 'flex';
-
-               fetch(form.action, {
-                 method: "POST",
-                 body: new FormData(form),
-                 headers: { 'Accept': 'application/json' }
-               })
-               .then(response => {
-                 if(formLoadingIndicator) formLoadingIndicator.style.display = 'none';
-                 if (response.ok) {
-                   return response.text();
-                 } else {
-                   return response.text().then(text => {
-                     throw new Error(`HTTP status ${response.status}: ${text}`);
-                   });
-                 }
-               })
-               .then(() => {
-                 form.reset();
-                 responseDiv.textContent = translations[currentLang].text.formSuccess;
-                 responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block success visible";
-               })
-               .catch(error => {
-                 console.error('Form submission error:', error);
-                 responseDiv.textContent = translations[currentLang].text.formError;
-                 responseDiv.className = "form-response text-center mt-5 p-4 rounded-md font-bold block error visible";
-               })
-               .finally(() => {
-                 submitButton.disabled = false;
-                 submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-               });
-            });
-        }
-
-
-        // Service type filter logic
-        const serviceTypeSelector = document.querySelector('.service-type-selector');
-        const serviciosSection = document.getElementById('servicios');
-        if (serviceTypeSelector && document.getElementById('domesticoBtn') && serviciosSection) {
-            filterServiceCards('domestico'); // Initial filter
-            serviceTypeSelector.addEventListener('click', (event) => {
-                const clickedButton = event.target.closest('button');
-                if (clickedButton) {
-                    serviceTypeSelector.querySelectorAll('button').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    clickedButton.classList.add('active');
-                    const selectedType = clickedButton.dataset.serviceType;
-                    filterServiceCards(selectedType);
-                    serviciosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        }
-
-        // "Solicita tu reparación" button scroll
-        const requestRepairBtn = document.getElementById('requestRepairBtn');
-        if (requestRepairBtn && formularioSection) {
-            requestRepairBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                formularioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        }
-
-        // Initialize gtag with default consent state
-        const initialConsent = getCookie('cookie_consent');
-        if (typeof gtag === 'function') {
-            gtag('consent', 'default', {
-                'analytics_storage': initialConsent === 'accepted' ? 'granted' : 'denied',
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied'
-            });
-            if (initialConsent === 'accepted') {
-                 gtag('consent', 'update', {
-                    'analytics_storage': 'granted'
+            document.querySelectorAll('#language-dropdown a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = e.target.getAttribute('data-lang-option');
+                    setLanguage(lang);
+                    populateServiceCards(lang); // Repoblar tarjetas de servicio con el nuevo idioma
                 });
-            }
-        }
+            });
+            
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'es';
+            setLanguage(preferredLanguage);
+            populateServiceCards(preferredLanguage); // Carga inicial de servicios
+            populateApplianceSelect(preferredLanguage); // Carga inicial de opciones del select
 
-        // Initialize Coverage Map
-        try {
-            const valenciaCoords = [39.4699, -0.3763]; // Coordinates for Valencia
-            const map = L.map('coverageMap').setView(valenciaCoords, 10); // Initial zoom level
+            // Filtros de servicio
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    filterServices(filter);
+                });
+            });
+            filterServices('all'); // Mostrar todos por defecto
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
 
-            // Add a marker for Valencia center
-            L.marker(valenciaCoords).addTo(map)
-                .bindPopup('<b>Valencia Centro</b><br>Nuestra base de operaciones.')
-                .openPopup();
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                    }
+                });
+            });
 
-            // Add a circle for coverage area (approx. 28km radius to include Sagunto)
-            L.circle(valenciaCoords, {
-                color: '#0a5cb8',      // Blue color, matching the theme
-                fillColor: '#0a5cb8',  // Fill color
-                fillOpacity: 0.2,    // Slight transparency for the fill
-                radius: 28000        // Radius in meters (28 km)
-            }).addTo(map).bindPopup('Zona de cobertura aproximada.');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-        } catch (e) {
-            console.error("Error initializing Leaflet map:", e);
-            const mapDiv = document.getElementById('coverageMap');
-            if (mapDiv) {
-                mapDiv.innerHTML = '<p class="text-red-500 text-center">Error al cargar el mapa de cobertura. Por favor, inténtelo de nuevo más tarde.</p>';
-            }
-        }
-        updateCoverageMapText(currentLang); // Ensure map texts are set on load
-    });
-  </script>
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.add('open'); });
+            closeMobileMenuButton.addEventListener('click', () => { mobileMenu.classList.remove('open'); });
+
+        });
+    </script>
 </body>
 </html>
