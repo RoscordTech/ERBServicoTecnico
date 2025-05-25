@@ -23,7 +23,6 @@
             font-family: 'Inter', sans-serif; 
         }
         .hero-bg {
-            /* Corregido el nombre del archivo de imagen de fondo */
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero.jpg.jpeg'); 
             background-size: cover;
             background-position: center;
@@ -83,6 +82,14 @@
         }
         .service-hidden {
             display: none !important;
+        }
+        /* Estilo para el contenedor del mapa */
+        #map {
+            height: 350px;
+            width: 100%;
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
         }
     </style>
 </head>
@@ -227,12 +234,18 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title text-navy" data-lang="brands_title">Trabajamos con las Mejores Marcas</h2>
             <div class="flex flex-wrap justify-center items-center">
                 <div class="brand-logo p-2"><img src="/samsung-logo-wordmark-rgb.png" alt="Reparación electrodomésticos Samsung"></div>
-                <div class="brand-logo p-2"><img src="/lg-logo-1.png" alt="Reparación electrodomésticos LG"></div> <div class="brand-logo p-2"><img src="/balay.png" alt="Reparación electrodomésticos Balay"></div>
-                <div class="brand-logo p-2"><img src="/siemens-Photoroom.png" alt="Reparación electrodomésticos Siemens"></div> <div class="brand-logo p-2"><img src="/Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Reparación electrodomésticos Whirlpool"></div>
+                <div class="brand-logo p-2"><img src="/lg-logo-1.png" alt="Reparación electrodomésticos LG"></div>
+                <div class="brand-logo p-2"><img src="/balay.png" alt="Reparación electrodomésticos Balay"></div>
+                <div class="brand-logo p-2"><img src="/siemens-Photoroom.png" alt="Reparación electrodomésticos Siemens"></div>
+                <div class="brand-logo p-2"><img src="/Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Reparación electrodomésticos Whirlpool"></div>
                 <div class="brand-logo p-2"><img src="/neckar.png" alt="Reparación electrodomésticos Neckar"></div>
                 <div class="brand-logo p-2"><img src="/bosch.png" alt="Reparación electrodomésticos Bosch"></div>
                 <div class="brand-logo p-2"><img src="/Haier_logo.svg.png" alt="Reparación electrodomésticos Haier"></div>
-                <div class="brand-logo p-2"><img src="/mitsubishi-Photoroom.png" alt="Reparación aires acondicionados Mitsubishi Electric"></div> <div class="brand-logo p-2"><img src="/saunier-Photoroom.png" alt="Reparación calderas Saunier Duval"></div> <div class="brand-logo p-2"><img src="/ariston-Photoroom.png" alt="Reparación termos Ariston"></div> <div class="brand-logo p-2"><img src="/vaillant-Photoroom.png" alt="Reparación calderas Vaillant"></div> <div class="brand-logo p-2"><img src="/junkers.png" alt="Reparación calentadores Junkers"></div>
+                <div class="brand-logo p-2"><img src="/mitsubishi-Photoroom.png" alt="Reparación aires acondicionados Mitsubishi Electric"></div>
+                <div class="brand-logo p-2"><img src="/saunier-Photoroom.png" alt="Reparación calderas Saunier Duval"></div>
+                <div class="brand-logo p-2"><img src="/ariston-Photoroom.png" alt="Reparación termos Ariston"></div>
+                <div class="brand-logo p-2"><img src="/vaillant-Photoroom.png" alt="Reparación calderas Vaillant"></div>
+                <div class="brand-logo p-2"><img src="/junkers.png" alt="Reparación calentadores Junkers"></div>
             </div>
         </div>
     </section>
@@ -318,19 +331,8 @@
                         </p>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-semibold mb-4" data-lang="contact_map_title">Nuestras Áreas de Servicio</h3>
-                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d12495474.904806554!2d-3.691006499999993!3d39.687196800000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sBarcelona%2C%20Coru%C3%B1a%2C%20Valencia%2C%20Castell%C3%B3n%20de%20la%20Plana!5e0!3m2!1ses!2ses!4v1700000000000"
-                                width="100%" 
-                                height="350" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade"
-                                title="Áreas de servicio de ERB"> 
-                            </iframe>
-                        </div>
+                        <h3 class="text-2xl font-semibold mb-4" data-lang="contact_map_title">Nuestra Área de Cobertura</h3>
+                        <div id="map"></div>
                     </div>
                 </div>
             </div>
@@ -391,7 +393,7 @@
                 service_thermotank_title: "Reparación de Termotanques", service_thermotank_desc: "Reparación y mantenimiento de termotanques eléctricos, problemas de temperatura o pérdidas.",
                 service_industrial_laundry_title: "Reparación de Maquinaria de Lavandería Industrial", service_industrial_laundry_desc: "Servicio técnico para lavadoras, secadoras y planchadoras industriales.",
                 service_industrial_fridge_title: "Reparación de Equipos de Refrigeración Industrial", service_industrial_fridge_desc: "Mantenimiento y reparación de cámaras frigoríficas, congeladores y vitrinas industriales.",
-                service_industrial_boiler_title: "Reparación de Calderas Industriales", service_industrial_boiler_desc: "Soluciones para calderas de vapor, agua caliente y otros sistemas industriales.",
+                service_industrial_boiler_title: "Reparación de Calderas Industriales", service_industrial_boiler_desc: "Soluciones para calderas de vapor, agua caliente y otros sistemas industrials.",
                 benefits_title: "Por Qué Elegirnos",
                 benefit1_title: "Atención Inmediata", benefit1_desc: "Solicita tu inspección llamando a nuestros canales de atención al cliente.",
                 benefit2_title: "Sin Coste de Desplazamiento", benefit2_desc: "Reparación en el acto si decides reparar, no cobramos el desplazamiento.",
@@ -408,7 +410,7 @@
                 loc_barcelona: "Barcelona", loc_coruna: "La Coruña", loc_valencia: "Valencia", loc_castellon: "Castellón de la Plana",
                 contact_info_title: "Otras Formas de Contacto",
                 contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Chatea con nosotros en WhatsApp",
-                contact_areas: "Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana", contact_map_title: "Nuestras Áreas de Servicio",
+                contact_areas: "Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana", contact_map_title: "Nuestra Área de Cobertura",
                 footer_copyright: "© 2025 ERB Servicio Técnico de Electrodomésticos | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana",
                 footer_privacy: "Política de Privacidad", footer_legal: "Aviso Legal", footer_cookies: "Política de Cookies",
                 form_sending: "Enviando...", form_success: "¡Mensaje enviado con éxito!", form_error: "Error al enviar. Inténtalo de nuevo."
@@ -498,7 +500,7 @@
                 loc_barcelona: "Barcelona", loc_coruna: "La Corunya", loc_valencia: "València", loc_castellon: "Castelló de la Plana",
                 contact_info_title: "Altres Formes de Contacte",
                 contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
-                contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "Les Nostres Àrees de Servei",
+                contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "La Nostra Àrea de Cobertura",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
                 form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar."
@@ -657,5 +659,119 @@
 
         });
     </script>
+    
+    <script>
+        function initMap() {
+            const valencia = { lat: 39.4699, lng: -0.3763 };
+            const sagunto = { lat: 39.6815, lng: -0.2776 };
+
+            // Inicializar el mapa
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10, // Ajusta el zoom según sea necesario
+                center: valencia,
+                mapTypeId: 'roadmap', // Puedes cambiar el tipo de mapa (satellite, hybrid, terrain)
+                styles: [ /* Puedes añadir estilos personalizados aquí para que coincida con tu web */
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "geometry",
+                        "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry",
+                        "stylers": [{ "color": "#dedede" }, { "lightness": 21 }]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }]
+                    },
+                    { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }]
+                    }
+                ]
+            });
+
+            // Calcular la distancia (radio) entre Valencia y Sagunto
+            const radiusInMeters = google.maps.geometry.spherical.computeDistanceBetween(
+                new google.maps.LatLng(valencia),
+                new google.maps.LatLng(sagunto)
+            );
+
+            // Crear el círculo de cobertura
+            const coverageCircle = new google.maps.Circle({
+                strokeColor: "#001f3f", // Color del borde (azul marino)
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#007bff", // Color de relleno (azul más claro)
+                fillOpacity: 0.25, // Transparencia del relleno
+                map: map,
+                center: valencia,
+                radius: radiusInMeters, // Radio en metros
+            });
+
+            // Opcional: Añadir un marcador en Valencia
+            new google.maps.Marker({
+                position: valencia,
+                map: map,
+                title: "Valencia (Centro de Cobertura)",
+                icon: { // Opcional: icono personalizado
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 6,
+                    fillColor: "#001f3f",
+                    fillOpacity: 1,
+                    strokeWeight: 0
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_erEiiEvZlRfOhnRCt-Ooz5yM9rBrgk&libraries=geometry&callback=initMap"></script>
+
 </body>
 </html>
