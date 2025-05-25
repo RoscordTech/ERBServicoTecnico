@@ -274,19 +274,18 @@
             <div class="grid md:grid-cols-2 gap-10 items-start">
                 <div>
                     <h3 class="text-2xl font-semibold mb-6" data-lang="contact_form_title">Envíanos un Mensaje</h3>
-                    <form id="contactForm" action="https://formsubmit.co/roscordtgn@gmail.com" method="POST" class="space-y-6">
-                        <input type="hidden" name="_next" value="https://erbserviciotecnico.com/gracias.html"> <input type="hidden" name="_subject" value="Nuevo mensaje desde la web ERB Servicio Técnico">
-                        <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_template" value="table"> <div>
+                    <form id="contactForm" action="https://formsubmit.co/serviciotecnico.erb@gmail.com" method="POST" class="space-y-6">
+                        <input type="hidden" name="_next" value="https://erbserviciotecnico.com/gracias.html"> 
+                        <input type="hidden" name="_subject" value="Nuevo mensaje desde la web ERB Servicio Técnico">
+                        <input type="hidden" name="_captcha" value="false"> 
+                        <input type="hidden" name="_template" value="table"> 
+                        <div>
                             <label for="nombre" class="block text-sm font-medium" data-lang="form_name">Nombre</label>
                             <input type="text" name="nombre" id="nombre" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
                         </div>
                         <div>
                             <label for="telefono" class="block text-sm font-medium" data-lang="form_phone">Teléfono</label>
                             <input type="tel" name="telefono" id="telefono" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium" data-lang="form_email">Correo electrónico</label>
-                            <input type="email" name="email" id="email" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
                         </div>
                         <div>
                             <label for="ubicacion" class="block text-sm font-medium" data-lang="form_location">Ubicación del servicio</label>
@@ -321,7 +320,7 @@
                         </p>
                         <p class="flex items-center mb-3">
                             <i class="fas fa-envelope mr-3 text-xl"></i>
-                            <a href="mailto:info@erbserviciotecnico.com" class="hover:underline" data-lang="contact_email_text">info@erbserviciotecnico.com</a> </p>
+                            <a href="mailto:serviciotecnico.erb@gmail.com" class="hover:underline" data-lang="contact_email_text">serviciotecnico.erb@gmail.com</a> </p>
                         <p class="flex items-center mb-6">
                             <img src="/123.png" alt="WhatsApp ERB" class="w-6 h-6 mr-2"> <a href="https://wa.me/34612548508" target="_blank" class="hover:underline" data-lang="contact_whatsapp_text">Chatea con nosotros en WhatsApp</a>
                         </p>
@@ -380,7 +379,6 @@
                 services_title: "Nuestros Servicios",
                 services_intro: "Soluciones expertas para todo tipo de electrodomésticos y climatización.",
                 filter_all: "Todos", filter_domestic: "Doméstico", filter_industrial: "Industrial",
-                // Servicios (ES)
                 service_fridge_title: "Reparación de Frigoríficos y Congeladores", service_fridge_desc: "Soluciones para problemas de enfriamiento, fugas y más en tus equipos de refrigeración domésticos.",
                 service_ac_title: "Instalación y Reparación de Aires Acondicionados", service_ac_desc: "Servicio completo para sistemas de climatización domésticos e industriales, garantizando confort.",
                 service_washing_machine_title: "Reparación de Lavadoras", service_washing_machine_desc: "Arreglamos problemas de centrifugado, desagüe, y cualquier avería en tu lavadora.",
@@ -406,10 +404,10 @@
                 about_text_p3: "Confía en nosotros para devolverle la vida a tus electrodomésticos.",
                 contact_title: "Contacta con Nosotros",
                 contact_form_title: "Envíanos un Mensaje",
-                form_name: "Nombre", form_phone: "Teléfono", form_email: "Correo electrónico", form_location: "Ubicación del servicio", form_appliance: "Electrodoméstico a reparar o servicio", form_message: "Descripción del problema", form_submit: "Enviar Mensaje",
+                form_name: "Nombre", form_phone: "Teléfono", /* form_email ya no se usa en el formulario */ form_location: "Ubicación del servicio", form_appliance: "Electrodoméstico a reparar o servicio", form_message: "Descripción del problema", form_submit: "Enviar Mensaje",
                 loc_barcelona: "Barcelona", loc_coruna: "La Coruña", loc_valencia: "Valencia", loc_castellon: "Castellón de la Plana",
                 contact_info_title: "Otras Formas de Contacto",
-                contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Chatea con nosotros en WhatsApp",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Chatea con nosotros en WhatsApp",
                 contact_areas: "Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana", contact_map_title: "Nuestra Área de Cobertura",
                 footer_copyright: "© 2025 ERB Servicio Técnico de Electrodomésticos | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana",
                 footer_privacy: "Política de Privacidad", footer_legal: "Aviso Legal", footer_cookies: "Política de Cookies",
@@ -425,7 +423,6 @@
                 services_title: "Els Nostres Serveis",
                 services_intro: "Solucions expertes per a tota mena d'electrodomèstics i climatització.",
                 filter_all: "Tots", filter_domestic: "Domèstic", filter_industrial: "Industrial",
-                // Servicios (CA)
                 service_fridge_title: "Reparació de Frigorífics i Congeladors", service_fridge_desc: "Solucions per a problemes de refredament, fuites i més en els teus equips de refrigeració domèstics.",
                 service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
                 service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teva rentadora.",
@@ -451,10 +448,10 @@
                 about_text_p3: "Confia en nosaltres per tornar-li la vida als teus electrodomèstics.",
                 contact_title: "Contacta amb Nosaltres",
                 contact_form_title: "Envia'ns un Missatge",
-                form_name: "Nom", form_phone: "Telèfon", form_email: "Correu electrònic", form_location: "Ubicació del servei", form_appliance: "Electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
+                form_name: "Nom", form_phone: "Telèfon", form_location: "Ubicació del servei", form_appliance: "Electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
                 loc_barcelona: "Barcelona", loc_coruna: "La Corunya", loc_valencia: "València", loc_castellon: "Castelló de la Plana",
                 contact_info_title: "Altres Formes de Contacte",
-                contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "Les Nostres Àrees de Servei",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
@@ -470,7 +467,6 @@
                 services_title: "Els Nostres Serveis",
                 services_intro: "Solucions expertes per a tota classe d'aparells electrodomèstics i climatització.",
                 filter_all: "Tots", filter_domestic: "Domèstic", filter_industrial: "Industrial",
-                // Servicios (VA)
                 service_fridge_title: "Reparació de Frigorífics i Congeladors", service_fridge_desc: "Solucions per a problemes de refredament, fugues i més en els teus equips de refrigeració domèstics.",
                 service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
                 service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teua rentadora.",
@@ -496,10 +492,10 @@
                 about_text_p3: "Confia en nosaltres per tornar-li la vida als teus aparells electrodomèstics.",
                 contact_title: "Contacta amb Nosaltres",
                 contact_form_title: "Envia'ns un Missatge",
-                form_name: "Nom", form_phone: "Telèfon", form_email: "Correu electrònic", form_location: "Ubicació del servei", form_appliance: "Aparell electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
+                form_name: "Nom", form_phone: "Telèfon", form_location: "Ubicació del servei", form_appliance: "Aparell electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
                 loc_barcelona: "Barcelona", loc_coruna: "La Corunya", loc_valencia: "València", loc_castellon: "Castelló de la Plana",
                 contact_info_title: "Altres Formes de Contacte",
-                contact_phone_text: "+34 612 548 508", contact_email_text: "info@erbserviciotecnico.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "La Nostra Àrea de Cobertura",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
