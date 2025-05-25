@@ -20,16 +20,16 @@
 
     <style>
         body {
-            font-family: 'Inter', sans-serif; /* Manteniendo Inter, o puedes cambiarla si ERB usa otra */
+            font-family: 'Inter', sans-serif; 
         }
         .hero-bg {
-            /* Imagen de fondo actualizada para usar una imagen local desde la raíz */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero.jpg'); /* ¡Reemplaza 'imagen-hero.jpg' con el nombre de tu archivo! */
+            /* Imagen de fondo actualizada con el nombre .jpeg */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero.jpeg'); 
             background-size: cover;
             background-position: center;
         }
         .navy-blue {
-            background-color: #001f3f; /* Azul marino oscuro de ERB (ajustar si es diferente) */
+            background-color: #001f3f; 
         }
         .text-navy {
             color: #001f3f;
@@ -65,7 +65,7 @@
             transform: translateX(0);
         }
         .brand-logo img {
-            height: 50px; /* Ajustar según el tamaño de los logos */
+            height: 50px; 
             width: auto;
             margin: 0.5rem;
             filter: grayscale(100%);
@@ -81,7 +81,6 @@
             background-color: #001f3f;
             color: white;
         }
-        /* Estilos para ocultar servicios filtrados */
         .service-hidden {
             display: none !important;
         }
@@ -94,63 +93,29 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "ERB Servicio Técnico",
-      "image": "https://erbserviciotecnico.com/logo.png", // SEO: URL absoluta del logo
-      "@id": "https://erbserviciotecnico.com/", // SEO: URL absoluta de la página
+      "image": "https://erbserviciotecnico.com/logo.png", 
+      "@id": "https://erbserviciotecnico.com/", 
       "url": "https://erbserviciotecnico.com/",
       "telephone": "+34612548508",
-      "priceRange": "$$", // SEO: Ajustar según corresponda
+      "priceRange": "$$", 
       "description": "Especialistas en reparación de electrodomésticos de gama blanca, domésticos e industriales, y servicio de instalación de aires acondicionados en Barcelona, Coruña, Valencia y Castellón.",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "ES" 
-        // No se proporciona una dirección física completa, se especifican áreas de servicio.
       },
       "areaServed": [
-        {
-          "@type": "City",
-          "name": "Barcelona"
-        },
-        {
-          "@type": "City",
-          "name": "Coruña" 
-        },
-        {
-          "@type": "City",
-          "name": "Valencia"
-        },
-        {
-          "@type": "City",
-          "name": "Castellón de la Plana"
-        }
+        { "@type": "City", "name": "Barcelona" },
+        { "@type": "City", "name": "Coruña" },
+        { "@type": "City", "name": "Valencia" },
+        { "@type": "City", "name": "Castellón de la Plana" }
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Servicios Técnicos",
         "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Reparación de electrodomésticos gama blanca",
-              "serviceType": "Reparación de electrodomésticos"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Reparación de electrodomésticos industriales",
-              "serviceType": "Reparación de electrodomésticos industriales"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Instalación de aires acondicionados",
-              "serviceType": "Instalación de aire acondicionado"
-            }
-          }
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reparación de electrodomésticos gama blanca", "serviceType": "Reparación de electrodomésticos" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reparación de electrodomésticos industriales", "serviceType": "Reparación de electrodomésticos industriales" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalación de aires acondicionados", "serviceType": "Instalación de aire acondicionado" } }
         ]
       }
     }
@@ -225,14 +190,7 @@
             </div>
 
             <div id="service-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 
-                <div class="service-card bg-white p-6 rounded-xl shadow-lg border border-gray-200" data-type="domestico">
-                    <div class="text-center mb-4"><i class="fas fa-cog text-4xl text-navy"></i></div>
-                    <h3 class="text-xl font-semibold text-navy mb-3 text-center" data-lang="service_some_title">Título Servicio</h3>
-                    <p class="text-gray-600 text-sm mb-3" data-lang="service_some_desc">Descripción corta del servicio.</p>
                 </div>
-                -->
-            </div>
         </div>
     </section>
     
@@ -272,16 +230,16 @@
                 <div class="brand-logo p-2"><img src="/lg-logo-1.png" alt="Reparación electrodomésticos LG"></div>
                 <div class="brand-logo p-2"><img src="/balay.png" alt="Reparación electrodomésticos Balay"></div>
                 <div class="brand-logo p-2"><img src="/siemens.png" alt="Reparación electrodomésticos Siemens"></div>
-                <div class="brand-logo p-2"><img src="/whirlpool.png" alt="Reparación electrodomésticos Whirlpool"></div>
+                <div class="brand-logo p-2"><img src="/Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Reparación electrodomésticos Whirlpool"></div>
                 <div class="brand-logo p-2"><img src="/neckar.png" alt="Reparación electrodomésticos Neckar"></div>
                 <div class="brand-logo p-2"><img src="/bosch.png" alt="Reparación electrodomésticos Bosch"></div>
-                <div class="brand-logo p-2"><img src="/haier.png" alt="Reparación electrodomésticos Haier"></div>
-                <div class="brand-logo p-2"><img src="/mitsubishi-electric.png" alt="Reparación aires acondicionados Mitsubishi Electric"></div>
-                <div class="brand-logo p-2"><img src="/saunier-duval.png" alt="Reparación calderas Saunier Duval"></div>
-                <div class="brand-logo p-2"><img src="/ariston.png" alt="Reparación termos Ariston"></div>
-                <div class="brand-logo p-2"><img src="/vaillant.png" alt="Reparación calderas Vaillant"></div>
+                <div class="brand-logo p-2"><img src="/Haier_logo.svg.png" alt="Reparación electrodomésticos Haier"></div>
+                <div class="brand-logo p-2"><img src="/mitsubishi.png" alt="Reparación aires acondicionados Mitsubishi Electric"></div>
+                <div class="brand-logo p-2"><img src="/saunier.png" alt="Reparación calderas Saunier Duval"></div>
+                <div class="brand-logo p-2"><img src="/ariston.jpg" alt="Reparación termos Ariston"></div>
+                <div class="brand-logo p-2"><img src="/vaillant.jpg" alt="Reparación calderas Vaillant"></div>
                 <div class="brand-logo p-2"><img src="/junkers.png" alt="Reparación calentadores Junkers"></div>
-                </div>
+            </div>
         </div>
     </section>
 
@@ -556,7 +514,6 @@
         // Función para cambiar idioma
         function setLanguage(lang) {
             document.documentElement.lang = lang;
-            // Añadir clase al body para estilos CSS específicos si es necesario
             document.body.className = document.body.className.replace(/lang-(es|ca|va)/g, '');
             document.body.classList.add('lang-' + lang);
 
@@ -564,7 +521,7 @@
                 const key = element.getAttribute('data-lang');
                 if (translations[lang] && translations[lang][key]) {
                     element.innerHTML = translations[lang][key];
-                } else if (translations.es[key]) { // Fallback a español si no existe la clave en el idioma actual
+                } else if (translations.es[key]) { 
                     element.innerHTML = translations.es[key];
                 }
             });
@@ -572,7 +529,6 @@
             localStorage.setItem('preferredLanguage', lang);
             document.getElementById('language-dropdown').classList.add('hidden');
 
-            // Actualizar enlaces legales
             const privacyLink = document.getElementById('privacyLink');
             const legalLink = document.getElementById('legalLink');
             const cookiesLink = document.getElementById('cookiesLink');
@@ -585,24 +541,23 @@
                 privacyLink.href = '/va/politica-privacitat.html';
                 legalLink.href = '/va/avis-legal.html';
                 cookiesLink.href = '/va/politica-galetes.html';
-            } else { // es
+            } else { 
                 privacyLink.href = '/politica-privacidad.html';
                 legalLink.href = '/aviso-legal.html';
                 cookiesLink.href = '/politica-cookies.html';
             }
-            // Actualizar opciones del select de equipos
             populateApplianceSelect(lang);
         }
         
         function populateServiceCards(lang) {
             const serviceListContainer = document.getElementById('service-list');
-            serviceListContainer.innerHTML = ''; // Limpiar servicios existentes
+            serviceListContainer.innerHTML = ''; 
             const currentTranslations = translations[lang] || translations.es;
 
             allServices.forEach(service => {
                 const card = document.createElement('div');
                 card.className = 'service-card bg-white p-6 rounded-xl shadow-lg border border-gray-200';
-                card.setAttribute('data-type', service.type); // Para el filtro
+                card.setAttribute('data-type', service.type); 
 
                 const iconHtml = `<div class="text-center mb-4"><i class="fas ${service.icon} text-4xl text-navy"></i></div>`;
                 const titleHtml = `<h3 class="text-xl font-semibold text-navy mb-3 text-center">${currentTranslations[service.title_key] || service.title_key}</h3>`;
@@ -616,7 +571,7 @@
         function populateApplianceSelect(lang) {
             const applianceSelect = document.getElementById('equipo');
             if (!applianceSelect) return;
-            applianceSelect.innerHTML = ''; // Limpiar opciones
+            applianceSelect.innerHTML = ''; 
             const currentTranslations = translations[lang] || translations.es;
 
             allServices.forEach(service => {
@@ -638,7 +593,6 @@
                 }
             });
 
-            // Actualizar botón activo
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('data-filter') === filter) {
@@ -667,23 +621,22 @@
                     e.preventDefault();
                     const lang = e.target.getAttribute('data-lang-option');
                     setLanguage(lang);
-                    populateServiceCards(lang); // Repoblar tarjetas de servicio con el nuevo idioma
+                    populateServiceCards(lang); 
                 });
             });
             
             const preferredLanguage = localStorage.getItem('preferredLanguage') || 'es';
             setLanguage(preferredLanguage);
-            populateServiceCards(preferredLanguage); // Carga inicial de servicios
-            populateApplianceSelect(preferredLanguage); // Carga inicial de opciones del select
+            populateServiceCards(preferredLanguage); 
+            populateApplianceSelect(preferredLanguage); 
 
-            // Filtros de servicio
             document.querySelectorAll('.filter-btn').forEach(button => {
                 button.addEventListener('click', () => {
                     const filter = button.getAttribute('data-filter');
                     filterServices(filter);
                 });
             });
-            filterServices('all'); // Mostrar todos por defecto
+            filterServices('all'); 
 
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
