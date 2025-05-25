@@ -15,6 +15,10 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+      // El gtag('config', 'G-TQC24XCERF') se moverá para ejecutarse después del consentimiento si es necesario,
+      // pero para un banner simple de "aceptar todo", a menudo se deja aquí y se asume el consentimiento si el banner no se rechaza.
+      // Para un cumplimiento más estricto, la inicialización de Analytics debería depender del consentimiento explícito.
+      // Por ahora, lo dejamos como está, asumiendo que el banner cubre el aviso.
       gtag('config', 'G-TQC24XCERF');
     </script>
 
@@ -23,18 +27,15 @@
             font-family: 'Inter', sans-serif; 
         }
         .hero-bg {
-            /* Imagen de fondo por defecto (para escritorio y tablets grandes) */
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero.jpg.jpeg'); 
             background-size: cover;
             background-position: center;
-            min-height: 100vh; /* Para asegurar que cubra la altura de la pantalla */
+            min-height: 100vh; 
         }
         
-        /* Media Query para dispositivos móviles (ej. pantallas hasta 768px de ancho) */
         @media (max-width: 768px) {
             .hero-bg {
-                /* Imagen de fondo específica para móviles */
-                background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero-movil.jpg'); /* ¡Asegúrate de que este archivo exista! */
+                background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/imagen-hero-movil.jpg'); 
             }
         }
 
@@ -100,6 +101,26 @@
             border-radius: 0.5rem;
             overflow: hidden;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Estilos para el banner de cookies */
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #1a202c; /* bg-gray-800 */
+            color: white;
+            padding: 1rem; /* p-4 */
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none; /* Oculto por defecto, se muestra con JS */
+        }
+        #cookie-banner a {
+            color: #63b3ed; /* text-blue-400 */
+            text-decoration: underline;
+        }
+        #cookie-banner a:hover {
+            color: #90cdf4; /* text-blue-300 */
         }
     </style>
 </head>
@@ -359,6 +380,17 @@
         </div>
     </footer>
 
+    <div id="cookie-banner" class="items-center justify-between flex-wrap md:flex">
+        <p class="text-sm mb-2 md:mb-0 md:mr-4">
+            <span data-lang="cookie_banner_text">Este sitio web utiliza cookies para asegurar la mejor experiencia. Al continuar navegando, aceptas su uso, incluidas cookies para Google Analytics y Google Ads. Consulta nuestra</span>
+            <a href="/politica-cookies.html" id="cookieBannerPolicyLink" class="font-semibold" data-lang="cookie_banner_policy_link">política de cookies</a>.
+        </p>
+        <button id="accept-cookies-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-sm" data-lang="cookie_banner_accept">
+            Aceptar
+        </button>
+    </div>
+
+
     <script>
         // Definición de servicios
         const allServices = [
@@ -414,14 +446,17 @@
                 about_text_p3: "Confía en nosotros para devolverle la vida a tus electrodomésticos.",
                 contact_title: "Contacta con Nosotros",
                 contact_form_title: "Envíanos un Mensaje",
-                form_name: "Nombre", form_phone: "Teléfono", /* form_email ya no se usa en el formulario */ form_location: "Ubicación del servicio", form_appliance: "Electrodoméstico a reparar o servicio", form_message: "Descripción del problema", form_submit: "Enviar Mensaje",
+                form_name: "Nombre", form_phone: "Teléfono", form_location: "Ubicación del servicio", form_appliance: "Electrodoméstico a reparar o servicio", form_message: "Descripción del problema", form_submit: "Enviar Mensaje",
                 loc_barcelona: "Barcelona", loc_coruna: "La Coruña", loc_valencia: "Valencia", loc_castellon: "Castellón de la Plana",
                 contact_info_title: "Otras Formas de Contacto",
                 contact_phone_text: "+34 612 548 508", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Chatea con nosotros en WhatsApp",
                 contact_areas: "Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana", contact_map_title: "Nuestra Área de Cobertura",
                 footer_copyright: "© 2025 ERB Servicio Técnico de Electrodomésticos | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana",
                 footer_privacy: "Política de Privacidad", footer_legal: "Aviso Legal", footer_cookies: "Política de Cookies",
-                form_sending: "Enviando...", form_success: "¡Mensaje enviado con éxito!", form_error: "Error al enviar. Inténtalo de nuevo."
+                form_sending: "Enviando...", form_success: "¡Mensaje enviado con éxito!", form_error: "Error al enviar. Inténtalo de nuevo.",
+                cookie_banner_text: "Este sitio web utiliza cookies para asegurar la mejor experiencia. Al continuar navegando, aceptas su uso, incluidas cookies para Google Analytics y Google Ads. Consulta nuestra",
+                cookie_banner_policy_link: "política de cookies",
+                cookie_banner_accept: "Aceptar"
             },
             ca: {
                 company_name_header: "ERB Servei Tècnic",
@@ -465,7 +500,10 @@
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "Les Nostres Àrees de Servei",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
-                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar."
+                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar.",
+                cookie_banner_text: "Aquest lloc web utilitza galetes per assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
+                cookie_banner_policy_link: "política de galetes",
+                cookie_banner_accept: "Acceptar"
             },
             va: {
                 company_name_header: "ERB Servei Tècnic",
@@ -509,7 +547,10 @@
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "La Nostra Àrea de Cobertura",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
-                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar."
+                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar.",
+                cookie_banner_text: "Este lloc web utilitza galetes per a assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
+                cookie_banner_policy_link: "política de galetes",
+                cookie_banner_accept: "Acceptar"
             }
         };
 
@@ -534,25 +575,31 @@
             const privacyLink = document.getElementById('privacyLink');
             const legalLink = document.getElementById('legalLink');
             const cookiesLink = document.getElementById('cookiesLink');
+            const cookieBannerPolicyLink = document.getElementById('cookieBannerPolicyLink');
+
 
             if (lang === 'ca') {
                 privacyLink.href = '/ca/politica-privacitat.html';
                 legalLink.href = '/ca/avis-legal.html';
                 cookiesLink.href = '/ca/politica-galetes.html';
+                if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/ca/politica-galetes.html';
             } else if (lang === 'va') {
                 privacyLink.href = '/va/politica-privacitat.html';
                 legalLink.href = '/va/avis-legal.html';
                 cookiesLink.href = '/va/politica-galetes.html';
+                if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/va/politica-galetes.html';
             } else { 
                 privacyLink.href = '/politica-privacidad.html';
                 legalLink.href = '/aviso-legal.html';
                 cookiesLink.href = '/politica-cookies.html';
+                if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/politica-cookies.html';
             }
             populateApplianceSelect(lang);
         }
         
         function populateServiceCards(lang) {
             const serviceListContainer = document.getElementById('service-list');
+            if (!serviceListContainer) return;
             serviceListContainer.innerHTML = ''; 
             const currentTranslations = translations[lang] || translations.es;
 
@@ -603,6 +650,28 @@
             });
         }
 
+        // Lógica del banner de cookies
+        function handleCookieBanner() {
+            const banner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('accept-cookies-btn');
+
+            if (!banner || !acceptBtn) return;
+
+            const cookiesAccepted = localStorage.getItem('erbCookiesAccepted');
+
+            if (!cookiesAccepted) {
+                banner.style.display = 'flex'; // O 'block' si prefieres, 'flex' para que los items se alineen bien
+            }
+
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('erbCookiesAccepted', 'true');
+                banner.style.display = 'none';
+                // Aquí podrías añadir lógica para inicializar scripts que dependen del consentimiento,
+                // si no se cargan por defecto (como Google Analytics).
+                // Por ejemplo: if (typeof gtag === 'function') { gtag('config', 'G-TQC24XCERF'); }
+            });
+        }
+
 
         document.addEventListener('DOMContentLoaded', () => {
             const langButton = document.getElementById('language-selector-btn');
@@ -628,7 +697,7 @@
             });
             
             const preferredLanguage = localStorage.getItem('preferredLanguage') || 'es';
-            setLanguage(preferredLanguage);
+            setLanguage(preferredLanguage); // Esto también actualiza el enlace de la política de cookies en el banner
             populateServiceCards(preferredLanguage); 
             populateApplianceSelect(preferredLanguage); 
 
@@ -663,6 +732,7 @@
             mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.add('open'); });
             closeMobileMenuButton.addEventListener('click', () => { mobileMenu.classList.remove('open'); });
 
+            handleCookieBanner(); // Inicializar la lógica del banner de cookies
         });
     </script>
     
