@@ -15,10 +15,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      // El gtag('config', 'G-TQC24XCERF') se moverá para ejecutarse después del consentimiento si es necesario,
-      // pero para un banner simple de "aceptar todo", a menudo se deja aquí y se asume el consentimiento si el banner no se rechaza.
-      // Para un cumplimiento más estricto, la inicialización de Analytics debería depender del consentimiento explícito.
-      // Por ahora, lo dejamos como está, asumiendo que el banner cubre el aviso.
       gtag('config', 'G-TQC24XCERF');
     </script>
 
@@ -102,7 +98,6 @@
             overflow: hidden;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        /* Estilos para el banner de cookies */
         #cookie-banner {
             position: fixed;
             bottom: 0;
@@ -113,7 +108,7 @@
             padding: 1rem; /* p-4 */
             box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
             z-index: 1000;
-            display: none; /* Oculto por defecto, se muestra con JS */
+            display: none; 
         }
         #cookie-banner a {
             color: #63b3ed; /* text-blue-400 */
@@ -122,6 +117,16 @@
         #cookie-banner a:hover {
             color: #90cdf4; /* text-blue-300 */
         }
+
+        /* Estilos para el spinner de carga */
+        #loading-spinner.hidden {
+            display: none;
+        }
+         /* Estilos para el modal de éxito */
+        #success-message-modal.hidden {
+            display: none;
+        }
+
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -264,19 +269,19 @@
         <div class="container mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title text-navy" data-lang="brands_title">Trabajamos con las Mejores Marcas</h2>
             <div class="flex flex-wrap justify-center items-center">
-                <div class="brand-logo p-2"><img src="/samsung-logo-wordmark-rgb.png" alt="Reparación electrodomésticos Samsung"></div>
-                <div class="brand-logo p-2"><img src="/lg-logo-1.png" alt="Reparación electrodomésticos LG"></div>
-                <div class="brand-logo p-2"><img src="/balay.png" alt="Reparación electrodomésticos Balay"></div>
-                <div class="brand-logo p-2"><img src="/siemens-Photoroom.png" alt="Reparación electrodomésticos Siemens"></div>
-                <div class="brand-logo p-2"><img src="/Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Reparación electrodomésticos Whirlpool"></div>
-                <div class="brand-logo p-2"><img src="/neckar.png" alt="Reparación electrodomésticos Neckar"></div>
-                <div class="brand-logo p-2"><img src="/bosch.png" alt="Reparación electrodomésticos Bosch"></div>
-                <div class="brand-logo p-2"><img src="/Haier_logo.svg.png" alt="Reparación electrodomésticos Haier"></div>
-                <div class="brand-logo p-2"><img src="/mitsubishi-Photoroom.png" alt="Reparación aires acondicionados Mitsubishi Electric"></div>
-                <div class="brand-logo p-2"><img src="/saunier-Photoroom.png" alt="Reparación calderas Saunier Duval"></div>
-                <div class="brand-logo p-2"><img src="/ariston-Photoroom.png" alt="Reparación termos Ariston"></div>
-                <div class="brand-logo p-2"><img src="/vaillant-Photoroom.png" alt="Reparación calderas Vaillant"></div>
-                <div class="brand-logo p-2"><img src="/junkers.png" alt="Reparación calentadores Junkers"></div>
+                <div class="brand-logo p-2"><img src="/samsung-logo-wordmark-rgb.png" alt="Reparación electrodomésticos Samsung" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Samsung';"></div>
+                <div class="brand-logo p-2"><img src="/lg-logo-1.png" alt="Reparación electrodomésticos LG" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=LG';"></div>
+                <div class="brand-logo p-2"><img src="/balay.png" alt="Reparación electrodomésticos Balay" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Balay';"></div>
+                <div class="brand-logo p-2"><img src="/siemens-Photoroom.png" alt="Reparación electrodomésticos Siemens" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Siemens';"></div>
+                <div class="brand-logo p-2"><img src="/Whirlpool_Corporation_Logo_(as_of_2017).svg.png" alt="Reparación electrodomésticos Whirlpool" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Whirlpool';"></div>
+                <div class="brand-logo p-2"><img src="/neckar.png" alt="Reparación electrodomésticos Neckar" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Neckar';"></div>
+                <div class="brand-logo p-2"><img src="/bosch.png" alt="Reparación electrodomésticos Bosch" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Bosch';"></div>
+                <div class="brand-logo p-2"><img src="/Haier_logo.svg.png" alt="Reparación electrodomésticos Haier" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Haier';"></div>
+                <div class="brand-logo p-2"><img src="/mitsubishi-Photoroom.png" alt="Reparación aires acondicionados Mitsubishi Electric" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Mitsubishi';"></div>
+                <div class="brand-logo p-2"><img src="/saunier-Photoroom.png" alt="Reparación calderas Saunier Duval" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Saunier+Duval';"></div>
+                <div class="brand-logo p-2"><img src="/ariston-Photoroom.png" alt="Reparación termos Ariston" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Ariston';"></div>
+                <div class="brand-logo p-2"><img src="/vaillant-Photoroom.png" alt="Reparación calderas Vaillant" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Vaillant';"></div>
+                <div class="brand-logo p-2"><img src="/junkers.png" alt="Reparación calentadores Junkers" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/000000?text=Junkers';"></div>
             </div>
         </div>
     </section>
@@ -306,10 +311,10 @@
                 <div>
                     <h3 class="text-2xl font-semibold mb-6" data-lang="contact_form_title">Envíanos un Mensaje</h3>
                     <form id="contactForm" action="https://formsubmit.co/serviciotecnico.erb@gmail.com" method="POST" class="space-y-6">
-                        <input type="hidden" name="_next" value="https://erbserviciotecnico.com/gracias.html"> 
                         <input type="hidden" name="_subject" value="Nuevo mensaje desde la web ERB Servicio Técnico">
                         <input type="hidden" name="_captcha" value="false"> 
                         <input type="hidden" name="_template" value="table"> 
+                        
                         <div>
                             <label for="nombre" class="block text-sm font-medium" data-lang="form_name">Nombre</label>
                             <input type="text" name="nombre" id="nombre" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300">
@@ -337,10 +342,11 @@
                             <textarea name="mensaje" id="mensaje" rows="4" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm bg-white text-gray-800 focus:ring-blue-500 focus:border-blue-500 border-gray-300"></textarea>
                         </div>
                         <div>
-                            <button type="submit" class="w-full bg-white hover:bg-gray-200 text-navy font-bold py-3 px-6 rounded-lg text-lg transition duration-300" data-lang="form_submit">Enviar Mensaje</button>
+                            <button type="submit" id="submit-contact-form" class="w-full bg-white hover:bg-gray-200 text-navy font-bold py-3 px-6 rounded-lg text-lg transition duration-300" data-lang="form_submit">Enviar Mensaje</button>
                         </div>
                     </form>
-                    <div id="form-status" class="mt-4 text-center"></div> </div>
+                    <div id="form-status" class="mt-4 text-center text-white"></div> 
+                </div>
 
                 <div class="space-y-8">
                     <div>
@@ -353,7 +359,7 @@
                             <i class="fas fa-envelope mr-3 text-xl"></i>
                             <a href="mailto:serviciotecnico.erb@gmail.com" class="hover:underline" data-lang="contact_email_text">serviciotecnico.erb@gmail.com</a> </p>
                         <p class="flex items-center mb-6">
-                            <img src="/123.png" alt="WhatsApp ERB" class="w-6 h-6 mr-2"> <a href="https://wa.me/34612548508" target="_blank" class="hover:underline" data-lang="contact_whatsapp_text">Chatea con nosotros en WhatsApp</a>
+                            <img src="/123.png" alt="WhatsApp ERB" class="w-6 h-6 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/24x24/ffffff/000000?text=WA';"> <a href="https://wa.me/34612548508" target="_blank" class="hover:underline" data-lang="contact_whatsapp_text">Chatea con nosotros en WhatsApp</a>
                         </p>
                          <p class="flex items-start">
                             <i class="fas fa-map-marker-alt mr-3 text-xl mt-1"></i>
@@ -368,6 +374,24 @@
             </div>
         </div>
     </section>
+
+    <div id="loading-spinner" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100]">
+        <div class="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-white"></div>
+    </div>
+
+    <div id="success-message-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100] p-4">
+        <div class="bg-white p-8 md:p-10 rounded-xl shadow-2xl text-center max-w-md w-full">
+            <div class="mb-5">
+                <svg class="mx-auto h-16 w-16 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3" data-lang="form_success_modal_title">¡Enviado con Éxito!</h3>
+            <p class="text-gray-600 mb-6" data-lang="form_success_modal_text">Gracias por tu mensaje. En breve nos pondremos en contacto contigo.</p>
+            <button id="close-success-modal-btn" class="bg-navy-blue text-white hover:bg-blue-700 font-semibold py-3 px-8 rounded-lg text-lg transition duration-300" data-lang="form_success_modal_close">Cerrar</button>
+        </div>
+    </div>
+
 
     <footer class="bg-gray-900 text-gray-300 py-12">
         <div class="container mx-auto px-6 text-center">
@@ -453,7 +477,12 @@
                 contact_areas: "Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana", contact_map_title: "Nuestra Área de Cobertura",
                 footer_copyright: "© 2025 ERB Servicio Técnico de Electrodomésticos | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana",
                 footer_privacy: "Política de Privacidad", footer_legal: "Aviso Legal", footer_cookies: "Política de Cookies",
-                form_sending: "Enviando...", form_success: "¡Mensaje enviado con éxito!", form_error: "Error al enviar. Inténtalo de nuevo.",
+                form_sending: "Enviando...", 
+                form_success: "¡Mensaje enviado con éxito! En breve nos contactaremos.", // Usado si el modal no se muestra por alguna razón
+                form_error: "Error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.",
+                form_success_modal_title: "¡Enviado con Éxito!",
+                form_success_modal_text: "Gracias por tu mensaje. En breve nos pondremos en contacto contigo.",
+                form_success_modal_close: "Cerrar",
                 cookie_banner_text: "Este sitio web utiliza cookies para asegurar la mejor experiencia. Al continuar navegando, aceptas su uso, incluidas cookies para Google Analytics y Google Ads. Consulta nuestra",
                 cookie_banner_policy_link: "política de cookies",
                 cookie_banner_accept: "Aceptar"
@@ -500,7 +529,12 @@
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "Les Nostres Àrees de Servei",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
-                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar.",
+                form_sending: "Enviant...", 
+                form_success: "Missatge enviat amb èxit! Aviat ens posarem en contacte.",
+                form_error: "Error en l'enviament del missatge. Si us plau, intenta-ho de nou més tard.",
+                form_success_modal_title: "Enviat amb Èxit!",
+                form_success_modal_text: "Gràcies pel teu missatge. Aviat ens posarem en contacte amb tu.",
+                form_success_modal_close: "Tancar",
                 cookie_banner_text: "Aquest lloc web utilitza galetes per assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
                 cookie_banner_policy_link: "política de galetes",
                 cookie_banner_accept: "Acceptar"
@@ -547,15 +581,24 @@
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "La Nostra Àrea de Cobertura",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
-                form_sending: "Enviant...", form_success: "Missatge enviat amb èxit!", form_error: "Error en l'enviament. Torna-ho a provar.",
+                form_sending: "Enviant...", 
+                form_success: "Missatge enviat amb èxit! En breu ens posarem en contacte.",
+                form_error: "Error en l'enviament del missatge. Per favor, intenta-ho de nou més tard.",
+                form_success_modal_title: "Enviat amb Èxit!",
+                form_success_modal_text: "Gràcies pel teu missatge. En breu ens posarem en contacte amb tu.",
+                form_success_modal_close: "Tancar",
                 cookie_banner_text: "Este lloc web utilitza galetes per a assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
                 cookie_banner_policy_link: "política de galetes",
                 cookie_banner_accept: "Acceptar"
             }
         };
 
+        // Variable global para el idioma actual
+        let currentLanguage = 'es';
+
         // Función para cambiar idioma
         function setLanguage(lang) {
+            currentLanguage = lang; // Actualizar idioma global
             document.documentElement.lang = lang;
             document.body.className = document.body.className.replace(/lang-(es|ca|va)/g, '');
             document.body.classList.add('lang-' + lang);
@@ -570,7 +613,10 @@
             });
             document.getElementById('current-lang-text').textContent = lang.toUpperCase();
             localStorage.setItem('preferredLanguage', lang);
-            document.getElementById('language-dropdown').classList.add('hidden');
+            
+            const langDropdown = document.getElementById('language-dropdown');
+            if (langDropdown) langDropdown.classList.add('hidden');
+
 
             const privacyLink = document.getElementById('privacyLink');
             const legalLink = document.getElementById('legalLink');
@@ -579,19 +625,19 @@
 
 
             if (lang === 'ca') {
-                privacyLink.href = '/ca/politica-privacitat.html';
-                legalLink.href = '/ca/avis-legal.html';
-                cookiesLink.href = '/ca/politica-galetes.html';
+                if (privacyLink) privacyLink.href = '/ca/politica-privacitat.html';
+                if (legalLink) legalLink.href = '/ca/avis-legal.html';
+                if (cookiesLink) cookiesLink.href = '/ca/politica-galetes.html';
                 if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/ca/politica-galetes.html';
             } else if (lang === 'va') {
-                privacyLink.href = '/va/politica-privacitat.html';
-                legalLink.href = '/va/avis-legal.html';
-                cookiesLink.href = '/va/politica-galetes.html';
+                if (privacyLink) privacyLink.href = '/va/politica-privacitat.html';
+                if (legalLink) legalLink.href = '/va/avis-legal.html';
+                if (cookiesLink) cookiesLink.href = '/va/politica-galetes.html';
                 if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/va/politica-galetes.html';
             } else { 
-                privacyLink.href = '/politica-privacidad.html';
-                legalLink.href = '/aviso-legal.html';
-                cookiesLink.href = '/politica-cookies.html';
+                if (privacyLink) privacyLink.href = '/politica-privacidad.html';
+                if (legalLink) legalLink.href = '/aviso-legal.html';
+                if (cookiesLink) cookiesLink.href = '/politica-cookies.html';
                 if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/politica-cookies.html';
             }
             populateApplianceSelect(lang);
@@ -650,7 +696,6 @@
             });
         }
 
-        // Lógica del banner de cookies
         function handleCookieBanner() {
             const banner = document.getElementById('cookie-banner');
             const acceptBtn = document.getElementById('accept-cookies-btn');
@@ -660,15 +705,12 @@
             const cookiesAccepted = localStorage.getItem('erbCookiesAccepted');
 
             if (!cookiesAccepted) {
-                banner.style.display = 'flex'; // O 'block' si prefieres, 'flex' para que los items se alineen bien
+                banner.style.display = 'flex';
             }
 
             acceptBtn.addEventListener('click', () => {
                 localStorage.setItem('erbCookiesAccepted', 'true');
                 banner.style.display = 'none';
-                // Aquí podrías añadir lógica para inicializar scripts que dependen del consentimiento,
-                // si no se cargan por defecto (como Google Analytics).
-                // Por ejemplo: if (typeof gtag === 'function') { gtag('config', 'G-TQC24XCERF'); }
             });
         }
 
@@ -677,15 +719,18 @@
             const langButton = document.getElementById('language-selector-btn');
             const langDropdown = document.getElementById('language-dropdown');
             
-            langButton.addEventListener('click', () => {
-                langDropdown.classList.toggle('hidden');
-            });
+            if (langButton && langDropdown) {
+                langButton.addEventListener('click', () => {
+                    langDropdown.classList.toggle('hidden');
+                });
 
-            document.addEventListener('click', (event) => {
-                if (!langButton.contains(event.target) && !langDropdown.contains(event.target)) {
-                    langDropdown.classList.add('hidden');
-                }
-            });
+                document.addEventListener('click', (event) => {
+                    if (!langButton.contains(event.target) && !langDropdown.contains(event.target)) {
+                        langDropdown.classList.add('hidden');
+                    }
+                });
+            }
+
 
             document.querySelectorAll('#language-dropdown a').forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -697,7 +742,7 @@
             });
             
             const preferredLanguage = localStorage.getItem('preferredLanguage') || 'es';
-            setLanguage(preferredLanguage); // Esto también actualiza el enlace de la política de cookies en el banner
+            setLanguage(preferredLanguage); 
             populateServiceCards(preferredLanguage); 
             populateApplianceSelect(preferredLanguage); 
 
@@ -714,12 +759,16 @@
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    try {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    } catch(error) {
+                        console.warn("Error scrolling to anchor:", targetId, error);
                     }
                     const mobileMenu = document.getElementById('mobile-menu');
-                    if (mobileMenu.classList.contains('open')) {
+                    if (mobileMenu && mobileMenu.classList.contains('open')) {
                         mobileMenu.classList.remove('open');
                     }
                 });
@@ -729,105 +778,156 @@
             const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
-            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.add('open'); });
-            closeMobileMenuButton.addEventListener('click', () => { mobileMenu.classList.remove('open'); });
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.add('open'); });
+            }
+            if (closeMobileMenuButton && mobileMenu) {
+                closeMobileMenuButton.addEventListener('click', () => { mobileMenu.classList.remove('open'); });
+            }
+            
 
-            handleCookieBanner(); // Inicializar la lógica del banner de cookies
+            handleCookieBanner();
+
+            // --- NUEVA LÓGICA DEL FORMULARIO DE CONTACTO ---
+            const contactForm = document.getElementById('contactForm');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const successModal = document.getElementById('success-message-modal');
+            const closeSuccessModalBtn = document.getElementById('close-success-modal-btn');
+            const formStatusDiv = document.getElementById('form-status');
+            const submitButton = document.getElementById('submit-contact-form');
+
+            if (contactForm && loadingSpinner && successModal && closeSuccessModalBtn && formStatusDiv && submitButton) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevenir el envío tradicional del formulario
+
+                    // Mostrar spinner y deshabilitar botón
+                    loadingSpinner.classList.remove('hidden');
+                    submitButton.disabled = true;
+                    submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    formStatusDiv.textContent = ''; // Limpiar mensajes anteriores
+
+                    const formData = new FormData(contactForm);
+                    const formAction = contactForm.getAttribute('action');
+
+                    fetch(formAction, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json' // Importante para que formsubmit.co devuelva JSON
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        loadingSpinner.classList.add('hidden');
+                        submitButton.disabled = false;
+                        submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                        if (data.success || (data.ok && data.ok === true) ) { // formsubmit.co puede devolver 'success' o un objeto con 'ok:true'
+                            contactForm.reset(); // Limpiar el formulario
+                            // Actualizar textos del modal por si el idioma cambió dinámicamente
+                            const modalTitle = successModal.querySelector('[data-lang="form_success_modal_title"]');
+                            const modalText = successModal.querySelector('[data-lang="form_success_modal_text"]');
+                            const modalCloseBtn = successModal.querySelector('[data-lang="form_success_modal_close"]');
+
+                            if (translations[currentLanguage] && translations[currentLanguage]['form_success_modal_title']) {
+                                modalTitle.textContent = translations[currentLanguage]['form_success_modal_title'];
+                                modalText.textContent = translations[currentLanguage]['form_success_modal_text'];
+                                modalCloseBtn.textContent = translations[currentLanguage]['form_success_modal_close'];
+                            } else { // Fallback a español si la traducción no existe
+                                modalTitle.textContent = translations.es['form_success_modal_title'];
+                                modalText.textContent = translations.es['form_success_modal_text'];
+                                modalCloseBtn.textContent = translations.es['form_success_modal_close'];
+                            }
+                            successModal.classList.remove('hidden');
+                        } else {
+                            // Hubo un error según formsubmit.co o la respuesta no fue la esperada
+                            formStatusDiv.textContent = translations[currentLanguage]?.form_error || translations.es.form_error;
+                            formStatusDiv.classList.remove('text-green-400');
+                            formStatusDiv.classList.add('text-red-400');
+                            console.error('Formsubmit.co reportó un error o formato de respuesta inesperado:', data);
+                        }
+                    })
+                    .catch(error => {
+                        loadingSpinner.classList.add('hidden');
+                        submitButton.disabled = false;
+                        submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                        formStatusDiv.textContent = translations[currentLanguage]?.form_error || translations.es.form_error;
+                        formStatusDiv.classList.remove('text-green-400');
+                        formStatusDiv.classList.add('text-red-400');
+                        console.error('Error al enviar el formulario:', error);
+                    });
+                });
+
+                closeSuccessModalBtn.addEventListener('click', () => {
+                    successModal.classList.add('hidden');
+                });
+            } else {
+                console.error("No se encontraron todos los elementos necesarios para el formulario de contacto mejorado.");
+            }
+            // --- FIN DE LA NUEVA LÓGICA DEL FORMULARIO ---
         });
     </script>
     
     <script>
+        // Función para inicializar el mapa de Google
         function initMap() {
-            const valencia = { lat: 39.4699, lng: -0.3763 };
-            const sagunto = { lat: 39.6815, lng: -0.2776 };
+            // Coordenadas de ejemplo, ajusta según sea necesario
+            const valencia = { lat: 39.4699, lng: -0.3763 }; 
+            const sagunto = { lat: 39.6815, lng: -0.2776 }; // Ejemplo para calcular radio
 
-            const map = new google.maps.Map(document.getElementById("map"), {
+            const mapElement = document.getElementById("map");
+            if (!mapElement) {
+                console.error("Elemento del mapa no encontrado");
+                return;
+            }
+            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+                console.error("Google Maps API no cargada.");
+                return;
+            }
+
+
+            const map = new google.maps.Map(mapElement, {
                 zoom: 10, 
                 center: valencia,
                 mapTypeId: 'roadmap', 
                 styles: [ 
-                    {
-                        "featureType": "water",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.stroke",
-                        "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }]
-                    },
-                    {
-                        "featureType": "road.arterial",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }]
-                    },
-                    {
-                        "featureType": "poi",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#dedede" }, { "lightness": 21 }]
-                    },
-                    {
-                        "elementType": "labels.text.stroke",
-                        "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }]
-                    },
-                    {
-                        "elementType": "labels.text.fill",
-                        "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }]
-                    },
-                    { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] },
-                    {
-                        "featureType": "transit",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "geometry.stroke",
-                        "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }]
-                    }
+                    { featureType: "water", elementType: "geometry", stylers: [{ color: "#e9e9e9" }, { lightness: 17 }] },
+                    { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f5f5f5" }, { lightness: 20 }] },
+                    { featureType: "road.highway", elementType: "geometry.fill", stylers: [{ color: "#ffffff" }, { lightness: 17 }] },
+                    { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#ffffff" }, { lightness: 29 }, { weight: 0.2 }] },
+                    { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#ffffff" }, { lightness: 18 }] },
+                    { featureType: "road.local", elementType: "geometry", stylers: [{ color: "#ffffff" }, { lightness: 16 }] },
+                    { featureType: "poi", elementType: "geometry", stylers: [{ color: "#f5f5f5" }, { lightness: 21 }] },
+                    { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#dedede" }, { lightness: 21 }] },
+                    { elementType: "labels.text.stroke", stylers: [{ visibility: "on" }, { color: "#ffffff" }, { lightness: 16 }] },
+                    { elementType: "labels.text.fill", stylers: [{ saturation: 36 }, { color: "#333333" }, { lightness: 40 }] },
+                    { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+                    { featureType: "transit", elementType: "geometry", stylers: [{ color: "#f2f2f2" }, { lightness: 19 }] },
+                    { featureType: "administrative", elementType: "geometry.fill", stylers: [{ color: "#fefefe" }, { lightness: 20 }] },
+                    { featureType: "administrative", elementType: "geometry.stroke", stylers: [{ color: "#fefefe" }, { lightness: 17 }, { weight: 1.2 }] }
                 ]
             });
+            
+            if (google.maps.geometry && google.maps.geometry.spherical) {
+                 const radiusInMeters = google.maps.geometry.spherical.computeDistanceBetween(
+                    new google.maps.LatLng(valencia),
+                    new google.maps.LatLng(sagunto) 
+                );
 
-            const radiusInMeters = google.maps.geometry.spherical.computeDistanceBetween(
-                new google.maps.LatLng(valencia),
-                new google.maps.LatLng(sagunto)
-            );
+                new google.maps.Circle({
+                    strokeColor: "#001f3f", 
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#007bff", 
+                    fillOpacity: 0.25, 
+                    map: map,
+                    center: valencia,
+                    radius: radiusInMeters, 
+                });
+            } else {
+                console.warn("Librería 'geometry' de Google Maps no disponible para calcular el radio del círculo.");
+            }
 
-            const coverageCircle = new google.maps.Circle({
-                strokeColor: "#001f3f", 
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: "#007bff", 
-                fillOpacity: 0.25, 
-                map: map,
-                center: valencia,
-                radius: radiusInMeters, 
-            });
 
             new google.maps.Marker({
                 position: valencia,
@@ -843,7 +943,7 @@
             });
         }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_erEiiEvZlRfOhnRCt-Ooz5yM9rBrgk&libraries=geometry&callback=initMap"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_erEiiEvZlRfOhnRCt-Ooz5yM9rBrgk&libraries=geometry&callback=initMap&loading=async"></script>
 
 </body>
 </html>
