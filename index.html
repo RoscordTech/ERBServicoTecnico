@@ -126,13 +126,10 @@
             color: #90cdf4; /* text-blue-300 */
         }
 
-        #loading-spinner.hidden, #success-message-modal.hidden, #testimonial-loading-spinner.hidden, #testimonial-auth-message.hidden {
+        #loading-spinner.hidden, #success-message-modal.hidden, #testimonial-loading-spinner.hidden {
             display: none;
         }
         #google-signin-btn.hidden, #signout-btn.hidden, #user-info.hidden {
-            display: none;
-        }
-        #testimonialForm.hidden {
             display: none;
         }
 
@@ -354,18 +351,14 @@
                         <button id="signout-btn" class="mt-2 text-sm text-red-600 hover:underline" data-lang="testimonial_sign_out">Cerrar Sesión</button>
                     </div>
                     <button id="google-signin-btn" class="btn-google hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center">
-                        <i class="fab fa-google mr-2"></i> <span data-lang="testimonial_signin_google">Iniciar sesión con Google para opinar</span>
+                        <i class="fab fa-google mr-2"></i> <span data-lang="testimonial_signin_google">Iniciar sesión con Google</span>
                     </button>
                 </div>
 
-                <div id="testimonial-auth-message" class="text-center p-4 mb-4 bg-yellow-100 text-yellow-700 rounded-md">
-                    <p data-lang="testimonial_login_to_submit">Por favor, inicia sesión con Google para dejar una opinión.</p>
-                </div>
-
-                <form id="testimonialForm" class="space-y-6 hidden">
+                <form id="testimonialForm" class="space-y-6">
                     <div>
                         <label for="testimonialNombre" class="block text-sm font-medium text-gray-700" data-lang="testimonial_form_name">Tu Nombre</label>
-                        <input type="text" name="testimonialNombre" id="testimonialNombre" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm border-gray-300 focus:ring-navy focus:border-navy bg-gray-100" readonly>
+                        <input type="text" name="testimonialNombre" id="testimonialNombre" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm border-gray-300 focus:ring-navy focus:border-navy">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" data-lang="testimonial_form_rating">Tu Puntuación</label>
@@ -395,7 +388,7 @@
 
             <div id="testimonial-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 </div>
-            <p id="no-testimonials" class="text-center text-gray-600 mt-8 hidden" data-lang="testimonials_empty">Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!</p>
+            <p id="no-testimonials" class="text-center text-gray-600 hidden" data-lang="testimonials_empty">Aún no hay testimonios. ¡Sé el primero en dejar tu opinión!</p>
         </div>
     </section>
 
@@ -518,99 +511,56 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithRedirect, signOut, getRedirectResult, browserSessionPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js"; // Actualizado a 11.8.1
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js"; // Actualizado a 11.8.1
+        import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp, doc, setDoc, getDoc, updateDoc, deleteDoc, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js"; // Actualizado a 11.8.1
+        // import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js"; // Descomentar si se usa Analytics
 
+        // Tu configuración de Firebase (proporcionada por el usuario)
         const firebaseConfig = {
           apiKey: "AIzaSyCkuxUilQ75CH4Lx96loCsTASsF1u0WwSc",
           authDomain: "xddddd-23011.firebaseapp.com",
           projectId: "xddddd-23011",
-          storageBucket: "xddddd-23011.appspot.com", 
+          storageBucket: "xddddd-23011.firebasestorage.app", // Corregido: debe ser .appspot.com o el correcto
           messagingSenderId: "723576872564",
           appId: "1:723576872564:web:a7c3f486442d7619967b21"
         };
         
+        // El appId para las rutas de Firestore se tomará de firebaseConfig.appId
         const appId = firebaseConfig.appId; 
         console.log("Firebase App ID en uso para Firestore paths:", appId);
+
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        // const analytics = getAnalytics(app); // Descomentar si se usa Analytics
         
         let currentFirebaseUser = null; 
+        let isAuthReady = false;
 
         const googleSignInBtn = document.getElementById('google-signin-btn');
         const signOutBtn = document.getElementById('signout-btn');
         const userInfoDiv = document.getElementById('user-info');
         const userDisplayNameSpan = document.getElementById('user-display-name');
         const testimonialNombreInput = document.getElementById('testimonialNombre');
-        const testimonialForm = document.getElementById('testimonialForm');
-        const testimonialFormStatus = document.getElementById('testimonial-form-status');
-        const testimonialAuthMessage = document.getElementById('testimonial-auth-message'); 
-        const testimonialListDiv = document.getElementById('testimonial-list'); 
-        const noTestimonialsP = document.getElementById('no-testimonials'); 
-
-        // Intentar establecer la persistencia a 'session' o 'local' como fallback.
-        // Esto se hace primero para que getRedirectResult() opere con la persistencia deseada.
-        setPersistence(auth, browserSessionPersistence)
-          .catch((error) => {
-            console.warn("No se pudo establecer persistencia 'session', intentando 'local':", error.message);
-            return setPersistence(auth, auth. ऐपรืรืLOCAL_PERSISTENCE); // Firebase usa LOCAL_PERSISTENCE internamente
-          })
-          .then(() => {
-            console.log("Persistencia de autenticación establecida.");
-            // Una vez establecida la persistencia (o intentada), verificar el resultado de la redirección.
-            return getRedirectResult(auth);
-          })
-          .then((result) => {
-            if (result && result.user) {
-              console.log("Usuario obtenido de getRedirectResult:", result.user);
-              // onAuthStateChanged se encargará de la actualización de UI.
-            }
-            // Cargar testimonios siempre al inicio, ya que son públicos
-            loadTestimonials(); 
-          })
-          .catch((error) => {
-            console.error("Error final en getRedirectResult o configuración de persistencia:", error);
-            const currentTranslations = window.translations[window.currentLanguage] || window.translations.es;
-            let errorMessage = currentTranslations?.testimonial_signin_error || "Error al procesar inicio de sesión con Google.";
-
-            if (error.code && (error.code.includes('storage') || error.code.includes('auth/operation-not-supported-in-this-environment') || error.code.includes('auth/web-storage-unsupported'))) {
-                 errorMessage = currentTranslations?.testimonial_storage_error || "El inicio de sesión no pudo completarse. Es posible que la configuración de privacidad de tu navegador (prevención de rastreo o bloqueo de cookies de terceros) esté interfiriendo. Por favor, ajusta la configuración para este sitio e inténtalo de nuevo.";
-            }
-             if (testimonialFormStatus) {
-                testimonialFormStatus.innerHTML = errorMessage;
-                testimonialFormStatus.className = 'mt-4 text-center text-red-500 p-3 bg-red-100 rounded-md';
-            }
-            loadTestimonials(); // Intentar cargar testimonios de todas formas
-          });
-
+        const testimonialFormStatus = document.getElementById('testimonial-form-status'); // Definido aquí para acceso global en el script
 
         function updateAuthUI(user) {
             currentFirebaseUser = user;
-            if (user) { 
+            if (user && !user.isAnonymous) { 
                 googleSignInBtn.classList.add('hidden');
                 userInfoDiv.classList.remove('hidden');
                 signOutBtn.classList.remove('hidden');
-                testimonialAuthMessage.classList.add('hidden'); 
-                testimonialForm.classList.remove('hidden'); 
-
                 userDisplayNameSpan.textContent = user.displayName || 'Usuario de Google';
                 testimonialNombreInput.value = user.displayName || '';
                 testimonialNombreInput.readOnly = true;
-                testimonialNombreInput.classList.add('bg-gray-100');
+                 testimonialNombreInput.classList.add('bg-gray-100');
             } else { 
                 googleSignInBtn.classList.remove('hidden');
                 userInfoDiv.classList.add('hidden');
                 signOutBtn.classList.add('hidden');
-                testimonialAuthMessage.classList.remove('hidden'); 
-                const authMsgP = testimonialAuthMessage.querySelector('p');
-                if (authMsgP && translations[currentLanguage]) {
-                    authMsgP.textContent = translations[currentLanguage].testimonial_login_to_submit || "Por favor, inicia sesión con Google para dejar una opinión.";
-                }
-                testimonialForm.classList.add('hidden'); 
-
                 userDisplayNameSpan.textContent = '';
                 testimonialNombreInput.value = ''; 
                 testimonialNombreInput.readOnly = false;
@@ -619,28 +569,28 @@
         }
         
         onAuthStateChanged(auth, (user) => {
-            console.log("onAuthStateChanged disparado. Usuario:", user);
+            isAuthReady = true;
             updateAuthUI(user);
+            if (!user) { 
+                signInAnonymously(auth).catch(error => {
+                    console.error("Error en inicio de sesión anónimo inicial:", error);
+                });
+            }
+            loadTestimonials(); 
         });
         
         if (googleSignInBtn) {
-            googleSignInBtn.addEventListener('click', () => {
-                // No es necesario llamar a setPersistence aquí de nuevo si ya se hizo al inicio
-                // y antes de getRedirectResult. Firebase mantendrá la persistencia configurada.
+            googleSignInBtn.addEventListener('click', async () => {
                 const provider = new GoogleAuthProvider();
-                signInWithRedirect(auth, provider)
-                .catch((error) => {
-                     console.error("Error al iniciar redirección con Google:", error);
-                     const currentTranslations = window.translations[window.currentLanguage] || window.translations.es;
-                     let errorMessage = currentTranslations?.testimonial_signin_error || "Error al iniciar sesión con Google.";
-                     if (error.code && (error.code.includes('storage') || error.code.includes('auth/web-storage-unsupported'))) {
-                         errorMessage = currentTranslations?.testimonial_storage_error || "Error con el almacenamiento del navegador. Revisa la configuración de privacidad (cookies, prevención de rastreo).";
-                     }
-                     if (testimonialFormStatus) {
-                        testimonialFormStatus.innerHTML = errorMessage;
-                        testimonialFormStatus.className = 'mt-4 text-center text-red-500 p-3 bg-red-100 rounded-md';
+                try {
+                    await signInWithPopup(auth, provider);
+                } catch (error) {
+                    console.error("Error al iniciar sesión con Google:", error);
+                    if (testimonialFormStatus) { // Verificar si el elemento existe
+                        testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_signin_error || "Error al iniciar sesión con Google.";
+                        testimonialFormStatus.className = 'mt-4 text-center text-red-500';
                     }
-                });
+                }
             });
         }
 
@@ -648,14 +598,41 @@
             signOutBtn.addEventListener('click', async () => {
                 try {
                     await signOut(auth);
+                    await signInAnonymously(auth);
                 } catch (error) {
                     console.error("Error al cerrar sesión:", error);
                 }
             });
         }
         
+        async function ensureInitialAuth() {
+            if (auth.currentUser) { 
+                isAuthReady = true;
+                updateAuthUI(auth.currentUser);
+                loadTestimonials();
+                return;
+            }
+            // La variable __initial_auth_token no se usa aquí ya que tenemos firebaseConfig completo.
+            // Se intentará el inicio anónimo directamente si no hay usuario.
+            try {
+                 await signInAnonymously(auth);
+            } catch (error) {
+                console.error("Error en la autenticación anónima inicial:", error);
+            } finally {
+                isAuthReady = true; 
+                updateAuthUI(auth.currentUser); // Actualizar UI con el usuario anónimo o null si falló
+                loadTestimonials(); 
+            }
+        }
+        ensureInitialAuth();
+
+
+        const testimonialForm = document.getElementById('testimonialForm');
+        const testimonialListDiv = document.getElementById('testimonial-list');
+        const noTestimonialsP = document.getElementById('no-testimonials');
         const testimonialRatingStars = document.querySelectorAll('#testimonialRating .fa-star');
         const ratingValueInput = document.getElementById('ratingValue');
+        // testimonialFormStatus ya está definido arriba
         const testimonialLoadingSpinner = document.getElementById('testimonial-loading-spinner');
         const submitTestimonialButton = document.getElementById('submit-testimonial-form');
 
@@ -692,8 +669,8 @@
         if (testimonialForm) {
             testimonialForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                if (!auth.currentUser) { 
-                    if(testimonialFormStatus) testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_login_required_submit || "Debes iniciar sesión con Google para enviar una opinión.";
+                if (!isAuthReady || !auth.currentUser) { 
+                    if(testimonialFormStatus) testimonialFormStatus.textContent = translations[currentLanguage]?.auth_pending || "Esperando autenticación...";
                     if(testimonialFormStatus) testimonialFormStatus.className = 'mt-4 text-center text-yellow-500';
                     return;
                 }
@@ -703,9 +680,16 @@
                     return;
                 }
 
-                let nombre = testimonialNombreInput.value; 
+                let nombre = testimonialNombreInput.value;
                 const mensaje = document.getElementById('testimonialMensaje').value;
-                
+                let submittedByGoogle = false;
+
+                if (currentFirebaseUser && !currentFirebaseUser.isAnonymous && currentFirebaseUser.displayName) {
+                    nombre = currentFirebaseUser.displayName; 
+                    submittedByGoogle = true;
+                }
+
+
                 testimonialLoadingSpinner.classList.remove('hidden');
                 submitTestimonialButton.disabled = true;
                 if(testimonialFormStatus) testimonialFormStatus.textContent = '';
@@ -718,16 +702,20 @@
                         comment: mensaje,
                         createdAt: serverTimestamp(),
                         userId: auth.currentUser.uid, 
-                        isGoogleUser: !auth.currentUser.isAnonymous, 
-                        photoURL: auth.currentUser.photoURL || null 
+                        isGoogleUser: submittedByGoogle, 
+                        photoURL: submittedByGoogle ? (currentFirebaseUser.photoURL || null) : null 
                     });
                     if(testimonialFormStatus) testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_form_success || "¡Gracias por tu opinión!";
                     if(testimonialFormStatus) testimonialFormStatus.className = 'mt-4 text-center text-green-500';
-                    
-                    document.getElementById('testimonialMensaje').value = '';
+                    testimonialForm.reset();
                     currentRating = 0;
                     ratingValueInput.value = '';
                     updateStarDisplay(0);
+                    if (submittedByGoogle && currentFirebaseUser) {
+                        testimonialNombreInput.value = currentFirebaseUser.displayName;
+                    } else {
+                        testimonialNombreInput.value = ''; 
+                    }
 
                 } catch (error) {
                     console.error("Error al guardar testimonio: ", error);
@@ -761,34 +749,39 @@
                     <p class="text-xs text-gray-400 text-right">${date}</p>
                 </div>
             `;
-            if(testimonialListDiv) testimonialListDiv.appendChild(card);
+            testimonialListDiv.appendChild(card);
         }
 
         function loadTestimonials() {
-            console.log("Intentando cargar testimonios (público)...");
+            if (!isAuthReady) {
+                console.log("Esperando autenticación para cargar testimonios...");
+                return;
+            }
+             if (!auth.currentUser) { 
+                console.warn("No hay usuario autenticado (ni siquiera anónimo) para cargar testimonios.");
+                noTestimonialsP.textContent = translations[currentLanguage]?.auth_required_for_load || "Se requiere autenticación para cargar testimonios.";
+                noTestimonialsP.classList.remove('hidden');
+                noTestimonialsP.classList.add('text-yellow-500');
+                return;
+            }
             const testimonialsCollectionPath = `artifacts/${appId}/public/data/testimonials`;
             const q = query(collection(db, testimonialsCollectionPath), orderBy("createdAt", "desc"), limit(6)); 
 
             onSnapshot(q, (querySnapshot) => {
-                if(testimonialListDiv) testimonialListDiv.innerHTML = ''; 
+                testimonialListDiv.innerHTML = ''; 
                 if (querySnapshot.empty) {
-                    if(noTestimonialsP && translations[currentLanguage]) {
-                        noTestimonialsP.textContent = translations[currentLanguage].testimonials_empty;
-                        noTestimonialsP.classList.remove('hidden');
-                    }
+                    noTestimonialsP.classList.remove('hidden');
                 } else {
-                    if(noTestimonialsP) noTestimonialsP.classList.add('hidden');
+                    noTestimonialsP.classList.add('hidden');
                     querySnapshot.forEach((doc) => {
                         displayTestimonial(doc);
                     });
                 }
             }, (error) => {
                 console.error("Error al cargar testimonios: ", error);
-                 if(noTestimonialsP && translations[currentLanguage]) {
-                    noTestimonialsP.textContent = translations[currentLanguage]?.testimonials_load_error || "Error al cargar testimonios.";
-                    noTestimonialsP.classList.remove('hidden');
-                    noTestimonialsP.classList.add('text-red-500');
-                }
+                noTestimonialsP.textContent = translations[currentLanguage]?.testimonials_load_error || "Error al cargar testimonios.";
+                noTestimonialsP.classList.remove('hidden');
+                noTestimonialsP.classList.add('text-red-500');
             });
         }
         
@@ -851,14 +844,13 @@
                 testimonial_form_submit: "Enviar Opinión",
                 testimonial_form_success: "¡Gracias por tu opinión! Ha sido enviada.",
                 testimonial_form_error: "Error al enviar tu opinión. Inténtalo de nuevo.",
-                testimonial_signin_google: "Iniciar sesión con Google para opinar",
+                testimonial_signin_google: "Iniciar sesión con Google",
                 testimonial_sign_out: "Cerrar Sesión",
                 testimonial_logged_in_as: "Conectado como:",
                 testimonial_signin_error: "Error al iniciar sesión con Google.",
-                testimonial_login_to_submit: "Por favor, inicia sesión con Google para dejar una opinión.",
-                testimonial_storage_error: "El inicio de sesión no pudo completarse. Es posible que la configuración de privacidad de tu navegador (prevención de rastreo o bloqueo de cookies de terceros) esté interfiriendo. Por favor, ajusta la configuración para este sitio e inténtalo de nuevo.",
-                testimonials_empty: "Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!",
+                testimonials_empty: "Aún no hay testimonios. ¡Sé el primero en dejar tu opinión!",
                 testimonials_load_error: "Error al cargar testimonios.",
+                auth_required_for_load: "Se requiere autenticación para cargar testimonios.",
                 date_unavailable: "Fecha no disponible",
                 contact_title: "Contacta con Nosotros",
                 contact_form_title: "Envíanos un Mensaje",
@@ -881,8 +873,9 @@
                 map_error_title: "Error al cargar el mapa:",
                 map_error_text: "El mapa no se puede mostrar en este momento. Si eres el administrador del sitio, asegúrate de que la URL actual esté autorizada en la configuración de la clave API de Google Maps en Google Cloud Console.",
                 map_error_url_is: "URL actual para autorizar:",
+                auth_pending: "Esperando autenticación..."
             },
-            ca: { 
+            ca: {
                 company_name_header: "ERB Servei Tècnic",
                 nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_testimonials: "Testimonis", nav_contact: "Contacte",
                 nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_testimonials_mobile: "Testimonis", nav_contact_mobile: "Contacte",
@@ -896,7 +889,7 @@
                 service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
                 service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teva rentadora.",
                 service_dishwasher_title: "Reparació de Rentavaixelles", service_dishwasher_desc: "Solucionem errades de neteja, fuites o problemes elèctrics al teu rentavaixelles.",
-                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no escalfen, problemes con el termòstat o errades electròniques.",
+                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no escalfen, problemes amb el termòstat o errades electròniques.",
                 service_dryer_title: "Reparació d'Assecadores", service_dryer_desc: "Solucions per a assecadores que no assequen, fan soroll o no s'engeguen.",
                 service_cooktop_title: "Reparació de Vitroceràmiques", service_cooktop_desc: "Reparem vitroceràmiques d'inducció, elèctriques, amb problemes als fogons o controls.",
                 service_water_heater_title: "Reparació d'Escalfadors d'Aigua", service_water_heater_desc: "Servei tècnic per a escalfadors de gas o elèctrics, problemes d'encesa o fuites.",
@@ -924,14 +917,13 @@
                 testimonial_form_submit: "Enviar Opinió",
                 testimonial_form_success: "Gràcies per la teva opinió! S'ha enviat correctament.",
                 testimonial_form_error: "Error en enviar la teva opinió. Intenta-ho de nou.",
-                testimonial_signin_google: "Iniciar sessió amb Google per opinar",
+                testimonial_signin_google: "Iniciar sessió amb Google",
                 testimonial_sign_out: "Tancar Sessió",
                 testimonial_logged_in_as: "Connectat com:",
                 testimonial_signin_error: "Error en iniciar sessió amb Google.",
-                testimonial_login_to_submit: "Si us plau, inicia sessió amb Google per deixar una opinió.",
-                testimonial_storage_error: "L'inici de sessió no s'ha pogut completar. És possible que la configuració de privadesa del teu navegador (prevenció de rastreig o bloqueig de galetes de tercers) estigui interferint. Si us plau, ajusta la configuració per a aquest lloc i torna-ho a provar.",
-                testimonials_empty: "Encara no hi ha testimonis. Sigues el primer a deixar la teva opinió iniciant sessió!",
+                testimonials_empty: "Encara no hi ha testimonis. Sigues el primer a deixar la teva opinió!",
                 testimonials_load_error: "Error en carregar els testimonis.",
+                auth_required_for_load: "Es requereix autenticació per carregar els testimonis.",
                 date_unavailable: "Data no disponible",
                 contact_title: "Contacta amb Nosaltres",
                 contact_form_title: "Envia'ns un Missatge",
@@ -954,8 +946,9 @@
                 map_error_title: "Error en carregar el mapa:",
                 map_error_text: "El mapa no es pot mostrar en aquest moment. Si ets l'administrador del lloc, assegura't que la URL actual estigui autoritzada a la configuració de la clau API de Google Maps a Google Cloud Console.",
                 map_error_url_is: "URL actual per autoritzar:",
+                auth_pending: "Esperant autenticació..."
             },
-            va: { 
+            va: {
                 company_name_header: "ERB Servei Tècnic",
                 nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_testimonials: "Testimonis", nav_contact: "Contacte",
                 nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_testimonials_mobile: "Testimonis", nav_contact_mobile: "Contacte",
@@ -969,7 +962,7 @@
                 service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
                 service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teua rentadora.",
                 service_dishwasher_title: "Reparació de Rentaplats", service_dishwasher_desc: "Solucionem errades de neteja, fugues o problemes elèctrics al teu rentaplats.",
-                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no calfen, problemes con el termòstat o errades electròniques.",
+                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no calfen, problemes amb el termòstat o errades electròniques.",
                 service_dryer_title: "Reparació d'Eixugadores", service_dryer_desc: "Solucions per a eixugadores que no eixuguen, fan soroll o no s'encenen.",
                 service_cooktop_title: "Reparació de Vitroceràmiques", service_cooktop_desc: "Reparem vitroceràmiques d'inducció, elèctriques, amb problemes als fogons o controls.",
                 service_water_heater_title: "Reparació de Calentadors d'Aigua", service_water_heater_desc: "Servei tècnic per a calentadors de gas o elèctrics, problemes d'encesa o fugues.",
@@ -981,7 +974,7 @@
                 benefits_title: "Per Què Triar-nos",
                 benefit1_title: "Atenció Immediata", benefit1_desc: "Sol·licita la teua inspecció telefonant als nostres canals d'atenció al client.",
                 benefit2_title: "Sense Cost de Desplaçament", benefit2_desc: "Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.",
-                benefit3_title: "Garantia de 6 Mesos", benefit3_desc: "Gaudeix del teu aparell electrodomèstic com nou con garantia en la reparació de 6 mesos.",
+                benefit3_title: "Garantia de 6 Mesos", benefit3_desc: "Gaudeix del teu aparell electrodomèstic com nou amb garantia en la reparació de 6 mesos.",
                 benefit4_title: "Preus Competitius", benefit4_desc: "Preus competitius en totes les reparacions d'aparells electrodomèstics.",
                 brands_title: "Treballem amb les Millors Marques",
                 about_title: "Sobre Nosaltres",
@@ -997,14 +990,13 @@
                 testimonial_form_submit: "Enviar Opinió",
                 testimonial_form_success: "Gràcies per la teua opinió! S'ha enviat correctament.",
                 testimonial_form_error: "Error en enviar la teua opinió. Intenta-ho de nou.",
-                testimonial_signin_google: "Iniciar sessió amb Google per opinar",
+                testimonial_signin_google: "Iniciar sessió amb Google",
                 testimonial_sign_out: "Tancar Sessió",
                 testimonial_logged_in_as: "Connectat com:",
-                testimonial_signin_error: "Error en iniciar sessió con Google.",
-                testimonial_login_to_submit: "Per favor, inicia sessió amb Google per deixar una opinió.",
-                testimonial_storage_error: "L'inici de sessió no s'ha pogut completar. És possible que la configuració de privadesa del teu navegador (prevenció de rastreig o bloqueig de galetes de tercers) estiga interferint. Per favor, ajusta la configuració per a este lloc i torna-ho a provar.",
-                testimonials_empty: "Encara no hi ha testimonis. Sigues el primer a deixar la teua opinió iniciant sessió!",
+                testimonial_signin_error: "Error en iniciar sessió amb Google.",
+                testimonials_empty: "Encara no hi ha testimonis. Sigues el primer a deixar la teua opinió!",
                 testimonials_load_error: "Error en carregar els testimonis.",
+                auth_required_for_load: "Es requereix autenticació per carregar els testimonis.",
                 date_unavailable: "Data no disponible",
                 contact_title: "Contacta amb Nosaltres",
                 contact_form_title: "Envia'ns un Missatge",
@@ -1019,7 +1011,7 @@
                 form_success: "Missatge enviat amb èxit! En breu ens posarem en contacte.",
                 form_error: "Error en l'enviament del missatge. Per favor, intenta-ho de nou més tard.",
                 form_success_modal_title: "Enviat amb Èxit!",
-                form_success_modal_text: "Gràcies pel teu missatge. En breu ens posarem en contacte con tu.",
+                form_success_modal_text: "Gràcies pel teu missatge. En breu ens posarem en contacte amb tu.",
                 form_success_modal_close: "Tancar",
                 cookie_banner_text: "Este lloc web utilitza galetes per a assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
                 cookie_banner_policy_link: "política de galetes",
@@ -1027,6 +1019,7 @@
                 map_error_title: "Error en carregar el mapa:",
                 map_error_text: "El mapa no es pot mostrar en este moment. Si eres l'administrador del lloc, assegura't que la URL actual estiga autoritzada en la configuració de la clau API de Google Maps en Google Cloud Console.",
                 map_error_url_is: "URL actual per autoritzar:",
+                auth_pending: "Esperant autenticació..."
             }
         };
 
@@ -1083,10 +1076,6 @@
                 if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/politica-cookies.html';
             }
             populateApplianceSelect(lang);
-            const authMsgP = testimonialAuthMessage.querySelector('p');
-             if (authMsgP && translations[currentLanguage] && !auth.currentUser) { 
-                 authMsgP.textContent = translations[currentLanguage].testimonial_login_to_submit || "Por favor, inicia sesión con Google para dejar una opinión.";
-             }
         }
         
         function populateServiceCards(lang) {
