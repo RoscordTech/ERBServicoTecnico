@@ -362,7 +362,7 @@
                     <p data-lang="testimonial_login_to_submit">Por favor, inicia sesión con Google para dejar una opinión.</p>
                 </div>
 
-                <form id="testimonialForm" class="space-y-6 hidden"> {/* Oculto hasta que el usuario inicie sesión */}
+                <form id="testimonialForm" class="space-y-6 hidden"> 
                     <div>
                         <label for="testimonialNombre" class="block text-sm font-medium text-gray-700" data-lang="testimonial_form_name">Tu Nombre</label>
                         <input type="text" name="testimonialNombre" id="testimonialNombre" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm border-gray-300 focus:ring-navy focus:border-navy bg-gray-100" readonly>
@@ -396,7 +396,7 @@
             <div id="testimonial-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {/* Los testimonios se cargarán aquí */}
             </div>
-            <p id="no-testimonials" class="text-center text-gray-600 mt-8" data-lang="testimonials_empty">Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!</p>
+            <p id="no-testimonials" class="text-center text-gray-600 mt-8 hidden" data-lang="testimonials_empty">Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!</p>
         </div>
     </section>
 
@@ -548,29 +548,27 @@
         const testimonialNombreInput = document.getElementById('testimonialNombre');
         const testimonialForm = document.getElementById('testimonialForm');
         const testimonialFormStatus = document.getElementById('testimonial-form-status');
-        const testimonialAuthMessage = document.getElementById('testimonial-auth-message');
-        const testimonialListDiv = document.getElementById('testimonial-list'); // Definido aquí para acceso global
-        const noTestimonialsP = document.getElementById('no-testimonials'); // Definido aquí
+        const testimonialAuthMessage = document.getElementById('testimonial-auth-message'); 
+        const testimonialListDiv = document.getElementById('testimonial-list'); 
+        const noTestimonialsP = document.getElementById('no-testimonials'); 
 
-        // Manejar el resultado de la redirección de Google Sign-In
+        // Procesar el resultado de la redirección al cargar la página
         getRedirectResult(auth)
           .then((result) => {
             if (result && result.user) {
               console.log("Usuario obtenido de getRedirectResult:", result.user);
-              // onAuthStateChanged se encargará de actualizar la UI y cargar testimonios.
+              // onAuthStateChanged se encargará de la actualización de UI y carga de testimonios.
             }
-            // Siempre llamar a loadTestimonials al inicio, independientemente del resultado del redirect.
-            // Si el usuario ya estaba logueado, onAuthStateChanged lo capturará y cargará.
-            // Si no, se mostrará el mensaje para iniciar sesión para verlos (si esa es la lógica deseada)
-            // o se cargarán si las reglas lo permiten públicamente.
-            loadTestimonials(); // Cargar testimonios al inicio
+            // Llamar a loadTestimonials aquí asegura que se carguen al inicio
+            // independientemente del resultado de la redirección o si el usuario ya estaba logueado.
+            loadTestimonials();
           }).catch((error) => {
             console.error("Error en getRedirectResult:", error);
             if (testimonialFormStatus) {
                 testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_signin_error || "Error al procesar inicio de sesión con Google.";
                 testimonialFormStatus.className = 'mt-4 text-center text-red-500';
             }
-            loadTestimonials(); // Intentar cargar testimonios incluso si hay error en redirect
+            loadTestimonials(); // Intentar cargar testimonios de todas formas
           });
 
 
@@ -580,19 +578,20 @@
                 googleSignInBtn.classList.add('hidden');
                 userInfoDiv.classList.remove('hidden');
                 signOutBtn.classList.remove('hidden');
-                testimonialAuthMessage.classList.add('hidden'); // Ocultar mensaje de "inicia sesión para opinar"
-                testimonialForm.classList.remove('hidden'); // Mostrar formulario para opinar
+                testimonialAuthMessage.classList.add('hidden'); 
+                testimonialForm.classList.remove('hidden'); 
 
                 userDisplayNameSpan.textContent = user.displayName || 'Usuario de Google';
                 testimonialNombreInput.value = user.displayName || '';
                 testimonialNombreInput.readOnly = true;
                 testimonialNombreInput.classList.add('bg-gray-100');
+                // No es necesario llamar a loadTestimonials() aquí de nuevo si onSnapshot ya está activo
+                // y se llamó una vez al inicio.
             } else { 
                 googleSignInBtn.classList.remove('hidden');
                 userInfoDiv.classList.add('hidden');
                 signOutBtn.classList.add('hidden');
                 testimonialAuthMessage.classList.remove('hidden'); 
-                // Cambiar el mensaje para indicar que se necesita login para *dejar* una opinión
                 const authMsgP = testimonialAuthMessage.querySelector('p');
                 if (authMsgP && translations[currentLanguage]) {
                     authMsgP.textContent = translations[currentLanguage].testimonial_login_to_submit || "Por favor, inicia sesión con Google para dejar una opinión.";
@@ -603,16 +602,16 @@
                 testimonialNombreInput.value = ''; 
                 testimonialNombreInput.readOnly = false;
                 testimonialNombreInput.classList.remove('bg-gray-100');
+                // Los testimonios permanecen visibles, no se limpian aquí.
             }
         }
         
         onAuthStateChanged(auth, (user) => {
             console.log("onAuthStateChanged disparado. Usuario:", user);
             updateAuthUI(user);
-            // Los testimonios ahora se cargan una vez al inicio (después de getRedirectResult)
-            // y se actualizan en tiempo real por onSnapshot si las reglas lo permiten.
-            // Si el usuario inicia/cierra sesión, la UI se actualiza, pero la lista de testimonios no se vuelve a cargar aquí,
-            // ya que onSnapshot la mantiene actualizada. Si se quiere recargar explícitamente, se podría llamar a loadTestimonials() aquí.
+            // Si el usuario acaba de iniciar sesión y antes no había, y los testimonios no se cargaron,
+            // podríamos considerar una llamada a loadTestimonials() aquí, aunque ya se hace al inicio.
+            // Si loadTestimonials() ya fue llamado y onSnapshot está activo, la lista se mantiene.
         });
         
         if (googleSignInBtn) {
@@ -750,10 +749,7 @@
         }
 
         function loadTestimonials() {
-            console.log("Intentando cargar testimonios...");
-            // No se condiciona por auth.currentUser aquí, se asume que las reglas de Firestore permiten la lectura pública.
-            // Si no hay testimonios o hay un error, se manejará en el callback de onSnapshot.
-            
+            console.log("Intentando cargar testimonios (público)...");
             const testimonialsCollectionPath = `artifacts/${appId}/public/data/testimonials`;
             const q = query(collection(db, testimonialsCollectionPath), orderBy("createdAt", "desc"), limit(6)); 
 
@@ -780,6 +776,8 @@
             });
         }
         
+        // Resto del código (allServices, translations, setLanguage, etc. sin cambios)
+        // ... (el código de allServices, translations, setLanguage, etc. que ya tenías)
         const allServices = [
             { id: 'frigorificos', type: 'domestico', icon: 'fa-snowflake', title_key: 'service_fridge_title', desc_key: 'service_fridge_desc' },
             { id: 'aires_acondicionados', type: 'domestico industrial', icon: 'fa-wind', title_key: 'service_ac_title', desc_key: 'service_ac_desc' },
@@ -843,9 +841,7 @@
                 testimonial_sign_out: "Cerrar Sesión",
                 testimonial_logged_in_as: "Conectado como:",
                 testimonial_signin_error: "Error al iniciar sesión con Google.",
-                testimonial_login_required: "Por favor, inicia sesión con Google para dejar o ver testimonios.", // Ya no se usa este texto específico
                 testimonial_login_to_submit: "Por favor, inicia sesión con Google para dejar una opinión.",
-                testimonials_login_to_see: "Inicia sesión con Google para ver y dejar testimonios.", // Ya no se usa este texto específico
                 testimonials_empty: "Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!",
                 testimonials_load_error: "Error al cargar testimonios.",
                 date_unavailable: "Fecha no disponible",
@@ -870,7 +866,6 @@
                 map_error_title: "Error al cargar el mapa:",
                 map_error_text: "El mapa no se puede mostrar en este momento. Si eres el administrador del sitio, asegúrate de que la URL actual esté autorizada en la configuración de la clave API de Google Maps en Google Cloud Console.",
                 map_error_url_is: "URL actual para autorizar:",
-                auth_pending: "Esperando autenticación..." 
             },
             ca: { 
                 company_name_header: "ERB Servei Tècnic",
@@ -886,7 +881,7 @@
                 service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
                 service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teva rentadora.",
                 service_dishwasher_title: "Reparació de Rentavaixelles", service_dishwasher_desc: "Solucionem errades de neteja, fuites o problemes elèctrics al teu rentavaixelles.",
-                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no escalfen, problemes amb el termòstat o errades electròniques.",
+                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no escalfen, problemes con el termòstat o errades electròniques.",
                 service_dryer_title: "Reparació d'Assecadores", service_dryer_desc: "Solucions per a assecadores que no assequen, fan soroll o no s'engeguen.",
                 service_cooktop_title: "Reparació de Vitroceràmiques", service_cooktop_desc: "Reparem vitroceràmiques d'inducció, elèctriques, amb problemes als fogons o controls.",
                 service_water_heater_title: "Reparació d'Escalfadors d'Aigua", service_water_heater_desc: "Servei tècnic per a escalfadors de gas o elèctrics, problemes d'encesa o fuites.",
@@ -943,7 +938,6 @@
                 map_error_title: "Error en carregar el mapa:",
                 map_error_text: "El mapa no es pot mostrar en aquest moment. Si ets l'administrador del lloc, assegura't que la URL actual estigui autoritzada a la configuració de la clau API de Google Maps a Google Cloud Console.",
                 map_error_url_is: "URL actual per autoritzar:",
-                auth_pending: "Esperant autenticació..."
             },
             va: { 
                 company_name_header: "ERB Servei Tècnic",
@@ -959,7 +953,7 @@
                 service_ac_title: "Instal·lació i Reparació d'Aires Condicionats", service_ac_desc: "Servei complet per a sistemes de climatització domèstics i industrials, garantint confort.",
                 service_washing_machine_title: "Reparació de Rentadores", service_washing_machine_desc: "Arreglem problemes de centrifugat, desguàs, i qualsevol avaria a la teua rentadora.",
                 service_dishwasher_title: "Reparació de Rentaplats", service_dishwasher_desc: "Solucionem errades de neteja, fugues o problemes elèctrics al teu rentaplats.",
-                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no calfen, problemes amb el termòstat o errades electròniques.",
+                service_oven_title: "Reparació de Forns", service_oven_desc: "Reparem forns que no calfen, problemes con el termòstat o errades electròniques.",
                 service_dryer_title: "Reparació d'Eixugadores", service_dryer_desc: "Solucions per a eixugadores que no eixuguen, fan soroll o no s'encenen.",
                 service_cooktop_title: "Reparació de Vitroceràmiques", service_cooktop_desc: "Reparem vitroceràmiques d'inducció, elèctriques, amb problemes als fogons o controls.",
                 service_water_heater_title: "Reparació de Calentadors d'Aigua", service_water_heater_desc: "Servei tècnic per a calentadors de gas o elèctrics, problemes d'encesa o fugues.",
@@ -971,7 +965,7 @@
                 benefits_title: "Per Què Triar-nos",
                 benefit1_title: "Atenció Immediata", benefit1_desc: "Sol·licita la teua inspecció telefonant als nostres canals d'atenció al client.",
                 benefit2_title: "Sense Cost de Desplaçament", benefit2_desc: "Reparació a l'acte si decideixes reparar, no cobrem el desplaçament.",
-                benefit3_title: "Garantia de 6 Mesos", benefit3_desc: "Gaudeix del teu aparell electrodomèstic com nou amb garantia en la reparació de 6 mesos.",
+                benefit3_title: "Garantia de 6 Mesos", benefit3_desc: "Gaudeix del teu aparell electrodomèstic com nou con garantia en la reparació de 6 mesos.",
                 benefit4_title: "Preus Competitius", benefit4_desc: "Preus competitius en totes les reparacions d'aparells electrodomèstics.",
                 brands_title: "Treballem amb les Millors Marques",
                 about_title: "Sobre Nosaltres",
@@ -990,7 +984,7 @@
                 testimonial_signin_google: "Iniciar sessió amb Google per opinar",
                 testimonial_sign_out: "Tancar Sessió",
                 testimonial_logged_in_as: "Connectat com:",
-                testimonial_signin_error: "Error en iniciar sessió amb Google.",
+                testimonial_signin_error: "Error en iniciar sessió con Google.",
                 testimonial_login_to_submit: "Per favor, inicia sessió amb Google per deixar una opinió.",
                 testimonials_empty: "Encara no hi ha testimonis. Sigues el primer a deixar la teua opinió iniciant sessió!",
                 testimonials_load_error: "Error en carregar els testimonis.",
@@ -1008,7 +1002,7 @@
                 form_success: "Missatge enviat amb èxit! En breu ens posarem en contacte.",
                 form_error: "Error en l'enviament del missatge. Per favor, intenta-ho de nou més tard.",
                 form_success_modal_title: "Enviat amb Èxit!",
-                form_success_modal_text: "Gràcies pel teu missatge. En breu ens posarem en contacte amb tu.",
+                form_success_modal_text: "Gràcies pel teu missatge. En breu ens posarem en contacte con tu.",
                 form_success_modal_close: "Tancar",
                 cookie_banner_text: "Este lloc web utilitza galetes per a assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
                 cookie_banner_policy_link: "política de galetes",
@@ -1016,7 +1010,6 @@
                 map_error_title: "Error en carregar el mapa:",
                 map_error_text: "El mapa no es pot mostrar en este moment. Si eres l'administrador del lloc, assegura't que la URL actual estiga autoritzada en la configuració de la clau API de Google Maps en Google Cloud Console.",
                 map_error_url_is: "URL actual per autoritzar:",
-                auth_pending: "Esperant autenticació..."
             }
         };
 
@@ -1073,9 +1066,8 @@
                 if (cookieBannerPolicyLink) cookieBannerPolicyLink.href = '/politica-cookies.html';
             }
             populateApplianceSelect(lang);
-            // Actualizar texto del mensaje de autenticación si es visible
             const authMsgP = testimonialAuthMessage.querySelector('p');
-             if (authMsgP && translations[currentLanguage] && !auth.currentUser) { // Solo si no hay usuario
+             if (authMsgP && translations[currentLanguage] && !auth.currentUser) { 
                  authMsgP.textContent = translations[currentLanguage].testimonial_login_to_submit || "Por favor, inicia sesión con Google para dejar una opinión.";
              }
         }
@@ -1414,33 +1406,36 @@
 </html>
 ```
 
-**Cambios Clave Realizados:**
+**Cambios Realizados:**
 
-1.  **Carga Inicial de Testimonios:**
-    * La función `loadTestimonials()` ahora se llama una vez que se procesa `getRedirectResult(auth)` (es decir, al cargar la página, después de verificar si hubo una redirección de inicio de sesión). Esto asegura que los testimonios se intenten cargar para todos los visitantes.
-    * La función `loadTestimonials()` ya no verifica si `auth.currentUser` existe antes de intentar cargar los datos. Se asume que las reglas de Firestore permitirán la lectura pública.
+1.  **`getRedirectResult(auth)` y Carga Inicial de Testimonios:**
+    * La función `loadTestimonials()` ahora se llama **dentro** de la lógica de `getRedirectResult(auth)` (tanto en el `.then()` como en el `.catch()`). Esto asegura que los testimonios se intenten cargar tan pronto como la página se carga y Firebase ha tenido la oportunidad de procesar cualquier redirección de inicio de sesión.
+2.  **`updateAuthUI(user)` Simplificada para la Carga de Testimonios:**
+    * La función `updateAuthUI` ya no llama directamente a `loadTestimonials()`. Su responsabilidad principal es actualizar los elementos de la interfaz de usuario relacionados con el estado de inicio de sesión (mostrar/ocultar el botón de Google, el formulario de envío, el nombre del usuario, etc.).
+    * Cuando el usuario no está conectado (`user` es `null`), el mensaje en `#testimonial-auth-message` ahora dirá "Por favor, inicia sesión con Google para dejar una opinión." (usando la clave `testimonial_login_to_submit`). Los testimonios existentes permanecerán visibles si ya se cargaron.
+3.  **`onAuthStateChanged`:**
+    * Este observador sigue actualizando la UI (`updateAuthUI(user)`) cuando cambia el estado de autenticación (por ejemplo, después de un `signInWithRedirect` exitoso o un `signOut`).
+    * Ya no llama a `loadTestimonials()` directamente, ya que `onSnapshot` (dentro de `loadTestimonials`) mantendrá la lista actualizada si las reglas lo permiten, y la carga inicial se hace después de `getRedirectResult`.
+4.  **`loadTestimonials()`:**
+    * Esta función ahora se ejecuta sin verificar `auth.currentUser` al principio. Simplemente intenta obtener los testimonios. Si las reglas de Firestore permiten la lectura pública (`allow read: if true;`), se mostrarán.
+    * Si no hay testimonios, el mensaje en `#no-testimonials` se actualiza para decir "Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!" para reflejar que se requiere inicio de sesión solo para *enviar*.
 
-2.  **`updateAuthUI(user)` Modificada:**
-    * Cuando un usuario **inicia sesión con Google**:
-        * Se muestra el formulario de envío de testimonios (`testimonialForm.classList.remove('hidden')`).
-        * Se oculta el mensaje que pide iniciar sesión (`testimonialAuthMessage.classList.add('hidden')`).
-    * Cuando un usuario **no está conectado con Google (o cierra sesión)**:
-        * Se oculta el formulario de envío (`testimonialForm.classList.add('hidden')`).
-        * Se muestra el mensaje `#testimonial-auth-message`, pero su texto ahora indica que se necesita iniciar sesión para *dejar* una opinión (la clave de traducción `testimonial_login_to_submit` se usará aquí).
-        * **Importante:** La lista de testimonios (`testimonialListDiv`) **ya no se limpia** cuando el usuario cierra sesión. Los testimonios permanecen visibles.
+**Recordatorio Importante (Reglas de Firestore):**
 
-3.  **Textos de Traducción Ajustados:**
-    * La clave `testimonial_login_required` se ha ajustado a `testimonial_login_to_submit` para ser más específica.
-    * La clave `testimonials_login_to_see` ya no es necesaria en la lógica de `updateAuthUI` para ocultar testimonios.
-    * El texto del botón de Google Sign-In (`testimonial_signin_google`) se ha cambiado a "Iniciar sesión con Google para opinar" para ser más claro.
-    * El mensaje `#no-testimonials` ahora dice "Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!" para animar a la interacción.
+Para que este flujo funcione y los testimonios sean visibles para todos, tus reglas de seguridad de Firestore para la colección de testimonios deben permitir la lectura pública. Por ejemplo:
 
-**Recordatorios Cruciales:**
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /artifacts/1:723576872564:web:a7c3f486442d7619967b21/public/data/testimonials/{testimonialId} {
+      allow read: if true; // <--- ESTO PERMITE QUE TODOS LEAN
+      allow create: if request.auth != null && request.auth.token.firebase.sign_in_provider == 'google.com'; // Solo usuarios de Google pueden crear
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}
+```
 
-* **Reglas de Seguridad de Firestore:** Para que los testimonios sean visibles para todos, tus reglas de Firestore para la ruta `artifacts/${appId}/public/data/testimonials/{testimonialId}` deben tener `allow read: if true;`. La regla `allow create` debe seguir requiriendo autenticación (por ejemplo, `if request.auth != null && request.auth.token.firebase.sign_in_provider == 'google.com';`).
-* **Pruebas:**
-    * Abre la página sin iniciar sesión: deberías ver los testimonios existentes (si los hay). El formulario para enviar uno nuevo debería estar oculto, y deberías ver un mensaje pidiéndote que inicies sesión para *opinar*.
-    * Inicia sesión con Google: el formulario para enviar debería aparecer, y deberías poder enviar un testimonio.
-    * Cierra sesión: los testimonios deberían seguir visibles, pero el formulario de envío se ocultará de nuevo.
-
-Estos cambios deberían lograr el comportamiento que dese
+Prueba estos cambios. Los testimonios deberían cargarse ahora para todos los visitantes, y solo se pedirá iniciar sesión con Google para poder enviar una nueva opini
