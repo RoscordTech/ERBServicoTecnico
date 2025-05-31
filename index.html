@@ -2865,31 +2865,3 @@ Si el problema persiste y la consola sigue indicando un bloqueo de almacenamient
 
 </body>
 </html>
-```
-
-**Cambios Clave Realizados en el Script de Firebase:**
-
-1.  **`setPersistence(auth, browserSessionPersistence)`:**
-    * Antes de intentar `getRedirectResult` o `signInWithRedirect`, ahora se llama a `setPersistence` para intentar usar `sessionStorage` en lugar de `localStorage`. Esto a veces es menos propenso a ser bloqueado por configuraciones de privacidad estrictas.
-2.  **Manejo de Errores de Persistencia/Redirección Mejorado:**
-    * Se ha añadido un manejo de errores más específico en el bloque `.catch()` después de `getRedirectResult`. Si detecta un error relacionado con el almacenamiento, mostrará un mensaje más útil al usuario (usando la nueva clave de traducción `testimonial_storage_error`).
-3.  **Llamada a `setPersistence` antes de `signInWithRedirect`:**
-    * Al hacer clic en el botón de inicio de sesión con Google, también se intenta establecer la persistencia a `session` antes de llamar a `signInWithRedirect`.
-
-**Nueva Clave de Traducción Necesaria:**
-
-Asegúrate de añadir esta nueva clave a tus objetos de traducción (especialmente para `es`, `ca`, y `va`):
-
-* **`testimonial_storage_error`**:
-    * `es`: "El inicio de sesión no pudo completarse. Es posible que la configuración de privacidad de tu navegador (prevención de rastreo o bloqueo de cookies de terceros) esté interfiriendo. Por favor, ajusta la configuración para este sitio e inténtalo de nuevo."
-    * `ca`: "L'inici de sessió no s'ha pogut completar. És possible que la configuració de privadesa del teu navegador (prevenció de rastreig o bloqueig de galetes de tercers) estigui interferint. Si us plau, ajusta la configuració per a aquest lloc i torna-ho a provar."
-    * `va`: "L'inici de sessió no s'ha pogut completar. És possible que la configuració de privadesa del teu navegador (prevenció de rastreig o bloqueig de galetes de tercers) estiga interferint. Per favor, ajusta la configuració per a este lloc i torna-ho a provar."
-
-**Qué hacer ahora:**
-
-1.  **Actualiza tu código** con esta nueva versión.
-2.  **Añade la nueva clave de traducción** `testimonial_storage_error` a tus objetos `translations` para todos los idiomas.
-3.  **Prueba de nuevo el inicio de sesión con Google.**
-4.  **Si sigue fallando, revisa la consola del navegador.** El nuevo mensaje de error podría darte más pistas o confirmar si es un problema de almacenamiento/privacidad del navegador.
-
-Si el problema persiste y la consola sigue indicando un bloqueo de almacenamiento o un error en `setPersistence` o `getRedirectResult` relacionado con el entorno, la solución definitiva seguirá siendo **ajustar la configuración de privacidad de tu navegador para `erbserviciotecnico.com` y los dominios de Google/Firebase**, permitiendo las cookies y el almacenamiento necesarios para el flujo de autenticación. Este cambio en el código es un intento de mitigar el problema, pero no puede sobrepasar las restricciones impuestas por el navegad
