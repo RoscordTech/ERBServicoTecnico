@@ -1404,38 +1404,3 @@
 
 </body>
 </html>
-```
-
-**Cambios Realizados:**
-
-1.  **`getRedirectResult(auth)` y Carga Inicial de Testimonios:**
-    * La función `loadTestimonials()` ahora se llama **dentro** de la lógica de `getRedirectResult(auth)` (tanto en el `.then()` como en el `.catch()`). Esto asegura que los testimonios se intenten cargar tan pronto como la página se carga y Firebase ha tenido la oportunidad de procesar cualquier redirección de inicio de sesión.
-2.  **`updateAuthUI(user)` Simplificada para la Carga de Testimonios:**
-    * La función `updateAuthUI` ya no llama directamente a `loadTestimonials()`. Su responsabilidad principal es actualizar los elementos de la interfaz de usuario relacionados con el estado de inicio de sesión (mostrar/ocultar el botón de Google, el formulario de envío, el nombre del usuario, etc.).
-    * Cuando el usuario no está conectado (`user` es `null`), el mensaje en `#testimonial-auth-message` ahora dirá "Por favor, inicia sesión con Google para dejar una opinión." (usando la clave `testimonial_login_to_submit`). Los testimonios existentes permanecerán visibles si ya se cargaron.
-3.  **`onAuthStateChanged`:**
-    * Este observador sigue actualizando la UI (`updateAuthUI(user)`) cuando cambia el estado de autenticación (por ejemplo, después de un `signInWithRedirect` exitoso o un `signOut`).
-    * Ya no llama a `loadTestimonials()` directamente, ya que `onSnapshot` (dentro de `loadTestimonials`) mantendrá la lista actualizada si las reglas lo permiten, y la carga inicial se hace después de `getRedirectResult`.
-4.  **`loadTestimonials()`:**
-    * Esta función ahora se ejecuta sin verificar `auth.currentUser` al principio. Simplemente intenta obtener los testimonios. Si las reglas de Firestore permiten la lectura pública (`allow read: if true;`), se mostrarán.
-    * Si no hay testimonios, el mensaje en `#no-testimonials` se actualiza para decir "Aún no hay testimonios. ¡Sé el primero en dejar tu opinión iniciando sesión!" para reflejar que se requiere inicio de sesión solo para *enviar*.
-
-**Recordatorio Importante (Reglas de Firestore):**
-
-Para que este flujo funcione y los testimonios sean visibles para todos, tus reglas de seguridad de Firestore para la colección de testimonios deben permitir la lectura pública. Por ejemplo:
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /artifacts/1:723576872564:web:a7c3f486442d7619967b21/public/data/testimonials/{testimonialId} {
-      allow read: if true; // <--- ESTO PERMITE QUE TODOS LEAN
-      allow create: if request.auth != null && request.auth.token.firebase.sign_in_provider == 'google.com'; // Solo usuarios de Google pueden crear
-      allow update: if false;
-      allow delete: if false;
-    }
-  }
-}
-```
-
-Prueba estos cambios. Los testimonios deberían cargarse ahora para todos los visitantes, y solo se pedirá iniciar sesión con Google para poder enviar una nueva opini
