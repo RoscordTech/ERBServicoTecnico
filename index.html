@@ -52,15 +52,23 @@
         .btn-primary:hover {
             background-color: #003366; 
         }
+        .btn-google {
+            background-color: #DB4437;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-google:hover {
+            background-color: #C33D2E;
+        }
         .section-title {
             border-bottom: 3px solid #001f3f;
             padding-bottom: 0.5rem;
             display: inline-block;
         }
-        .service-card, .benefit-card {
+        .service-card, .benefit-card, .testimonial-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .service-card:hover, .benefit-card:hover {
+        .service-card:hover, .benefit-card:hover, .testimonial-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -118,13 +126,32 @@
             color: #90cdf4; /* text-blue-300 */
         }
 
-        /* Estilos para el spinner de carga */
-        #loading-spinner.hidden {
+        #loading-spinner.hidden, #success-message-modal.hidden, #testimonial-loading-spinner.hidden {
             display: none;
         }
-         /* Estilos para el modal de éxito */
-        #success-message-modal.hidden {
+        #google-signin-btn.hidden, #signout-btn.hidden, #user-info.hidden {
             display: none;
+        }
+
+        /* Estilos para estrellas de calificación */
+        .star-rating .fa-star {
+            color: #ddd; /* Color de estrella vacía */
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        .star-rating .fa-star.selected,
+        .star-rating .fa-star:hover,
+        .star-rating .fa-star:hover ~ .fa-star {
+            color: #f5b301; /* Color de estrella llena/hover */
+        }
+        .star-rating:hover .fa-star.selected:hover ~ .fa-star {
+            color: #ddd; /* Mantener seleccionadas al hacer hover sobre otras */
+        }
+        .testimonial-stars .fa-star {
+             color: #f5b301;
+        }
+        .testimonial-stars .fa-star.empty {
+            color: #ddd;
         }
 
     </style>
@@ -139,7 +166,7 @@
       "image": "https://erbserviciotecnico.com/logo.png", 
       "@id": "https://erbserviciotecnico.com/", 
       "url": "https://erbserviciotecnico.com/",
-      "telephone": "+34642677771",
+      "telephone": "+34612548508",
       "priceRange": "$$", 
       "description": "Especialistas en reparación de electrodomésticos de gama blanca, domésticos e industriales, y servicio de instalación de aires acondicionados en Barcelona, Coruña, Valencia y Castellón.",
       "address": {
@@ -160,6 +187,11 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reparación de electrodomésticos industriales", "serviceType": "Reparación de electrodomésticos industriales" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalación de aires acondicionados", "serviceType": "Instalación de aire acondicionado" } }
         ]
+      },
+      "aggregateRating": { 
+        "@type": "AggregateRating",
+        "ratingValue": "4.8", 
+        "reviewCount": "25" 
       }
     }
     </script>
@@ -167,7 +199,7 @@
     <header class="navy-blue text-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#inicio" class="text-2xl font-bold flex items-center">
-                <img src="/logo.png" alt="ERB Servicio Técnico Logo" class="h-8 mr-2"> <span data-lang="company_name_header">ERB Servicio Técnico</span>
+                <img src="/logo.png" alt="ERB Servicio Técnico Logo" class="h-8 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/100x30/001f3f/ffffff?text=ERB';"> <span data-lang="company_name_header">ERB Servicio Técnico</span>
             </a>
             <nav class="hidden md:flex space-x-4">
                 <a href="#inicio" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_home">Inicio</a>
@@ -175,6 +207,7 @@
                 <a href="#beneficios" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_benefits">Beneficios</a>
                 <a href="#marcas" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_brands">Marcas</a>
                 <a href="#nosotros" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_about">Sobre Nosotros</a>
+                <a href="#testimonios" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_testimonials">Testimonios</a>
                 <a href="#contacto" class="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" data-lang="nav_contact">Contacto</a>
             </nav>
             <div class="flex items-center">
@@ -209,6 +242,7 @@
             <a href="#beneficios" class="hover:text-gray-300 text-lg py-2" data-lang="nav_benefits_mobile">Beneficios</a>
             <a href="#marcas" class="hover:text-gray-300 text-lg py-2" data-lang="nav_brands_mobile">Marcas</a>
             <a href="#nosotros" class="hover:text-gray-300 text-lg py-2" data-lang="nav_about_mobile">Sobre Nosotros</a>
+            <a href="#testimonios" class="hover:text-gray-300 text-lg py-2" data-lang="nav_testimonials_mobile">Testimonios</a>
             <a href="#contacto" class="hover:text-gray-300 text-lg py-2" data-lang="nav_contact_mobile">Contacto</a>
         </nav>
     </div>
@@ -304,6 +338,61 @@
         </div>
     </section>
 
+    <section id="testimonios" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title text-navy" data-lang="testimonials_title">Opiniones de Nuestros Clientes</h2>
+            
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg mb-16">
+                <h3 class="text-2xl font-semibold text-navy mb-6" data-lang="testimonial_form_title">Deja tu Opinión</h3>
+                
+                <div id="auth-container" class="mb-6 text-center">
+                    <div id="user-info" class="hidden mb-4">
+                        <p><span data-lang="testimonial_logged_in_as">Conectado como:</span> <span id="user-display-name" class="font-semibold"></span></p>
+                        <button id="signout-btn" class="mt-2 text-sm text-red-600 hover:underline" data-lang="testimonial_sign_out">Cerrar Sesión</button>
+                    </div>
+                    <button id="google-signin-btn" class="btn-google hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center">
+                        <i class="fab fa-google mr-2"></i> <span data-lang="testimonial_signin_google">Iniciar sesión con Google</span>
+                    </button>
+                </div>
+
+                <form id="testimonialForm" class="space-y-6">
+                    <div>
+                        <label for="testimonialNombre" class="block text-sm font-medium text-gray-700" data-lang="testimonial_form_name">Tu Nombre</label>
+                        <input type="text" name="testimonialNombre" id="testimonialNombre" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm border-gray-300 focus:ring-navy focus:border-navy">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" data-lang="testimonial_form_rating">Tu Puntuación</label>
+                        <div id="testimonialRating" class="star-rating flex space-x-1 mt-1 text-2xl">
+                            <i class="fas fa-star" data-value="1"></i>
+                            <i class="fas fa-star" data-value="2"></i>
+                            <i class="fas fa-star" data-value="3"></i>
+                            <i class="fas fa-star" data-value="4"></i>
+                            <i class="fas fa-star" data-value="5"></i>
+                        </div>
+                        <input type="hidden" name="ratingValue" id="ratingValue" required>
+                    </div>
+                    <div>
+                        <label for="testimonialMensaje" class="block text-sm font-medium text-gray-700" data-lang="testimonial_form_message">Tu Comentario</label>
+                        <textarea name="testimonialMensaje" id="testimonialMensaje" rows="4" required class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm border-gray-300 focus:ring-navy focus:border-navy"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" id="submit-testimonial-form" class="w-full btn-primary text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300" data-lang="testimonial_form_submit">Enviar Opinión</button>
+                    </div>
+                </form>
+                <div id="testimonial-form-status" class="mt-4 text-center"></div>
+                 <div id="testimonial-loading-spinner" class="hidden flex items-center justify-center mt-4">
+                    <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-navy"></div>
+                    <p class="ml-2 text-navy" data-lang="form_sending">Enviando...</p>
+                </div>
+            </div>
+
+            <div id="testimonial-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+            <p id="no-testimonials" class="text-center text-gray-600 hidden" data-lang="testimonials_empty">Aún no hay testimonios. ¡Sé el primero en dejar tu opinión!</p>
+        </div>
+    </section>
+
+
     <section id="contacto" class="py-16 md:py-24 navy-blue text-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang="contact_title">Contacta con Nosotros</h2>
@@ -353,13 +442,13 @@
                         <h3 class="text-2xl font-semibold mb-4" data-lang="contact_info_title">Otras Formas de Contacto</h3>
                         <p class="flex items-center mb-3">
                             <i class="fas fa-phone mr-3 text-xl"></i>
-                            <a href="tel:+34642677771" class="hover:underline" data-lang="contact_phone_text">+34 642 677 771</a>
+                            <a href="tel:+34612548508" class="hover:underline" data-lang="contact_phone_text">+34 612 548 508</a>
                         </p>
                         <p class="flex items-center mb-3">
                             <i class="fas fa-envelope mr-3 text-xl"></i>
                             <a href="mailto:serviciotecnico.erb@gmail.com" class="hover:underline" data-lang="contact_email_text">serviciotecnico.erb@gmail.com</a> </p>
                         <p class="flex items-center mb-6">
-                            <img src="/123.png" alt="WhatsApp ERB" class="w-6 h-6 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/24x24/ffffff/000000?text=WA';"> <a href="https://wa.me/34642677771" target="_blank" class="hover:underline" data-lang="contact_whatsapp_text">Chatea con nosotros en WhatsApp</a>
+                            <img src="/123.png" alt="WhatsApp ERB" class="w-6 h-6 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/24x24/ffffff/000000?text=WA';"> <a href="https://wa.me/34612548508" target="_blank" class="hover:underline" data-lang="contact_whatsapp_text">Chatea con nosotros en WhatsApp</a>
                         </p>
                          <p class="flex items-start">
                             <i class="fas fa-map-marker-alt mr-3 text-xl mt-1"></i>
@@ -368,7 +457,14 @@
                     </div>
                     <div>
                         <h3 class="text-2xl font-semibold mb-4" data-lang="contact_map_title">Nuestra Área de Cobertura</h3>
-                        <div id="map"></div>
+                        <div id="map">
+                             <div id="map-error-message" class="p-4 bg-red-100 text-red-700 rounded-md hidden">
+                                <strong data-lang="map_error_title">Error al cargar el mapa:</strong>
+                                <p data-lang="map_error_text">El mapa no se puede mostrar en este momento. Si eres el administrador del sitio, asegúrate de que la URL actual esté autorizada en la configuración de la clave API de Google Maps en Google Cloud Console.</p>
+                                <p data-lang="map_error_url_is">URL actual para autorizar:</p>
+                                <code id="map-current-url" class="text-xs bg-red-200 p-1 rounded"></code>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -414,9 +510,281 @@
         </button>
     </div>
 
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js"; // Actualizado a 11.8.1
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js"; // Actualizado a 11.8.1
+        import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp, doc, setDoc, getDoc, updateDoc, deleteDoc, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js"; // Actualizado a 11.8.1
+        // import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js"; // Descomentar si se usa Analytics
 
-    <script>
-        // Definición de servicios
+        // Tu configuración de Firebase (proporcionada por el usuario)
+        const firebaseConfig = {
+          apiKey: "AIzaSyCkuxUilQ75CH4Lx96loCsTASsF1u0WwSc",
+          authDomain: "xddddd-23011.firebaseapp.com",
+          projectId: "xddddd-23011",
+          storageBucket: "xddddd-23011.firebasestorage.app", // Corregido: debe ser .appspot.com o el correcto
+          messagingSenderId: "723576872564",
+          appId: "1:723576872564:web:a7c3f486442d7619967b21"
+        };
+        
+        // El appId para las rutas de Firestore se tomará de firebaseConfig.appId
+        const appId = firebaseConfig.appId; 
+        console.log("Firebase App ID en uso para Firestore paths:", appId);
+
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        // const analytics = getAnalytics(app); // Descomentar si se usa Analytics
+        
+        let currentFirebaseUser = null; 
+        let isAuthReady = false;
+
+        const googleSignInBtn = document.getElementById('google-signin-btn');
+        const signOutBtn = document.getElementById('signout-btn');
+        const userInfoDiv = document.getElementById('user-info');
+        const userDisplayNameSpan = document.getElementById('user-display-name');
+        const testimonialNombreInput = document.getElementById('testimonialNombre');
+        const testimonialFormStatus = document.getElementById('testimonial-form-status'); // Definido aquí para acceso global en el script
+
+        function updateAuthUI(user) {
+            currentFirebaseUser = user;
+            if (user && !user.isAnonymous) { 
+                googleSignInBtn.classList.add('hidden');
+                userInfoDiv.classList.remove('hidden');
+                signOutBtn.classList.remove('hidden');
+                userDisplayNameSpan.textContent = user.displayName || 'Usuario de Google';
+                testimonialNombreInput.value = user.displayName || '';
+                testimonialNombreInput.readOnly = true;
+                 testimonialNombreInput.classList.add('bg-gray-100');
+            } else { 
+                googleSignInBtn.classList.remove('hidden');
+                userInfoDiv.classList.add('hidden');
+                signOutBtn.classList.add('hidden');
+                userDisplayNameSpan.textContent = '';
+                testimonialNombreInput.value = ''; 
+                testimonialNombreInput.readOnly = false;
+                testimonialNombreInput.classList.remove('bg-gray-100');
+            }
+        }
+        
+        onAuthStateChanged(auth, (user) => {
+            isAuthReady = true;
+            updateAuthUI(user);
+            if (!user) { 
+                signInAnonymously(auth).catch(error => {
+                    console.error("Error en inicio de sesión anónimo inicial:", error);
+                });
+            }
+            loadTestimonials(); 
+        });
+        
+        if (googleSignInBtn) {
+            googleSignInBtn.addEventListener('click', async () => {
+                const provider = new GoogleAuthProvider();
+                try {
+                    await signInWithPopup(auth, provider);
+                } catch (error) {
+                    console.error("Error al iniciar sesión con Google:", error);
+                    if (testimonialFormStatus) { // Verificar si el elemento existe
+                        testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_signin_error || "Error al iniciar sesión con Google.";
+                        testimonialFormStatus.className = 'mt-4 text-center text-red-500';
+                    }
+                }
+            });
+        }
+
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', async () => {
+                try {
+                    await signOut(auth);
+                    await signInAnonymously(auth);
+                } catch (error) {
+                    console.error("Error al cerrar sesión:", error);
+                }
+            });
+        }
+        
+        async function ensureInitialAuth() {
+            if (auth.currentUser) { 
+                isAuthReady = true;
+                updateAuthUI(auth.currentUser);
+                loadTestimonials();
+                return;
+            }
+            // La variable __initial_auth_token no se usa aquí ya que tenemos firebaseConfig completo.
+            // Se intentará el inicio anónimo directamente si no hay usuario.
+            try {
+                 await signInAnonymously(auth);
+            } catch (error) {
+                console.error("Error en la autenticación anónima inicial:", error);
+            } finally {
+                isAuthReady = true; 
+                updateAuthUI(auth.currentUser); // Actualizar UI con el usuario anónimo o null si falló
+                loadTestimonials(); 
+            }
+        }
+        ensureInitialAuth();
+
+
+        const testimonialForm = document.getElementById('testimonialForm');
+        const testimonialListDiv = document.getElementById('testimonial-list');
+        const noTestimonialsP = document.getElementById('no-testimonials');
+        const testimonialRatingStars = document.querySelectorAll('#testimonialRating .fa-star');
+        const ratingValueInput = document.getElementById('ratingValue');
+        // testimonialFormStatus ya está definido arriba
+        const testimonialLoadingSpinner = document.getElementById('testimonial-loading-spinner');
+        const submitTestimonialButton = document.getElementById('submit-testimonial-form');
+
+        let currentRating = 0;
+
+        testimonialRatingStars.forEach(star => {
+            star.addEventListener('click', () => {
+                currentRating = parseInt(star.getAttribute('data-value'));
+                ratingValueInput.value = currentRating;
+                updateStarDisplay(currentRating);
+            });
+            star.addEventListener('mouseover', () => {
+                const hoverValue = parseInt(star.getAttribute('data-value'));
+                updateStarDisplay(hoverValue, true);
+            });
+            star.addEventListener('mouseout', () => {
+                updateStarDisplay(currentRating);
+            });
+        });
+
+        function updateStarDisplay(rating, isHover = false) {
+            testimonialRatingStars.forEach(star => {
+                const starValue = parseInt(star.getAttribute('data-value'));
+                if (starValue <= rating) {
+                    star.classList.add('selected', 'text-yellow-400');
+                    star.classList.remove('text-gray-300'); 
+                } else {
+                    star.classList.remove('selected', 'text-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+        
+        if (testimonialForm) {
+            testimonialForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!isAuthReady || !auth.currentUser) { 
+                    if(testimonialFormStatus) testimonialFormStatus.textContent = translations[currentLanguage]?.auth_pending || "Esperando autenticación...";
+                    if(testimonialFormStatus) testimonialFormStatus.className = 'mt-4 text-center text-yellow-500';
+                    return;
+                }
+                if (currentRating === 0) {
+                     if(testimonialFormStatus) testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_form_rating_required || "Por favor, selecciona una puntuación.";
+                     if(testimonialFormStatus) testimonialFormStatus.className = 'mt-4 text-center text-red-500';
+                    return;
+                }
+
+                let nombre = testimonialNombreInput.value;
+                const mensaje = document.getElementById('testimonialMensaje').value;
+                let submittedByGoogle = false;
+
+                if (currentFirebaseUser && !currentFirebaseUser.isAnonymous && currentFirebaseUser.displayName) {
+                    nombre = currentFirebaseUser.displayName; 
+                    submittedByGoogle = true;
+                }
+
+
+                testimonialLoadingSpinner.classList.remove('hidden');
+                submitTestimonialButton.disabled = true;
+                if(testimonialFormStatus) testimonialFormStatus.textContent = '';
+
+                try {
+                    const testimonialsCollectionPath = `artifacts/${appId}/public/data/testimonials`;
+                    await addDoc(collection(db, testimonialsCollectionPath), {
+                        name: nombre,
+                        rating: currentRating,
+                        comment: mensaje,
+                        createdAt: serverTimestamp(),
+                        userId: auth.currentUser.uid, 
+                        isGoogleUser: submittedByGoogle, 
+                        photoURL: submittedByGoogle ? (currentFirebaseUser.photoURL || null) : null 
+                    });
+                    if(testimonialFormStatus) testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_form_success || "¡Gracias por tu opinión!";
+                    if(testimonialFormStatus) testimonialFormStatus.className = 'mt-4 text-center text-green-500';
+                    testimonialForm.reset();
+                    currentRating = 0;
+                    ratingValueInput.value = '';
+                    updateStarDisplay(0);
+                    if (submittedByGoogle && currentFirebaseUser) {
+                        testimonialNombreInput.value = currentFirebaseUser.displayName;
+                    } else {
+                        testimonialNombreInput.value = ''; 
+                    }
+
+                } catch (error) {
+                    console.error("Error al guardar testimonio: ", error);
+                    if(testimonialFormStatus) testimonialFormStatus.textContent = translations[currentLanguage]?.testimonial_form_error || "Error al enviar tu opinión. Inténtalo de nuevo.";
+                    if(testimonialFormStatus) testimonialFormStatus.className = 'mt-4 text-center text-red-500';
+                } finally {
+                    testimonialLoadingSpinner.classList.add('hidden');
+                    submitTestimonialButton.disabled = false;
+                }
+            });
+        }
+
+        function displayTestimonial(doc) {
+            const data = doc.data();
+            const card = document.createElement('div');
+            card.className = 'testimonial-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col';
+            
+            let starsHtml = '<div class="testimonial-stars text-yellow-400 mb-2 flex items-center">';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<i class="fas fa-star ${i <= data.rating ? '' : 'empty text-gray-300'}"></i>`;
+            }
+            starsHtml += '</div>';
+
+            const date = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString(currentLanguage) : (translations[currentLanguage]?.date_unavailable || 'Fecha no disponible');
+
+            card.innerHTML = `
+                ${starsHtml}
+                <p class="text-gray-600 italic mb-4 flex-grow">"${data.comment}"</p>
+                <div class="mt-auto">
+                    <p class="font-semibold text-navy text-right">- ${data.name}</p>
+                    <p class="text-xs text-gray-400 text-right">${date}</p>
+                </div>
+            `;
+            testimonialListDiv.appendChild(card);
+        }
+
+        function loadTestimonials() {
+            if (!isAuthReady) {
+                console.log("Esperando autenticación para cargar testimonios...");
+                return;
+            }
+             if (!auth.currentUser) { 
+                console.warn("No hay usuario autenticado (ni siquiera anónimo) para cargar testimonios.");
+                noTestimonialsP.textContent = translations[currentLanguage]?.auth_required_for_load || "Se requiere autenticación para cargar testimonios.";
+                noTestimonialsP.classList.remove('hidden');
+                noTestimonialsP.classList.add('text-yellow-500');
+                return;
+            }
+            const testimonialsCollectionPath = `artifacts/${appId}/public/data/testimonials`;
+            const q = query(collection(db, testimonialsCollectionPath), orderBy("createdAt", "desc"), limit(6)); 
+
+            onSnapshot(q, (querySnapshot) => {
+                testimonialListDiv.innerHTML = ''; 
+                if (querySnapshot.empty) {
+                    noTestimonialsP.classList.remove('hidden');
+                } else {
+                    noTestimonialsP.classList.add('hidden');
+                    querySnapshot.forEach((doc) => {
+                        displayTestimonial(doc);
+                    });
+                }
+            }, (error) => {
+                console.error("Error al cargar testimonios: ", error);
+                noTestimonialsP.textContent = translations[currentLanguage]?.testimonials_load_error || "Error al cargar testimonios.";
+                noTestimonialsP.classList.remove('hidden');
+                noTestimonialsP.classList.add('text-red-500');
+            });
+        }
+        
         const allServices = [
             { id: 'frigorificos', type: 'domestico', icon: 'fa-snowflake', title_key: 'service_fridge_title', desc_key: 'service_fridge_desc' },
             { id: 'aires_acondicionados', type: 'domestico industrial', icon: 'fa-wind', title_key: 'service_ac_title', desc_key: 'service_ac_desc' },
@@ -433,12 +801,11 @@
             { id: 'calderas_industriales', type: 'industrial', icon: 'fa-dumpster-fire', title_key: 'service_industrial_boiler_title', desc_key: 'service_industrial_boiler_desc' },
         ];
 
-        // Datos de idioma
         const translations = {
             es: {
                 company_name_header: "ERB Servicio Técnico",
-                nav_home: "Inicio", nav_services: "Servicios", nav_benefits: "Beneficios", nav_brands: "Marcas", nav_about: "Sobre Nosotros", nav_contact: "Contacto",
-                nav_home_mobile: "Inicio", nav_services_mobile: "Servicios", nav_benefits_mobile: "Beneficios", nav_brands_mobile: "Marcas", nav_about_mobile: "Sobre Nosotros", nav_contact_mobile: "Contacto",
+                nav_home: "Inicio", nav_services: "Servicios", nav_benefits: "Beneficios", nav_brands: "Marcas", nav_about: "Sobre Nosotros", nav_testimonials: "Testimonios", nav_contact: "Contacto",
+                nav_home_mobile: "Inicio", nav_services_mobile: "Servicios", nav_benefits_mobile: "Beneficios", nav_brands_mobile: "Marcas", nav_about_mobile: "Sobre Nosotros", nav_testimonials_mobile: "Testimonios", nav_contact_mobile: "Contacto",
                 hero_h1: "Reparación de Electrodomésticos: ERB Servicio Técnico",
                 hero_subtitle: "Especialistas en reparación y mantenimiento de electrodomésticos de gama blanca, industrial e instalación de aires acondicionados.",
                 hero_cta: "Solicita Presupuesto",
@@ -468,29 +835,50 @@
                 about_text_p1: "Somos un equipo de técnicos especializados con años de experiencia en la reparación y mantenimiento de electrodomésticos de gama blanca, tanto domésticos como industriales, así como en la instalación de aires acondicionados.",
                 about_text_p2: "Nuestro compromiso es ofrecer un servicio rápido, eficiente y con garantía, asegurando la máxima satisfacción de nuestros clientes en Barcelona, Coruña, Valencia y Castellón de la Plana.",
                 about_text_p3: "Confía en nosotros para devolverle la vida a tus electrodomésticos.",
+                testimonials_title: "Opiniones de Nuestros Clientes",
+                testimonial_form_title: "Deja tu Opinión",
+                testimonial_form_name: "Tu Nombre",
+                testimonial_form_rating: "Tu Puntuación",
+                testimonial_form_rating_required: "Por favor, selecciona una puntuación.",
+                testimonial_form_message: "Tu Comentario",
+                testimonial_form_submit: "Enviar Opinión",
+                testimonial_form_success: "¡Gracias por tu opinión! Ha sido enviada.",
+                testimonial_form_error: "Error al enviar tu opinión. Inténtalo de nuevo.",
+                testimonial_signin_google: "Iniciar sesión con Google",
+                testimonial_sign_out: "Cerrar Sesión",
+                testimonial_logged_in_as: "Conectado como:",
+                testimonial_signin_error: "Error al iniciar sesión con Google.",
+                testimonials_empty: "Aún no hay testimonios. ¡Sé el primero en dejar tu opinión!",
+                testimonials_load_error: "Error al cargar testimonios.",
+                auth_required_for_load: "Se requiere autenticación para cargar testimonios.",
+                date_unavailable: "Fecha no disponible",
                 contact_title: "Contacta con Nosotros",
                 contact_form_title: "Envíanos un Mensaje",
                 form_name: "Nombre", form_phone: "Teléfono", form_location: "Ubicación del servicio", form_appliance: "Electrodoméstico a reparar o servicio", form_message: "Descripción del problema", form_submit: "Enviar Mensaje",
                 loc_barcelona: "Barcelona", loc_coruna: "La Coruña", loc_valencia: "Valencia", loc_castellon: "Castellón de la Plana",
                 contact_info_title: "Otras Formas de Contacto",
-                contact_phone_text: "+34 642 677 771", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Chatea con nosotros en WhatsApp",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Chatea con nosotros en WhatsApp",
                 contact_areas: "Servicio en: Barcelona, Coruña, Valencia y Castellón de la Plana", contact_map_title: "Nuestra Área de Cobertura",
                 footer_copyright: "© 2025 ERB Servicio Técnico de Electrodomésticos | BARCELONA – CORUÑA – VALENCIA – CASTELLÓN de la Plana",
                 footer_privacy: "Política de Privacidad", footer_legal: "Aviso Legal", footer_cookies: "Política de Cookies",
                 form_sending: "Enviando...", 
-                form_success: "¡Mensaje enviado con éxito! En breve nos contactaremos.", // Usado si el modal no se muestra por alguna razón
+                form_success: "¡Mensaje enviado con éxito! En breve nos contactaremos.", 
                 form_error: "Error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.",
                 form_success_modal_title: "¡Enviado con Éxito!",
                 form_success_modal_text: "Gracias por tu mensaje. En breve nos pondremos en contacto contigo.",
                 form_success_modal_close: "Cerrar",
                 cookie_banner_text: "Este sitio web utiliza cookies para asegurar la mejor experiencia. Al continuar navegando, aceptas su uso, incluidas cookies para Google Analytics y Google Ads. Consulta nuestra",
                 cookie_banner_policy_link: "política de cookies",
-                cookie_banner_accept: "Aceptar"
+                cookie_banner_accept: "Aceptar",
+                map_error_title: "Error al cargar el mapa:",
+                map_error_text: "El mapa no se puede mostrar en este momento. Si eres el administrador del sitio, asegúrate de que la URL actual esté autorizada en la configuración de la clave API de Google Maps en Google Cloud Console.",
+                map_error_url_is: "URL actual para autorizar:",
+                auth_pending: "Esperando autenticación..."
             },
             ca: {
                 company_name_header: "ERB Servei Tècnic",
-                nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_contact: "Contacte",
-                nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_contact_mobile: "Contacte",
+                nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_testimonials: "Testimonis", nav_contact: "Contacte",
+                nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_testimonials_mobile: "Testimonis", nav_contact_mobile: "Contacte",
                 hero_h1: "Reparació d'Electrodomèstics: ERB Servei Tècnic",
                 hero_subtitle: "Especialistes en reparació i manteniment d'electrodomèstics de gamma blanca, industrial i instal·lació d'aires condicionats.",
                 hero_cta: "Sol·licita Pressupost",
@@ -520,12 +908,29 @@
                 about_text_p1: "Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'electrodomèstics de gamma blanca, tant domèstics com industrials, així com en la instal·lació d'aires condicionats.",
                 about_text_p2: "El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana.",
                 about_text_p3: "Confia en nosaltres per tornar-li la vida als teus electrodomèstics.",
+                testimonials_title: "Opinions dels Nostres Clients",
+                testimonial_form_title: "Deixa la Teva Opinió",
+                testimonial_form_name: "El Teu Nom",
+                testimonial_form_rating: "La Teva Puntuació",
+                testimonial_form_rating_required: "Si us plau, selecciona una puntuació.",
+                testimonial_form_message: "El Teu Comentari",
+                testimonial_form_submit: "Enviar Opinió",
+                testimonial_form_success: "Gràcies per la teva opinió! S'ha enviat correctament.",
+                testimonial_form_error: "Error en enviar la teva opinió. Intenta-ho de nou.",
+                testimonial_signin_google: "Iniciar sessió amb Google",
+                testimonial_sign_out: "Tancar Sessió",
+                testimonial_logged_in_as: "Connectat com:",
+                testimonial_signin_error: "Error en iniciar sessió amb Google.",
+                testimonials_empty: "Encara no hi ha testimonis. Sigues el primer a deixar la teva opinió!",
+                testimonials_load_error: "Error en carregar els testimonis.",
+                auth_required_for_load: "Es requereix autenticació per carregar els testimonis.",
+                date_unavailable: "Data no disponible",
                 contact_title: "Contacta amb Nosaltres",
                 contact_form_title: "Envia'ns un Missatge",
                 form_name: "Nom", form_phone: "Telèfon", form_location: "Ubicació del servei", form_appliance: "Electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
                 loc_barcelona: "Barcelona", loc_coruna: "La Corunya", loc_valencia: "València", loc_castellon: "Castelló de la Plana",
                 contact_info_title: "Altres Formes de Contacte",
-                contact_phone_text: "+34 642 677 771", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "Les Nostres Àrees de Servei",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
@@ -537,12 +942,16 @@
                 form_success_modal_close: "Tancar",
                 cookie_banner_text: "Aquest lloc web utilitza galetes per assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
                 cookie_banner_policy_link: "política de galetes",
-                cookie_banner_accept: "Acceptar"
+                cookie_banner_accept: "Acceptar",
+                map_error_title: "Error en carregar el mapa:",
+                map_error_text: "El mapa no es pot mostrar en aquest moment. Si ets l'administrador del lloc, assegura't que la URL actual estigui autoritzada a la configuració de la clau API de Google Maps a Google Cloud Console.",
+                map_error_url_is: "URL actual per autoritzar:",
+                auth_pending: "Esperant autenticació..."
             },
             va: {
                 company_name_header: "ERB Servei Tècnic",
-                nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_contact: "Contacte",
-                nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_contact_mobile: "Contacte",
+                nav_home: "Inici", nav_services: "Serveis", nav_benefits: "Beneficis", nav_brands: "Marques", nav_about: "Sobre Nosaltres", nav_testimonials: "Testimonis", nav_contact: "Contacte",
+                nav_home_mobile: "Inici", nav_services_mobile: "Serveis", nav_benefits_mobile: "Beneficis", nav_brands_mobile: "Marques", nav_about_mobile: "Sobre Nosaltres", nav_testimonials_mobile: "Testimonis", nav_contact_mobile: "Contacte",
                 hero_h1: "Reparació d'Electrodomèstics: ERB Servei Tècnic",
                 hero_subtitle: "Especialistes en reparació i manteniment d'aparells electrodomèstics de gamma blanca, industrial i instal·lació d'aires condicionats.",
                 hero_cta: "Sol·licita Pressupost",
@@ -572,12 +981,29 @@
                 about_text_p1: "Som un equip de tècnics especialitzats amb anys d'experiència en la reparació i manteniment d'aparells electrodomèstics de gamma blanca, tant domèstics com industrials, així com en la instal·lació d'aires condicionats.",
                 about_text_p2: "El nostre compromís és oferir un servei ràpid, eficient i amb garantia, assegurant la màxima satisfacció dels nostres clients a Barcelona, Corunya, València i Castelló de la Plana.",
                 about_text_p3: "Confia en nosaltres per tornar-li la vida als teus aparells electrodomèstics.",
+                testimonials_title: "Opinions dels Nostres Clients",
+                testimonial_form_title: "Deixa la Teua Opinió",
+                testimonial_form_name: "El Teu Nom",
+                testimonial_form_rating: "La Teua Puntuació",
+                testimonial_form_rating_required: "Per favor, selecciona una puntuació.",
+                testimonial_form_message: "El Teu Comentari",
+                testimonial_form_submit: "Enviar Opinió",
+                testimonial_form_success: "Gràcies per la teua opinió! S'ha enviat correctament.",
+                testimonial_form_error: "Error en enviar la teua opinió. Intenta-ho de nou.",
+                testimonial_signin_google: "Iniciar sessió amb Google",
+                testimonial_sign_out: "Tancar Sessió",
+                testimonial_logged_in_as: "Connectat com:",
+                testimonial_signin_error: "Error en iniciar sessió amb Google.",
+                testimonials_empty: "Encara no hi ha testimonis. Sigues el primer a deixar la teua opinió!",
+                testimonials_load_error: "Error en carregar els testimonis.",
+                auth_required_for_load: "Es requereix autenticació per carregar els testimonis.",
+                date_unavailable: "Data no disponible",
                 contact_title: "Contacta amb Nosaltres",
                 contact_form_title: "Envia'ns un Missatge",
                 form_name: "Nom", form_phone: "Telèfon", form_location: "Ubicació del servei", form_appliance: "Aparell electrodomèstic a reparar o servei", form_message: "Descripció del problema", form_submit: "Enviar Missatge",
                 loc_barcelona: "Barcelona", loc_coruna: "La Corunya", loc_valencia: "València", loc_castellon: "Castelló de la Plana",
                 contact_info_title: "Altres Formes de Contacte",
-                contact_phone_text: "+34 642 677 771", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
+                contact_phone_text: "+34 612 548 508", contact_email_text: "serviciotecnico.erb@gmail.com", contact_whatsapp_text: "Xateja amb nosaltres a WhatsApp",
                 contact_areas: "Servei a: Barcelona, Corunya, València i Castelló de la Plana", contact_map_title: "La Nostra Àrea de Cobertura",
                 footer_copyright: "© 2025 ERB Servei Tècnic d'Electrodomèstics | BARCELONA – CORUNYA – VALÈNCIA – CASTELLÓ de la Plana",
                 footer_privacy: "Política de Privacitat", footer_legal: "Avís Legal", footer_cookies: "Política de Galetes",
@@ -589,16 +1015,22 @@
                 form_success_modal_close: "Tancar",
                 cookie_banner_text: "Este lloc web utilitza galetes per a assegurar la millor experiència. En continuar navegant, n'acceptes l'ús, incloses galetes per a Google Analytics i Google Ads. Consulta la nostra",
                 cookie_banner_policy_link: "política de galetes",
-                cookie_banner_accept: "Acceptar"
+                cookie_banner_accept: "Acceptar",
+                map_error_title: "Error en carregar el mapa:",
+                map_error_text: "El mapa no es pot mostrar en este moment. Si eres l'administrador del lloc, assegura't que la URL actual estiga autoritzada en la configuració de la clau API de Google Maps en Google Cloud Console.",
+                map_error_url_is: "URL actual per autoritzar:",
+                auth_pending: "Esperant autenticació..."
             }
         };
 
-        // Variable global para el idioma actual
         let currentLanguage = 'es';
+        window.translations = translations;
+        window.currentLanguage = currentLanguage;
 
-        // Función para cambiar idioma
+
         function setLanguage(lang) {
-            currentLanguage = lang; // Actualizar idioma global
+            currentLanguage = lang; 
+            window.currentLanguage = lang; 
             document.documentElement.lang = lang;
             document.body.className = document.body.className.replace(/lang-(es|ca|va)/g, '');
             document.body.classList.add('lang-' + lang);
@@ -611,7 +1043,10 @@
                     element.innerHTML = translations.es[key];
                 }
             });
-            document.getElementById('current-lang-text').textContent = lang.toUpperCase();
+            
+            const currentLangText = document.getElementById('current-lang-text');
+            if(currentLangText) currentLangText.textContent = lang.toUpperCase();
+            
             localStorage.setItem('preferredLanguage', lang);
             
             const langDropdown = document.getElementById('language-dropdown');
@@ -725,7 +1160,7 @@
                 });
 
                 document.addEventListener('click', (event) => {
-                    if (!langButton.contains(event.target) && !langDropdown.contains(event.target)) {
+                    if (langButton && !langButton.contains(event.target) && langDropdown && !langDropdown.contains(event.target)) {
                         langDropdown.classList.add('hidden');
                     }
                 });
@@ -788,7 +1223,6 @@
 
             handleCookieBanner();
 
-            // --- NUEVA LÓGICA DEL FORMULARIO DE CONTACTO ---
             const contactForm = document.getElementById('contactForm');
             const loadingSpinner = document.getElementById('loading-spinner');
             const successModal = document.getElementById('success-message-modal');
@@ -798,13 +1232,12 @@
 
             if (contactForm && loadingSpinner && successModal && closeSuccessModalBtn && formStatusDiv && submitButton) {
                 contactForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevenir el envío tradicional del formulario
+                    event.preventDefault(); 
 
-                    // Mostrar spinner y deshabilitar botón
                     loadingSpinner.classList.remove('hidden');
                     submitButton.disabled = true;
                     submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-                    formStatusDiv.textContent = ''; // Limpiar mensajes anteriores
+                    formStatusDiv.textContent = ''; 
 
                     const formData = new FormData(contactForm);
                     const formAction = contactForm.getAttribute('action');
@@ -813,7 +1246,7 @@
                         method: 'POST',
                         body: formData,
                         headers: {
-                            'Accept': 'application/json' // Importante para que formsubmit.co devuelva JSON
+                            'Accept': 'application/json'
                         }
                     })
                     .then(response => response.json())
@@ -822,9 +1255,8 @@
                         submitButton.disabled = false;
                         submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
 
-                        if (data.success || (data.ok && data.ok === true) ) { // formsubmit.co puede devolver 'success' o un objeto con 'ok:true'
-                            contactForm.reset(); // Limpiar el formulario
-                            // Actualizar textos del modal por si el idioma cambió dinámicamente
+                        if (data.success || (data.ok && data.ok === true) ) { 
+                            contactForm.reset(); 
                             const modalTitle = successModal.querySelector('[data-lang="form_success_modal_title"]');
                             const modalText = successModal.querySelector('[data-lang="form_success_modal_text"]');
                             const modalCloseBtn = successModal.querySelector('[data-lang="form_success_modal_close"]');
@@ -833,16 +1265,15 @@
                                 modalTitle.textContent = translations[currentLanguage]['form_success_modal_title'];
                                 modalText.textContent = translations[currentLanguage]['form_success_modal_text'];
                                 modalCloseBtn.textContent = translations[currentLanguage]['form_success_modal_close'];
-                            } else { // Fallback a español si la traducción no existe
+                            } else { 
                                 modalTitle.textContent = translations.es['form_success_modal_title'];
                                 modalText.textContent = translations.es['form_success_modal_text'];
                                 modalCloseBtn.textContent = translations.es['form_success_modal_close'];
                             }
                             successModal.classList.remove('hidden');
                         } else {
-                            // Hubo un error según formsubmit.co o la respuesta no fue la esperada
                             formStatusDiv.textContent = translations[currentLanguage]?.form_error || translations.es.form_error;
-                            formStatusDiv.classList.remove('text-green-400');
+                            formStatusDiv.classList.remove('text-green-400'); 
                             formStatusDiv.classList.add('text-red-400');
                             console.error('Formsubmit.co reportó un error o formato de respuesta inesperado:', data);
                         }
@@ -857,93 +1288,125 @@
                         console.error('Error al enviar el formulario:', error);
                     });
                 });
-
-                closeSuccessModalBtn.addEventListener('click', () => {
-                    successModal.classList.add('hidden');
-                });
+                
+                if(closeSuccessModalBtn) {
+                    closeSuccessModalBtn.addEventListener('click', () => {
+                        successModal.classList.add('hidden');
+                    });
+                }
             } else {
                 console.error("No se encontraron todos los elementos necesarios para el formulario de contacto mejorado.");
             }
-            // --- FIN DE LA NUEVA LÓGICA DEL FORMULARIO ---
         });
     </script>
     
     <script>
-        // Función para inicializar el mapa de Google
+        window.gm_authFailure = function() {
+            const mapErrorMessageDiv = document.getElementById('map-error-message');
+            const mapCurrentUrlSpan = document.getElementById('map-current-url');
+            if (mapErrorMessageDiv) {
+                mapErrorMessageDiv.classList.remove('hidden');
+                if (mapCurrentUrlSpan) {
+                    mapCurrentUrlSpan.textContent = window.location.href;
+                }
+                const errorTitle = mapErrorMessageDiv.querySelector('[data-lang="map_error_title"]');
+                const errorText = mapErrorMessageDiv.querySelector('[data-lang="map_error_text"]');
+                const errorUrlIs = mapErrorMessageDiv.querySelector('[data-lang="map_error_url_is"]');
+                if (window.translations && window.currentLanguage) { 
+                    if (errorTitle) errorTitle.textContent = window.translations[window.currentLanguage]?.map_error_title || window.translations.es.map_error_title;
+                    if (errorText) errorText.textContent = window.translations[window.currentLanguage]?.map_error_text || window.translations.es.map_error_text;
+                    if (errorUrlIs) errorUrlIs.textContent = window.translations[window.currentLanguage]?.map_error_url_is || window.translations.es.map_error_url_is;
+                }
+            }
+            console.error("Google Maps API authentication failure. Check RefererNotAllowedMapError or other API key issues in Google Cloud Console.");
+        };
+
         function initMap() {
-            // Coordenadas de ejemplo, ajusta según sea necesario
             const valencia = { lat: 39.4699, lng: -0.3763 }; 
-            const sagunto = { lat: 39.6815, lng: -0.2776 }; // Ejemplo para calcular radio
+            const sagunto = { lat: 39.6815, lng: -0.2776 }; 
 
             const mapElement = document.getElementById("map");
+            const mapErrorMessageDiv = document.getElementById('map-error-message');
+            const mapCurrentUrlSpan = document.getElementById('map-current-url');
+
             if (!mapElement) {
                 console.error("Elemento del mapa no encontrado");
                 return;
             }
-            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-                console.error("Google Maps API no cargada.");
-                return;
-            }
-
-
-            const map = new google.maps.Map(mapElement, {
-                zoom: 10, 
-                center: valencia,
-                mapTypeId: 'roadmap', 
-                styles: [ 
-                    { featureType: "water", elementType: "geometry", stylers: [{ color: "#e9e9e9" }, { lightness: 17 }] },
-                    { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f5f5f5" }, { lightness: 20 }] },
-                    { featureType: "road.highway", elementType: "geometry.fill", stylers: [{ color: "#ffffff" }, { lightness: 17 }] },
-                    { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#ffffff" }, { lightness: 29 }, { weight: 0.2 }] },
-                    { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#ffffff" }, { lightness: 18 }] },
-                    { featureType: "road.local", elementType: "geometry", stylers: [{ color: "#ffffff" }, { lightness: 16 }] },
-                    { featureType: "poi", elementType: "geometry", stylers: [{ color: "#f5f5f5" }, { lightness: 21 }] },
-                    { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#dedede" }, { lightness: 21 }] },
-                    { elementType: "labels.text.stroke", stylers: [{ visibility: "on" }, { color: "#ffffff" }, { lightness: 16 }] },
-                    { elementType: "labels.text.fill", stylers: [{ saturation: 36 }, { color: "#333333" }, { lightness: 40 }] },
-                    { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
-                    { featureType: "transit", elementType: "geometry", stylers: [{ color: "#f2f2f2" }, { lightness: 19 }] },
-                    { featureType: "administrative", elementType: "geometry.fill", stylers: [{ color: "#fefefe" }, { lightness: 20 }] },
-                    { featureType: "administrative", elementType: "geometry.stroke", stylers: [{ color: "#fefefe" }, { lightness: 17 }, { weight: 1.2 }] }
-                ]
-            });
             
-            if (google.maps.geometry && google.maps.geometry.spherical) {
-                 const radiusInMeters = google.maps.geometry.spherical.computeDistanceBetween(
-                    new google.maps.LatLng(valencia),
-                    new google.maps.LatLng(sagunto) 
-                );
-
-                new google.maps.Circle({
-                    strokeColor: "#001f3f", 
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: "#007bff", 
-                    fillOpacity: 0.25, 
-                    map: map,
-                    center: valencia,
-                    radius: radiusInMeters, 
-                });
-            } else {
-                console.warn("Librería 'geometry' de Google Maps no disponible para calcular el radio del círculo.");
-            }
-
-
-            new google.maps.Marker({
-                position: valencia,
-                map: map,
-                title: "Valencia (Centro de Cobertura)",
-                icon: { 
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 6,
-                    fillColor: "#001f3f",
-                    fillOpacity: 1,
-                    strokeWeight: 0
+            try {
+                if (typeof google === 'undefined' || typeof google.maps === 'undefined' || typeof google.maps.Map === 'undefined') {
+                    console.error("Google Maps API no cargada o incompleta.");
+                    if (mapErrorMessageDiv) mapErrorMessageDiv.classList.remove('hidden');
+                    if (mapCurrentUrlSpan) mapCurrentUrlSpan.textContent = window.location.href;
+                    return;
                 }
-            });
+
+                const map = new google.maps.Map(mapElement, {
+                    zoom: 10, 
+                    center: valencia,
+                    mapTypeId: 'roadmap', 
+                    styles: [ 
+                        { featureType: "water", elementType: "geometry", stylers: [{ color: "#e9e9e9" }, { lightness: 17 }] },
+                        { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f5f5f5" }, { lightness: 20 }] },
+                        { featureType: "road.highway", elementType: "geometry.fill", stylers: [{ color: "#ffffff" }, { lightness: 17 }] },
+                        { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#ffffff" }, { lightness: 29 }, { weight: 0.2 }] },
+                        { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#ffffff" }, { lightness: 18 }] },
+                        { featureType: "road.local", elementType: "geometry", stylers: [{ color: "#ffffff" }, { lightness: 16 }] },
+                        { featureType: "poi", elementType: "geometry", stylers: [{ color: "#f5f5f5" }, { lightness: 21 }] },
+                        { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#dedede" }, { lightness: 21 }] },
+                        { elementType: "labels.text.stroke", stylers: [{ visibility: "on" }, { color: "#ffffff" }, { lightness: 16 }] },
+                        { elementType: "labels.text.fill", stylers: [{ saturation: 36 }, { color: "#333333" }, { lightness: 40 }] },
+                        { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+                        { featureType: "transit", elementType: "geometry", stylers: [{ color: "#f2f2f2" }, { lightness: 19 }] },
+                        { featureType: "administrative", elementType: "geometry.fill", stylers: [{ color: "#fefefe" }, { lightness: 20 }] },
+                        { featureType: "administrative", elementType: "geometry.stroke", stylers: [{ color: "#fefefe" }, { lightness: 17 }, { weight: 1.2 }] }
+                    ]
+                });
+                
+                if (google.maps.geometry && google.maps.geometry.spherical) {
+                     const radiusInMeters = google.maps.geometry.spherical.computeDistanceBetween(
+                        new google.maps.LatLng(valencia),
+                        new google.maps.LatLng(sagunto) 
+                    );
+
+                    new google.maps.Circle({
+                        strokeColor: "#001f3f", 
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: "#007bff", 
+                        fillOpacity: 0.25, 
+                        map: map,
+                        center: valencia,
+                        radius: radiusInMeters, 
+                    });
+                } else {
+                    console.warn("Librería 'geometry' de Google Maps no disponible para calcular el radio del círculo.");
+                }
+
+                new google.maps.Marker({
+                    position: valencia,
+                    map: map,
+                    title: "Valencia (Centro de Cobertura)",
+                    icon: { 
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 6,
+                        fillColor: "#001f3f",
+                        fillOpacity: 1,
+                        strokeWeight: 0
+                    }
+                });
+                if (mapErrorMessageDiv) mapErrorMessageDiv.classList.add('hidden');
+
+            } catch (e) {
+                console.error("Error inicializando Google Maps:", e);
+                 if (mapErrorMessageDiv) mapErrorMessageDiv.classList.remove('hidden');
+                 if (mapCurrentUrlSpan) mapCurrentUrlSpan.textContent = window.location.href;
+            }
         }
+        window.initMap = initMap;
     </script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_erEiiEvZlRfOhnRCt-Ooz5yM9rBrgk&libraries=geometry&callback=initMap&loading=async"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_erEiiEvZlRfOhnRCt-Ooz5yM9rBrgk&libraries=geometry&callback=initMap&onerror=gm_authFailure"></script>
 
 </body>
 </html>
