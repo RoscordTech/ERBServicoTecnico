@@ -685,8 +685,8 @@
     <header class="site-header" id="site-header">
         <div class="header-inner">
             <a href="#inicio" class="logo-link">
-                <img src="/logo.png" alt="ERB Logo" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'logo-text\'>ERB<span>.</span></div>';">
-                <span class="logo-text" data-lang="company_name_header">ERB<span>.</span></span>
+                <img src="/logo.png" alt="ERB Servicio Técnico" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='inline';">
+                <span class="logo-text" style="display:none;">ERB <span>Servicio Técnico</span></span>
             </a>
 
             <nav class="nav-desktop">
@@ -1297,11 +1297,21 @@
                 const toggle = document.getElementById(`lang-toggle-${variant}`);
                 const dropdown = document.getElementById(`lang-dropdown-${variant}`);
                 if (toggle && dropdown) {
-                    toggle.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('open'); });
+                    toggle.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        // Close the other dropdown
+                        document.querySelectorAll('.lang-dropdown').forEach(d => {
+                            if (d !== dropdown) d.classList.remove('open');
+                        });
+                        dropdown.classList.toggle('open');
+                    });
+                    dropdown.addEventListener('click', (e) => e.stopPropagation());
                     dropdown.querySelectorAll('.lang-option').forEach(opt => {
                         opt.addEventListener('click', (e) => {
                             e.preventDefault();
-                            setLanguage(opt.dataset.langOption);
+                            e.stopPropagation();
+                            const lang = opt.getAttribute('data-lang-option');
+                            setLanguage(lang);
                             dropdown.classList.remove('open');
                         });
                     });
@@ -1337,14 +1347,29 @@
                     btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Enviando...';
                     btn.disabled = true;
                     try {
-                        const resp = await fetch(contactForm.action, { method: 'POST', body: new FormData(contactForm), headers: { 'Accept': 'application/json' } });
+                        const formData = new FormData(contactForm);
+                        const resp = await fetch(contactForm.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
+                        });
                         if (resp.ok) {
                             contactForm.reset();
+                            populateApplianceSelect();
                             const modal = document.getElementById('success-modal');
                             modal.classList.add('open');
+                        } else {
+                            const data = await resp.json().catch(() => ({}));
+                            const errMsg = (data.errors && data.errors.map(e => e.message).join(', ')) || 'Error al enviar el formulario. Inténtalo de nuevo.';
+                            alert(errMsg);
                         }
-                    } catch (err) { console.error(err); }
-                    finally { btn.innerHTML = origText; btn.disabled = false; }
+                    } catch (err) {
+                        console.error('Form submission error:', err);
+                        alert('Error de conexión. Por favor, inténtalo de nuevo o contacta por teléfono.');
+                    } finally {
+                        btn.innerHTML = origText;
+                        btn.disabled = false;
+                    }
                 });
             }
 
